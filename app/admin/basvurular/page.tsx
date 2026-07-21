@@ -36,6 +36,17 @@ export default function BasvurularPage() {
   }
 
   async function onayla(b: Basvuru) {
+    const { data: mevcutOyuncu } = await supabase
+  .from("oyuncular")
+  .select("id")
+  .eq("ad_soyad", b.ad_soyad)
+  .eq("takim", b.takim)
+  .maybeSingle();
+
+if (mevcutOyuncu) {
+  alert("Bu oyuncu zaten takımda kayıtlı.");
+  return;
+}
     // oyuncular tablosuna ekle
 
     const { error: oyuncuHata } = await supabase
