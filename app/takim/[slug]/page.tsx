@@ -69,10 +69,20 @@ export default function TakimDetayPage() {
 
   const [oyuncular, setOyuncular] = useState<Oyuncu[]>([]);
 
-  useEffect(() => {
-   if (takim) getir();
-}, [takim]);
+ 
+useEffect(() => {
+ async function getir() {
+  if (!takim) return;
 
+  const { data } = await supabase
+    .from("oyuncular")
+    .select("*")
+    .eq("takim", takim.ad)
+    .order("forma_no");
+
+  setOyuncular(data || []);
+} getir();
+}, [takim]);
 async function getir() {
     const { data } = await supabase
       .from("oyuncular")

@@ -19,30 +19,29 @@ type Takim = {
 
 export default function PuanDurumuPage() {
   const [takimlar, setTakimlar] = useState<Takim[]>([]);
-async function getir() {
-  useEffect(() => {
-    getir();
-  }, []);
+
 
   
-  
-  const { data, error } = await supabase
-    .from("takimlar")
-    .select("*")
-    .order("puan", { ascending: false })
-    .order("averaj", { ascending: false });
+useEffect(() => {
+  async function takimlariGetir() {
+    const { data, error } = await supabase
+      .from("takimlar")
+      .select("*")
+      .order("puan", { ascending: false })
+      .order("averaj", { ascending: false });
 
-  console.log(data);
+    console.log(data);
 
-  if (error) {
-    alert(error.message);
-    return;
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setTakimlar(data || []);
   }
 
-  setTakimlar(data || []);
-}
-
-
+  takimlariGetir();
+}, []);
   return (
     <div
       style={{

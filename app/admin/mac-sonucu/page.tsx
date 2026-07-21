@@ -84,21 +84,21 @@ console.log("DEP TAKIM:", depTakim);
   }
 
    // Ev sahibi yeni değerler
-  let evOynanan = evTakim.oynanan + 1;
+ const evOynanan = evTakim.oynanan + 1;
   let evGalibiyet = evTakim.galibiyet;
   let evBeraberlik = evTakim.beraberlik;
   let evMaglubiyet = evTakim.maglubiyet;
-  let evAtilan = evTakim.atilan_gol + evGol;
-  let evYenilen = evTakim.yenilen_gol + depGol;
+  const evAtilan = evTakim.atilan_gol + evGol;
+  const evYenilen = evTakim.yenilen_gol + depGol;
   let evPuan = evTakim.puan;
 
   // Deplasman yeni değerler
-  let depOynanan = depTakim.oynanan + 1;
+  const depOynanan = depTakim.oynanan + 1;
   let depGalibiyet = depTakim.galibiyet;
   let depBeraberlik = depTakim.beraberlik;
   let depMaglubiyet = depTakim.maglubiyet;
-  let depAtilan = depTakim.atilan_gol + depGol;
-  let depYenilen = depTakim.yenilen_gol + evGol;
+  const depAtilan = depTakim.atilan_gol + depGol;
+  const depYenilen = depTakim.yenilen_gol + evGol;
   let depPuan = depTakim.puan;
 
   // Sonucu hesapla
