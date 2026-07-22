@@ -70,10 +70,20 @@ export default function NotificationButton() {
         ),
       };
 
-      const { error } = await supabase
+      const { data, error } = await supabase
   .from("bildirim_aboneleri")
-  .insert(payload);
-  
+  .insert([payload])
+  .select();
+
+console.log("Supabase Sonuç:", data);
+console.log("Supabase Hata:", error);
+
+if (error) {
+  console.error(error);
+  alert("Supabase Hatası:\n" + error.message);
+  return;
+}
+
       if (error) {
         console.error(error);
         alert("Supabase Hatası:\n" + JSON.stringify(error));

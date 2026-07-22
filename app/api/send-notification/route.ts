@@ -11,14 +11,14 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY!
 );
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
+    const { baslik, mesaj } = await req.json();
+
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
-
-    const { baslik, mesaj } = await request.json();
 
     const { data: aboneler, error } = await supabase
       .from("bildirim_aboneleri")
@@ -26,14 +26,14 @@ export async function POST(request: Request) {
 
     if (error) {
       return NextResponse.json(
-        { error: error.message },
+        { success: false, error: error.message },
         { status: 500 }
       );
     }
 
     let gonderilen = 0;
 
-    for (const abone of aboneler || []) {
+    for (const abone of aboneler ?? []) {
       try {
         await webpush.sendNotification(
           {
@@ -50,10 +50,10 @@ export async function POST(request: Request) {
         );
 
         gonderilen++;
-      } catch (err: any) {
-        console.error("Push hatası:", err);
+      } catch (e: any) {
+        console.error(e);
 
-        if (err?.statusCode === 404 || err?.statusCode === 410) {
+        if (e?.statusCode === 404 || e?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
             .delete()
@@ -66,13 +66,12 @@ export async function POST(request: Request) {
       success: true,
       gonderilen,
     });
-  } catch (err: any) {
-    console.error(err);
 
+  } catch (e: any) {
     return NextResponse.json(
       {
         success: false,
-        error: err?.stack || err?.message || String(err),
+        error: e?.message || "Sunucu hatası",
       },
       {
         status: 500,
