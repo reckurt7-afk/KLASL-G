@@ -26,8 +26,13 @@ export default function NotificationButton() {
         alert("Service Worker desteklenmiyor.");
         return;
       }
+console.log("Notification:", "Notification" in window);
+console.log("ServiceWorker:", "serviceWorker" in navigator);
+console.log("PushManager:", "PushManager" in window);
+console.log("Standalone:", window.matchMedia("(display-mode: standalone)").matches);
 
-      if (!("PushManager" in window)) {
+if (!("PushManager" in window)) {
+      
         alert(
           "Bu cihazda Push Bildirim desteği bulunmuyor. Eğer iPhone kullanıyorsanız uygulamayı önce Ana Ekrana ekleyip oradan açmanız gerekir."
         );
