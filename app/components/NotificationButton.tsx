@@ -26,15 +26,10 @@ export default function NotificationButton() {
         alert("Service Worker desteklenmiyor.");
         return;
       }
-console.log("Notification:", "Notification" in window);
-console.log("ServiceWorker:", "serviceWorker" in navigator);
-console.log("PushManager:", "PushManager" in window);
-console.log("Standalone:", window.matchMedia("(display-mode: standalone)").matches);
 
-if (!("PushManager" in window)) {
-      
+      if (!("PushManager" in window)) {
         alert(
-          "Bu cihazda Push Bildirim desteği bulunmuyor. Eğer iPhone kullanıyorsanız uygulamayı önce Ana Ekrana ekleyip oradan açmanız gerekir."
+          "iPhone kullanıyorsanız uygulamayı Ana Ekrana ekleyip oradan açın."
         );
         return;
       }
@@ -59,37 +54,43 @@ if (!("PushManager" in window)) {
         });
       }
 
-      const { error } = await supabase
-        .from("bildirim_aboneleri")
-        .upsert({
-          endpoint: subscription.endpoint,
-          p256dh: btoa(
-            String.fromCharCode(
-              ...new Uint8Array(subscription.getKey("p256dh")!)
-            )
-          ),
-          auth: btoa(
-            String.fromCharCode(
-              ...new Uint8Array(subscription.getKey("auth")!)
-            )
-          ),
-        });
+      alert("✅ Push aboneliği oluşturuldu.");
 
+      const payload = {
+        endpoint: subscription.endpoint,
+        p256dh: btoa(
+          String.fromCharCode(
+            ...new Uint8Array(subscription.getKey("p256dh")!)
+          )
+        ),
+        auth: btoa(
+          String.fromCharCode(
+            ...new Uint8Array(subscription.getKey("auth")!)
+          )
+        ),
+      };
+
+      const { error } = await supabase
+  .from("bildirim_aboneleri")
+  .insert(payload);
+  
       if (error) {
-  console.error(error);
-  alert(JSON.stringify(error, null, 2));
-  return;
-}
+        console.error(error);
+        alert("Supabase Hatası:\n" + JSON.stringify(error));
+        return;
+      }
+
+      alert("✅ Supabase kaydı tamamlandı.");
 
       new Notification("KLAS LİG", {
         body: "🔔 Bildirimler başarıyla açıldı.",
         icon: "/icons/logo.png",
       });
 
-      alert("✅ Bildirimler başarıyla aktif edildi.");
+      alert("🎉 Bildirimler başarıyla aktif edildi.");
     } catch (err: any) {
       console.error(err);
-      alert("Bir hata oluştu: " + err.message);
+      alert("Hata:\n" + (err?.message || JSON.stringify(err)));
     }
   };
 
