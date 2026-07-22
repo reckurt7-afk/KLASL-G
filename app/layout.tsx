@@ -5,10 +5,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "KLAS LİG BURSA",
   description: "KLAS LİG BURSA Resmi Web Sitesi",
+  applicationName: "KLAS LİG BURSA",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icons/logo.png",
-    apple: "/icons/logo.png",
+    icon: [
+      { url: "/icons/logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/logo.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/logo.png", sizes: "180x180" },
+    ],
   },
   appleWebApp: {
     capable: true,
@@ -23,9 +29,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="tr">
       <body>

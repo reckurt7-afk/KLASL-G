@@ -4,42 +4,41 @@ import { useEffect, useState } from "react";
 
 export default function InstallButton() {
   const [loading, setLoading] = useState(false);
-const [installPrompt, setInstallPrompt] = useState<any>(null);
-useEffect(() => {
-  const handler = (event: any) => {
-    event.preventDefault();
-    setInstallPrompt(event);
-  };
+  const [installPrompt, setInstallPrompt] = useState<any>(null);
 
-  window.addEventListener("beforeinstallprompt", handler);
+  useEffect(() => {
+    const handler = (e: any) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
 
-  return () => {
-    window.removeEventListener("beforeinstallprompt", handler);
-  };
-}, []);
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+    };
+  }, []);
+
   const installApp = async () => {
-  if (!installPrompt) {
-    alert(
-      "📱 Uygulama yükleme şu anda desteklenmiyor. Chrome üzerinden tekrar deneyin."
-    );
-    return;
-  }
+    if (!installPrompt) {
+      alert(
+        "📲 Bu cihazda otomatik yükleme kullanılamıyor.\n\nTarayıcınızın 'Ana Ekrana Ekle' özelliğini kullanarak uygulamayı yükleyebilirsiniz."
+      );
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);
 
-  installPrompt.prompt();
+    try {
+      await installPrompt.prompt();
+      await installPrompt.userChoice;
+    } catch (err) {
+      console.error(err);
+    }
 
-  const result = await installPrompt.userChoice;
-
-  if (result.outcome === "accepted") {
-    console.log("Uygulama yüklendi");
-  } else {
-    console.log("Kullanıcı iptal etti");
-  }
-
-  setInstallPrompt(null);
-  setLoading(false);
-};
+    setInstallPrompt(null);
+    setLoading(false);
+  };
 
   return (
     <button
@@ -56,7 +55,7 @@ useEffect(() => {
         color: "#FFD700",
         fontSize: 18,
         fontWeight: 800,
-        cursor: "pointer",
+        cursor: loading ? "default" : "pointer",
       }}
     >
       {loading ? "Yükleniyor..." : "📲 UYGULAMAYI YÜKLE"}

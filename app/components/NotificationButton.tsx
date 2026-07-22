@@ -18,69 +18,73 @@ export default function NotificationButton() {
   const enableNotifications = async () => {
     try {
       if (!("Notification" in window)) {
-        alert("Bu tarayıcı bildirimleri desteklemiyor.");
+        alert("Bu cihaz web bildirimlerini desteklemiyor.");
         return;
       }
 
-      const izin = await Notification.requestPermission();
+      if (!("serviceWorker" in navigator)) {
+        alert("Service Worker desteklenmiyor.");
+        return;
+      }
 
-      if (izin !== "granted") {
+      if (!("PushManager" in window)) {
+        alert(
+          "Bu cihazda Push Bildirim desteği bulunmuyor. Eğer iPhone kullanıyorsanız uygulamayı önce Ana Ekrana ekleyip oradan açmanız gerekir."
+        );
+        return;
+      }
+
+      const permission = await Notification.requestPermission();
+
+      if (permission !== "granted") {
         alert("Bildirim izni verilmedi.");
         return;
       }
 
       const registration = await navigator.serviceWorker.ready;
-console.log("SW:", registration);
-      // Eski abonelik varsa sil
-      const oldSubscription =
-        await registration.pushManager.getSubscription();
 
-      if (oldSubscription) {
-        await oldSubscription.unsubscribe();
+      let subscription = await registration.pushManager.getSubscription();
+
+      if (!subscription) {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(
+            process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+          ),
+        });
       }
 
-      // Yeni abonelik oluştur
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-        ),
-      });
-console.log("Subscription:", subscription);
       const { error } = await supabase
         .from("bildirim_aboneleri")
-        .insert([
-          {
-            endpoint: subscription.endpoint,
-            p256dh: btoa(
-              String.fromCharCode(
-                ...new Uint8Array(subscription.getKey("p256dh")!)
-              )
-            ),
-            auth: btoa(
-              String.fromCharCode(
-                ...new Uint8Array(subscription.getKey("auth")!)
-              )
-            ),
-          },
-        ]);
+        .upsert({
+          endpoint: subscription.endpoint,
+          p256dh: btoa(
+            String.fromCharCode(
+              ...new Uint8Array(subscription.getKey("p256dh")!)
+            )
+          ),
+          auth: btoa(
+            String.fromCharCode(
+              ...new Uint8Array(subscription.getKey("auth")!)
+            )
+          ),
+        });
 
-     if (error) {
-  console.error(error);
-  alert(JSON.stringify(error, null, 2));
-  return;
-}
+      if (error) {
+        console.error(error);
+        alert("Abonelik kaydedilemedi.");
+        return;
+      }
 
       new Notification("KLAS LİG", {
-        body: "🔔 Bildirimler başarıyla açıldı!",
+        body: "🔔 Bildirimler başarıyla açıldı.",
         icon: "/icons/logo.png",
       });
 
-      alert("✅ Telefon bildirim kaydı oluşturuldu.");
-
+      alert("✅ Bildirimler başarıyla aktif edildi.");
     } catch (err: any) {
-      alert("Hata: " + err.message);
       console.error(err);
+      alert("Bir hata oluştu: " + err.message);
     }
   };
 
