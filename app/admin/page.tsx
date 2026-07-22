@@ -9,6 +9,7 @@ const kartlar = [
   { icon: "📨", baslik: "Oyuncu Başvuruları", link: "/admin/basvurular" },
   { icon: "📰", baslik: "Haberler", link: "/admin/haberler" },
   { icon: "📢", baslik: "Duyurular", link: "/admin/duyurular" },
+  { icon: "🔔", baslik: "Bildirim Gönder", link: "/admin/bildirim" },
   { icon: "⚙️", baslik: "Ayarlar", link: "/admin/ayarlar" },
 ];
 

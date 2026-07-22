@@ -1,8 +1,11 @@
 "use client";
-
+import InstallButton from "./InstallButton";
+import NotificationButton from "./NotificationButton";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Countdown from "./Countdown";
 import Link from "next/link";
+
 export default function Hero() {
   return (
     <section
@@ -114,6 +117,8 @@ export default function Hero() {
     👤 OYUNCU BAŞVURUSU
   </button>
 </Link>
+<InstallButton />
+<NotificationButton />
                 <div
           style={{
             display: "grid",
