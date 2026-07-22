@@ -71,10 +71,10 @@ export default function NotificationButton() {
         });
 
       if (error) {
-        console.error(error);
-        alert("Abonelik kaydedilemedi.");
-        return;
-      }
+  console.error(error);
+  alert(JSON.stringify(error, null, 2));
+  return;
+}
 
       new Notification("KLAS LİG", {
         body: "🔔 Bildirimler başarıyla açıldı.",
