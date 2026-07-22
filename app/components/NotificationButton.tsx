@@ -65,10 +65,11 @@ console.log("Subscription:", subscription);
           },
         ]);
 
-      if (error) {
-        alert("Abonelik kaydı hatası: " + error.message);
-        return;
-      }
+     if (error) {
+  console.error(error);
+  alert(JSON.stringify(error, null, 2));
+  return;
+}
 
       new Notification("KLAS LİG", {
         body: "🔔 Bildirimler başarıyla açıldı!",
