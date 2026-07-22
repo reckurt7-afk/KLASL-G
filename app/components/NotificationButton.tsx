@@ -30,7 +30,7 @@ export default function NotificationButton() {
       }
 
       const registration = await navigator.serviceWorker.ready;
-
+console.log("SW:", registration);
       // Eski abonelik varsa sil
       const oldSubscription =
         await registration.pushManager.getSubscription();
@@ -46,7 +46,7 @@ export default function NotificationButton() {
           process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
         ),
       });
-
+console.log("Subscription:", subscription);
       const { error } = await supabase
         .from("bildirim_aboneleri")
         .insert([
