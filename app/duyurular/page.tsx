@@ -6,7 +6,9 @@ import { supabase } from "@/lib/supabase";
 type Duyuru = {
   id: number;
   baslik: string;
-  icerik: string;
+  aciklama: string;
+  renk: string;
+  aktif: boolean;
   created_at: string;
 };
 
@@ -18,12 +20,15 @@ export default function DuyurularPage() {
   }, []);
 
   async function getir() {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("duyurular")
       .select("*")
+      .eq("aktif", true)
       .order("created_at", { ascending: false });
 
-    if (data) setDuyurular(data);
+    if (!error && data) {
+      setDuyurular(data);
+    }
   }
 
   return (
@@ -38,9 +43,9 @@ export default function DuyurularPage() {
         style={{
           color: "#fff",
           textAlign: "center",
-          marginBottom: 30,
           fontSize: 32,
           fontWeight: 900,
+          marginBottom: 30,
         }}
       >
         📢 Duyurular
@@ -55,20 +60,30 @@ export default function DuyurularPage() {
           gap: 18,
         }}
       >
+        {duyurular.length === 0 && (
+          <div
+            style={{
+              color: "#999",
+              textAlign: "center",
+            }}
+          >
+            Henüz duyuru bulunmuyor.
+          </div>
+        )}
+
         {duyurular.map((duyuru) => (
           <div
             key={duyuru.id}
             style={{
               background: "#171717",
-              border: "1px solid rgba(255,49,49,.25)",
-              borderRadius: 16,
+              borderLeft: `6px solid ${duyuru.renk || "#ff3131"}`,
+              borderRadius: 12,
               padding: 20,
             }}
           >
             <h2
               style={{
                 color: "#fff",
-                margin: 0,
                 marginBottom: 10,
               }}
             >
@@ -77,9 +92,9 @@ export default function DuyurularPage() {
 
             <div
               style={{
-                color: "#999",
+                color: "#888",
                 fontSize: 13,
-                marginBottom: 15,
+                marginBottom: 12,
               }}
             >
               {new Date(duyuru.created_at).toLocaleDateString("tr-TR")}
@@ -88,12 +103,12 @@ export default function DuyurularPage() {
             <p
               style={{
                 color: "#ddd",
-                lineHeight: 1.7,
                 whiteSpace: "pre-wrap",
+                lineHeight: 1.7,
                 margin: 0,
               }}
             >
-              {duyuru.icerik}
+              {duyuru.aciklama}
             </p>
           </div>
         ))}

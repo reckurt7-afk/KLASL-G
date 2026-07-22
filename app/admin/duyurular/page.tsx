@@ -1,27 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+
+type Duyuru = {
+  id: number;
+  baslik: string;
+  aciklama: string;
+  created_at: string;
+};
 
 export default function AdminDuyurularPage() {
   const [baslik, setBaslik] = useState("");
-  const [icerik, setIcerik] = useState("");
+  const [aciklama, setAciklama] = useState("");
   const [loading, setLoading] = useState(false);
+  const [duyurular, setDuyurular] = useState<Duyuru[]>([]);
+
+  useEffect(() => {
+    getir();
+  }, []);
+
+  async function getir() {
+    const { data } = await supabase
+      .from("duyurular")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (data) setDuyurular(data);
+  }
 
   async function yayinla() {
-    if (!baslik.trim() || !icerik.trim()) {
-      alert("Başlık ve duyuru metni boş olamaz.");
+    if (!baslik || !aciklama) {
+      alert("Tüm alanları doldurun.");
       return;
     }
 
     setLoading(true);
 
-    const { error } = await supabase.from("duyurular").insert([
-      {
-        baslik,
-        icerik,
-      },
-    ]);
+    const { error } = await supabase.from("duyurular").insert({
+      baslik,
+      aciklama,
+      aktif: true,
+      renk: "#ff3131",
+    });
 
     setLoading(false);
 
@@ -30,10 +51,28 @@ export default function AdminDuyurularPage() {
       return;
     }
 
-    alert("✅ Duyuru başarıyla yayınlandı.");
-
     setBaslik("");
-    setIcerik("");
+    setAciklama("");
+
+    alert("✅ Duyuru yayınlandı.");
+
+    getir();
+  }
+
+  async function sil(id: number) {
+    if (!confirm("Bu duyuru silinsin mi?")) return;
+
+    const { error } = await supabase
+      .from("duyurular")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    getir();
   }
 
   return (
@@ -48,12 +87,10 @@ export default function AdminDuyurularPage() {
         style={{
           color: "#fff",
           textAlign: "center",
-          marginBottom: 35,
-          fontSize: 30,
-          fontWeight: 900,
+          marginBottom: 30,
         }}
       >
-        📢 Duyuru Yayınla
+        📢 Duyuru Yönetimi
       </h1>
 
       <div
@@ -62,56 +99,60 @@ export default function AdminDuyurularPage() {
           margin: "auto",
           display: "flex",
           flexDirection: "column",
-          gap: 18,
+          gap: 15,
         }}
       >
         <input
           value={baslik}
           onChange={(e) => setBaslik(e.target.value)}
-          placeholder="Duyuru Başlığı"
-          style={{
-            height: 55,
-            borderRadius: 12,
-            border: "1px solid #333",
-            background: "#171717",
-            color: "#fff",
-            padding: "0 15px",
-            fontSize: 17,
-          }}
+          placeholder="Başlık"
         />
 
         <textarea
-          value={icerik}
-          onChange={(e) => setIcerik(e.target.value)}
-          placeholder="Duyuru Metni"
           rows={8}
-          style={{
-            borderRadius: 12,
-            border: "1px solid #333",
-            background: "#171717",
-            color: "#fff",
-            padding: 15,
-            fontSize: 16,
-            resize: "vertical",
-          }}
+          value={aciklama}
+          onChange={(e) => setAciklama(e.target.value)}
+          placeholder="Duyuru"
         />
 
-        <button
-          onClick={yayinla}
-          disabled={loading}
-          style={{
-            height: 58,
-            border: "none",
-            borderRadius: 12,
-            background: "#ff3131",
-            color: "#fff",
-            fontWeight: 900,
-            fontSize: 18,
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={yayinla} disabled={loading}>
           {loading ? "Yayınlanıyor..." : "🚀 Yayınla"}
         </button>
+
+        <hr />
+
+        <h2 style={{ color: "#fff" }}>Yayınlanan Duyurular</h2>
+
+        {duyurular.map((duyuru) => (
+          <div
+            key={duyuru.id}
+            style={{
+              background: "#171717",
+              borderRadius: 12,
+              padding: 15,
+              color: "#fff",
+              marginBottom: 12,
+            }}
+          >
+            <h3>{duyuru.baslik}</h3>
+
+            <p>{duyuru.aciklama}</p>
+
+            <button
+              onClick={() => sil(duyuru.id)}
+              style={{
+                background: "#ff3131",
+                color: "#fff",
+                border: "none",
+                padding: "8px 14px",
+                borderRadius: 8,
+                cursor: "pointer",
+              }}
+            >
+              🗑️ Sil
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
