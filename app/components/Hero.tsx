@@ -49,7 +49,7 @@ export default function Hero() {
       >
 
         <Image
-          src="/logo.png"
+         src="/icons/logo.png"
           alt="KLAS LİG"
           width={160}
           height={160}
