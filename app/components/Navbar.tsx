@@ -7,10 +7,7 @@ export default function Navbar() {
   return (
     <header
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
+        position: "relative",
         background: "rgba(10,10,10,.92)",
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(255,215,0,.25)",
