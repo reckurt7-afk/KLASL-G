@@ -1,8 +1,14 @@
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 
-export const runtime = "nodejs";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 webpush.setVapidDetails(
   process.env.VAPID_EMAIL!,
@@ -12,12 +18,6 @@ webpush.setVapidDetails(
 
 export async function POST(request: Request) {
   try {
-    // Supabase istemcisini burada oluştur
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
-
     const { baslik, mesaj } = await request.json();
 
     const { data: aboneler, error } = await supabase
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
         gonderilen++;
       } catch (err: any) {
-        console.error("Push hatası:", err);
+        console.error(err);
 
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
@@ -66,7 +66,6 @@ export async function POST(request: Request) {
       success: true,
       gonderilen,
     });
-
   } catch (err: any) {
     console.error(err);
 
