@@ -27,17 +27,19 @@ export default function BildirimPage() {
     }
 
     try {
-      const response = await fetch("/api/send-notification", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          baslik,
-          mesaj,
-        }),
-      });
-
+      const response = await fetch(
+  "https://klasl-g-4u2d.vercel.app/api/send-notification",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      baslik,
+      mesaj,
+    }),
+  }
+);
       const sonuc = await response.json();
 alert(JSON.stringify(sonuc));
       if (!response.ok) {
