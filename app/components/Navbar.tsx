@@ -43,22 +43,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Logo */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingBottom: 12,
-        }}
-      >
-        <Image
-          src="/logo.png"
-          alt="KLAS Lig"
-          width={50}
-          height={50}
-          priority
-        />
-      </div>
+      
     </header>
   );
 }
@@ -68,9 +53,9 @@ const btn = {
   color: "#fff",
   background: "#171717",
   border: "1px solid rgba(255,215,0,.35)",
-  borderRadius: 12,
-  padding: "12px 8px",
+  borderRadius: 10,
+ padding: "8px 12px",
   textAlign: "center" as const,
-  fontSize: 14,
+  fontSize: 13,
   fontWeight: 700,
 };

@@ -17,7 +17,7 @@ export default function Hero() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "90px 20px 40px",
+        padding: "130px 20px 40px",
       }}
     >
       {/* KARARTMA */}
@@ -48,8 +48,8 @@ export default function Hero() {
         <Image
           src="/logo.png"
           alt="KLAS LİG"
-          width={180}
-          height={180}
+          width={160}
+          height={160}
           priority
         />
 
@@ -59,7 +59,7 @@ export default function Hero() {
             fontSize: 46,
             fontWeight: 900,
             lineHeight: 1.05,
-            marginTop: 18,
+            marginTop: 10,
             textShadow: "0 0 20px rgba(255,0,0,.45)",
           }}
         >
