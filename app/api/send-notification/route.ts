@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+export const runtime = "nodejs";
 
 webpush.setVapidDetails(
   process.env.VAPID_EMAIL!,
@@ -15,6 +12,12 @@ webpush.setVapidDetails(
 
 export async function POST(request: Request) {
   try {
+    // Supabase istemcisini burada oluştur
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
     const { baslik, mesaj } = await request.json();
 
     const { data: aboneler, error } = await supabase
@@ -47,11 +50,9 @@ export async function POST(request: Request) {
         );
 
         gonderilen++;
-
       } catch (err: any) {
-        console.log("Push hatası:", err?.statusCode, err?.message);
+        console.error("Push hatası:", err);
 
-        // Geçersiz abonelikleri sil
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
@@ -66,10 +67,16 @@ export async function POST(request: Request) {
       gonderilen,
     });
 
-  } catch (error: any) {
+  } catch (err: any) {
+    console.error(err);
+
     return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
+      {
+        error: err?.message || "Bilinmeyen hata",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
