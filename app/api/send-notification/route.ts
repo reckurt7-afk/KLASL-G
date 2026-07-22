@@ -5,11 +5,6 @@ import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 webpush.setVapidDetails(
   process.env.VAPID_EMAIL!,
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
@@ -18,6 +13,11 @@ webpush.setVapidDetails(
 
 export async function POST(request: Request) {
   try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
     const { baslik, mesaj } = await request.json();
 
     const { data: aboneler, error } = await supabase
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
         gonderilen++;
       } catch (err: any) {
-        console.error(err);
+        console.error("Push hatası:", err);
 
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
@@ -71,7 +71,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        error: err?.message || "Bilinmeyen hata",
+        success: false,
+        error: err?.stack || err?.message || String(err),
       },
       {
         status: 500,
