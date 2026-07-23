@@ -54,7 +54,7 @@ export default function NotificationButton() {
         });
       }
 
-      alert("✅ Push aboneliği oluşturuldu.");
+     
 
       const payload = {
         endpoint: subscription.endpoint,
@@ -90,7 +90,7 @@ if (error) {
         return;
       }
 
-      alert("✅ Supabase kaydı tamamlandı.");
+      
 
       new Notification("KLAS LİG", {
         body: "🔔 Bildirimler başarıyla açıldı.",
