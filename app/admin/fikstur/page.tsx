@@ -55,6 +55,9 @@ export default function FiksturAdminPage() {
   }
 
   alert("✅ Kaydedildi");
+
+  // Listeyi yeniden yükle
+  maclariGetir();
 }
 
   return (
