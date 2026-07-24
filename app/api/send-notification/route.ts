@@ -49,21 +49,17 @@ export async function POST(req: Request) {
           })
         );
 
-        gonderilen++;
-      } catch (e: any) {
-  console.error("WEBPUSH HATASI:", {
-    statusCode: e?.statusCode,
-    message: e?.message,
-    body: e?.body,
-  });
-
-  if (e?.statusCode === 404 || e?.statusCode === 410) {
-          await supabase
-            .from("bildirim_aboneleri")
-            .delete()
-            .eq("id", abone.id);
-        }
-      }
+       } catch (e: any) {
+  return NextResponse.json(
+    {
+      success: false,
+      statusCode: e?.statusCode,
+      message: e?.message,
+      body: e?.body,
+    },
+    { status: 500 }
+  );
+}
     }
 
     return NextResponse.json({
