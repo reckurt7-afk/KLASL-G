@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const kartlar = [
+  { icon: "🔴", baslik: "Canlı Maç", link: "/admin/canli-mac" },
   { icon: "⚽", baslik: "Maç Sonucu Gir", link: "/admin/mac-sonucu" },
   { icon: "🏆", baslik: "Puan Durumu", link: "/admin/puan-durumu" },
   { icon: "📅", baslik: "Fikstürü Düzenle", link: "/admin/fikstur" },
@@ -11,6 +12,7 @@ const kartlar = [
   { icon: "📢", baslik: "Duyurular", link: "/admin/duyurular" },
   { icon: "🔔", baslik: "Bildirim Gönder", link: "/admin/bildirim" },
   { icon: "⚙️", baslik: "Ayarlar", link: "/admin/ayarlar" },
+  { icon: "🎯", baslik: "Skor Tahminleri", link: "/admin/skor-tahminleri" },
 ];
 
 export default function AdminPage() {
