@@ -74,7 +74,8 @@ export default function NotificationButton() {
   .from("bildirim_aboneleri")
   .insert([payload])
   .select();
-
+alert("DATA: " + JSON.stringify(data));
+alert("ERROR: " + JSON.stringify(error));
 console.log("Supabase Sonuç:", data);
 console.log("Supabase Hata:", error);
 
