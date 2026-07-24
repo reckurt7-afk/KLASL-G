@@ -148,7 +148,7 @@ export default function FiksturAdminPage() {
       document.getElementById(`saha-${mac.id}`) as HTMLInputElement
     ).value;
 
-    kaydet(mac.id, tarih, saat, saha);
+    
   }}
   style={{
     width: "100%",
