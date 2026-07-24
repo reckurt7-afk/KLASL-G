@@ -51,9 +51,13 @@ export async function POST(req: Request) {
 
         gonderilen++;
       } catch (e: any) {
-        console.error(e);
+  console.error("WEBPUSH HATASI:", {
+    statusCode: e?.statusCode,
+    message: e?.message,
+    body: e?.body,
+  });
 
-        if (e?.statusCode === 404 || e?.statusCode === 410) {
+  if (e?.statusCode === 404 || e?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
             .delete()
