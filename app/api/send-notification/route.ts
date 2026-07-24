@@ -15,16 +15,6 @@ export async function POST(req: Request) {
   try {
     const { baslik, mesaj } = await req.json();
 
-    if (!baslik || !mesaj) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Başlık veya mesaj boş olamaz",
-        },
-        { status: 400 }
-      );
-    }
-
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -46,6 +36,7 @@ export async function POST(req: Request) {
 
     let gonderilen = 0;
     let hatali = 0;
+    let hataDetayi: any = null;
 
     for (const abone of aboneler || []) {
       try {
@@ -68,13 +59,14 @@ export async function POST(req: Request) {
       } catch (err: any) {
         hatali++;
 
-        console.log(
-          "Bildirim gönderilemedi:",
-          err?.statusCode,
-          err?.body
-        );
+        hataDetayi = {
+          statusCode: err?.statusCode,
+          message: err?.message,
+          body: err?.body,
+        };
 
-        // Ölü aboneleri temizle
+        console.log("Bildirim hatası:", hataDetayi);
+
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
@@ -84,27 +76,21 @@ export async function POST(req: Request) {
       }
     }
 
-        return NextResponse.json({
+    return NextResponse.json({
       success: true,
       toplam: aboneler?.length || 0,
       gonderilen,
       hatali,
+      hataDetayi,
     });
 
   } catch (err: any) {
-    console.error("SEND NOTIFICATION ERROR:", err);
-
     return NextResponse.json(
       {
         success: false,
-        statusCode: err?.statusCode,
-        message: err?.message,
-        body: err?.body,
-        stack: err?.stack,
+        error: err?.message,
       },
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }
