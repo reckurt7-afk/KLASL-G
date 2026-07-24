@@ -38,6 +38,9 @@ export default function Navbar() {
         <Link href="/duyurular" style={btn}>
           📢 Duyurular
         </Link>
+        <Link href="/mac-saatleri" style={btn}>
+  ⏰ Maç Saatleri
+</Link>
       </div>
 
       

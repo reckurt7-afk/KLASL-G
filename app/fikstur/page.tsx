@@ -9,6 +9,9 @@ type CanliMac = {
   ev_sahibi: string;
   deplasman: string;
   durum: string;
+  tarih: string | null;
+  saat: string | null;
+  saha: string | null;
 };
 
 const logolar: Record<string, string> = {
@@ -115,7 +118,7 @@ export default function FiksturPage() {
 async function canliMaclariGetir() {
   const { data } = await supabase
     .from("maclar")
-    .select("hafta,ev_sahibi,deplasman,durum")
+    .select("hafta,ev_sahibi,deplasman,durum,tarih,saat,saha")
     .eq("durum", "Canlı");
 
   if (data) {
