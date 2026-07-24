@@ -84,7 +84,7 @@ export async function POST(req: Request) {
       }
     }
 
-    return NextResponse.json({
+        return NextResponse.json({
       success: true,
       toplam: aboneler?.length || 0,
       gonderilen,
@@ -97,7 +97,10 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: err?.message || "Sunucu hatası",
+        statusCode: err?.statusCode,
+        message: err?.message,
+        body: err?.body,
+        stack: err?.stack,
       },
       {
         status: 500,
