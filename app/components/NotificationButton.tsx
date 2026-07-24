@@ -73,7 +73,7 @@ export default function NotificationButton() {
       const { data, error } = await supabase
   .from("bildirim_aboneleri")
   .insert([payload])
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
+  
   .select();
 alert("DATA: " + JSON.stringify(data));
 alert("ERROR: " + JSON.stringify(error));
