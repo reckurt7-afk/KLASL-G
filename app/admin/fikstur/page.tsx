@@ -147,7 +147,7 @@ export default function FiksturAdminPage() {
     const saha = (
       document.getElementById(`saha-${mac.id}`) as HTMLInputElement
     ).value;
-
+kaydet(mac.id, tarih, saat, saha);
     
   }}
   style={{
