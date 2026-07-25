@@ -4,7 +4,15 @@ export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
+console.log(
+  "PUBLIC:",
+  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.slice(0, 10)
+);
 
+console.log(
+  "PRIVATE:",
+  process.env.VAPID_PRIVATE_KEY?.slice(0, 10)
+);
 webpush.setVapidDetails(
   "mailto:recepkurt7@gmail.com",
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,

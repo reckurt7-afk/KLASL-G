@@ -53,7 +53,16 @@ export default function AdminDuyurularPage() {
 
     setBaslik("");
     setAciklama("");
-
+await fetch("/api/send-notification", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    baslik,
+    mesaj: aciklama,
+  }),
+});
     alert("✅ Duyuru yayınlandı.");
 
     getir();
