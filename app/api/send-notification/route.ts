@@ -6,10 +6,11 @@ import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
 
 webpush.setVapidDetails(
-  process.env.VAPID_EMAIL!,
+  "mailto:recepkurt7@gmail.com",
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
   process.env.VAPID_PRIVATE_KEY!
 );
+
 
 export async function POST(req: Request) {
   try {

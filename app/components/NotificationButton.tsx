@@ -43,16 +43,20 @@ export default function NotificationButton() {
 
       const registration = await navigator.serviceWorker.ready;
 
-      let subscription = await registration.pushManager.getSubscription();
+     let subscription = await registration.pushManager.getSubscription();
 
-      if (!subscription) {
-        subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(
-            process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-          ),
-        });
-      }
+// Eski abonelik varsa sil
+if (subscription) {
+  await subscription.unsubscribe();
+}
+
+// Yeni abonelik oluştur
+subscription = await registration.pushManager.subscribe({
+  userVisibleOnly: true,
+  applicationServerKey: urlBase64ToUint8Array(
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+  ),
+});
 
       const payload = {
         endpoint: subscription.endpoint,
