@@ -57,8 +57,6 @@ subscription = await registration.pushManager.subscribe({
     process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
   ),
 });
-console.log("Subscription:", subscription.toJSON());
-alert(JSON.stringify(subscription.toJSON(), null, 2));
       const payload = {
         endpoint: subscription.endpoint,
         p256dh: btoa(
