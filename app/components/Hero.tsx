@@ -3,10 +3,45 @@ import InstallButton from "./InstallButton";
 import NotificationButton from "./NotificationButton";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Countdown from "./Countdown";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function Hero() {
+  const [mac, setMac] = useState<any>(null);
+
+useEffect(() => {
+  canliMacGetir();
+
+  const channel = supabase
+    .channel("canli-mac")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "maclar",
+      },
+      () => {
+        canliMacGetir();
+      }
+    )
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []);
+async function canliMacGetir() {
+  const { data } = await supabase
+    .from("maclar")
+    .select("*")
+    .eq("canli", true)
+    .single();
+
+  if (data) {
+    setMac(data);
+  }
+}
   return (
     <section
       style={{
@@ -82,15 +117,96 @@ export default function Hero() {
         >
           3. SEZON
         </div>
-                 <div
+<div
   style={{
     width: "100%",
     marginTop: 35,
+    background: "rgba(15,15,15,.75)",
+    border: "1px solid rgba(255,49,49,.30)",
+    borderRadius: 20,
+    padding: "24px",
+    backdropFilter: "blur(10px)",
+    textAlign: "center",
   }}
 >
-  <Countdown />
-</div>
+  <div
+    style={{
+      color: "#ff3131",
+      fontWeight: 900,
+      fontSize: 22,
+      marginBottom: 18,
+    }}
+  >
+    🔴 BUGÜNKÜ MAÇ
+  </div>
 
+  <div
+    style={{
+      color: "#fff",
+      fontSize: 24,
+      fontWeight: 800,
+      lineHeight: 1.5,
+    }}
+  >
+   {mac ? (
+  <>
+    <div>{mac.ev_sahibi}</div>
+
+    <div
+      style={{
+        fontSize: 36,
+        fontWeight: 900,
+        color: "#ff3131",
+        margin: "10px 0",
+      }}
+    >
+      {mac.ev_skor} - {mac.dep_skor}
+    </div>
+
+    <div>{mac.deplasman}</div>
+  </>
+) : (
+  "Bugün maç bulunmuyor."
+)}
+  </div>
+
+  <div
+    style={{
+      marginTop: 18,
+      color: "#ddd",
+      fontSize: 16,
+    }}
+  >
+    {mac && (
+  <>
+    ⏱️ {mac.dakika}'
+    <br />
+    📍 {mac.saha}
+    <br />
+    🧑‍⚖️ Hakem: {mac.hakem}
+  </>
+)}
+  </div>
+
+  <a
+    href={mac?.youtube_link || "#"}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "inline-block",
+      marginTop: 20,
+      background: "#ff3131",
+      color: "#fff",
+      padding: "14px 28px",
+      borderRadius: 999,
+      textDecoration: "none",
+      fontWeight: 800,
+      fontSize: 16,
+    }}
+  >
+    📺 CANLI YAYINI İZLE
+  </a>
+</div>
        <Link
   href="/oyuncu-basvurusu"
   style={{

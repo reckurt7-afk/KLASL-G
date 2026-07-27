@@ -13,6 +13,8 @@ type Mac = {
   dakika: number;
   durum: string;
   canli: boolean;
+  hakem: string;
+  youtube_link: string;
 };
 
 export default function CanliMacPage() {
@@ -22,9 +24,96 @@ export default function CanliMacPage() {
   useEffect(() => {
     maclariGetir();
   }, []);
-async function canliDurumGuncelle(canli: boolean) {
+useEffect(() => {
+  if (!seciliMac?.canli) return;
+
+  const interval = setInterval(async () => {
+    if (!seciliMac) return;
+
+    const { data } = await supabase
+  .from("maclar")
+  .select("dakika")
+  .eq("id", seciliMac.id)
+  .single();
+
+if (!data) return;
+
+const yeniDakika = data.dakika + 1;
+
+await macGuncelle("dakika", yeniDakika);
+
+    // İlk yarı bitti
+    if (yeniDakika === 25) {
+      await macGuncelle("dakika", 25);
+      clearInterval(interval);
+      alert("⏸️ DEVRE ARASI");
+      return;
+    }
+
+    // Maç bitti
+    if (yeniDakika === 50) {
+      await macGuncelle("dakika", 50);
+      clearInterval(interval);
+      await canliDurumGuncelle(false);
+      alert("🏁 MAÇ SONA ERDİ");
+      return;
+    }
+
+    await macGuncelle("dakika", yeniDakika);
+  }, 60000);
+
+  return () => clearInterval(interval);
+}, [seciliMac]);
+  async function maclariGetir() {
+    const { data, error } = await supabase
+      .from("maclar")
+      .select("*")
+      .order("hafta", { ascending: true });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setMaclar(data || []);
+  }
+
+  async function macGuncelle(alan: keyof Mac, deger: any) {
+    if (!seciliMac) return;
+
+    const { error } = await supabase
+      .from("maclar")
+      .update({
+        [alan]: deger,
+      })
+      .eq("id", seciliMac.id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setSeciliMac({
+      ...seciliMac,
+      [alan]: deger,
+    });
+  }
+
+  async function canliDurumGuncelle(canli: boolean) {
   if (!seciliMac) return;
 
+  // Önce tüm maçları kapat
+  if (canli) {
+    await supabase
+      .from("maclar")
+      .update({
+        canli: false,
+        durum: "Bekliyor",
+      })
+      .neq("id", 0);
+  }
+
+  // Seçilen maçı güncelle
   const { error } = await supabase
     .from("maclar")
     .update({
@@ -38,34 +127,14 @@ async function canliDurumGuncelle(canli: boolean) {
     return;
   }
 
-  alert(
-    canli
-      ? "🔴 Maç canlı başlatıldı"
-      : "⛔ Canlı maç kapatıldı"
-  );
-
-  maclariGetir();
-
   setSeciliMac({
     ...seciliMac,
-    canli,
+    canli: canli,
     durum: canli ? "Canlı" : "Bekliyor",
   });
+
+  maclariGetir();
 }
-  async function maclariGetir() {
-    const { data, error } = await supabase
-      .from("maclar")
-      .select("*")
-      .order("hafta", { ascending: true });
-console.log(data);
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    setMaclar(data || []);
-  }
-
   return (
     <div
       style={{
@@ -78,50 +147,35 @@ console.log(data);
       <h1
         style={{
           textAlign: "center",
-          marginBottom: 30,
           color: "#ff3131",
+          marginBottom: 30,
           fontWeight: 900,
         }}
       >
         🔴 CANLI MAÇ YÖNETİMİ
       </h1>
-
-      <div
+            <div
         style={{
-          maxWidth: 600,
+          maxWidth: 700,
           margin: "0 auto",
           background: "#151515",
+          borderRadius: 16,
           padding: 20,
-          borderRadius: 15,
-          border: "1px solid #333",
         }}
       >
-        <div
-          style={{
-            marginBottom: 10,
-            fontWeight: 700,
-          }}
-        >
-          Maç Seç
-        </div>
-
         <select
+          value={seciliMac?.id || ""}
+          onChange={(e) => {
+            const mac = maclar.find((m) => m.id === Number(e.target.value));
+            setSeciliMac(mac || null);
+          }}
           style={{
             width: "100%",
             height: 50,
+            borderRadius: 10,
             background: "#222",
             color: "#fff",
-            borderRadius: 10,
             padding: "0 15px",
-            border: "1px solid #444",
-          }}
-          value={seciliMac?.id || ""}
-          onChange={(e) => {
-            const mac = maclar.find(
-              (m) => m.id === Number(e.target.value)
-            );
-
-            setSeciliMac(mac || null);
           }}
         >
           <option value="">Maç Seçiniz</option>
@@ -134,18 +188,12 @@ console.log(data);
         </select>
 
         {seciliMac && (
-          <div
-            style={{
-              marginTop: 30,
-              background: "#1c1c1c",
-              borderRadius: 15,
-              padding: 20,
-            }}
-          >
+          <>
             <h2
               style={{
                 textAlign: "center",
-                marginBottom: 20,
+                marginTop: 30,
+                marginBottom: 25,
               }}
             >
               {seciliMac.ev_sahibi}
@@ -154,19 +202,172 @@ console.log(data);
               <br />
               {seciliMac.deplasman}
             </h2>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto 1fr",
+                alignItems: "center",
+                textAlign: "center",
+                gap: 20,
+              }}
+            >
+              <div>
+                <button
+                  onClick={() =>
+                    macGuncelle(
+                      "ev_skor",
+                      Math.max(0, seciliMac.ev_skor - 1)
+                    )
+                  }
+                >
+                  ➖
+                </button>
+
+                <h1>{seciliMac.ev_skor}</h1>
+<button
+  onClick={async () => {
+    const yeniSkor = seciliMac.ev_skor + 1;
+
+    await macGuncelle("ev_skor", yeniSkor);
+
+    await fetch("/api/send-notification", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        baslik: "⚽ GOOOL!",
+        mesaj: `${seciliMac.ev_sahibi} ${yeniSkor}-${seciliMac.dep_skor} öne geçti!`,
+      }),
+    });
+  }}
+>
+  ➕
+</button>
+              </div>
+
+              <h1>-</h1>
+
+              <div>
+                <button
+                  onClick={() =>
+                    macGuncelle(
+                      "dep_skor",
+                      Math.max(0, seciliMac.dep_skor - 1)
+                    )
+                  }
+                >
+                  ➖
+                </button>
+
+                <h1>{seciliMac.dep_skor}</h1>
+
+                <button
+  onClick={async () => {
+    const yeniSkor = seciliMac.dep_skor + 1;
+
+    await macGuncelle("dep_skor", yeniSkor);
+
+    await fetch("/api/send-notification", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        baslik: "⚽ GOOOL!",
+        mesaj: `${seciliMac.deplasman} ${seciliMac.ev_skor}-${yeniSkor} öne geçti!`,
+      }),
+    });
+  }}
+>
+  ➕
+</button>
+              </div>
+            </div>
+                        <div style={{ marginTop: 30 }}>
+              <h3>Dakika</h3>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: 10,
+                  alignItems: "center",
+                }}
+              >
+                <button
+                  onClick={() =>
+                    macGuncelle(
+                      "dakika",
+                      Math.max(0, seciliMac.dakika - 1)
+                    )
+                  }
+                >
+                  ➖
+                </button>
+
+                <h2>{seciliMac.dakika}'</h2>
+
+                <button
+                  onClick={() =>
+                    macGuncelle("dakika", seciliMac.dakika + 1)
+                  }
+                >
+                  ➕
+                </button>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 25 }}>
+              <h3>Hakem</h3>
+
+              <input
+                value={seciliMac.hakem || ""}
+                onChange={(e) =>
+                  macGuncelle("hakem", e.target.value)
+                }
+                placeholder="Hakem adı"
+                style={{
+                  width: "100%",
+                  height: 45,
+                  padding: "0 15px",
+                  borderRadius: 10,
+                }}
+              />
+            </div>
+
+            <div style={{ marginTop: 20 }}>
+              <h3>YouTube Yayın Linki</h3>
+
+              <input
+                value={seciliMac.youtube_link || ""}
+                onChange={(e) =>
+                  macGuncelle("youtube_link", e.target.value)
+                }
+                placeholder="https://youtube.com/..."
+                style={{
+                  width: "100%",
+                  height: 45,
+                  padding: "0 15px",
+                  borderRadius: 10,
+                }}
+              />
+            </div>
+
             <div
   style={{
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "repeat(4,1fr)",
     gap: 10,
-    marginTop: 25,
+    marginTop: 30,
   }}
 >
   <button
     onClick={() => canliDurumGuncelle(true)}
     style={{
-      flex: 1,
       height: 50,
-      background: "#ff3131",
+      background: "#16a34a",
       color: "#fff",
       border: "none",
       borderRadius: 10,
@@ -174,15 +375,32 @@ console.log(data);
       cursor: "pointer",
     }}
   >
-    🔴 Canlı Başlat
+    ▶️ Başlat
   </button>
 
   <button
-    onClick={() => canliDurumGuncelle(false)}
+    onClick={async () => {
+      if (!seciliMac) return;
+
+      const { error } = await supabase
+        .from("maclar")
+        .update({
+          canli: false,
+          durum: "Devre Arası",
+        })
+        .eq("id", seciliMac.id);
+
+      if (!error) {
+        setSeciliMac({
+          ...seciliMac,
+          canli: false,
+          durum: "Devre Arası",
+        });
+      }
+    }}
     style={{
-      flex: 1,
       height: 50,
-      background: "#444",
+      background: "#f59e0b",
       color: "#fff",
       border: "none",
       borderRadius: 10,
@@ -190,10 +408,77 @@ console.log(data);
       cursor: "pointer",
     }}
   >
-    ⛔ Canlıyı Bitir
+    ⏸️ Devre
+  </button>
+
+  <button
+    onClick={async () => {
+      if (!seciliMac) return;
+
+      const { error } = await supabase
+        .from("maclar")
+        .update({
+          canli: true,
+          durum: "Canlı",
+        })
+        .eq("id", seciliMac.id);
+
+      if (!error) {
+        setSeciliMac({
+          ...seciliMac,
+          canli: true,
+          durum: "Canlı",
+        });
+      }
+    }}
+    style={{
+      height: 50,
+      background: "#2563eb",
+      color: "#fff",
+      border: "none",
+      borderRadius: 10,
+      fontWeight: 800,
+      cursor: "pointer",
+    }}
+  >
+    ▶️ 2.Yarı
+  </button>
+
+  <button
+    onClick={async () => {
+      if (!seciliMac) return;
+
+      const { error } = await supabase
+        .from("maclar")
+        .update({
+          canli: false,
+          durum: "Maç Sona Erdi",
+        })
+        .eq("id", seciliMac.id);
+
+      if (!error) {
+        setSeciliMac({
+          ...seciliMac,
+          canli: false,
+          durum: "Maç Sona Erdi",
+        });
+      }
+    }}
+    style={{
+      height: 50,
+      background: "#dc2626",
+      color: "#fff",
+      border: "none",
+      borderRadius: 10,
+      fontWeight: 800,
+      cursor: "pointer",
+    }}
+  >
+    🏁 Bitir
   </button>
 </div>
-          </div>
+
+          </>
         )}
       </div>
     </div>
