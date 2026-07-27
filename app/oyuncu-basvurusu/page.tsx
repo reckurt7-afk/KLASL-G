@@ -26,36 +26,36 @@ export default function OyuncuBasvurusuPage() {
   });
 
   async function gonder() {
-   const { data, error } = await supabase
-  .from("oyuncu_basvurulari")
-  .insert({
-    ...form,
-    forma_no: Number(form.forma_no),
-  })
-  .select();
-
-console.log("DATA:", data);
-console.log("ERROR:", error);
-
-if (error) {
-  console.error(error);
-  alert(JSON.stringify(error, null, 2));
-  return;
-}
-
-    alert("✅ Başvurunuz alındı. Onay bekleniyor.");
-
-    setForm({
-      ad_soyad: "",
-      telefon: "",
-      dogum_tarihi: "",
-      takim: "",
-      mevki: "",
-      forma_no: "",
-      aciklama: "",
+  const { error } = await supabase
+    .from("oyuncu_basvurulari")
+    .insert({
+      ad_soyad: form.ad_soyad,
+      telefon: form.telefon,
+      dogum_tarihi: form.dogum_tarihi || null,
+      takim: form.takim,
+      mevki: form.mevki,
+      forma_no: Number(form.forma_no),
+      aciklama: form.aciklama,
     });
+
+  if (error) {
+    console.error(error);
+    alert("Başvuru gönderilemedi.");
+    return;
   }
 
+  alert("✅ Başvurunuz gönderildi.");
+
+  setForm({
+    ad_soyad: "",
+    telefon: "",
+    dogum_tarihi: "",
+    takim: "",
+    mevki: "",
+    forma_no: "",
+    aciklama: "",
+  });
+}
   function degistir(
     alan: string,
     deger: string
