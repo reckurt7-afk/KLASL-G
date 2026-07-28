@@ -69,23 +69,17 @@ async function canliMacGetir() {
         }}
       />
 
-      <div className="flex justify-center w-full max-w-[1600px] mx-auto gap-12 relative z-10 items-start">
-        {/* Sol Sponsor */}
-        <div className="hidden xl:flex flex-col gap-6 w-[260px] shrink-0 pt-[20px]">
-          <SponsorBox side="left" />
-          <SponsorBox side="left" />
+      <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-8 xl:pt-0">
+        
+        {/* Sol Sponsor - Mobil için üste veya alta, ama masaüstünde solda. Mobilde yan yana veya grid. */}
+        <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-2 xl:order-1">
+          <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="left" /></div>
+          <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="left" /></div>
         </div>
 
         {/* İÇERİK */}
         <div
-          style={{
-            width: "100%",
-            maxWidth: 430,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
+          className="w-full max-w-[430px] flex flex-col items-center text-center order-1 xl:order-2"
         >
           <Image
             src="/icons/logo.png"
@@ -296,9 +290,9 @@ async function canliMacGetir() {
         </div>
 
         {/* Sağ Sponsor */}
-        <div className="hidden xl:flex flex-col gap-6 w-[260px] shrink-0 pt-[20px]">
-          <SponsorBox side="right" />
-          <SponsorBox side="right" />
+        <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-3">
+          <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="right" /></div>
+          <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="right" /></div>
         </div>
       </div>
     </section>
