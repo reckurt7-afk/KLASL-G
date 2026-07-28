@@ -11,6 +11,7 @@ type Basvuru = {
   mevki: string;
   forma_no: number;
   durum: string;
+  foto_url?: string;
 };
 
 export default function BasvurularPage() {
@@ -22,10 +23,10 @@ export default function BasvurularPage() {
 
   async function getir() {
     const { data, error } = await supabase
-  .from("oyuncu_basvurulari")
-  .select("*")
-  .eq("durum", "beklemede")
-  .order("created_at", { ascending: false });
+      .from("oyuncu_basvurulari")
+      .select("*")
+      .eq("durum", "beklemede")
+      .order("created_at", { ascending: false });
 
     if (error) {
       alert(error.message);
@@ -36,52 +37,61 @@ export default function BasvurularPage() {
   }
 
   async function onayla(b: Basvuru) {
+    // Önce bu oyuncunun zaten olup olmadığını kontrol et
     const { data: mevcutOyuncu } = await supabase
-  .from("oyuncular")
-  .select("id")
-  .eq("ad_soyad", b.ad_soyad)
-  .eq("takim", b.takim)
-  .maybeSingle();
-
-if (mevcutOyuncu) {
-  alert("Bu oyuncu zaten takımda kayıtlı.");
-  return;
-}
-    // oyuncular tablosuna ekle
-
-    const { error: oyuncuHata } = await supabase
       .from("oyuncular")
-      .insert({
-        ad_soyad: b.ad_soyad,
-        telefon: b.telefon,
-        takim: b.takim,
-        mevki: b.mevki,
-        forma_no: b.forma_no,
-      });
+      .select("id")
+      .eq("ad_soyad", b.ad_soyad)
+      .eq("takim", b.takim)
+      .maybeSingle();
 
-    if (oyuncuHata) {
-      alert(oyuncuHata.message);
+    if (mevcutOyuncu) {
+      // Oyuncu zaten varsa, bilgilerini (ve en önemlisi fotoğrafını) güncelle
+      const { error: guncellemeHatasi } = await supabase
+        .from("oyuncular")
+        .update({
+          telefon: b.telefon,
+          mevki: b.mevki,
+          forma_no: b.forma_no,
+          foto_url: b.foto_url,
+        })
+        .eq("id", mevcutOyuncu.id);
+
+      if (guncellemeHatasi) {
+        alert("Güncelleme hatası: " + guncellemeHatasi.message);
+        return;
+      }
+    } else {
+      // Oyuncu yoksa yeni kayıt olarak ekle
+      const { error: oyuncuHata } = await supabase
+        .from("oyuncular")
+        .insert({
+          ad_soyad: b.ad_soyad,
+          telefon: b.telefon,
+          takim: b.takim,
+          mevki: b.mevki,
+          forma_no: b.forma_no,
+          foto_url: b.foto_url,
+        });
+
+      if (oyuncuHata) {
+        alert("Ekleme hatası: " + oyuncuHata.message);
+        return;
+      }
+    }
+
+    // Başvuruyu 'onaylandi' olarak işaretle
+    const { error: basvuruHata } = await supabase
+      .from("oyuncu_basvurulari")
+      .update({ durum: "onaylandi" })
+      .eq("id", b.id);
+
+    if (basvuruHata) {
+      alert(basvuruHata.message);
       return;
     }
 
-    // başvuruyu güncelle
-
-    const { data, error } = await supabase
-  .from("oyuncu_basvurulari")
-  .update({
-    durum: "onaylandi",
-  })
-  .eq("id", b.id)
-  .select();
-console.log(data);
-console.log(error);
-    if (error) {
-      alert(error.message);
-      return;
-    }
-await getir();
-    alert("Oyuncu takıma eklendi.");
-
+    alert(mevcutOyuncu ? "Oyuncu bilgileri (Fotoğraf vs.) güncellendi." : "Yeni oyuncu takıma eklendi.");
     getir();
   }
 

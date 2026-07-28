@@ -44,156 +44,108 @@ useEffect(() => {
   takimlariGetir();
 }, []);
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundImage: "url('/images/stadium.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "rgba(0,0,0,.82)",
-          padding: "90px 12px 20px",
-        }}
-      >
-      <div
-  style={{
-    background: "rgba(25,25,25,.65)",
-    backdropFilter: "blur(18px)",
-    border: "1px solid rgba(255,215,0,.15)",
-    borderRadius: 24,
-    padding: 20,
-    marginBottom: 20,
-    textAlign: "center",
-  }}
->
-  <h1
-    style={{
-      color: "#fff",
-      fontSize: 30,
-      fontWeight: 900,
-      margin: 0,
-    }}
-  >
-    🏆 PUAN DURUMU
-  </h1>
+    <div className="min-h-screen bg-cover bg-center bg-fixed relative" style={{ backgroundImage: "url('/images/stadium.jpg')" }}>
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070707]/90 via-[#070707]/70 to-[#070707]/95"></div>
 
-  <div
-    style={{
-      color: "#FFD700",
-      marginTop: 8,
-      fontSize: 12,
-      letterSpacing: 5,
-      fontWeight: 700,
-    }}
-  >
-    KLAS LİG BURSA
-  </div>
-</div>
-
-        {/* Başlık */}
-        <div
-          style={{
-            display: "grid",
-           gridTemplateColumns: "24px 2fr 24px 24px 24px 24px 30px 24px",
-            gap: 4,
-            background: "rgba(25,25,25,.65)",
-backdropFilter: "blur(18px)",
-border: "1px solid rgba(255,215,0,.15)",
-            color: "#ff3131",
-            fontWeight: 800,
-            fontSize: 12,
-            padding: "10px 8px",
-            borderRadius: 12,
-            marginBottom: 10,
-          }}
-        >
-          <div>S</div>
-          <div>TAKIM</div>
-          <div>O</div>
-          <div>G</div>
-          <div>B</div>
-          <div>M</div>
-          <div>AV</div>
-          <div>P</div>
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto pt-[40px] px-4 pb-24">
+        
+        {/* Başlık Alanı */}
+        <div className="bg-[#151515]/60 backdrop-blur-xl border border-[#ff3131]/20 rounded-3xl p-6 mb-8 text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <h1 className="text-white text-3xl md:text-4xl font-black m-0 drop-shadow-[0_0_15px_rgba(255,49,49,0.4)]">
+            🏆 PUAN DURUMU
+          </h1>
+          <div className="text-[#ff3131] mt-2 text-xs md:text-sm tracking-[0.4em] font-black">
+            KLAS LİG BURSA
+          </div>
         </div>
 
-        {takimlar.map((t, i) => (
-          <div
-            key={t.ad}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "30px 1fr 26px 26px 26px 26px 34px 26px",
-              gap: 4,
-              alignItems: "center",
-             background: "rgba(25,25,25,.65)",
-backdropFilter: "blur(18px)",
-border: "1px solid rgba(255,215,0,.15)",
-boxShadow: "0 10px 30px rgba(0,0,0,.4)",
-              color: "#fff",
-              padding: "10px 8px",
-              borderRadius: 12,
-              marginBottom: 8,
-              borderLeft:
-                i < 2 ? "5px solid #16a34a" : "5px solid transparent",
-            }}
-          >
-            <div
-  style={{
-    fontWeight: 900,
-    fontSize: 24,
-    textAlign: "center",
-  }}
->
- {i === 0 ? "👑" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
-</div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                minWidth: 0,
-              }}
-            >
-              <Image
-                src={t.logo}
-                alt={t.ad}
-                width={36}
-height={42}
-style={{
-  borderRadius: "50%",
-  border: "2px solid rgba(255,215,0,.4)",
-}}
-              />
-
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                 
-                }}
-              >
-             <>
-  {t.ad}
-  {i === 0 && (
-    <span style={{ marginLeft: 6 }}>👑</span>
-  )}
-</>
-              </span>
+        {/* Tablo Konteyneri (Mobil İçin Kaydırılabilir) */}
+        <div className="overflow-x-auto pb-4 hide-scrollbar">
+          <div className="min-w-[700px]">
+            {/* Tablo Başlıkları */}
+            <div className="grid grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-2 bg-[#1a1a1a]/80 backdrop-blur-md border-b-2 border-[#ff3131] text-[#ff3131] font-black text-xs md:text-sm p-4 rounded-t-2xl shadow-[0_5px_15px_rgba(0,0,0,0.3)]">
+              <div className="text-center">S</div>
+              <div>TAKIM</div>
+              <div className="text-center">O</div>
+              <div className="text-center">G</div>
+              <div className="text-center">B</div>
+              <div className="text-center">M</div>
+              <div className="text-center">AV</div>
+              <div className="text-center text-white">P</div>
             </div>
-<div>{t.oynanan}</div>
-<div>{t.galibiyet}</div>
-<div>{t.beraberlik}</div>
-<div>{t.maglubiyet}</div>
-<div>{t.averaj}</div>
-<div style={{ fontWeight: 800 }}>{t.puan}</div>
-            
+
+            {/* Tablo Satırları */}
+            <div className="bg-[#151515]/60 backdrop-blur-md border border-[#ff3131]/10 rounded-b-2xl p-2 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex flex-col gap-1.5">
+              {takimlar.map((t, i) => {
+                // Şampiyon, İkinci, Üçüncü Renkleri
+                let rankColor = "text-gray-400";
+                let borderColor = "border-transparent";
+                let bgGradient = "bg-[#1f1f1f]/80";
+                let medal = i + 1;
+                
+                if (i === 0) {
+                  rankColor = "text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.8)]";
+                  borderColor = "border-l-yellow-400";
+                  bgGradient = "bg-gradient-to-r from-yellow-500/20 to-[#1f1f1f]/80";
+                  medal = "👑" as any;
+                } else if (i === 1) {
+                  rankColor = "text-gray-300 drop-shadow-[0_0_5px_rgba(209,213,219,0.8)]";
+                  borderColor = "border-l-gray-300";
+                  bgGradient = "bg-gradient-to-r from-gray-400/10 to-[#1f1f1f]/80";
+                  medal = "🥈" as any;
+                } else if (i === 2) {
+                  rankColor = "text-amber-600 drop-shadow-[0_0_5px_rgba(217,119,6,0.8)]";
+                  borderColor = "border-l-amber-600";
+                  bgGradient = "bg-gradient-to-r from-amber-600/10 to-[#1f1f1f]/80";
+                  medal = "🥉" as any;
+                }
+
+                return (
+                  <div
+                    key={t.ad}
+                    className={`grid grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-2 items-center ${bgGradient} border-l-4 ${borderColor} text-white p-3 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:bg-[#252525] hover:shadow-[0_5px_15px_rgba(255,49,49,0.2)] group cursor-default`}
+                  >
+                    {/* Sıralama / Madalya */}
+                    <div className={`font-black text-xl text-center ${rankColor} transition-transform group-hover:scale-110`}>
+                      {medal}
+                    </div>
+
+                    {/* Takım Bilgisi */}
+                    <div className="flex items-center gap-3">
+                      <div className="relative w-[36px] h-[36px] md:w-[42px] md:h-[42px] rounded-full overflow-hidden border border-white/20 group-hover:border-[#ff3131]/50 bg-[#111] shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                        <Image
+                          src={t.logo}
+                          alt={t.ad}
+                          fill
+                          className="object-contain p-1"
+                        />
+                      </div>
+                      <span className="font-bold text-sm md:text-base group-hover:text-[#ff3131] transition-colors">
+                        {t.ad}
+                        {i === 0 && <span className="ml-2">🏆</span>}
+                      </span>
+                    </div>
+
+                    {/* İstatistikler */}
+                    <div className="text-center font-semibold text-gray-300">{t.oynanan}</div>
+                    <div className="text-center font-bold text-green-400">{t.galibiyet}</div>
+                    <div className="text-center font-bold text-gray-400">{t.beraberlik}</div>
+                    <div className="text-center font-bold text-red-400">{t.maglubiyet}</div>
+                    
+                    <div className="text-center font-black bg-white/5 rounded-md py-1">
+                      {t.averaj > 0 ? `+${t.averaj}` : t.averaj}
+                    </div>
+                    
+                    <div className="text-center font-black text-lg text-white bg-[#ff3131]/20 rounded-md py-1 border border-[#ff3131]/30 group-hover:bg-[#ff3131] transition-colors">
+                      {t.puan}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
