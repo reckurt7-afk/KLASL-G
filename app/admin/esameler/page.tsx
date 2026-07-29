@@ -85,9 +85,9 @@ export default function AdminEsamelerPage() {
 
                 if (kadro.length === 0) {
                   return (
-                    <div className="bg-[#111] p-3 md:p-6 h-full flex flex-col items-center justify-center text-gray-600">
-                      <div className="text-2xl mb-2">⏳</div>
-                      <div className="text-[10px] md:text-sm font-bold text-center">
+                    <div className="bg-[#111] p-6 h-full flex flex-col items-center justify-center text-gray-600 border-b border-white/5">
+                      <div className="text-3xl mb-3">⏳</div>
+                      <div className="text-sm md:text-base font-bold text-center">
                         {takimAdi}<br/>henüz kadro girmedi.
                       </div>
                     </div>
@@ -95,25 +95,25 @@ export default function AdminEsamelerPage() {
                 }
 
                 return (
-                  <div className="bg-[#111] p-3 md:p-6 h-full">
-                    <h3 className="text-sm md:text-lg font-black text-yellow-500 mb-4 pb-2 border-b border-white/5 truncate">
+                  <div className="bg-[#111] p-6 border-b border-white/5">
+                    <h3 className="text-lg md:text-xl font-black text-yellow-500 mb-6 pb-3 border-b border-white/5 truncate">
                       🛡️ {takimAdi}
                     </h3>
 
                     {/* İlk 7 */}
                     <div className="mb-6">
-                      <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
-                      <div className="space-y-2">
+                      <div className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
+                      <div className="space-y-3">
                         {asil.map(o => (
-                          <div key={o.id} className={`flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
-                            <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-400">
+                          <div key={o.id} className={`flex items-center gap-4 p-3 rounded-xl ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
+                            <div className="w-10 h-10 shrink-0 rounded-full bg-black flex items-center justify-center text-sm font-black text-gray-400 border border-white/5">
                               {o.forma_no || "-"}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className={`font-bold text-xs md:text-base truncate ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
-                              <div className="text-[9px] md:text-[10px] text-gray-500 truncate">{o.pozisyon}</div>
+                              <div className={`font-bold text-base truncate ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
+                              <div className="text-xs text-gray-500 truncate">{o.pozisyon}</div>
                             </div>
-                            {o.kaptan && <span className="text-[10px] md:text-xs bg-yellow-500 text-black font-black px-1 md:px-2 py-0.5 rounded">©</span>}
+                            {o.kaptan && <span className="text-xs bg-yellow-500 text-black font-black px-3 py-1 rounded-md">© KAPTAN</span>}
                           </div>
                         ))}
                       </div>
@@ -122,16 +122,16 @@ export default function AdminEsamelerPage() {
                     {/* Yedekler */}
                     {yedek.length > 0 && (
                       <div>
-                        <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
-                        <div className="space-y-2">
+                        <div className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
+                        <div className="space-y-3">
                           {yedek.map(o => (
-                            <div key={o.id} className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg bg-[#1a1a1a]/50 border border-white/5 opacity-70">
-                              <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-500">
+                            <div key={o.id} className="flex items-center gap-4 p-3 rounded-xl bg-[#1a1a1a]/50 border border-white/5 opacity-70">
+                              <div className="w-10 h-10 shrink-0 rounded-full bg-black flex items-center justify-center text-sm font-black text-gray-500 border border-white/5">
                                 {o.forma_no || "-"}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="font-bold text-xs md:text-base text-gray-400 truncate">{o.ad_soyad}</div>
-                                <div className="text-[9px] md:text-[10px] text-gray-600 truncate">{o.pozisyon}</div>
+                                <div className="font-bold text-base text-gray-400 truncate">{o.ad_soyad}</div>
+                                <div className="text-xs text-gray-600 truncate">{o.pozisyon}</div>
                               </div>
                             </div>
                           ))}
@@ -152,7 +152,7 @@ export default function AdminEsamelerPage() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-px bg-white/5">
+                  <div className="flex flex-col gap-px bg-white/5">
                     {RenderKadro(evTakimi)}
                     {RenderKadro(depTakimi)}
                   </div>
