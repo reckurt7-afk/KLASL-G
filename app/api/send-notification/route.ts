@@ -13,14 +13,12 @@ console.log(
   "PRIVATE:",
   process.env.VAPID_PRIVATE_KEY?.slice(0, 10)
 );
-webpush.setVapidDetails(
-  "mailto:recepkurt7@gmail.com",
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-);
-
-
 export async function POST(req: Request) {
+  webpush.setVapidDetails(
+    "mailto:recepkurt7@gmail.com",
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+    process.env.VAPID_PRIVATE_KEY!
+  );
   try {
     const { baslik, mesaj } = await req.json();
 
