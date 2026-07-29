@@ -392,27 +392,29 @@ export default function EsameListesiPage() {
                                 </div>
                               </div>
 
-                              <div className="flex items-center gap-2 flex-wrap">
+                              <div className="grid grid-cols-3 gap-2 w-full sm:w-auto sm:flex sm:flex-wrap sm:justify-end mt-2 sm:mt-0">
                                 <button
                                   onClick={() => oyuncuToggle(o.id, "ilk7")}
-                                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${asilMi ? 'bg-[#ff3131] text-white shadow-lg' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
+                                  className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${asilMi ? 'bg-[#ff3131] text-white shadow-lg' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
                                 >
                                   İlk 7
                                 </button>
                                 <button
                                   onClick={() => oyuncuToggle(o.id, "yedek")}
-                                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${yedekMi ? 'bg-gray-600 text-white' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
+                                  className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${yedekMi ? 'bg-gray-600 text-white' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
                                 >
                                   Yedek
                                 </button>
                                 
-                                {asilMi && (
+                                {asilMi ? (
                                   <button
                                     onClick={() => setKaptanId(isKaptan ? null : o.id)}
-                                    className={`px-3 py-1.5 rounded-lg text-xs font-black border transition-all ${isKaptan ? 'bg-yellow-500 text-black border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'bg-transparent text-yellow-600 border-yellow-600/30 hover:bg-yellow-500/10'}`}
+                                    className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black border transition-all ${isKaptan ? 'bg-yellow-500 text-black border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'bg-transparent text-yellow-600 border-yellow-600/30 hover:bg-yellow-500/10'}`}
                                   >
                                     © KPT
                                   </button>
+                                ) : (
+                                  <div className="w-full sm:hidden"></div>
                                 )}
                               </div>
                             </div>
