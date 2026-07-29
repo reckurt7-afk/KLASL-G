@@ -100,41 +100,52 @@ await macGuncelle("dakika", yeniDakika);
   }
 
   async function canliDurumGuncelle(canli: boolean) {
-  if (!seciliMac) return;
+    if (!seciliMac) return;
 
-  // Önce tüm maçları kapat
-  if (canli) {
-    await supabase
+    // Önce tüm maçları kapat
+    if (canli) {
+      await supabase
+        .from("maclar")
+        .update({
+          canli: false,
+          durum: "Bekliyor",
+        })
+        .neq("id", 0);
+    }
+
+    // Seçilen maçı güncelle
+    const { error } = await supabase
       .from("maclar")
       .update({
-        canli: false,
-        durum: "Bekliyor",
+        canli: canli,
+        durum: canli ? "Canlı" : "Bekliyor",
       })
-      .neq("id", 0);
-  }
+      .eq("id", seciliMac.id);
 
-  // Seçilen maçı güncelle
-  const { error } = await supabase
-    .from("maclar")
-    .update({
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    if (canli) {
+      await fetch("/api/send-notification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baslik: "▶️ MAÇ BAŞLADI!",
+          mesaj: `${seciliMac.ev_sahibi} ile ${seciliMac.deplasman} arasındaki zorlu mücadele başladı!`,
+        }),
+      });
+    }
+
+    setSeciliMac({
+      ...seciliMac,
       canli: canli,
       durum: canli ? "Canlı" : "Bekliyor",
-    })
-    .eq("id", seciliMac.id);
+    });
 
-  if (error) {
-    alert(error.message);
-    return;
+    maclariGetir();
   }
-
-  setSeciliMac({
-    ...seciliMac,
-    canli: canli,
-    durum: canli ? "Canlı" : "Bekliyor",
-  });
-
-  maclariGetir();
-}
   return (
     <div
       style={{
@@ -214,17 +225,28 @@ await macGuncelle("dakika", yeniDakika);
             >
               <div>
                 <button
-                  onClick={() =>
-                    macGuncelle(
-                      "ev_skor",
-                      Math.max(0, seciliMac.ev_skor - 1)
-                    )
-                  }
+                  onClick={async () => {
+                    const yeniSkor = Math.max(0, seciliMac.ev_skor - 1);
+                    if (yeniSkor < seciliMac.ev_skor) {
+                      await macGuncelle("ev_skor", yeniSkor);
+                      await fetch("/api/send-notification", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          baslik: "❌ GOL İPTAL",
+                          mesaj: `${seciliMac.ev_sahibi} golü iptal edildi! Güncel Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
+                        }),
+                      });
+                    }
+                  }}
+                  style={{ fontSize: 24, padding: "10px 20px", background: "#333", border: "none", borderRadius: 10, cursor: "pointer", color: "white" }}
                 >
                   ➖
                 </button>
 
-                <h1>{seciliMac.ev_skor}</h1>
+                <h1 style={{ fontSize: 40, margin: 0 }}>{seciliMac.ev_skor}</h1>
 <button
   onClick={async () => {
     const yeniSkor = seciliMac.ev_skor + 1;
@@ -251,17 +273,28 @@ await macGuncelle("dakika", yeniDakika);
 
               <div>
                 <button
-                  onClick={() =>
-                    macGuncelle(
-                      "dep_skor",
-                      Math.max(0, seciliMac.dep_skor - 1)
-                    )
-                  }
+                  onClick={async () => {
+                    const yeniSkor = Math.max(0, seciliMac.dep_skor - 1);
+                    if (yeniSkor < seciliMac.dep_skor) {
+                      await macGuncelle("dep_skor", yeniSkor);
+                      await fetch("/api/send-notification", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          baslik: "❌ GOL İPTAL",
+                          mesaj: `${seciliMac.deplasman} golü iptal edildi! Güncel Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
+                        }),
+                      });
+                    }
+                  }}
+                  style={{ fontSize: 24, padding: "10px 20px", background: "#333", border: "none", borderRadius: 10, cursor: "pointer", color: "white" }}
                 >
                   ➖
                 </button>
 
-                <h1>{seciliMac.dep_skor}</h1>
+                <h1 style={{ fontSize: 40, margin: 0 }}>{seciliMac.dep_skor}</h1>
 
                 <button
   onClick={async () => {
@@ -396,6 +429,15 @@ await macGuncelle("dakika", yeniDakika);
           canli: false,
           durum: "Devre Arası",
         });
+        
+        await fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "⏸️ DEVRE ARASI",
+            mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+          }),
+        });
       }
     }}
     style={{
@@ -429,6 +471,15 @@ await macGuncelle("dakika", yeniDakika);
           canli: true,
           durum: "Canlı",
         });
+
+        await fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "▶️ İKİNCİ YARI",
+            mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı heyecanı başladı!`,
+          }),
+        });
       }
     }}
     style={{
@@ -461,6 +512,15 @@ await macGuncelle("dakika", yeniDakika);
           ...seciliMac,
           canli: false,
           durum: "Maç Sona Erdi",
+        });
+
+        await fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "🏁 MAÇ SONA ERDİ!",
+            mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+          }),
         });
       }
     }}

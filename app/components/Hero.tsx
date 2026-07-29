@@ -9,181 +9,126 @@ import Link from "next/link";
 export default function Hero() {
   const [mac, setMac] = useState<any>(null);
 
-useEffect(() => {
-  canliMacGetir();
+  useEffect(() => {
+    canliMacGetir();
 
-  const channel = supabase
-    .channel("canli-mac")
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "maclar",
-      },
-      () => {
-        canliMacGetir();
-      }
-    )
-    .subscribe();
+    const channel = supabase
+      .channel("canli-mac")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "maclar",
+        },
+        () => {
+          canliMacGetir();
+        }
+      )
+      .subscribe();
 
-  return () => {
-    supabase.removeChannel(channel);
-  };
-}, []);
-async function canliMacGetir() {
-  const { data } = await supabase
-    .from("maclar")
-    .select("*")
-    .eq("canli", true)
-    .single();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
-  if (data) {
-    setMac(data);
+  async function canliMacGetir() {
+    const { data } = await supabase
+      .from("maclar")
+      .select("*")
+      .eq("canli", true)
+      .single();
+
+    if (data) {
+      setMac(data);
+    }
   }
-}
+
   return (
-    <section
-      style={{
-        position: "relative",
-        minHeight: "100vh",
-        backgroundImage: "url('/images/stadium.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        overflow: "hidden",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "130px 20px 40px",
-      }}
-    >
-      {/* KARARTMA */}
-      <div
-        style={{
-          pointerEvents: "none",
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.92))",
-        }}
-      />
+    <section className="relative min-h-screen bg-[url('/images/stadium.png')] bg-cover bg-center bg-no-repeat overflow-hidden flex justify-center items-center px-4 pt-32 pb-12">
+      {/* KARARTMA GÖLGESİ */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070707]/60 via-[#070707]/80 to-[#070707]/95" />
 
       <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-8 xl:pt-0">
         
-        {/* Sol Sponsor - Mobil için üste veya alta, ama masaüstünde solda. Mobilde yan yana veya grid. */}
+        {/* Sol Sponsor */}
         <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-2 xl:order-1">
           <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="left" /></div>
           <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="left" /></div>
         </div>
 
-        {/* İÇERİK */}
-        <div
-          className="w-full max-w-[430px] flex flex-col items-center text-center order-1 xl:order-2"
-        >
-          <Image
-            src="/icons/logo.png"
-            alt="KLAS LİG"
-            width={160}
-            height={160}
-            priority
-          />
+        {/* ANA İÇERİK (MERKEZ) */}
+        <div className="w-full max-w-[480px] flex flex-col items-center text-center order-1 xl:order-2">
+          
+          <div className="relative group">
+            <div className="absolute -inset-2 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+            <Image
+              src="/icons/logo.png"
+              alt="KLAS LİG"
+              width={160}
+              height={160}
+              priority
+              className="relative drop-shadow-[0_0_15px_rgba(255,49,49,0.5)] transform transition-transform duration-500 hover:scale-105"
+            />
+          </div>
 
-          <h1
-            style={{
-              color: "#fff",
-              fontSize: 46,
-              fontWeight: 900,
-              lineHeight: 1.05,
-              marginTop: 10,
-              textShadow: "0 0 20px rgba(255,0,0,.45)",
-            }}
-          >
+          <h1 className="text-5xl md:text-7xl font-black mt-6 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
             KLAS LİG
             <br />
-            BURSA
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_15px_rgba(255,49,49,0.4)]">BURSA</span>
           </h1>
 
-          <div
-            style={{
-              marginTop: 12,
-              color: "#ff3131",
-              fontWeight: 900,
-              fontSize: 24,
-              letterSpacing: 3,
-            }}
-          >
+          <div className="mt-3 text-[#ff3131] font-black text-xl md:text-2xl tracking-[0.3em] bg-[#ff3131]/10 px-4 py-1 rounded-full border border-[#ff3131]/20">
             3. SEZON
           </div>
           
-          <div
-            style={{
-              width: "100%",
-              marginTop: 35,
-              background: "rgba(15,15,15,.75)",
-              border: "1px solid rgba(255,49,49,.30)",
-              borderRadius: 20,
-              padding: "24px",
-              backdropFilter: "blur(10px)",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                color: "#ff3131",
-                fontWeight: 900,
-                fontSize: 22,
-                marginBottom: 18,
-              }}
-            >
-              🔴 BUGÜNKÜ MAÇ
+          {/* BUGÜNKÜ MAÇ KUTUSU */}
+          <div className="w-full mt-8 bg-[#0f0f0f]/80 border border-[#ff3131]/30 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group hover:border-[#ff3131]/50 transition-all duration-500">
+            {/* Şık Arkaplan Işığı */}
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#ff3131]/20 rounded-full blur-3xl group-hover:bg-[#ff3131]/30 transition-all duration-500 pointer-events-none"></div>
+
+            <div className="flex items-center justify-center gap-2 text-[#ff3131] font-black text-xl md:text-2xl mb-6">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#ff3131]"></span>
+              </span>
+              CANLI MAÇ
             </div>
 
-            <div
-              style={{
-                color: "#fff",
-                fontSize: 24,
-                fontWeight: 800,
-                lineHeight: 1.5,
-              }}
-            >
+            <div className="text-white text-2xl md:text-3xl font-black leading-snug">
               {mac ? (
-                <>
-                  <div>{mac.ev_sahibi}</div>
+                <div className="flex flex-col items-center gap-2">
+                  <div className="w-full truncate px-2 text-gray-200">{mac.ev_sahibi}</div>
 
-                  <div
-                    style={{
-                      fontSize: 36,
-                      fontWeight: 900,
-                      color: "#ff3131",
-                      margin: "10px 0",
-                    }}
-                  >
+                  <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] my-4">
                     {mac.ev_skor} - {mac.dep_skor}
                   </div>
 
-                  <div>{mac.deplasman}</div>
-                </>
+                  <div className="w-full truncate px-2 text-gray-200">{mac.deplasman}</div>
+                </div>
               ) : (
-                "Bugün maç bulunmuyor."
+                <div className="text-gray-500 text-lg md:text-xl font-bold py-6">Şu an oynanan maç bulunmuyor.</div>
               )}
             </div>
 
-            <div
-              style={{
-                marginTop: 18,
-                color: "#ddd",
-                fontSize: 16,
-              }}
-            >
-              {mac && (
-                <>
-                  ⏱️ {mac.dakika}'
-                  <br />
-                  📍 {mac.saha}
-                  <br />
-                  🧑‍⚖️ Hakem: {mac.hakem}
-                </>
+            <div className="mt-6 text-gray-400 text-sm md:text-base font-bold bg-black/40 rounded-2xl p-4 border border-white/5">
+              {mac ? (
+                <div className="flex justify-around items-center">
+                  <div className="flex flex-col items-center">
+                    <span className="text-[#ff3131] text-lg">⏱️</span>
+                    <span>{mac.dakika}'</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[#ff3131] text-lg">📍</span>
+                    <span>{mac.saha || "Saha"}</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[#ff3131] text-lg">🧑‍⚖️</span>
+                    <span>{mac.hakem || "Hakem"}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center opacity-50">Sıradaki maçlar için fikstürü kontrol edin.</div>
               )}
             </div>
 
@@ -191,99 +136,37 @@ async function canliMacGetir() {
               href={mac?.youtube_link || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                marginTop: 20,
-                background: "#ff3131",
-                color: "#fff",
-                padding: "14px 28px",
-                borderRadius: 999,
-                textDecoration: "none",
-                fontWeight: 800,
-                fontSize: 16,
-              }}
+              className={`inline-block mt-6 w-full py-4 rounded-xl text-center font-black text-lg transition-all duration-300 ${mac?.youtube_link ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white shadow-[0_5px_15px_rgba(255,49,49,0.3)] hover:shadow-[0_5px_25px_rgba(255,49,49,0.6)] hover:-translate-y-1" : "bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700"}`}
             >
               📺 CANLI YAYINI İZLE
             </a>
           </div>
           
-          <Link
-            href="/oyuncular"
-            style={{
-              width: "100%",
-              maxWidth: 320,
-              textDecoration: "none",
-              marginTop: 28,
-            }}
-          >
-            <button
-              style={{
-                width: "100%",
-                height: 56,
-                border: "none",
-                borderRadius: 999,
-                background: "#ff3131",
-                color: "#fff",
-                fontSize: 18,
-                fontWeight: 800,
-                cursor: "pointer",
-                boxShadow: "0 0 25px rgba(255,49,49,.45)",
-              }}
-            >
-              👥 OYUNCULAR
+          <Link href="/oyuncular" className="w-full mt-8 block">
+            <button className="w-full h-14 rounded-xl bg-[#111] border border-white/10 hover:border-[#ff3131]/50 text-white text-lg font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(255,49,49,0.2)] hover:bg-[#1a1a1a]">
+              👥 OYUNCU İSTATİSTİKLERİ
             </button>
           </Link>
-          <InstallButton />
-          <NotificationButton />
+
+          <div className="w-full mt-4 flex gap-4">
+            <div className="w-1/2"><InstallButton /></div>
+            <div className="w-1/2"><NotificationButton /></div>
+          </div>
           
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2,1fr)",
-              gap: 14,
-              width: "100%",
-              marginTop: 35,
-            }}
-          >
+          <div className="grid grid-cols-2 gap-4 w-full mt-8">
             {[
               { icon: "👥", value: "8", text: "TAKIM" },
               { icon: "⚽", value: "28", text: "MAÇ" },
               { icon: "📺", value: "TÜM", text: "CANLI YAYIN" },
-              { icon: "🧑‍⚖️", value: "HAKEM", text: " TRİOSU" },
-            ].map((item) => (
+              { icon: "🧑‍⚖️", value: "HAKEM", text: "TRİOSU" },
+            ].map((item, index) => (
               <div
-                key={item.text}
-                style={{
-                  background: "rgba(15,15,15,.75)",
-                  border: "1px solid rgba(255,49,49,.30)",
-                  borderRadius: 18,
-                  padding: "18px",
-                  backdropFilter: "blur(10px)",
-                }}
+                key={index}
+                className="bg-[#0f0f0f]/60 border border-white/5 hover:border-[#ff3131]/30 rounded-2xl p-5 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#1a1a1a]"
               >
-                <div style={{ fontSize: 28 }}>{item.icon}</div>
-
-                <div
-                  style={{
-                    color: "#ff3131",
-                    fontSize: 28,
-                    fontWeight: 900,
-                    marginTop: 10,
-                  }}
-                >
-                  {item.value}
-                </div>
-
-                <div
-                  style={{
-                    color: "#fff",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    marginTop: 4,
-                  }}
-                >
-                  {item.text}
-                </div>
+                <div className="text-3xl mb-2 drop-shadow-md">{item.icon}</div>
+                <div className="text-[#ff3131] text-3xl font-black drop-shadow-[0_0_10px_rgba(255,49,49,0.3)]">{item.value}</div>
+                <div className="text-gray-400 text-xs font-bold mt-1 tracking-widest">{item.text}</div>
               </div>
             ))}
           </div>
@@ -301,79 +184,27 @@ async function canliMacGetir() {
 
 function SponsorBox({ side }: { side: "left" | "right" }) {
   return (
-    <div style={{
-      background: "rgba(21, 21, 21, 0.8)",
-      border: "1px solid rgba(255,49,49,.30)",
-      borderRadius: 16,
-      overflow: "hidden",
-      textAlign: "center",
-      display: "flex",
-      flexDirection: "column",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-      backdropFilter: "blur(10px)"
-    }}>
-      <div style={{
-        background: "linear-gradient(90deg, #ff3131 0%, #a11212 100%)",
-        color: "#fff",
-        padding: "12px",
-        fontWeight: 900,
-        fontSize: 14,
-        letterSpacing: 2
-      }}>
+    <div className="bg-[#111]/90 border border-[#ff3131]/20 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl group hover:border-[#ff3131]/50 transition-all duration-500">
+      <div className="bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white py-2 px-4 font-black text-xs tracking-widest">
         REKLAM ALANI
       </div>
       
-      <div style={{ padding: "25px 15px" }}>
-        <div style={{
-          width: 100,
-          height: 100,
-          margin: "0 auto 15px",
-          background: "#222",
-          borderRadius: "50%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "2px dashed #ff3131",
-          fontSize: 35
-        }}>
+      <div className="p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
+        
+        <div className="w-20 h-20 md:w-24 md:h-24 mb-4 bg-black rounded-full flex items-center justify-center border-2 border-dashed border-[#ff3131]/50 text-3xl md:text-4xl group-hover:scale-110 group-hover:border-solid group-hover:border-[#ff3131] transition-all duration-500 shadow-[0_0_15px_rgba(255,49,49,0.2)]">
           📢
         </div>
 
-        <h3 style={{ margin: "0 0 5px", fontSize: 22, fontWeight: 900, color: "#fff" }}>
+        <h3 className="m-0 mb-2 text-xl font-black text-white group-hover:text-[#ff3131] transition-colors">
           BURAYA REKLAM VERİN
         </h3>
-        <p style={{ margin: "0 0 20px", color: "#aaa", fontSize: 13, lineHeight: 1.4 }}>
+        <p className="m-0 mb-6 text-gray-400 text-xs md:text-sm leading-relaxed">
           Siz de markanızı binlerce sporsevere ulaştırın.
         </p>
 
-        <div style={{
-          background: "rgba(0,0,0,0.5)",
-          padding: "10px",
-          borderRadius: 8,
-          marginBottom: 20,
-          fontWeight: 700,
-          color: "#fff",
-          fontSize: 14,
-          border: "1px solid #333"
-        }}>
-          İletişime Geçin
-        </div>
-
-        <a href="#" style={{
-          display: "block",
-          background: "#fff",
-          color: "#000",
-          padding: "12px",
-          borderRadius: 8,
-          fontWeight: 900,
-          textDecoration: "none",
-          fontSize: 14,
-          transition: "all 0.2s"
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.background = "#e0e0e0"}
-        onMouseLeave={(e) => e.currentTarget.style.background = "#fff"}
-        >
-          BİLGİ AL
+        <a href="#" className="w-full block bg-white text-black py-3 rounded-xl font-black text-sm hover:bg-[#ff3131] hover:text-white hover:shadow-[0_5px_15px_rgba(255,49,49,0.4)] transition-all duration-300">
+          İLETİŞİME GEÇ
         </a>
       </div>
     </div>
