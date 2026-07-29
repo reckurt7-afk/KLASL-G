@@ -75,32 +75,32 @@ export default function AdminEsamelerPage() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
+                  <div className="grid grid-cols-2 gap-px bg-white/5">
                     {Object.keys(takimGruplari).map(takimAdi => {
                       const kadro = takimGruplari[takimAdi];
                       const asil = kadro.filter(o => o.ilk_yedi);
                       const yedek = kadro.filter(o => !o.ilk_yedi);
 
                       return (
-                        <div key={takimAdi} className="bg-[#111] p-6">
-                          <h3 className="text-lg font-black text-yellow-500 mb-4 pb-2 border-b border-white/5">
-                            🛡️ {takimAdi} KADROSU
+                        <div key={takimAdi} className="bg-[#111] p-3 md:p-6">
+                          <h3 className="text-sm md:text-lg font-black text-yellow-500 mb-4 pb-2 border-b border-white/5 truncate">
+                            🛡️ {takimAdi}
                           </h3>
 
                           {/* İlk 7 */}
                           <div className="mb-6">
-                            <div className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
+                            <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
                             <div className="space-y-2">
                               {asil.map(o => (
-                                <div key={o.id} className={`flex items-center gap-3 p-2 rounded-lg ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
-                                  <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-xs font-black text-gray-400">
+                                <div key={o.id} className={`flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
+                                  <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-400">
                                     {o.forma_no || "-"}
                                   </div>
-                                  <div className="flex-1">
-                                    <div className={`font-bold ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
-                                    <div className="text-[10px] text-gray-500">{o.pozisyon}</div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className={`font-bold text-xs md:text-base truncate ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
+                                    <div className="text-[9px] md:text-[10px] text-gray-500 truncate">{o.pozisyon}</div>
                                   </div>
-                                  {o.kaptan && <span className="text-xs bg-yellow-500 text-black font-black px-2 py-0.5 rounded">©</span>}
+                                  {o.kaptan && <span className="text-[10px] md:text-xs bg-yellow-500 text-black font-black px-1 md:px-2 py-0.5 rounded">©</span>}
                                 </div>
                               ))}
                             </div>
@@ -109,16 +109,16 @@ export default function AdminEsamelerPage() {
                           {/* Yedekler */}
                           {yedek.length > 0 && (
                             <div>
-                              <div className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
+                              <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
                               <div className="space-y-2">
                                 {yedek.map(o => (
-                                  <div key={o.id} className="flex items-center gap-3 p-2 rounded-lg bg-[#1a1a1a]/50 border border-white/5 opacity-70">
-                                    <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center text-xs font-black text-gray-500">
+                                  <div key={o.id} className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg bg-[#1a1a1a]/50 border border-white/5 opacity-70">
+                                    <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-500">
                                       {o.forma_no || "-"}
                                     </div>
-                                    <div className="flex-1">
-                                      <div className="font-bold text-gray-400">{o.ad_soyad}</div>
-                                      <div className="text-[10px] text-gray-600">{o.pozisyon}</div>
+                                    <div className="flex-1 min-w-0">
+                                      <div className="font-bold text-xs md:text-base text-gray-400 truncate">{o.ad_soyad}</div>
+                                      <div className="text-[9px] md:text-[10px] text-gray-600 truncate">{o.pozisyon}</div>
                                     </div>
                                   </div>
                                 ))}

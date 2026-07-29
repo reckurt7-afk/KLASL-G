@@ -381,41 +381,43 @@ export default function EsameListesiPage() {
                           const isKaptan = kaptanId === o.id;
 
                           return (
-                            <div key={o.id} className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl border transition-colors ${asilMi ? 'bg-[#ff3131]/10 border-[#ff3131]/30' : yedekMi ? 'bg-white/5 border-white/20' : 'bg-[#1a1a1a] border-white/5'} gap-3`}>
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-black/50 border border-white/10 flex items-center justify-center font-black text-gray-300 text-xs">
-                                  {o.forma_no || "-"}
+                            <div key={o.id} className={`p-3 rounded-xl border transition-colors ${asilMi ? 'bg-[#ff3131]/10 border-[#ff3131]/30' : yedekMi ? 'bg-white/5 border-white/20' : 'bg-[#1a1a1a] border-white/5'}`}>
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div className="flex items-center gap-3 overflow-hidden">
+                                  <div className="w-8 h-8 flex-shrink-0 rounded-full bg-black/50 border border-white/10 flex items-center justify-center font-black text-gray-300 text-xs">
+                                    {o.forma_no || "-"}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className={`font-bold truncate ${asilMi ? 'text-white' : 'text-gray-300'}`}>{o.ad_soyad}</div>
+                                    <div className="text-xs text-gray-500 truncate">{o.mevki || "Mevki Belirtilmemiş"}</div>
+                                  </div>
                                 </div>
-                                <div>
-                                  <div className={`font-bold ${asilMi ? 'text-white' : 'text-gray-300'}`}>{o.ad_soyad}</div>
-                                  <div className="text-xs text-gray-500">{o.mevki || "Mevki Belirtilmemiş"}</div>
-                                </div>
-                              </div>
 
-                              <div className="grid grid-cols-3 gap-2 w-full sm:w-auto sm:flex sm:flex-wrap sm:justify-end mt-2 sm:mt-0">
-                                <button
-                                  onClick={() => oyuncuToggle(o.id, "ilk7")}
-                                  className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${asilMi ? 'bg-[#ff3131] text-white shadow-lg' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
-                                >
-                                  İlk 7
-                                </button>
-                                <button
-                                  onClick={() => oyuncuToggle(o.id, "yedek")}
-                                  className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${yedekMi ? 'bg-gray-600 text-white' : 'bg-black text-gray-400 hover:bg-[#333]'}`}
-                                >
-                                  Yedek
-                                </button>
-                                
-                                {asilMi ? (
+                                <div className="grid grid-cols-3 gap-2 mt-1 sm:mt-0 sm:flex sm:flex-wrap sm:justify-end">
                                   <button
-                                    onClick={() => setKaptanId(isKaptan ? null : o.id)}
-                                    className={`w-full sm:w-auto px-2 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black border transition-all ${isKaptan ? 'bg-yellow-500 text-black border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'bg-transparent text-yellow-600 border-yellow-600/30 hover:bg-yellow-500/10'}`}
+                                    onClick={() => oyuncuToggle(o.id, "ilk7")}
+                                    className={`w-full sm:w-auto px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${asilMi ? 'bg-[#ff3131] text-white shadow-lg' : 'bg-[#222] text-gray-400 hover:bg-[#333]'}`}
                                   >
-                                    © KPT
+                                    İlk 7
                                   </button>
-                                ) : (
-                                  <div className="w-full sm:hidden"></div>
-                                )}
+                                  <button
+                                    onClick={() => oyuncuToggle(o.id, "yedek")}
+                                    className={`w-full sm:w-auto px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${yedekMi ? 'bg-gray-600 text-white' : 'bg-[#222] text-gray-400 hover:bg-[#333]'}`}
+                                  >
+                                    Yedek
+                                  </button>
+                                  
+                                  {asilMi ? (
+                                    <button
+                                      onClick={() => setKaptanId(isKaptan ? null : o.id)}
+                                      className={`w-full sm:w-auto px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black border transition-all ${isKaptan ? 'bg-yellow-500 text-black border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.5)]' : 'bg-[#222] text-yellow-600 border-yellow-600/30 hover:bg-yellow-500/10'}`}
+                                    >
+                                      © KPT
+                                    </button>
+                                  ) : (
+                                    <div className="w-full sm:hidden"></div>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           );
