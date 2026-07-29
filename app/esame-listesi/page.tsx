@@ -127,11 +127,20 @@ export default function EsameListesiPage() {
     
     const { data } = await supabase
       .from("oyuncular")
-      .select("id, ad_soyad, forma_no, mevki")
-      .ilike("takim", `%${secilenTakim.substring(0, 5)}%`);
+      .select("id, ad_soyad, forma_no, mevki, takim");
       
     if (data) {
-      setOyuncular(data);
+      // JavaScript üzerinde Türkçe karakter duyarlılığına takılmadan eşleştirme yapıyoruz
+      const hedefTakim = secilenTakim.toLocaleUpperCase("tr-TR").trim();
+      
+      const takimOyunculari = data.filter((o) => {
+        if (!o.takim) return false;
+        const dbTakim = o.takim.toLocaleUpperCase("tr-TR").trim();
+        // Takım isimleri tam eşleşiyorsa veya ilk kelimeleri eşleşiyorsa al
+        return dbTakim === hedefTakim || dbTakim.includes(hedefTakim.split(' ')[0]);
+      });
+      
+      setOyuncular(takimOyunculari);
     }
     setLoading(false);
   };
@@ -181,7 +190,7 @@ export default function EsameListesiPage() {
           forma_no: o.forma_no || 0,
           ad_soyad: o.ad_soyad,
           pozisyon: o.mevki || "Belirsiz",
-          ilk_11: true,
+          ilk_yedi: true,
           kaptan: kaptanId === id,
         });
       }
@@ -196,7 +205,7 @@ export default function EsameListesiPage() {
           forma_no: o.forma_no || 0,
           ad_soyad: o.ad_soyad,
           pozisyon: o.mevki || "Belirsiz",
-          ilk_11: false,
+          ilk_yedi: false,
           kaptan: false,
         });
       }

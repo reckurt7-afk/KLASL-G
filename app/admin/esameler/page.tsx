@@ -10,7 +10,7 @@ type Esame = {
   ad_soyad: string;
   forma_no: number;
   pozisyon: string;
-  ilk_11: boolean;
+  ilk_yedi: boolean;
   kaptan: boolean;
 };
 
@@ -78,8 +78,8 @@ export default function AdminEsamelerPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
                     {Object.keys(takimGruplari).map(takimAdi => {
                       const kadro = takimGruplari[takimAdi];
-                      const asil = kadro.filter(o => o.ilk_11);
-                      const yedek = kadro.filter(o => !o.ilk_11);
+                      const asil = kadro.filter(o => o.ilk_yedi);
+                      const yedek = kadro.filter(o => !o.ilk_yedi);
 
                       return (
                         <div key={takimAdi} className="bg-[#111] p-6">
