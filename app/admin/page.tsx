@@ -13,7 +13,7 @@ const kartlar = [
   { icon: "🔔", baslik: "Bildirim Gönder", link: "/admin/bildirim" },
   { icon: "⚙️", baslik: "Ayarlar", link: "/admin/ayarlar" },
   { icon: "🎯", baslik: "Skor Tahminleri", link: "/admin/skor-tahminleri" },
-  { icon: "📄", baslik: "Maç Esameleri", link: "/admin/mac-esameleri" },
+  { icon: "📄", baslik: "Maç Esameleri", link: "/admin/esameler" },
 ];
 
 export default function AdminPage() {
