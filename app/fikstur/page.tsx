@@ -31,10 +31,8 @@ const haftalar = [
   {
     hafta: "1. HAFTA",
     maclar: [
-      ["Dinamo Nalbantoğlu", "Krokodilla FK"],
       ["Yeşil Bursa FC", "BİSKREM FC"],
       ["Dündar Köyü", "Gravyer FC"],
-      ["Yediyol Black FC", "Alaçam Spor"],
     ],
   },
   {

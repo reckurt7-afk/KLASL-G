@@ -21,10 +21,8 @@ const haftalar = [
   {
     hafta: "1. HAFTA",
     maclar: [
-      ["Dinamo Nalbantoğlu", "Krokodilla FK"],
       ["Yeşil Bursa FC", "BİSKREM FC"],
       ["Dündar Köyü", "Gravyer FC"],
-      ["Yediyol Black FC", "Alaçam Spor"],
     ],
   },
   {
@@ -122,7 +120,7 @@ export default function EsameListesiPage() {
 
   const sifreKontrolEt = async () => {
     if (!secilenTakim) return alert("Lütfen takımınızı seçin!");
-    if (sifre !== "klas2024") return alert("Kaptan şifresi hatalı!");
+    if (sifre !== "klas2026") return alert("Kaptan şifresi hatalı!");
     
     setIsAuth(true);
     setLoading(true);
