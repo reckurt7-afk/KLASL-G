@@ -65,69 +65,96 @@ export default function AdminEsamelerPage() {
                 return acc;
               }, {});
 
+              // Maç isminden ev ve deplasmanı ayıkla (Örn: "1. HAFTA - Yeşil Bursa FC 🆚 BİSKREM FC")
+              let evTakimi = "Ev Takımı";
+              let depTakimi = "Deplasman Takımı";
+              
+              try {
+                if (macId.includes(" 🆚 ")) {
+                  const parts = macId.split(" - ");
+                  const takımlar = parts.length > 1 ? parts[1].split(" 🆚 ") : parts[0].split(" 🆚 ");
+                  evTakimi = takımlar[0].trim();
+                  depTakimi = takımlar[1].trim();
+                }
+              } catch (e) {}
+
+              const RenderKadro = (takimAdi: string) => {
+                const kadro = takimGruplari[takimAdi] || [];
+                const asil = kadro.filter(o => o.ilk_yedi);
+                const yedek = kadro.filter(o => !o.ilk_yedi);
+
+                if (kadro.length === 0) {
+                  return (
+                    <div className="bg-[#111] p-3 md:p-6 h-full flex flex-col items-center justify-center text-gray-600">
+                      <div className="text-2xl mb-2">⏳</div>
+                      <div className="text-[10px] md:text-sm font-bold text-center">
+                        {takimAdi}<br/>henüz kadro girmedi.
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="bg-[#111] p-3 md:p-6 h-full">
+                    <h3 className="text-sm md:text-lg font-black text-yellow-500 mb-4 pb-2 border-b border-white/5 truncate">
+                      🛡️ {takimAdi}
+                    </h3>
+
+                    {/* İlk 7 */}
+                    <div className="mb-6">
+                      <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
+                      <div className="space-y-2">
+                        {asil.map(o => (
+                          <div key={o.id} className={`flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
+                            <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-400">
+                              {o.forma_no || "-"}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className={`font-bold text-xs md:text-base truncate ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
+                              <div className="text-[9px] md:text-[10px] text-gray-500 truncate">{o.pozisyon}</div>
+                            </div>
+                            {o.kaptan && <span className="text-[10px] md:text-xs bg-yellow-500 text-black font-black px-1 md:px-2 py-0.5 rounded">©</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Yedekler */}
+                    {yedek.length > 0 && (
+                      <div>
+                        <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
+                        <div className="space-y-2">
+                          {yedek.map(o => (
+                            <div key={o.id} className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg bg-[#1a1a1a]/50 border border-white/5 opacity-70">
+                              <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-500">
+                                {o.forma_no || "-"}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="font-bold text-xs md:text-base text-gray-400 truncate">{o.ad_soyad}</div>
+                                <div className="text-[9px] md:text-[10px] text-gray-600 truncate">{o.pozisyon}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              };
+
               return (
                 <div key={macId} className="bg-[#111] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
                   {/* Maç Başlığı */}
                   <div className="bg-[#1a1a1a] p-4 border-b border-[#ff3131]/20 flex justify-between items-center">
-                    <h2 className="text-xl font-black text-white">{macId}</h2>
-                    <span className="bg-[#ff3131]/10 text-[#ff3131] px-3 py-1 rounded-full text-xs font-bold border border-[#ff3131]/20">
-                      {macOyunculari.length} Oyuncu Bildirildi
+                    <h2 className="text-sm md:text-xl font-black text-white truncate pr-2">{macId}</h2>
+                    <span className="shrink-0 bg-[#ff3131]/10 text-[#ff3131] px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-bold border border-[#ff3131]/20">
+                      {macOyunculari.length} Oyuncu
                     </span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-px bg-white/5">
-                    {Object.keys(takimGruplari).map(takimAdi => {
-                      const kadro = takimGruplari[takimAdi];
-                      const asil = kadro.filter(o => o.ilk_yedi);
-                      const yedek = kadro.filter(o => !o.ilk_yedi);
-
-                      return (
-                        <div key={takimAdi} className="bg-[#111] p-3 md:p-6">
-                          <h3 className="text-sm md:text-lg font-black text-yellow-500 mb-4 pb-2 border-b border-white/5 truncate">
-                            🛡️ {takimAdi}
-                          </h3>
-
-                          {/* İlk 7 */}
-                          <div className="mb-6">
-                            <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">İlk 7 ({asil.length})</div>
-                            <div className="space-y-2">
-                              {asil.map(o => (
-                                <div key={o.id} className={`flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg ${o.kaptan ? 'bg-yellow-500/10 border border-yellow-500/20' : 'bg-[#1a1a1a] border border-transparent'}`}>
-                                  <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-400">
-                                    {o.forma_no || "-"}
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <div className={`font-bold text-xs md:text-base truncate ${o.kaptan ? 'text-yellow-500' : 'text-gray-200'}`}>{o.ad_soyad}</div>
-                                    <div className="text-[9px] md:text-[10px] text-gray-500 truncate">{o.pozisyon}</div>
-                                  </div>
-                                  {o.kaptan && <span className="text-[10px] md:text-xs bg-yellow-500 text-black font-black px-1 md:px-2 py-0.5 rounded">©</span>}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Yedekler */}
-                          {yedek.length > 0 && (
-                            <div>
-                              <div className="text-[10px] md:text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">Yedekler ({yedek.length})</div>
-                              <div className="space-y-2">
-                                {yedek.map(o => (
-                                  <div key={o.id} className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-lg bg-[#1a1a1a]/50 border border-white/5 opacity-70">
-                                    <div className="w-6 h-6 md:w-8 md:h-8 shrink-0 rounded-full bg-black flex items-center justify-center text-[10px] md:text-xs font-black text-gray-500">
-                                      {o.forma_no || "-"}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                      <div className="font-bold text-xs md:text-base text-gray-400 truncate">{o.ad_soyad}</div>
-                                      <div className="text-[9px] md:text-[10px] text-gray-600 truncate">{o.pozisyon}</div>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
+                    {RenderKadro(evTakimi)}
+                    {RenderKadro(depTakimi)}
                   </div>
                 </div>
               );
