@@ -11,6 +11,7 @@ export default function Navbar() {
     { href: "/", label: "🏠 Ana Sayfa" },
     { href: "/puan-durumu", label: "🏆 Puan Durumu" },
     { href: "/fikstur", label: "📅 Fikstür" },
+    { href: "/esame-listesi", label: "📋 Esame Listesi" },
     { href: "/takimlar", label: "👥 Takımlar" },
     { href: "/duyurular", label: "📢 Duyurular" },
     { href: "/mac-saatleri", label: "⏰ Saatler" },
