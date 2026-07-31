@@ -7,11 +7,15 @@ export default function CanliYayinPage() {
   const [videoId, setVideoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // YouTube linkinden ID çıkartan fonksiyon
   const extractVideoId = (url: string) => {
+    if (!url) return null;
+    url = url.trim();
+    // Eğer sadece 11 karakterli ID girilmişse direkt onu döndür
+    if (url.length === 11 && !url.includes("youtube.com") && !url.includes("youtu.be")) {
+      return url;
+    }
     try {
-      const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-      const match = url.match(regex);
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/|shorts\/))([\w-]{11})/i);
       return match ? match[1] : null;
     } catch {
       return null;
