@@ -12,10 +12,9 @@ export default function Navbar() {
     { href: "/puan-durumu", label: "🏆 Puan Durumu" },
     { href: "/fikstur", label: "📅 Fikstür" },
     { href: "/esame-listesi", label: "📋 Esame Listesi" },
-    { href: "/takimlar", label: "👥 Takımlar" },
+    { href: "/takimlar", label: "🛡️ Takımlar" },
     { href: "/duyurular", label: "📢 Duyurular" },
     { href: "/mac-saatleri", label: "⏰ Saatler" },
-    { href: "/oyuncular", label: "👥 Oyuncular" },
   ];
 
   return (

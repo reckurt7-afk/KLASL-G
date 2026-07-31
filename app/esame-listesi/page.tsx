@@ -275,8 +275,8 @@ export default function EsameListesiPage() {
 
               <div className="flex justify-between items-center w-full mb-6">
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[60px] md:h-[60px] bg-black/40 rounded-full p-2 border border-white/10 group-hover:border-[#ff3131]/50 transition-all duration-500 shadow-lg">
-                    <Image src={logolar[mac[0]] || "/icons/logo.png"} alt={mac[0]} fill className="object-contain p-1" />
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                    <Image src={logolar[mac[0]] || "/icons/logo.png"} alt={mac[0]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[0]}</span>
                 </div>
@@ -284,8 +284,8 @@ export default function EsameListesiPage() {
                 <span className="text-[#ff3131] font-black text-2xl italic drop-shadow-[0_0_10px_rgba(255,49,49,0.8)] w-[20%] text-center">VS</span>
 
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[60px] md:h-[60px] bg-black/40 rounded-full p-2 border border-white/10 group-hover:border-[#ff3131]/50 transition-all duration-500 shadow-lg">
-                    <Image src={logolar[mac[1]] || "/icons/logo.png"} alt={mac[1]} fill className="object-contain p-1" />
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                    <Image src={logolar[mac[1]] || "/icons/logo.png"} alt={mac[1]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[1]}</span>
                 </div>

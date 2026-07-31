@@ -105,24 +105,23 @@ export default function FiksturPage() {
   const [telefon, setTelefon] = useState("");
   const [evSkor, setEvSkor] = useState("");
   const [depSkor, setDepSkor] = useState("");
-
   const [sayilar, setSayilar] = useState<Record<string, number>>({});
-  const [canliMaclar, setCanliMaclar] = useState<CanliMac[]>([]);
+  const [tumMaclar, setTumMaclar] = useState<any[]>([]);
+
   useEffect(() => {
-  tahminSayilariniGetir();
-  canliMaclariGetir();
-}, []);
+    tahminSayilariniGetir();
+    tumMaclariGetir();
+  }, []);
 
-async function canliMaclariGetir() {
-  const { data } = await supabase
-    .from("maclar")
-    .select("hafta,ev_sahibi,deplasman,durum,tarih,saat,saha")
-    .eq("durum", "Canlı");
+  async function tumMaclariGetir() {
+    const { data } = await supabase
+      .from("maclar")
+      .select("*");
 
-  if (data) {
-    setCanliMaclar(data);
+    if (data) {
+      setTumMaclar(data);
+    }
   }
-}
 
 async function tahminSayilariniGetir() {
   const { data } = await supabase
@@ -239,13 +238,15 @@ return (
       {/* Maç Kartları Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {haftalar[aktifHafta].maclar.map((mac, index) => {
-          const canliMi = canliMaclar.some(
+          const dbMatch = tumMaclar.find(
             (m) =>
               m.hafta === aktifHafta + 1 &&
-              m.ev_sahibi === mac[0] &&
-              m.deplasman === mac[1]
+              ((m.ev_sahibi.toUpperCase() === mac[0].toUpperCase() && m.deplasman.toUpperCase() === mac[1].toUpperCase()) ||
+               (m.ev_sahibi.toUpperCase() === mac[1].toUpperCase() && m.deplasman.toUpperCase() === mac[0].toUpperCase()))
           );
 
+          const canliMi = dbMatch?.durum === "Canlı";
+          const isOynandi = dbMatch?.oynandi;
           const tahminSayisi = sayilar[`${aktifHafta + 1}-${mac[0]}-${mac[1]}`] || 0;
 
           return (
@@ -261,21 +262,40 @@ return (
                 
                 {/* Ev Sahibi */}
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[60px] md:h-[60px] bg-black/40 rounded-full p-2 border border-white/10 group-hover:border-[#ff3131]/50 group-hover:scale-110 transition-all duration-500 shadow-lg">
-                    <Image src={logolar[mac[0]]} alt={mac[0]} fill className="object-contain p-1" />
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                    <Image src={logolar[mac[0]]} alt={mac[0]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[0]}</span>
                 </div>
 
-                {/* VS */}
-                <span className="text-[#ff3131] font-black text-2xl italic drop-shadow-[0_0_10px_rgba(255,49,49,0.8)] w-[20%] text-center">
-                  VS
-                </span>
+                {/* Skor veya VS */}
+                <div className="w-[30%] flex flex-col items-center justify-center">
+                  {isOynandi ? (
+                    <div className="flex items-center justify-center gap-3">
+                      <span className="text-white font-black text-4xl">{dbMatch.ev_skor}</span>
+                      <span className="text-[#ff3131] font-black text-2xl">-</span>
+                      <span className="text-white font-black text-4xl">{dbMatch.dep_skor}</span>
+                    </div>
+                  ) : canliMi ? (
+                    <div className="flex flex-col items-center animate-pulse">
+                      <div className="text-[#ff3131] font-black text-sm mb-1 tracking-widest">CANLI</div>
+                      <div className="flex items-center justify-center gap-2">
+                        <span className="text-white font-black text-3xl">{dbMatch?.ev_skor || 0}</span>
+                        <span className="text-[#ff3131] font-bold text-xl">-</span>
+                        <span className="text-white font-black text-3xl">{dbMatch?.dep_skor || 0}</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <span className="text-[#ff3131] font-black text-2xl italic drop-shadow-[0_0_10px_rgba(255,49,49,0.8)] text-center">
+                      VS
+                    </span>
+                  )}
+                </div>
 
                 {/* Deplasman */}
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[60px] md:h-[60px] bg-black/40 rounded-full p-2 border border-white/10 group-hover:border-[#ff3131]/50 group-hover:scale-110 transition-all duration-500 shadow-lg">
-                    <Image src={logolar[mac[1]]} alt={mac[1]} fill className="object-contain p-1" />
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                    <Image src={logolar[mac[1]]} alt={mac[1]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[1]}</span>
                 </div>
@@ -288,7 +308,14 @@ return (
               </div>
 
               {/* Tahmin Butonu */}
-              {canliMi ? (
+              {isOynandi ? (
+                <button
+                  disabled
+                  className="w-full py-3 bg-gray-900 text-gray-500 rounded-xl font-bold border border-gray-800 cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  ✅ MAÇ SONA ERDİ
+                </button>
+              ) : canliMi ? (
                 <button
                   disabled
                   className="w-full py-3 bg-gray-800 text-gray-400 rounded-xl font-bold border border-gray-700 cursor-not-allowed flex items-center justify-center gap-2"
