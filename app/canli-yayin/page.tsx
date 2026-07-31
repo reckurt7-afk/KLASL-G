@@ -20,20 +20,34 @@ export default function CanliYayinPage() {
 
   useEffect(() => {
     async function getir() {
-      const { data } = await supabase
+      // Önce canlı bir maç var mı diye bakalım
+      const { data: canliMac } = await supabase
         .from("maclar")
         .select("youtube_link")
         .eq("canli", true)
         .single();
       
-      if (data && data.youtube_link) {
-        setVideoId(extractVideoId(data.youtube_link));
+      if (canliMac && canliMac.youtube_link) {
+        setVideoId(extractVideoId(canliMac.youtube_link));
+        setLoading(false);
+        return;
       }
+
+      // Canlı maç yoksa, genel ayarlardan (id=0) varsayılan tanıtım linkini çekelim
+      const { data: ayar } = await supabase
+        .from("maclar")
+        .select("youtube_link")
+        .eq("id", 0)
+        .single();
+
+      if (ayar && ayar.youtube_link) {
+        setVideoId(extractVideoId(ayar.youtube_link));
+      }
+      
       setLoading(false);
     }
     getir();
 
-    // Saniyede bir kontrol edebiliriz ya da real-time yapabiliriz ama sayfa yüklenince alması şimdilik yeterli.
   }, []);
 
   if (loading) {
@@ -44,7 +58,7 @@ export default function CanliYayinPage() {
     );
   }
 
-  // Eğer canlı yayın yoksa placeholder video koyalım (örneğin Lofi Girl)
+  // Eğer canlı yayın ve genel ayar yoksa en son çare bir placeholder
   const activeVideoId = videoId || "jfKfPfyJRdk";
 
   return (
