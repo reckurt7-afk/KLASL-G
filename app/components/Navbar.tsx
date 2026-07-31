@@ -9,6 +9,7 @@ export default function Navbar() {
 
   const links = [
     { href: "/", label: "🏠 Ana Sayfa" },
+    { href: "/canli-yayin", label: "🔴 Canlı Yayın" },
     { href: "/puan-durumu", label: "🏆 Puan Durumu" },
     { href: "/fikstur", label: "📅 Fikstür" },
     { href: "/esame-listesi", label: "📋 Esame Listesi" },
