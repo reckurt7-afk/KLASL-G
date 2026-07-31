@@ -1,10 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function CanliYayinPage() {
-  // Lofi Girl video ID for placeholder - we need a mechanism to update this
-  const [videoId, setVideoId] = useState("jfKfPfyJRdk"); 
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // YouTube linkinden ID çıkartan fonksiyon
+  const extractVideoId = (url: string) => {
+    try {
+      const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    } catch {
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    async function getir() {
+      const { data } = await supabase
+        .from("maclar")
+        .select("youtube_link")
+        .eq("canli", true)
+        .single();
+      
+      if (data && data.youtube_link) {
+        setVideoId(extractVideoId(data.youtube_link));
+      }
+      setLoading(false);
+    }
+    getir();
+
+    // Saniyede bir kontrol edebiliriz ya da real-time yapabiliriz ama sayfa yüklenince alması şimdilik yeterli.
+  }, []);
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0b0b0b", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <h2 style={{ color: "#fff" }}>Canlı yayın aranıyor...</h2>
+      </div>
+    );
+  }
+
+  // Eğer canlı yayın yoksa placeholder video koyalım (örneğin Lofi Girl)
+  const activeVideoId = videoId || "jfKfPfyJRdk";
 
   return (
     <div style={{ minHeight: "100vh", background: "#0b0b0b", paddingTop: 100, paddingBottom: 60 }}>
@@ -15,14 +56,14 @@ export default function CanliYayinPage() {
             style={{ 
               width: 15, 
               height: 15, 
-              background: "#ff3131", 
+              background: videoId ? "#ff3131" : "#888", 
               borderRadius: "50%", 
-              boxShadow: "0 0 15px #ff3131", 
-              animation: "pulse 1.5s infinite" 
+              boxShadow: videoId ? "0 0 15px #ff3131" : "none", 
+              animation: videoId ? "pulse 1.5s infinite" : "none" 
             }} 
           />
           <h1 style={{ color: "#fff", fontSize: 32, fontWeight: 900, margin: 0, textTransform: "uppercase", letterSpacing: 1 }}>
-            CANLI YAYIN
+            {videoId ? "CANLI YAYIN" : "ŞU AN CANLI YAYIN YOK"}
           </h1>
           <style>{`
             @keyframes pulse {
@@ -38,7 +79,7 @@ export default function CanliYayinPage() {
           <div style={{ flex: "1 1 700px", background: "#111", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,49,49,0.2)", boxShadow: "0 10px 40px rgba(0,0,0,0.5)" }}>
             <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1`}
                 title="Klas Lig Canlı Yayın"
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -54,18 +95,18 @@ export default function CanliYayinPage() {
             </div>
             <div style={{ flex: 1, position: "relative" }}>
               <iframe
-                src={`https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${typeof window !== "undefined" ? window.location.hostname : "klasl-g-4u2d.vercel.app"}`}
+                src={`https://www.youtube.com/live_chat?v=${activeVideoId}&embed_domain=${typeof window !== "undefined" ? window.location.hostname : "klasl-g-4u2d.vercel.app"}`}
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
               />
             </div>
           </div>
         </div>
 
-        <div style={{ marginTop: 20, background: "rgba(255,255,255,0.05)", padding: 15, borderRadius: 12, border: "1px solid rgba(255,255,255,0.1)" }}>
-          <p style={{ color: "#aaa", fontSize: 13, margin: 0 }}>
-            <strong style={{ color: "#fff" }}>Admin Bilgilendirmesi:</strong> YouTube canlı sohbet kutusunun düzgün çalışabilmesi için her yayında güncel YouTube <b>Video Linkini (veya ID'sini)</b> sisteme girmeniz gerekmektedir. (Bunun için yakında admin paneline bir ayar eklenecektir).
-          </p>
-        </div>
+        {!videoId && (
+          <div style={{ marginTop: 20, background: "rgba(255,49,49,0.1)", padding: 15, borderRadius: 12, border: "1px solid rgba(255,49,49,0.2)", color: "#ff3131", fontWeight: 700 }}>
+            Şu an devam eden bir maç yayını bulunmamaktadır. Aşağıdaki video örnektir.
+          </div>
+        )}
 
       </div>
     </div>
