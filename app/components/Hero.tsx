@@ -214,29 +214,21 @@ function SponsorBox({ side }: { side: "left" | "right" }) {
 
 function GoktugSponsorBox() {
   return (
-    <div className="bg-[#0b2b3a] border border-[#00d0ff]/40 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,208,255,0.2)] group hover:border-[#00d0ff]/80 transition-all duration-500 relative h-full">
-      <div className="absolute right-0 top-0 bottom-0 w-3/4 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none group-hover:opacity-30 transition-opacity duration-500"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0b2b3a] via-[#0b2b3a]/90 to-transparent pointer-events-none"></div>
-
-      <div className="bg-gradient-to-r from-[#00d0ff] to-[#0088cc] text-white py-2 px-4 font-black text-[10px] tracking-widest relative z-10 text-center">
+    <div className="bg-[#0b2b3a] border border-[#00d0ff]/40 rounded-2xl overflow-hidden flex flex-col shadow-[0_10px_30px_rgba(0,208,255,0.2)] group hover:border-[#00d0ff]/80 transition-all duration-500 relative h-full">
+      <div className="bg-gradient-to-r from-[#00d0ff] to-[#0088cc] text-white py-2 px-4 font-black text-[10px] tracking-widest text-center relative z-10">
         👑 ANA SPONSOR
       </div>
       
-      <div className="p-4 flex flex-col items-center justify-between flex-1 relative z-10">
-        
-        {/* CSS ile yapılmış Birebir Logo Tasarımı */}
-        <div className="flex items-center gap-2 w-full justify-center group-hover:scale-105 transition-transform duration-500 my-auto">
-          <div className="text-white text-3xl font-black italic tracking-tighter drop-shadow-[0_0_10px_rgba(0,208,255,0.8)]">
-            <span className="text-[#00d0ff]">G</span>G
-          </div>
-          <div className="w-[1px] h-8 bg-white/30"></div>
-          <div className="flex flex-col text-left">
-            <span className="text-white font-black text-[22px] leading-none tracking-wider">GÖKTUĞ</span>
-            <span className="text-[#00d0ff] text-[8px] font-black tracking-widest mt-1 uppercase">Bilişim ve Güvenlik</span>
-          </div>
+      <div className="p-4 flex flex-col items-center justify-between flex-1">
+        <div className="relative w-full aspect-[2/1] md:aspect-[21/9] rounded-lg overflow-hidden border border-white/5 group-hover:border-[#00d0ff]/40 transition-colors shadow-lg mb-4">
+          <img 
+            src="/logos/goktug.jpg" 
+            alt="Göktuğ Bilişim" 
+            className="w-full h-full object-cover"
+          />
         </div>
 
-        <a href="https://wa.me/905366660201" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#00d0ff]/10 border border-[#00d0ff]/50 text-[#00d0ff] py-2.5 rounded-xl font-black text-xs hover:bg-[#00d0ff] hover:text-black hover:shadow-[0_0_15px_rgba(0,208,255,0.6)] transition-all duration-300 mt-4">
+        <a href="https://wa.me/905366660201" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#00d0ff]/10 border border-[#00d0ff]/50 text-[#00d0ff] py-2.5 rounded-xl font-black text-xs hover:bg-[#00d0ff] hover:text-black hover:shadow-[0_0_15px_rgba(0,208,255,0.6)] transition-all duration-300 mt-auto">
           <span className="text-sm">📞</span>
           <span>0536 666 02 01</span>
         </a>
