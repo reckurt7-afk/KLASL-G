@@ -1,4 +1,6 @@
 import ServiceWorkerRegister from "./components/ServiceWorkerRegister";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
@@ -36,8 +38,10 @@ export default function RootLayout({
     <html lang="tr">
       <body>
         <ServiceWorkerRegister />
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
-}
+}
