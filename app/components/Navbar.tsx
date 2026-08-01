@@ -14,6 +14,8 @@ export default function Navbar() {
     { href: "/fikstur", label: "📅 Fikstür" },
     { href: "/esame-listesi", label: "📋 Esame Listesi" },
     { href: "/takimlar", label: "🛡️ Takımlar" },
+    { href: "/galeri", label: "📸 Galeri" },
+    { href: "/video-arsivi", label: "🎬 Videolar" },
     { href: "/duyurular", label: "📢 Duyurular" },
     { href: "/mac-saatleri", label: "⏰ Saatler" },
   ];

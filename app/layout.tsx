@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "KLAS LİG BURSA",
   description: "KLAS LİG BURSA Resmi Web Sitesi",
   applicationName: "KLAS LİG BURSA",
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/icons/logo.png", sizes: "192x192", type: "image/png" },

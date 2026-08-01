@@ -8,6 +8,8 @@ const kartlar = [
   { icon: "👥", baslik: "Takımları Yönet", link: "/admin/takimlar" },
   { icon: "👤", baslik: "Oyuncuları Yönet", link: "/admin/oyuncular" },
   { icon: "📨", baslik: "Oyuncu Başvuruları", link: "/admin/basvurular" },
+  { icon: "📸", baslik: "Fotoğraf Galerisi", link: "/admin/galeri" },
+  { icon: "🎬", baslik: "Video Arşivi", link: "/admin/video-arsivi" },
   { icon: "📰", baslik: "Haberler", link: "/admin/haberler" },
   { icon: "📢", baslik: "Duyurular", link: "/admin/duyurular" },
   { icon: "🔔", baslik: "Bildirim Gönder", link: "/admin/bildirim" },
