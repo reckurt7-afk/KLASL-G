@@ -6,45 +6,56 @@ import { supabase } from "@/lib/supabase";
 export default function CanliYayinPage() {
   const [videoId, setVideoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hata, setHata] = useState("");
 
   const extractVideoId = (url: string): string | null => {
     if (!url) return null;
     url = url.trim();
-    // Sadece 11 karakterli ID girilmişse direkt döndür
-    if (url.length === 11 && !url.includes(".")) return url;
+    // Sadece 11 karakterlik ham ID girilmişse
+    if (/^[\w-]{11}$/.test(url)) return url;
     try {
       const match = url.match(
-        /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|live\/|shorts\/))([\w-]{11})/i
+        /[?&]v=([\w-]{11})|youtu\.be\/([\w-]{11})|\/(?:embed|live|shorts)\/([\w-]{11})/i
       );
-      return match ? match[1] : null;
-    } catch {
-      return null;
-    }
+      if (match) return match[1] || match[2] || match[3];
+    } catch {}
+    return null;
   };
 
   useEffect(() => {
     async function getir() {
-      // 1) Önce canlı maç var mı
-      const { data: canliMac } = await supabase
-        .from("maclar")
-        .select("youtube_link")
-        .eq("canli", true)
-        .maybeSingle();
+      try {
+        // 1) Canlı maç var mı?
+        const { data: maclar } = await supabase
+          .from("maclar")
+          .select("youtube_link")
+          .eq("canli", true)
+          .limit(1);
 
-      if (canliMac?.youtube_link) {
-        const id = extractVideoId(canliMac.youtube_link);
-        if (id) { setVideoId(id); setLoading(false); return; }
-      }
+        if (maclar && maclar.length > 0 && maclar[0].youtube_link) {
+          const id = extractVideoId(maclar[0].youtube_link);
+          if (id) { setVideoId(id); setLoading(false); return; }
+        }
 
-      // 2) Canlı maç yoksa, ayarlar tablosundan varsayılan linki çek
-      const { data: ayar } = await supabase
-        .from("ayarlar")
-        .select("deger")
-        .eq("anahtar", "canli_yayin_link")
-        .maybeSingle();
+        // 2) Canlı maç yoksa ayarlar tablosundan çek
+        const { data: ayarlar, error } = await supabase
+          .from("ayarlar")
+          .select("deger")
+          .eq("anahtar", "canli_yayin_link")
+          .limit(1);
 
-      if (ayar?.deger) {
-        setVideoId(extractVideoId(ayar.deger));
+        if (error) {
+          setHata("Ayarlar tablosu okunamadı: " + error.message);
+          setLoading(false);
+          return;
+        }
+
+        if (ayarlar && ayarlar.length > 0 && ayarlar[0].deger) {
+          const id = extractVideoId(ayarlar[0].deger);
+          setVideoId(id);
+        }
+      } catch (e: any) {
+        setHata("Hata: " + e.message);
       }
 
       setLoading(false);
@@ -56,6 +67,15 @@ export default function CanliYayinPage() {
     return (
       <div style={{ minHeight: "100vh", background: "#0b0b0b", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <h2 style={{ color: "#fff" }}>Yükleniyor...</h2>
+      </div>
+    );
+  }
+
+  if (hata) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0b0b0b", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
+        <div style={{ color: "#ff3131", fontWeight: 700, fontSize: 18 }}>⚠️ Bir hata oluştu</div>
+        <div style={{ color: "#aaa", fontSize: 14 }}>{hata}</div>
       </div>
     );
   }
@@ -93,7 +113,8 @@ export default function CanliYayinPage() {
             <div style={{ flex: "1 1 700px", background: "#111", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,49,49,0.2)", boxShadow: "0 10px 40px rgba(0,0,0,0.5)" }}>
               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
                 <iframe
-                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                  key={videoId}
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
                   title="Klas Lig Canlı Yayın"
                   style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
