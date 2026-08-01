@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { supabase } from "@/lib/supabase";
+import { supabasePublic } from "@/lib/supabase";
 
 type Oyuncu = {
   id: string | number;
@@ -49,7 +49,7 @@ export default function TakimDetayPage() {
       if (!takim) return;
       
       // 1) Admin tarafından eklenen oyuncular
-      const { data: oyuncularData, error: err1 } = await supabase
+      const { data: oyuncularData, error: err1 } = await supabasePublic
         .from("oyuncular")
         .select("*")
         .eq("takim", takim.ad)
@@ -58,7 +58,7 @@ export default function TakimDetayPage() {
       if (err1) console.error("Oyuncular fetch hatası:", err1);
         
       // 2) Siteye kayıt olup bu takımı seçen üyeler
-      const { data: profillerData, error: err2 } = await supabase
+      const { data: profillerData, error: err2 } = await supabasePublic
         .from("profiller")
         .select("id, ad_soyad, avatar_url, takim")
         .eq("takim", takim.ad);

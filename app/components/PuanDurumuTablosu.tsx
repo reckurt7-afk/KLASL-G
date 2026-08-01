@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabasePublic } from "@/lib/supabase";
 
 type Takim = {
   id: number;
@@ -22,7 +22,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
 
   useEffect(() => {
     async function takimlariGetir() {
-      const { data, error } = await supabase
+      const { data, error } = await supabasePublic
         .from("takimlar")
         .select("*")
         .order("puan", { ascending: false })

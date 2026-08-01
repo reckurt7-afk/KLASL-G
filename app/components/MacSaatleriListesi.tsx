@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase";
+import { supabasePublic } from "@/lib/supabase";
 
 type Mac = {
   id: number;
@@ -38,7 +38,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
 
   useEffect(() => {
     async function maclariGetir() {
-      const { data, error } = await supabase
+      const { data, error } = await supabasePublic
         .from("maclar")
         .select("id,hafta,ev_sahibi,deplasman,tarih,saat,saha")
         .order("hafta", { ascending: true })
