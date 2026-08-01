@@ -5,15 +5,17 @@ import { supabase } from "@/lib/supabase";
 
 export default function AyarlarPage() {
   const [youtubeLink, setYoutubeLink] = useState("");
+  const [mp4Link, setMp4Link] = useState("");
   const [kaydediliyor, setKaydediliyor] = useState(false);
   const [yukleniyor, setYukleniyor] = useState(true);
 
   useEffect(() => {
     async function getir() {
-      // id = 0 olan satır, global genel ayarları tutar.
-      const { data } = await supabase.from("maclar").select("youtube_link").eq("id", 0).single();
-      if (data && data.youtube_link) {
-        setYoutubeLink(data.youtube_link);
+      // id = 0 olan satır, global genel ayarları tutar. 'hakem' sütununu mp4 linki için kullanıyoruz.
+      const { data } = await supabase.from("maclar").select("youtube_link, hakem").eq("id", 0).single();
+      if (data) {
+        if (data.youtube_link) setYoutubeLink(data.youtube_link);
+        if (data.hakem) setMp4Link(data.hakem);
       }
       setYukleniyor(false);
     }
@@ -23,12 +25,11 @@ export default function AyarlarPage() {
   async function kaydet() {
     setKaydediliyor(true);
     
-    // id = 0 satırı yoksa oluştur, varsa güncelle (upsert mantığı)
-    const { error } = await supabase.from("maclar").update({ youtube_link: youtubeLink }).eq("id", 0);
+    // id = 0 satırı yoksa oluştur, varsa güncelle
+    const { error } = await supabase.from("maclar").update({ youtube_link: youtubeLink, hakem: mp4Link }).eq("id", 0);
     
-    // Eğer update hata verirse (belki id=0 satırı silinmiştir), insert ile oluşturmayı deneriz.
     if (error) {
-       await supabase.from("maclar").insert([{ id: 0, youtube_link: youtubeLink, hafta: 0, ev_sahibi: "Sistem", deplasman: "Sistem", ev_skor: 0, dep_skor: 0, dakika: 0, durum: "Sistem", canli: false }]);
+       await supabase.from("maclar").insert([{ id: 0, youtube_link: youtubeLink, hakem: mp4Link, hafta: 0, ev_sahibi: "Sistem", deplasman: "Sistem", ev_skor: 0, dep_skor: 0, dakika: 0, durum: "Sistem", canli: false }]);
     }
 
     setKaydediliyor(false);
@@ -49,15 +50,22 @@ export default function AyarlarPage() {
 
       <div style={{ maxWidth: 700, margin: "0 auto", background: "#151515", borderRadius: 16, padding: 30, border: "1px solid rgba(255,255,255,0.1)" }}>
         
-        <h3 style={{ marginBottom: 15, color: "#ff3131" }}>Varsayılan Canlı Yayın Linki (Tanıtım vs.)</h3>
-        <p style={{ color: "#aaa", fontSize: 14, marginBottom: 20 }}>
-          Sitede devam eden herhangi bir "Canlı Maç" yoksa, Canlı Yayın sayfasında aşağıdaki YouTube videosu gösterilir. Buraya bir tanıtım veya boş ekran videonuzun linkini koyabilirsiniz.
-        </p>
-
+        <h3 style={{ marginBottom: 15, color: "#ff3131" }}>Seçenek 1: YouTube Linki</h3>
         <input
           value={youtubeLink}
           onChange={(e) => setYoutubeLink(e.target.value)}
           placeholder="https://www.youtube.com/watch?v=..."
+          style={{ width: "100%", height: 50, padding: "0 20px", borderRadius: 12, background: "#222", border: "1px solid #333", color: "#fff", fontSize: 16, marginBottom: 30 }}
+        />
+
+        <h3 style={{ marginBottom: 15, color: "#31a3ff" }}>Seçenek 2: Özel Video (MP4) Linki</h3>
+        <p style={{ color: "#aaa", fontSize: 13, marginBottom: 15 }}>
+          Eğer YouTube kullanmak istemiyorsan, videonu bir yere yükleyip (örn. sunucuya veya buluta) direkt .mp4 linkini buraya yapıştırabilirsin.
+        </p>
+        <input
+          value={mp4Link}
+          onChange={(e) => setMp4Link(e.target.value)}
+          placeholder="https://site.com/video.mp4"
           style={{ width: "100%", height: 50, padding: "0 20px", borderRadius: 12, background: "#222", border: "1px solid #333", color: "#fff", fontSize: 16 }}
         />
 
@@ -65,7 +73,7 @@ export default function AyarlarPage() {
           onClick={kaydet}
           disabled={kaydediliyor}
           style={{
-            marginTop: 25,
+            marginTop: 35,
             width: "100%",
             height: 55,
             background: kaydediliyor ? "#555" : "linear-gradient(135deg, #ff3131, #a11212)",
