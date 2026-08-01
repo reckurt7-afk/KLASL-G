@@ -3,35 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const bolumler = [
-  {
-    baslik: "Lig",
-    linkler: [
-      { href: "/puan-durumu", label: "🏆 Puan Durumu" },
-      { href: "/fikstur", label: "📅 Fikstür" },
-      { href: "/mac-saatleri", label: "⏰ Maç Saatleri" },
-      { href: "/esame-listesi", label: "📋 Esame Listesi" },
-    ],
-  },
-  {
-    baslik: "Takımlar & İçerik",
-    linkler: [
-      { href: "/takimlar", label: "🛡️ Takımlar" },
-      { href: "/galeri", label: "📸 Fotoğraf Galerisi" },
-      { href: "/video-arsivi", label: "🎬 Video Arşivi" },
-      { href: "/canli-yayin", label: "🔴 Canlı Yayın" },
-    ],
-  },
-  {
-    baslik: "Üyelik",
-    linkler: [
-      { href: "/duyurular", label: "📢 Duyurular" },
-      { href: "/oyuncu-basvurusu", label: "👤 Oyuncu Başvurusu" },
-      { href: "/giris", label: "🔑 Giriş Yap" },
-      { href: "/kayit", label: "📝 Kayıt Ol" },
-    ],
-  },
-];
+
 
 export default function Footer() {
   return (
@@ -65,25 +37,7 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Linkler */}
-          {bolumler.map((b) => (
-            <div key={b.baslik} className="flex-1 min-w-[140px]">
-              <div className="text-[#ff3131] font-black text-xs tracking-[0.2em] uppercase mb-4">
-                {b.baslik}
-              </div>
-              <div className="flex flex-col gap-3">
-                {b.linkler.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className="text-gray-500 text-sm font-medium hover:text-white transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+
         </div>
 
         {/* Alt Bölüm */}
