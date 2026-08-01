@@ -152,17 +152,7 @@ export default function ProfilPage() {
           </div>
         </div>
 
-        {/* Hızlı Linkler */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <Link href="/puan-durumu" className="card p-5 flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
-            <span className="text-3xl mb-2">🏆</span>
-            <span className="text-white font-bold text-sm">Puan Durumu</span>
-          </Link>
-          <Link href="/fikstur" className="card p-5 flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
-            <span className="text-3xl mb-2">📅</span>
-            <span className="text-white font-bold text-sm">Fikstür</span>
-          </Link>
-        </div>
+
 
         {/* Çıkış ve Admin Butonları */}
         <div className="flex flex-col gap-3">
