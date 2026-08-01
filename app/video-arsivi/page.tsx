@@ -3,12 +3,20 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-type Video = { id: number; baslik: string; youtube_link: string; aciklama: string; tarih: string };
+type Video = {
+  id: number;
+  baslik: string;
+  youtube_link: string;
+  aciklama: string;
+  tarih: string;
+};
 
 function extractId(url: string): string | null {
   if (!url) return null;
-  const m = url.match(/[?&]v=([\w-]{11})|youtu\.be\/([\w-]{11})|\/(?:embed|live|shorts)\/([\w-]{11})/i);
-  return m ? (m[1] || m[2] || m[3]) : null;
+  const m = url.match(
+    /[?&]v=([\w-]{11})|youtu\.be\/([\w-]{11})|\/(?:embed|live|shorts)\/([\w-]{11})/i
+  );
+  return m ? m[1] || m[2] || m[3] : null;
 }
 
 export default function VideoArsivPage() {
@@ -17,8 +25,14 @@ export default function VideoArsivPage() {
   const [secili, setSecili] = useState<Video | null>(null);
 
   useEffect(() => {
-    supabase.from("videolar").select("*").order("tarih", { ascending: false })
-      .then(({ data }) => { setVideolar(data || []); setYukleniyor(false); });
+    supabase
+      .from("videolar")
+      .select("*")
+      .order("tarih", { ascending: false })
+      .then(({ data }) => {
+        setVideolar(data || []);
+        setYukleniyor(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -30,51 +44,79 @@ export default function VideoArsivPage() {
   return (
     <div className="page">
       <div className="container">
-        <div style={{ marginBottom: 40, textAlign: "center" }}>
-          <p className="section-sub">KLAS LİG BURSA</p>
+        <div className="text-center mb-12">
           <h1 className="section-title">🎬 Video Arşivi</h1>
+          <p className="section-sub">KLAS LİG BURSA</p>
         </div>
 
         {yukleniyor ? (
           <div className="grid-3">
-            {[...Array(6)].map((_, i) => <div key={i} className="skeleton" style={{ aspectRatio: "16/9", borderRadius: 16 }} />)}
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="skeleton rounded-2xl"
+                style={{ aspectRatio: "16/9" }}
+              />
+            ))}
           </div>
         ) : videolar.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "80px 20px", color: "var(--muted)" }}>
-            <div style={{ fontSize: 64, marginBottom: 16 }}>🎬</div>
-            <p style={{ fontSize: 18, fontWeight: 700 }}>Henüz video eklenmemiş</p>
+          <div className="card text-center py-24">
+            <div className="text-7xl mb-4 opacity-50">🎬</div>
+            <p className="text-white text-xl font-black mb-2">
+              Henüz video eklenmemiş
+            </p>
+            <p className="text-gray-500 text-sm">
+              Admin panelinden video ekleyebilirsiniz.
+            </p>
           </div>
         ) : (
           <div className="grid-3">
-            {videolar.map(video => {
+            {videolar.map((video) => {
               const vid = extractId(video.youtube_link);
               return (
-                <div key={video.id} className="card" onClick={() => setSecili(video)}
-                  style={{ padding: 0, cursor: "pointer", overflow: "hidden" }}>
+                <div
+                  key={video.id}
+                  onClick={() => setSecili(video)}
+                  className="card p-0 cursor-pointer overflow-hidden group rounded-2xl"
+                >
                   {/* Thumbnail */}
-                  <div style={{ position: "relative", aspectRatio: "16/9", background: "#1a1a1a", overflow: "hidden" }}>
-                    {vid && <img src={`https://img.youtube.com/vi/${vid}/hqdefault.jpg`} alt={video.baslik}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
-                    <div style={{
-                      position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)",
-                      display: "flex", alignItems: "center", justifyContent: "center"
-                    }}>
-                      <div style={{
-                        width: 54, height: 54, borderRadius: "50%",
-                        background: "rgba(255,49,49,0.9)", display: "flex",
-                        alignItems: "center", justifyContent: "center",
-                        fontSize: 22, paddingLeft: 4,
-                        boxShadow: "0 0 24px rgba(255,49,49,0.6)",
-                        transition: "transform 0.2s"
-                      }}>▶</div>
+                  <div
+                    className="relative bg-[#1a1a1a] overflow-hidden"
+                    style={{ aspectRatio: "16/9" }}
+                  >
+                    {vid && (
+                      <img
+                        src={`https://img.youtube.com/vi/${vid}/hqdefault.jpg`}
+                        alt={video.baslik}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-[#ff3131]/90 flex items-center justify-center text-white text-2xl pl-1 shadow-[0_0_24px_rgba(255,49,49,0.6)] group-hover:scale-110 transition-transform duration-300">
+                        ▶
+                      </div>
                     </div>
                   </div>
-                  <div style={{ padding: "14px 16px" }}>
-                    <p style={{ color: "#fff", fontWeight: 800, fontSize: 14, marginBottom: 6 }}>{video.baslik}</p>
-                    {video.aciklama && <p style={{ color: "var(--muted)", fontSize: 12, lineHeight: 1.6 }}>{video.aciklama}</p>}
+
+                  {/* Info */}
+                  <div className="p-4">
+                    <p className="text-white font-black text-sm mb-1 line-clamp-2">
+                      {video.baslik}
+                    </p>
+                    {video.aciklama && (
+                      <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-2">
+                        {video.aciklama}
+                      </p>
+                    )}
                     {video.tarih && (
-                      <p style={{ color: "var(--primary)", fontSize: 11, fontWeight: 700, marginTop: 10 }}>
-                        📅 {new Date(video.tarih).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })}
+                      <p className="text-[#ff3131] text-xs font-bold">
+                        📅{" "}
+                        {new Date(video.tarih).toLocaleDateString("tr-TR", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
                       </p>
                     )}
                   </div>
@@ -87,18 +129,35 @@ export default function VideoArsivPage() {
 
       {/* Video Modal */}
       {secili && (
-        <div onClick={() => setSecili(null)}
-          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: 20 }}>
-          <div onClick={e => e.stopPropagation()} style={{ maxWidth: 900, width: "100%", position: "relative" }}>
-            <button onClick={() => setSecili(null)}
-              style={{ position: "absolute", top: -44, right: 0, background: "none", border: "none", color: "#fff", fontSize: 28, cursor: "pointer" }}>✕</button>
-            <div style={{ position: "relative", paddingBottom: "56.25%", borderRadius: 16, overflow: "hidden" }}>
-              <iframe src={`https://www.youtube.com/embed/${extractId(secili.youtube_link)}?autoplay=1`}
+        <div
+          onClick={() => setSecili(null)}
+          className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[9999] p-5"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-4xl w-full relative"
+          >
+            <button
+              onClick={() => setSecili(null)}
+              className="absolute -top-12 right-0 text-white text-3xl hover:text-[#ff3131] transition-colors font-black"
+            >
+              ✕
+            </button>
+            <div
+              className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+              style={{ paddingBottom: "56.25%" }}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${extractId(secili.youtube_link)}?autoplay=1`}
                 title={secili.baslik}
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                className="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
-            <p style={{ color: "#fff", fontWeight: 800, fontSize: 17, marginTop: 14, textAlign: "center" }}>{secili.baslik}</p>
+            <p className="text-white font-black text-lg mt-5 text-center">
+              {secili.baslik}
+            </p>
           </div>
         </div>
       )}

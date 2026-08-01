@@ -11,7 +11,6 @@ export default function CanliYayinPage() {
   const extractVideoId = (url: string): string | null => {
     if (!url) return null;
     url = url.trim();
-    // Sadece 11 karakterlik ham ID girilmişse
     if (/^[\w-]{11}$/.test(url)) return url;
     try {
       const match = url.match(
@@ -25,7 +24,6 @@ export default function CanliYayinPage() {
   useEffect(() => {
     async function getir() {
       try {
-        // 1) Canlı maç var mı?
         const { data: maclar } = await supabase
           .from("maclar")
           .select("youtube_link")
@@ -37,7 +35,6 @@ export default function CanliYayinPage() {
           if (id) { setVideoId(id); setLoading(false); return; }
         }
 
-        // 2) Canlı maç yoksa ayarlar tablosundan çek
         const { data: ayarlar, error } = await supabase
           .from("ayarlar")
           .select("deger")
@@ -57,7 +54,6 @@ export default function CanliYayinPage() {
       } catch (e: any) {
         setHata("Hata: " + e.message);
       }
-
       setLoading(false);
     }
     getir();
@@ -65,58 +61,57 @@ export default function CanliYayinPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0b0b0b", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <h2 style={{ color: "#fff" }}>Yükleniyor...</h2>
+      <div className="page flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#ff3131] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-400 font-bold">Yükleniyor...</p>
+        </div>
       </div>
     );
   }
 
   if (hata) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0b0b0b", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
-        <div style={{ color: "#ff3131", fontWeight: 700, fontSize: 18 }}>⚠️ Bir hata oluştu</div>
-        <div style={{ color: "#aaa", fontSize: 14 }}>{hata}</div>
+      <div className="page flex flex-col items-center justify-center gap-4">
+        <div className="text-6xl">⚠️</div>
+        <div className="text-[#ff3131] font-bold text-lg">Bir hata oluştu</div>
+        <div className="text-gray-400 text-sm bg-[#111] border border-white/10 rounded-xl px-6 py-3">{hata}</div>
       </div>
     );
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0b0b0b", paddingTop: 100, paddingBottom: 60 }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 15px" }}>
+    <div className="page">
+      <div className="container max-w-[1400px]">
 
         {/* Başlık */}
-        <div style={{ display: "flex", alignItems: "center", gap: 15, marginBottom: 30 }}>
-          <div
-            style={{
-              width: 15, height: 15,
-              background: videoId ? "#ff3131" : "#888",
-              borderRadius: "50%",
-              boxShadow: videoId ? "0 0 15px #ff3131" : "none",
-              animation: videoId ? "pulse 1.5s infinite" : "none",
-            }}
-          />
-          <h1 style={{ color: "#fff", fontSize: 32, fontWeight: 900, margin: 0, textTransform: "uppercase", letterSpacing: 1 }}>
-            {videoId ? "CANLI YAYIN" : "ŞU AN CANLI YAYIN YOK"}
-          </h1>
-          <style>{`
-            @keyframes pulse {
-              0%   { transform: scale(0.95); opacity: 0.8; }
-              50%  { transform: scale(1.3);  opacity: 1; }
-              100% { transform: scale(0.95); opacity: 0.8; }
-            }
-          `}</style>
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            {videoId ? (
+              <span className="relative flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#ff3131]"></span>
+              </span>
+            ) : (
+              <span className="w-4 h-4 rounded-full bg-gray-600 inline-block" />
+            )}
+            <h1 className="section-title mb-0">
+              {videoId ? "CANLI YAYIN" : "ŞU AN CANLI YAYIN YOK"}
+            </h1>
+          </div>
+          <p className="section-sub">KLAS LİG BURSA</p>
         </div>
 
         {videoId ? (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
+          <div className="flex flex-wrap gap-5">
             {/* YouTube Player */}
-            <div style={{ flex: "1 1 700px", background: "#111", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,49,49,0.2)", boxShadow: "0 10px 40px rgba(0,0,0,0.5)" }}>
-              <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+            <div className="flex-1 min-w-[300px] bg-[#111] rounded-2xl overflow-hidden border border-[rgba(255,49,49,0.2)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+              <div className="relative" style={{ paddingBottom: "56.25%" }}>
                 <iframe
                   key={videoId}
                   src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
                   title="Klas Lig Canlı Yayın"
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+                  className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -124,26 +119,30 @@ export default function CanliYayinPage() {
             </div>
 
             {/* Canlı Sohbet */}
-            <div style={{ flex: "1 1 350px", minHeight: 500, background: "#111", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", display: "flex", flexDirection: "column" }}>
-              <div style={{ padding: "15px 20px", background: "rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.1)", color: "#fff", fontWeight: 700, display: "flex", alignItems: "center", gap: 10 }}>
-                <span style={{ fontSize: 18 }}>💬</span> Canlı Sohbet
+            <div className="flex-1 min-w-[280px] min-h-[450px] bg-[#111] rounded-2xl overflow-hidden border border-[rgba(255,255,255,0.07)] flex flex-col">
+              <div className="px-5 py-4 bg-[rgba(255,255,255,0.04)] border-b border-white/10 text-white font-bold flex items-center gap-3">
+                <span className="text-xl">💬</span> Canlı Sohbet
               </div>
-              <div style={{ flex: 1, position: "relative" }}>
+              <div className="flex-1 relative">
                 <iframe
-                  src={`https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${typeof window !== "undefined" ? window.location.hostname : "klasl-g-4u2d.vercel.app"}`}
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+                  src={`https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${typeof window !== "undefined" ? window.location.hostname : "localhost"}`}
+                  className="absolute inset-0 w-full h-full border-0"
                 />
               </div>
             </div>
           </div>
         ) : (
-          <div style={{ textAlign: "center", padding: "80px 20px", color: "#aaa" }}>
-            <div style={{ fontSize: 80, marginBottom: 20 }}>📺</div>
-            <p style={{ fontSize: 20, color: "#fff", fontWeight: 700 }}>Şu an aktif yayın yok</p>
-            <p style={{ fontSize: 14, marginTop: 10 }}>Admin paneli → Ayarlar'dan bir YouTube linki ekleyebilirsin.</p>
+          <div className="card text-center py-24 px-6">
+            <div className="text-8xl mb-6 opacity-50">📺</div>
+            <h2 className="text-white text-2xl font-black mb-3">Şu an aktif yayın yok</h2>
+            <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
+              Admin paneli → Ayarlar'dan bir YouTube linki ekleyerek canlı yayını başlatabilirsiniz.
+            </p>
+            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[rgba(255,49,49,0.1)] border border-[rgba(255,49,49,0.2)] rounded-xl text-[#ff3131] font-bold text-sm">
+              🔴 Bir sonraki maç için takipte kalın!
+            </div>
           </div>
         )}
-
       </div>
     </div>
   );

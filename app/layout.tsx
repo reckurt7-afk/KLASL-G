@@ -1,6 +1,7 @@
 import ServiceWorkerRegister from "./components/ServiceWorkerRegister";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { AuthProvider } from "@/lib/AuthContext";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
@@ -36,11 +37,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      </head>
       <body>
-        <ServiceWorkerRegister />
-        <Navbar />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <ServiceWorkerRegister />
+          <Navbar />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
