@@ -1,28 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-// Bu sayfalar giriş gerektirmez (Herkes görebilir)
+// Bu sayfalar giriş gerektirmez (Sadece Giriş ve Kayıt)
 const ACIK_SAYFALAR = [
   "/giris", 
-  "/kayit", 
-  "/puan-durumu", 
-  "/mac-saatleri", 
-  "/takimlar", 
-  "/takim", 
-  "/fikstur", 
-  "/gol-kralligi", 
-  "/haberler", 
-  "/oyuncular"
+  "/kayit"
 ];
 
 export async function middleware(req: NextRequest) {
   let res = NextResponse.next({ request: req });
   const pathname = req.nextUrl.pathname;
-
-  // Ana sayfaya her zaman erişim var
-  if (pathname === "/") {
-    return res;
-  }
 
   // Açık sayfalara her zaman erişim var
   if (ACIK_SAYFALAR.some((s) => pathname.startsWith(s))) {
