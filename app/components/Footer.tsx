@@ -95,24 +95,10 @@ export default function Footer() {
         </div>
 
         {/* Alt bölüm */}
-        <div style={{
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          paddingTop: 20,
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 10,
-        }}>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 20, textAlign: "center" }}>
           <div style={{ color: "#555", fontSize: 12 }}>
             © {new Date().getFullYear()} Klas Lig Bursa. Tüm hakları saklıdır.
           </div>
-          <Link
-            href="/admin"
-            style={{ color: "#333", fontSize: 12, textDecoration: "none" }}
-          >
-            ⚙️ Yönetim
-          </Link>
         </div>
       </div>
     </footer>
