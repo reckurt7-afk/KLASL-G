@@ -14,7 +14,6 @@ export default function KayitPage() {
     email: "",
     sifre: "",
     sifreTekrar: "",
-    takim: "",
   });
   const [loading, setLoading] = useState(false);
   const [hata, setHata] = useState("");
@@ -72,7 +71,6 @@ export default function KayitPage() {
         data: {
           ad_soyad: form.ad_soyad.trim(),
           telefon: telefonTemiz,
-          takim: form.takim,
         },
       },
     });
@@ -94,7 +92,6 @@ export default function KayitPage() {
         ad_soyad: form.ad_soyad.trim(),
         telefon: telefonTemiz,
         email: form.email.trim(),
-        takim: form.takim,
       });
     }
 
@@ -165,26 +162,7 @@ export default function KayitPage() {
               </p>
             </div>
 
-            <div>
-              <label className="text-gray-400 text-xs font-bold uppercase tracking-wider block mb-2">
-                Takımınız (İsteğe Bağlı)
-              </label>
-              <select
-                value={form.takim}
-                onChange={(e) => degistir("takim", e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
-              >
-                <option value="">Takım Seçiniz...</option>
-                <option value="ALAÇAM SPOR">ALAÇAM SPOR</option>
-                <option value="DİNAMO NALBANTOĞLU">DİNAMO NALBANTOĞLU</option>
-                <option value="KROKODİLLA FC">KROKODİLLA FC</option>
-                <option value="DÜNDAR KÖYÜ">DÜNDAR KÖYÜ</option>
-                <option value="YEŞİL BURSA FC">YEŞİL BURSA FC</option>
-                <option value="YEDİYOL BLACK FC">YEDİYOL BLACK FC</option>
-                <option value="GRAVYER FC">GRAVYER FC</option>
-                <option value="BİSKREM FC">BİSKREM FC</option>
-              </select>
-            </div>
+
 
             <div>
               <label className="text-gray-400 text-xs font-bold uppercase tracking-wider block mb-2">
