@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { supabasePublic } from "@/lib/supabase";
+import { publicFetch } from "@/lib/supabase";
 
 type Oyuncu = {
   id: string | number;
@@ -49,45 +49,34 @@ export default function TakimDetayPage() {
       if (!takim) return;
       
       // 1) Admin tarafından eklenen oyuncular
-      const { data: oyuncularData, error: err1 } = await supabasePublic
-        .from("oyuncular")
-        .select("*")
-        .eq("takim", takim.ad)
-        .order("forma_no");
-        
-      if (err1) console.error("Oyuncular fetch hatası:", err1);
-        
-      // 2) Siteye kayıt olup bu takımı seçen üyeler
-      const { data: profillerData, error: err2 } = await supabasePublic
-        .from("profiller")
-        .select("id, ad_soyad, avatar_url, takim")
-        .eq("takim", takim.ad);
-        
-      if (err2 && err2.code !== "42703") {
-         console.warn("Profiller tablosundan oyuncular çekilemedi. (Sütun eksik olabilir)");
-      }
-        
-      const merged: Oyuncu[] = [...(oyuncularData || [])];
+      const oyuncularData = await publicFetch(
+        "oyuncular",
+        `select=*&takim=eq.${encodeURIComponent(takim.ad)}&order=forma_no.asc`
+      );
       
-      // Profillerden gelenleri de ekle (eğer aynı isimde yoksa)
-      if (profillerData) {
-        profillerData.forEach(p => {
-          // Zaten admin eklediyse atla
-          const profName = p.ad_soyad ? p.ad_soyad.toLowerCase().trim() : "";
-          if (profName && !merged.find(m => m.ad_soyad && m.ad_soyad.toLowerCase().trim() === profName)) {
-            merged.push({
-              id: p.id as string | number,
-              ad_soyad: p.ad_soyad || "İsimsiz Oyuncu",
-              takim: p.takim,
-              mevki: "Oyuncu",
-              forma_no: 0,
-              foto_url: p.avatar_url,
-              genel_puan: 75,
-              is_premium: false
-            });
-          }
-        });
-      }
+      // 2) Siteye kayıt olup bu takımı seçen üyeler  
+      const profillerData = await publicFetch(
+        "profiller",
+        `select=id,ad_soyad,avatar_url,takim&takim=eq.${encodeURIComponent(takim.ad)}`
+      );
+
+      const merged: Oyuncu[] = [...oyuncularData];
+      
+      profillerData.forEach((p: any) => {
+        const profName = p.ad_soyad ? p.ad_soyad.toLowerCase().trim() : "";
+        if (profName && !merged.find(m => m.ad_soyad && m.ad_soyad.toLowerCase().trim() === profName)) {
+          merged.push({
+            id: p.id,
+            ad_soyad: p.ad_soyad || "İsimsiz Oyuncu",
+            takim: p.takim,
+            mevki: "Oyuncu",
+            forma_no: 0,
+            foto_url: p.avatar_url,
+            genel_puan: 75,
+            is_premium: false
+          });
+        }
+      });
 
       setOyuncular(merged);
     }
