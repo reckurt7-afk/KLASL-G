@@ -48,7 +48,9 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
     maclariGetir();
   }, []);
 
-  const haftalar = mini ? [2] : [2, 3, 4, 5, 6, 7];
+  const haftalar = mini
+    ? [maclar.length > 0 ? maclar[0].hafta : 1]
+    : [...new Set(maclar.map(m => m.hafta))].sort((a, b) => a - b);
 
   return (
     <div className="w-full">

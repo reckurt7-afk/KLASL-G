@@ -24,16 +24,10 @@ export default function GirisPage() {
     });
 
     if (error) {
-      if (
-        error.message.includes("Invalid login credentials") ||
-        error.message.includes("invalid_credentials")
-      ) {
+      if (error.message.includes("Invalid login credentials") || error.message.includes("invalid_credentials")) {
         setHata("E-posta veya şifre hatalı. Lütfen tekrar deneyin.");
       } else if (error.message.includes("Email not confirmed")) {
-        // E-posta doğrulama açıksa bunu göster
-        setHata(
-          "E-posta adresin henüz doğrulanmamış. Supabase panelinden 'Confirm email' seçeneğini kapatın veya e-postanı kontrol edin."
-        );
+        setHata("E-posta adresin henüz doğrulanmamış.");
       } else if (error.message.includes("Too many requests")) {
         setHata("Çok fazla deneme yapıldı. Lütfen birkaç dakika bekleyin.");
       } else {
@@ -48,31 +42,103 @@ export default function GirisPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#070707] flex items-center justify-center px-4 py-16">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-10">
-          <div className="relative w-20 h-20 mb-4">
-            <Image src="/icons/logo.png" alt="KLAS LİG" fill className="object-contain drop-shadow-[0_0_15px_rgba(255,49,49,0.5)]" />
+    <div style={{
+      minHeight: "100vh",
+      background: "#070707",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "20px",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      {/* Arka plan glow efekti */}
+      <div style={{
+        position: "absolute",
+        top: "20%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: 600,
+        height: 600,
+        background: "radial-gradient(circle, rgba(255,49,49,0.12) 0%, transparent 70%)",
+        borderRadius: "50%",
+        filter: "blur(40px)",
+        pointerEvents: "none",
+      }} />
+
+      <div style={{ width: "100%", maxWidth: 460, position: "relative", zIndex: 1 }}>
+
+        {/* Logo Bölümü */}
+        <div style={{ textAlign: "center", marginBottom: 40 }}>
+          <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px" }}>
+            <Image
+              src="/icons/logo.png"
+              alt="KLAS LİG"
+              fill
+              style={{ objectFit: "contain", filter: "drop-shadow(0 0 20px rgba(255,49,49,0.6))" }}
+            />
           </div>
-          <h1 className="text-3xl font-black text-white tracking-widest">KLAS LİG</h1>
-          <span className="text-[#ff3131] font-black text-xs tracking-[0.4em] mt-1">BURSA</span>
+          <h1 style={{
+            color: "#fff",
+            fontSize: 36,
+            fontWeight: 900,
+            letterSpacing: 6,
+            margin: 0,
+            lineHeight: 1,
+          }}>KLAS LİG</h1>
+          <div style={{
+            color: "#ff3131",
+            fontSize: 13,
+            fontWeight: 800,
+            letterSpacing: 8,
+            marginTop: 6,
+          }}>BURSA</div>
         </div>
 
         {/* Kart */}
-        <div className="bg-[#111] border border-[rgba(255,255,255,0.07)] rounded-3xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
-          <h2 className="text-white text-2xl font-black mb-1">Giriş Yap</h2>
-          <p className="text-gray-500 text-sm mb-8">Hesabınla giriş yaparak devam et.</p>
+        <div style={{
+          background: "rgba(17,17,17,0.95)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: 24,
+          padding: "40px 36px",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,49,49,0.05)",
+          backdropFilter: "blur(20px)",
+        }}>
+          <div style={{ marginBottom: 32 }}>
+            <h2 style={{ color: "#fff", fontSize: 28, fontWeight: 900, margin: "0 0 8px" }}>
+              Hoş Geldin 👋
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 16, margin: 0 }}>
+              Hesabınla giriş yap ve ligin keyfini çıkar.
+            </p>
+          </div>
 
           {hata && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm font-medium mb-6">
+            <div style={{
+              background: "rgba(255,49,49,0.08)",
+              border: "1px solid rgba(255,49,49,0.3)",
+              borderRadius: 12,
+              padding: "14px 18px",
+              color: "#ff6b6b",
+              fontSize: 15,
+              fontWeight: 500,
+              marginBottom: 24,
+            }}>
               ⚠️ {hata}
             </div>
           )}
 
-          <form onSubmit={girisYap} className="space-y-4">
+          <form onSubmit={girisYap} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <div>
-              <label className="text-gray-400 text-xs font-bold uppercase tracking-wider block mb-2">
+              <label style={{
+                display: "block",
+                color: "rgba(255,255,255,0.5)",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                marginBottom: 10,
+              }}>
                 E-posta
               </label>
               <input
@@ -82,12 +148,33 @@ export default function GirisPage() {
                 placeholder="ornek@mail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                style={{
+                  width: "100%",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 14,
+                  padding: "16px 18px",
+                  color: "#fff",
+                  fontSize: 16,
+                  outline: "none",
+                  boxSizing: "border-box",
+                  transition: "border-color 0.2s",
+                }}
+                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
+                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>
 
             <div>
-              <label className="text-gray-400 text-xs font-bold uppercase tracking-wider block mb-2">
+              <label style={{
+                display: "block",
+                color: "rgba(255,255,255,0.5)",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                marginBottom: 10,
+              }}>
                 Şifre
               </label>
               <input
@@ -97,34 +184,85 @@ export default function GirisPage() {
                 placeholder="••••••••"
                 value={sifre}
                 onChange={(e) => setSifre(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                style={{
+                  width: "100%",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 14,
+                  padding: "16px 18px",
+                  color: "#fff",
+                  fontSize: 16,
+                  outline: "none",
+                  boxSizing: "border-box",
+                  transition: "border-color 0.2s",
+                }}
+                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
+                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white font-black rounded-xl text-base shadow-[0_8px_20px_rgba(255,49,49,0.3)] hover:shadow-[0_8px_30px_rgba(255,49,49,0.5)] hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 mt-2"
+              style={{
+                width: "100%",
+                padding: "18px",
+                background: loading ? "rgba(255,49,49,0.5)" : "linear-gradient(135deg, #ff3131 0%, #c01010 100%)",
+                color: "#fff",
+                border: "none",
+                borderRadius: 14,
+                fontSize: 17,
+                fontWeight: 900,
+                letterSpacing: 2,
+                cursor: loading ? "not-allowed" : "pointer",
+                boxShadow: loading ? "none" : "0 10px 30px rgba(255,49,49,0.35)",
+                marginTop: 4,
+                transition: "all 0.2s",
+              }}
             >
               {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+                  <span style={{
+                    width: 20, height: 20,
+                    border: "2px solid rgba(255,255,255,0.3)",
+                    borderTopColor: "#fff",
+                    borderRadius: "50%",
+                    animation: "spin 0.8s linear infinite",
+                    display: "inline-block",
+                  }} />
                   Giriş yapılıyor...
                 </span>
               ) : "GİRİŞ YAP →"}
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.06)] text-center">
-            <p className="text-gray-500 text-sm">
+          <div style={{
+            marginTop: 28,
+            paddingTop: 24,
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            textAlign: "center",
+          }}>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, margin: 0 }}>
               Hesabın yok mu?{" "}
-              <Link href="/kayit" className="text-[#ff3131] font-bold hover:text-red-400 transition-colors">
+              <Link href="/kayit" style={{
+                color: "#ff3131",
+                fontWeight: 800,
+                textDecoration: "none",
+                fontSize: 15,
+              }}>
                 Kayıt Ol
               </Link>
             </p>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
