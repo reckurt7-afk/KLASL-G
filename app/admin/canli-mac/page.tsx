@@ -23,46 +23,77 @@ export default function CanliMacPage() {
   const [sureCalisiyor, setSureCalisiyor] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 🔊 GOL SESİ - Web Audio API ile heyecanlı melodi + Speech API ile anons
+  // 🔊 GOL SESİ - Maçkolik tarzı: kalabalık + korna + yükselen tiz + GOOOL anons
   function golSesiCal() {
     try {
-      // 1) Web Audio API ile heyecanlı gol melodisi
-      const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
-      if (AudioContext) {
-        const ctx = new AudioContext();
-        const notalar = [
-          { freq: 523, sure: 0.1 },
-          { freq: 659, sure: 0.1 },
-          { freq: 784, sure: 0.15 },
-          { freq: 1047, sure: 0.4 },
-          { freq: 988, sure: 0.15 },
-          { freq: 1047, sure: 0.6 },
-        ];
-        let zaman = ctx.currentTime;
-        notalar.forEach(({ freq, sure }) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.frequency.setValueAtTime(freq, zaman);
-          osc.type = "sine";
-          gain.gain.setValueAtTime(0.6, zaman);
-          gain.gain.exponentialRampToValueAtTime(0.001, zaman + sure);
-          osc.start(zaman);
-          osc.stop(zaman + sure);
-          zaman += sure;
-        });
-      }
+      const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
 
-      // 2) Web Speech API ile "GOOOL!" anons
+      // 1) KALABALIK GÜRÜLTÜsü (beyaz gürültü - stadyum efekti)
+      const bufferSize = ctx.sampleRate * 2;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const noiseFilter = ctx.createBiquadFilter();
+      noiseFilter.type = "bandpass";
+      noiseFilter.frequency.value = 800;
+      noiseFilter.Q.value = 0.5;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0, now);
+      noiseGain.gain.linearRampToValueAtTime(0.4, now + 0.3);
+      noiseGain.gain.linearRampToValueAtTime(0.6, now + 0.8);
+      noiseGain.gain.linearRampToValueAtTime(0, now + 2);
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      noise.start(now);
+      noise.stop(now + 2);
+
+      // 2) KORNA SESİ (Maçkolik'in o uzun yükselen tonu)
+      const korna = ctx.createOscillator();
+      const kornaGain = ctx.createGain();
+      korna.type = "sawtooth";
+      korna.frequency.setValueAtTime(300, now);
+      korna.frequency.linearRampToValueAtTime(600, now + 0.5);
+      korna.frequency.linearRampToValueAtTime(550, now + 1.2);
+      kornaGain.gain.setValueAtTime(0, now);
+      kornaGain.gain.linearRampToValueAtTime(0.5, now + 0.1);
+      kornaGain.gain.linearRampToValueAtTime(0.5, now + 1.0);
+      kornaGain.gain.linearRampToValueAtTime(0, now + 1.3);
+      korna.connect(kornaGain);
+      kornaGain.connect(ctx.destination);
+      korna.start(now);
+      korna.stop(now + 1.4);
+
+      // 3) TİZ GOL SESİ (ikinci korna - Maçkolik tarzı çift ton)
+      const tiz = ctx.createOscillator();
+      const tizGain = ctx.createGain();
+      tiz.type = "square";
+      tiz.frequency.setValueAtTime(880, now + 0.15);
+      tiz.frequency.linearRampToValueAtTime(1100, now + 0.6);
+      tizGain.gain.setValueAtTime(0, now + 0.15);
+      tizGain.gain.linearRampToValueAtTime(0.3, now + 0.3);
+      tizGain.gain.linearRampToValueAtTime(0, now + 1.0);
+      tiz.connect(tizGain);
+      tizGain.connect(ctx.destination);
+      tiz.start(now + 0.15);
+      tiz.stop(now + 1.0);
+
+      // 4) Speech API ile "GOOOOOL!" anons (ses bittikten sonra)
       if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance("GOOOL! GOOOL! GOOOL!");
+        const utterance = new SpeechSynthesisUtterance("GOOOOOL!");
         utterance.lang = "tr-TR";
-        utterance.rate = 0.7;
-        utterance.pitch = 1.3;
+        utterance.rate = 0.5;   // Yavaş ve uzun "GOOOL"
+        utterance.pitch = 1.4;  // Tiz ve heyecanlı
         utterance.volume = 1;
-        setTimeout(() => window.speechSynthesis.speak(utterance), 800);
+        setTimeout(() => window.speechSynthesis.speak(utterance), 600);
       }
     } catch (e) {
       console.log("Ses çalınamadı:", e);
