@@ -26,7 +26,8 @@ self.addEventListener("push", (event) => {
     body: data.body || "Yeni bildirim var!",
     icon: "/icons/logo.png",
     badge: "/icons/logo.png",
-    vibrate: [200, 100, 200],
+    vibrate: [300, 100, 300, 100, 300], // Gol heyecanı için 3'lü titreme
+    sound: data.ses || undefined, // Ses URL'i
     data: {
       url: "/",
     },

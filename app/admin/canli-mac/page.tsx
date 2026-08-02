@@ -23,6 +23,52 @@ export default function CanliMacPage() {
   const [sureCalisiyor, setSureCalisiyor] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // 🔊 GOL SESİ - Web Audio API ile heyecanlı melodi + Speech API ile anons
+  function golSesiCal() {
+    try {
+      // 1) Web Audio API ile heyecanlı gol melodisi
+      const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (AudioContext) {
+        const ctx = new AudioContext();
+        const notalar = [
+          { freq: 523, sure: 0.1 },
+          { freq: 659, sure: 0.1 },
+          { freq: 784, sure: 0.15 },
+          { freq: 1047, sure: 0.4 },
+          { freq: 988, sure: 0.15 },
+          { freq: 1047, sure: 0.6 },
+        ];
+        let zaman = ctx.currentTime;
+        notalar.forEach(({ freq, sure }) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.setValueAtTime(freq, zaman);
+          osc.type = "sine";
+          gain.gain.setValueAtTime(0.6, zaman);
+          gain.gain.exponentialRampToValueAtTime(0.001, zaman + sure);
+          osc.start(zaman);
+          osc.stop(zaman + sure);
+          zaman += sure;
+        });
+      }
+
+      // 2) Web Speech API ile "GOOOL!" anons
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance("GOOOL! GOOOL! GOOOL!");
+        utterance.lang = "tr-TR";
+        utterance.rate = 0.7;
+        utterance.pitch = 1.3;
+        utterance.volume = 1;
+        setTimeout(() => window.speechSynthesis.speak(utterance), 800);
+      }
+    } catch (e) {
+      console.log("Ses çalınamadı:", e);
+    }
+  }
+
   useEffect(() => {
     maclariGetir();
   }, []);
@@ -233,6 +279,7 @@ export default function CanliMacPage() {
 
                   <button onClick={async () => {
                     const yeniSkor = seciliMac.ev_skor + 1;
+                    golSesiCal(); // 🔊 GOOOL sesi!
                     await macGuncelle("ev_skor", yeniSkor);
                     await fetch("/api/send-notification", {
                       method: "POST",
@@ -270,6 +317,7 @@ export default function CanliMacPage() {
 
                   <button onClick={async () => {
                     const yeniSkor = seciliMac.dep_skor + 1;
+                    golSesiCal(); // 🔊 GOOOL sesi!
                     await macGuncelle("dep_skor", yeniSkor);
                     await fetch("/api/send-notification", {
                       method: "POST",
