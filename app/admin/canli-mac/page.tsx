@@ -133,11 +133,17 @@ export default function CanliMacPage() {
   }, [sureCalisiyor]);
 
   async function maclariGetir() {
-    const data = await publicFetch(
-      "maclar",
-      "select=*&order=hafta.asc"
-    );
-    setMaclar(data || []);
+    const data = await publicFetch("maclar", "select=*&order=hafta.asc");
+    // null olan skorları 0'a çevir
+    const normalize = (data || []).map((m: any) => ({
+      ...m,
+      ev_skor: m.ev_skor ?? 0,
+      dep_skor: m.dep_skor ?? 0,
+      dakika: m.dakika ?? 0,
+      ev_sahibi: m.ev_sahibi || "Ev Sahibi",
+      deplasman: m.deplasman || "Deplasman",
+    }));
+    setMaclar(normalize);
   }
 
   async function macGuncelle(alan: keyof Mac, deger: any) {
@@ -242,7 +248,7 @@ export default function CanliMacPage() {
           <option value="">Maç Seçiniz</option>
           {maclar.map((m) => (
             <option key={m.id} value={m.id}>
-              {m.hafta}. Hafta | {m.ev_sahibi} - {m.deplasman}
+              {m.hafta}. Hafta | {m.ev_sahibi || "Ev Sahibi"} - {m.deplasman || "Deplasman"}
             </option>
           ))}
         </select>
@@ -255,7 +261,7 @@ export default function CanliMacPage() {
                 {seciliMac.hafta}. HAFTA
               </div>
               <h2 style={{ fontSize: 22, fontWeight: 900, margin: 0 }}>
-                {seciliMac.ev_sahibi} 🆚 {seciliMac.deplasman}
+                {seciliMac.ev_sahibi || "Ev Sahibi"} 🆚 {seciliMac.deplasman || "Deplasman"}
               </h2>
               {seciliMac.canli && (
                 <div style={{
