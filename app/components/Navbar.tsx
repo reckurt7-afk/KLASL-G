@@ -2,17 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/lib/AuthContext";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { user, profil, loading, cikisYap } = useAuth();
-
-  // Giriş/Kayıt sayfalarında Navbar'ı gösterme
-  const gizliSayfalar = ["/giris", "/kayit"];
-  if (gizliSayfalar.includes(pathname)) return null;
 
   const links = [
     { href: "/", label: "🏠 Ana Sayfa" },
@@ -26,10 +19,6 @@ export default function Navbar() {
     { href: "/duyurular", label: "📢 Duyurular" },
     { href: "/mac-saatleri", label: "⏰ Saatler" },
   ];
-
-  const initials = profil?.ad_soyad
-    ? profil.ad_soyad.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2)
-    : "?";
 
   return (
     <>
@@ -67,41 +56,6 @@ export default function Navbar() {
                 );
               })}
             </nav>
-
-            {/* Kullanıcı Alanı */}
-            <div className="hidden lg:flex items-center gap-3">
-              {loading ? (
-                <div className="w-9 h-9 rounded-full bg-white/10 animate-pulse" />
-              ) : user ? (
-                // Giriş yapılmış
-                <div className="flex items-center gap-3">
-                  <Link href="/profil" className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#ff3131]/40 rounded-xl px-4 py-2 transition-all duration-200 group">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff3131] to-[#a11212] flex items-center justify-center text-white text-xs font-black shadow-[0_0_10px_rgba(255,49,49,0.3)]">
-                      {initials}
-                    </div>
-                    <span className="text-white text-sm font-bold group-hover:text-[#ff3131] transition-colors">
-                      {profil?.ad_soyad?.split(" ")[0] || "Profil"}
-                    </span>
-                  </Link>
-                  <button
-                    onClick={cikisYap}
-                    className="px-4 py-2 text-sm font-bold text-gray-400 hover:text-red-400 border border-white/10 hover:border-red-500/30 rounded-xl transition-all duration-200"
-                  >
-                    Çıkış
-                  </button>
-                </div>
-              ) : (
-                // Giriş yapılmamış
-                <div className="flex items-center gap-2">
-                  <Link href="/giris" className="px-4 py-2 text-sm font-bold text-gray-300 hover:text-white border border-white/10 hover:border-white/30 rounded-xl transition-all duration-200">
-                    Giriş Yap
-                  </Link>
-                  <Link href="/kayit" className="px-5 py-2 text-sm font-bold bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white rounded-xl shadow-[0_4px_12px_rgba(255,49,49,0.3)] hover:shadow-[0_4px_20px_rgba(255,49,49,0.5)] hover:-translate-y-0.5 transition-all duration-200">
-                    Kayıt Ol
-                  </Link>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </header>
@@ -130,29 +84,6 @@ export default function Navbar() {
               </Link>
             );
           })}
-
-          {/* Mobilde kullanıcı */}
-          {!loading && (
-            user ? (
-              <Link
-                href="/profil"
-                className={`flex-shrink-0 flex flex-col items-center justify-center w-[68px] h-[68px] rounded-2xl text-[10px] font-bold transition-all duration-300 ${pathname === "/profil" ? "bg-gradient-to-b from-[#ff3131]/20 to-transparent border border-[#ff3131]/50 text-white" : "text-gray-400 border border-transparent"}`}
-              >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff3131] to-[#a11212] flex items-center justify-center text-white text-xs font-black mb-0.5">
-                  {initials}
-                </div>
-                <span>Profil</span>
-              </Link>
-            ) : (
-              <Link
-                href="/giris"
-                className="flex-shrink-0 flex flex-col items-center justify-center w-[68px] h-[68px] rounded-2xl text-[10px] font-bold text-[#ff3131] border border-[#ff3131]/30 bg-[#ff3131]/10 transition-all duration-300"
-              >
-                <span className="text-xl mb-0.5">🔑</span>
-                <span>Giriş</span>
-              </Link>
-            )
-          )}
         </div>
       </nav>
 
