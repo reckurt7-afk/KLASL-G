@@ -2,6 +2,7 @@ import ServiceWorkerRegister from "./components/ServiceWorkerRegister";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GolSesiDinleyici from "./components/GolSesiDinleyici";
+import ReklamBandi from "./components/ReklamBandi";
 import { AuthProvider } from "@/lib/AuthContext";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <ReklamBandi />
         </AuthProvider>
       </body>
     </html>

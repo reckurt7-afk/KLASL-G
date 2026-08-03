@@ -61,7 +61,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#070707]/95 backdrop-blur-xl border-t border-[#ff3131]/20 pb-safe z-[9999] shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
+      <nav className="lg:hidden fixed bottom-[44px] left-0 right-0 bg-[#070707]/95 backdrop-blur-xl border-t border-[#ff3131]/20 pb-safe z-[9999] shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
         <div className="flex overflow-x-auto gap-1 p-2 hide-scrollbar">
           {links.map((link) => {
             const isActive = pathname === link.href;
