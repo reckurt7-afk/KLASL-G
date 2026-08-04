@@ -4,27 +4,41 @@ export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { createClient } from "@supabase/supabase-js";
-console.log(
-  "PUBLIC:",
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.slice(0, 10)
-);
 
-console.log(
-  "PRIVATE:",
-  process.env.VAPID_PRIVATE_KEY?.slice(0, 10)
-);
 export async function POST(req: Request) {
-  webpush.setVapidDetails(
-    "mailto:recepkurt7@gmail.com",
-    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-    process.env.VAPID_PRIVATE_KEY!
-  );
   try {
     const { baslik, mesaj } = await req.json();
 
+    if (!baslik || !mesaj) {
+      return NextResponse.json({ success: false, error: "baslik ve mesaj gerekli" }, { status: 400 });
+    }
+
+    // VAPID key kontrolü
+    const vapidPublic = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+    const vapidPrivate = process.env.VAPID_PRIVATE_KEY;
+
+    if (!vapidPublic || !vapidPrivate) {
+      console.warn("VAPID keys eksik - bildirim gönderilemiyor");
+      return NextResponse.json({
+        success: true,
+        gonderilen: 0,
+        hatali: 0,
+        uyari: "VAPID keys ayarlı değil",
+      });
+    }
+
+    // Supabase service role key kontrolü
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    webpush.setVapidDetails(
+      "mailto:recepkurt7@gmail.com",
+      vapidPublic,
+      vapidPrivate
+    );
+
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
+      serviceKey!
     );
 
     const { data: aboneler, error } = await supabase
@@ -32,20 +46,23 @@ export async function POST(req: Request) {
       .select("*");
 
     if (error) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: error.message,
-        },
-        { status: 500 }
-      );
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
+
+    if (!aboneler || aboneler.length === 0) {
+      return NextResponse.json({
+        success: true,
+        gonderilen: 0,
+        hatali: 0,
+        toplam: 0,
+        uyari: "Kayıtlı abone yok",
+      });
     }
 
     let gonderilen = 0;
     let hatali = 0;
-    let hataDetayi: any = null;
 
-    for (const abone of aboneler || []) {
+    for (const abone of aboneler) {
       try {
         await webpush.sendNotification(
           {
@@ -60,20 +77,12 @@ export async function POST(req: Request) {
             body: mesaj,
           })
         );
-
         gonderilen++;
-
       } catch (err: any) {
         hatali++;
+        console.log("Bildirim hatası:", err?.statusCode, err?.message);
 
-        hataDetayi = {
-          statusCode: err?.statusCode,
-          message: err?.message,
-          body: err?.body,
-        };
-
-        console.log("Bildirim hatası:", hataDetayi);
-
+        // Geçersiz aboneleri sil
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
@@ -85,18 +94,15 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      toplam: aboneler?.length || 0,
+      toplam: aboneler.length,
       gonderilen,
       hatali,
-      hataDetayi,
     });
 
   } catch (err: any) {
+    console.error("send-notification hatası:", err);
     return NextResponse.json(
-      {
-        success: false,
-        error: err?.message,
-      },
+      { success: false, error: err?.message || "Bilinmeyen hata" },
       { status: 500 }
     );
   }
