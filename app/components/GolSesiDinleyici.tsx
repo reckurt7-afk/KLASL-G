@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 // Maçkolik tarzı gol sesi
@@ -75,12 +75,15 @@ function golSesiCal() {
 }
 
 export default function GolSesiDinleyici() {
-  // Önceki skorları sakla - gol gelince fark et
   const skorlarRef = useRef<Record<number, { ev: number; dep: number }>>({});
   const hazirRef = useRef(false);
+  
+  // Şov Ekranı State'leri
+  const [golVar, setGolVar] = useState(false);
+  const [golAtanIsim, setGolAtanIsim] = useState("");
+  const [atanTakim, setAtanTakim] = useState("");
 
   useEffect(() => {
-    // İlk yüklemede mevcut skorları kaydet (ses çalmadan)
     async function ilkYukle() {
       const { data } = await supabase
         .from("maclar")
@@ -96,7 +99,6 @@ export default function GolSesiDinleyici() {
     }
     ilkYukle();
 
-    // Realtime ile maçlar tablosunu dinle
     const kanal = supabase
       .channel("gol-sesi-kanal")
       .on(
@@ -112,13 +114,23 @@ export default function GolSesiDinleyici() {
           const eski = skorlarRef.current[yeni.id];
 
           if (eski) {
-            // Skor artmış mı? → GOL!
             if (yeni.ev_skor > eski.ev || yeni.dep_skor > eski.dep) {
+              const takim = yeni.ev_skor > eski.ev ? yeni.ev_sahibi : yeni.deplasman;
+              const golKral = yeni.durum?.includes("|") ? yeni.durum.split("|")[1] : "BİLİNMEYEN KAHRAMAN";
+              
+              // Animasyonu ve Sesi Başlat
               golSesiCal();
+              setAtanTakim(takim);
+              setGolAtanIsim(golKral || "BİLİNMEYEN KAHRAMAN");
+              setGolVar(true);
+
+              // 7 Saniye sonra animasyonu kapat
+              setTimeout(() => {
+                setGolVar(false);
+              }, 7000);
             }
           }
 
-          // Yeni skoru kaydet
           skorlarRef.current[yeni.id] = {
             ev: yeni.ev_skor,
             dep: yeni.dep_skor,
@@ -132,5 +144,50 @@ export default function GolSesiDinleyici() {
     };
   }, []);
 
-  return null; // Görsel bir şey yok, sadece dinleyici
+  if (!golVar) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden pointer-events-none">
+      {/* Kırmızı Flaşör Arka Plan */}
+      <div className="absolute inset-0 bg-red-600/90 animate-gol-flash backdrop-blur-sm" />
+      
+      {/* Dev GOOOOL Yazısı */}
+      <div className="relative z-10 flex flex-col items-center animate-gol-zoom">
+        <h1 className="text-[15vw] sm:text-[180px] font-black italic text-white leading-none tracking-tighter drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] m-0">
+          GO<span className="text-yellow-400">O</span>O<span className="text-yellow-400">O</span>L!
+        </h1>
+        
+        {/* Atan Takım */}
+        <div className="text-2xl sm:text-4xl font-bold text-white/90 tracking-[0.2em] uppercase mt-4 animate-bounce">
+          {atanTakim}
+        </div>
+
+        {/* Golü Atan Kişi */}
+        <div className="mt-6 px-10 py-4 bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-600 rounded-full shadow-[0_0_50px_rgba(234,179,8,0.5)] border-2 border-white/50 animate-pulse">
+          <span className="text-3xl sm:text-5xl font-black text-black tracking-tight">
+            ⚽ {golAtanIsim}
+          </span>
+        </div>
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes gol-flash {
+          0%, 100% { opacity: 0.9; }
+          50% { opacity: 0.5; background-color: #000; }
+        }
+        .animate-gol-flash {
+          animation: gol-flash 0.5s infinite;
+        }
+        @keyframes gol-zoom {
+          0% { transform: scale(0.1) rotate(-10deg); opacity: 0; }
+          40% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+          60% { transform: scale(0.9) rotate(-3deg); }
+          100% { transform: scale(1) rotate(0deg); }
+        }
+        .animate-gol-zoom {
+          animation: gol-zoom 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+      `}} />
+    </div>
+  );
 }

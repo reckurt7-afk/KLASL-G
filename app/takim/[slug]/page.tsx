@@ -48,21 +48,21 @@ export default function TakimDetayPage() {
     async function getir() {
       if (!takim) return;
       
-      // 1) Admin tarafından eklenen oyuncular
-      const oyuncularData = await publicFetch(
-        "oyuncular",
-        `select=*&takim=eq.${encodeURIComponent(takim.ad)}&order=forma_no.asc`
+      // 1) All players from DB filtered by team name
+      const allPlayers = await publicFetch("oyuncular", "select=*");
+      const teamPlayers = allPlayers.filter(
+        (o) => o.takim && o.takim.toUpperCase().trim() === takim.ad.toUpperCase().trim()
       );
       
       // 2) Siteye kayıt olup bu takımı seçen üyeler  
-      const profillerData = await publicFetch(
-        "profiller",
-        `select=id,ad_soyad,avatar_url,takim&takim=eq.${encodeURIComponent(takim.ad)}`
+      const profillerData = await publicFetch("profiller", "select=id,ad_soyad,avatar_url,takim");
+      const teamProfiles = profillerData.filter(
+        (p) => p.takim && p.takim.toUpperCase().trim() === takim.ad.toUpperCase().trim()
       );
 
-      const merged: Oyuncu[] = [...oyuncularData];
+      const merged: Oyuncu[] = [...teamPlayers];
       
-      profillerData.forEach((p: any) => {
+      teamProfiles.forEach((p: any) => {
         const profName = p.ad_soyad ? p.ad_soyad.toLowerCase().trim() : "";
         if (profName && !merged.find(m => m.ad_soyad && m.ad_soyad.toLowerCase().trim() === profName)) {
           merged.push({

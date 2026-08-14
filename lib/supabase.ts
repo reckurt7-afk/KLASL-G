@@ -1,21 +1,24 @@
 import { createBrowserClient } from "@supabase/ssr";
 
-// Giriş/çıkış ve profil işlemleri için (auth gerektirir)
-export const supabase = createBrowserClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const SUPA_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "https://tebmmmmbwsholknougiw.supabase.co";
 
-const SUPA_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPA_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const SUPA_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlYm1tbW1id3Nob2xrbm91Z2l3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5NzE1NjIsImV4cCI6MjA5OTU0NzU2Mn0.m9Op9xMoxPndfl3IdZculYHPVF7hRUHwEpb1mTywKNw";
+
+// Giriş/çıkış ve profil işlemleri için (auth gerektirir)
+export const supabase = createBrowserClient(SUPA_URL, SUPA_KEY);
 
 // RLS'yi bypass eden direkt fetch - herkese açık tablolar için
 export async function publicFetch(
   tablo: string,
-  params: string = "*"
+  params: string = "select=*"
 ): Promise<any[]> {
   try {
-    const url = `${SUPA_URL}/rest/v1/${tablo}?${params}`;
+    const formattedParams = params.includes("=") ? params : `select=${params}`;
+    const url = `${SUPA_URL}/rest/v1/${tablo}?${formattedParams}`;
     const res = await fetch(url, {
       headers: {
         apikey: SUPA_KEY,

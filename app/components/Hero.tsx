@@ -6,7 +6,13 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function Hero() {
+export default function Hero({
+  activeTab = "puanDurumu",
+  onSelectTab,
+}: {
+  activeTab?: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi";
+  onSelectTab?: (tab: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi") => void;
+}) {
   const [mac, setMac] = useState<any>(null);
 
   useEffect(() => {
@@ -45,11 +51,11 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen bg-[url('/images/stadium.png')] bg-cover bg-center bg-no-repeat overflow-hidden flex justify-center items-center px-4 pt-32 pb-12">
+    <section className="relative min-h-screen bg-[url('/images/stadium.png')] bg-cover bg-center bg-no-repeat overflow-hidden flex justify-center items-center px-4 pt-28 pb-12">
       {/* KARARTMA GÖLGESİ */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070707]/60 via-[#070707]/80 to-[#070707]/95" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070707]/70 via-[#070707]/85 to-[#070707]/98" />
 
-      <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-8 xl:pt-0">
+      <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-4 xl:pt-0">
         
         {/* Sol Sponsor */}
         <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-2 xl:order-1">
@@ -58,39 +64,94 @@ export default function Hero() {
         </div>
 
         {/* ANA İÇERİK (MERKEZ) */}
-        <div className="w-full max-w-[480px] flex flex-col items-center text-center order-1 xl:order-2">
+        <div className="w-full max-w-[520px] flex flex-col items-center text-center order-1 xl:order-2">
           
           <div className="relative group">
-            <div className="absolute -inset-2 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-3 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
             <Image
               src="/icons/logo.png"
               alt="KLAS LİG"
-              width={160}
-              height={160}
+              width={140}
+              height={140}
               priority
-              className="relative drop-shadow-[0_0_15px_rgba(255,49,49,0.5)] transform transition-transform duration-500 hover:scale-105"
+              className="relative drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] transform transition-transform duration-500 hover:scale-105"
             />
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black mt-6 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+          <h1 className="text-4xl md:text-6xl font-black mt-3 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             KLAS LİG
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_15px_rgba(255,49,49,0.4)]">BURSA</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.5)]">BURSA</span>
           </h1>
 
-          <div className="mt-3 text-[#ff3131] font-black text-xl md:text-2xl tracking-[0.3em] bg-[#ff3131]/10 px-4 py-1 rounded-full border border-[#ff3131]/20">
+          <div className="mt-1.5 font-black text-xs md:text-sm tracking-[0.3em] text-[#ff3131] bg-[#ff3131]/15 px-4 py-1 rounded-full border border-[#ff3131]/40 shadow-[0_0_15px_rgba(255,49,49,0.2)]">
             3. SEZON
           </div>
-          
-          {/* BUGÜNKÜ MAÇ KUTUSU */}
-          <div className="w-full mt-8 bg-[#0f0f0f]/80 border border-[#ff3131]/30 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group hover:border-[#ff3131]/50 transition-all duration-500">
-            {/* Şık Arkaplan Işığı */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#ff3131]/20 rounded-full blur-3xl group-hover:bg-[#ff3131]/30 transition-all duration-500 pointer-events-none"></div>
 
-            <div className="flex items-center justify-center gap-2 text-[#ff3131] font-black text-xl md:text-2xl mb-6">
-              <span className="relative flex h-3 w-3">
+          {/* ÜST TARAFA ALINAN ŞIK ULTRA PROFESYONEL BUTONLAR BARİ */}
+          <div className="w-full mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+            {/* HAFTANIN 7'Sİ BUTONU */}
+            <button
+              onClick={() => onSelectTab && onSelectTab("haftaninYedisi")}
+              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
+                activeTab === "haftaninYedisi"
+                  ? "bg-gradient-to-b from-[#ffd700] via-[#ffb700] to-[#c48d00] text-black shadow-[0_6px_30px_rgba(255,215,0,0.6)] scale-[1.04] border-2 border-yellow-200"
+                  : "bg-[#0c0c0c]/90 text-white border border-[#ffd700]/40 hover:border-[#ffd700] hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:-translate-y-1"
+              }`}
+            >
+              <span className="text-xl">🌟</span>
+              <span className="tracking-tight uppercase font-black">HAFTANIN 7'Sİ</span>
+            </button>
+
+            {/* PUAN DURUMU BUTONU */}
+            <button
+              onClick={() => onSelectTab && onSelectTab("puanDurumu")}
+              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
+                activeTab === "puanDurumu"
+                  ? "bg-gradient-to-b from-[#ff3131] via-[#d61111] to-[#880000] text-white shadow-[0_6px_30px_rgba(255,49,49,0.6)] scale-[1.04] border-2 border-red-400"
+                  : "bg-[#0c0c0c]/90 text-white border border-white/15 hover:border-[#ff3131]/70 hover:shadow-[0_0_20px_rgba(255,49,49,0.3)] hover:-translate-y-1"
+              }`}
+            >
+              <span className="text-xl">🏆</span>
+              <span className="tracking-tight uppercase font-black">PUAN DURUMU</span>
+            </button>
+
+            {/* İSTATİSTİKLER BUTONU */}
+            <button
+              onClick={() => onSelectTab && onSelectTab("istatistikler")}
+              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
+                activeTab === "istatistikler"
+                  ? "bg-gradient-to-b from-[#ff3131] via-[#d61111] to-[#880000] text-white shadow-[0_6px_30px_rgba(255,49,49,0.6)] scale-[1.04] border-2 border-red-400"
+                  : "bg-[#0c0c0c]/90 text-white border border-white/15 hover:border-[#ff3131]/70 hover:shadow-[0_0_20px_rgba(255,49,49,0.3)] hover:-translate-y-1"
+              }`}
+            >
+              <span className="text-xl">⚡</span>
+              <span className="tracking-tight uppercase font-black">İSTATİSTİKLER</span>
+            </button>
+
+            {/* TRANSFER BORSASI BUTONU */}
+            <button
+              onClick={() => onSelectTab && onSelectTab("transferBorsasi")}
+              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
+                activeTab === "transferBorsasi"
+                  ? "bg-gradient-to-b from-[#4ade80] via-[#16a34a] to-[#14532d] text-white shadow-[0_6px_30px_rgba(74,222,128,0.6)] scale-[1.04] border-2 border-[#86efac]"
+                  : "bg-[#0c0c0c]/90 text-white border border-[#4ade80]/40 hover:border-[#4ade80] hover:shadow-[0_0_20px_rgba(74,222,128,0.3)] hover:-translate-y-1"
+              }`}
+            >
+              <span className="text-xl">💸</span>
+              <span className="tracking-tight uppercase font-black">Borsa</span>
+            </button>
+          </div>
+
+          {/* ULTRA ŞIK CANLI MAÇ KUTUSU */}
+          <div className="w-full mt-6 bg-gradient-to-b from-[#0e0e0e]/95 via-[#090909]/90 to-[#050505]/95 border-2 border-[#ff3131]/40 hover:border-[#ff3131]/70 rounded-3xl p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden group transition-all duration-500">
+            {/* Şık Arkaplan Işığı */}
+            <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#ff3131]/20 rounded-full blur-3xl group-hover:bg-[#ff3131]/35 transition-all duration-500 pointer-events-none"></div>
+
+            <div className="flex items-center justify-center gap-2.5 text-[#ff3131] font-black text-xl md:text-2xl mb-6 tracking-wider">
+              <span className="relative flex h-3.5 w-3.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#ff3131]"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#ff3131]"></span>
               </span>
               CANLI MAÇ
             </div>
@@ -98,37 +159,37 @@ export default function Hero() {
             <div className="text-white text-2xl md:text-3xl font-black leading-snug">
               {mac ? (
                 <div className="flex flex-col items-center gap-2">
-                  <div className="w-full truncate px-2 text-gray-200">{mac.ev_sahibi}</div>
+                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.ev_sahibi}</div>
 
-                  <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] my-4">
+                  <div className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ff3131] via-[#e61c1c] to-[#a11212] drop-shadow-[0_0_25px_rgba(255,49,49,0.7)] my-4 tracking-tighter">
                     {mac.ev_skor} - {mac.dep_skor}
                   </div>
 
-                  <div className="w-full truncate px-2 text-gray-200">{mac.deplasman}</div>
+                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.deplasman}</div>
                 </div>
               ) : (
-                <div className="text-gray-500 text-lg md:text-xl font-bold py-6">Şu an oynanan maç bulunmuyor.</div>
+                <div className="text-gray-400 text-lg md:text-xl font-bold py-6">Şu an oynanan canlı maç bulunmuyor.</div>
               )}
             </div>
 
-            <div className="mt-6 text-gray-400 text-sm md:text-base font-bold bg-black/40 rounded-2xl p-4 border border-white/5">
+            <div className="mt-6 text-gray-300 text-sm md:text-base font-bold bg-black/60 rounded-2xl p-4 border border-white/10 shadow-inner">
               {mac ? (
                 <div className="flex justify-around items-center">
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-lg">⏱️</span>
-                    <span>{mac.dakika}'</span>
+                    <span className="text-[#ff3131] text-xl">⏱️</span>
+                    <span className="font-black text-white">{mac.dakika}'</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-lg">📍</span>
-                    <span>{mac.saha || "Saha"}</span>
+                    <span className="text-[#ff3131] text-xl">📍</span>
+                    <span className="font-black text-white">{mac.saha || "Saha"}</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-lg">🧑‍⚖️</span>
-                    <span>{mac.hakem || "Hakem"}</span>
+                    <span className="text-[#ff3131] text-xl">🧑‍⚖️</span>
+                    <span className="font-black text-white">{mac.hakem || "Hakem"}</span>
                   </div>
                 </div>
               ) : (
-                <div className="text-center opacity-50">Sıradaki maçlar için fikstürü kontrol edin.</div>
+                <div className="text-center text-gray-400 font-bold">Sıradaki lig maçları için fikstürü takip edin.</div>
               )}
             </div>
 
@@ -136,15 +197,20 @@ export default function Hero() {
               href={mac?.youtube_link || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-block mt-6 w-full py-4 rounded-xl text-center font-black text-lg transition-all duration-300 ${mac?.youtube_link ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white shadow-[0_5px_15px_rgba(255,49,49,0.3)] hover:shadow-[0_5px_25px_rgba(255,49,49,0.6)] hover:-translate-y-1" : "bg-gray-800 text-gray-500 cursor-not-allowed border border-gray-700"}`}
+              className={`inline-block mt-6 w-full py-4 rounded-2xl text-center font-black text-lg transition-all duration-300 ${
+                mac?.youtube_link
+                  ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white shadow-[0_8px_25px_rgba(255,49,49,0.4)] hover:shadow-[0_10px_35px_rgba(255,49,49,0.7)] hover:scale-[1.02]"
+                  : "bg-gray-900 text-gray-500 cursor-not-allowed border border-gray-800"
+              }`}
             >
               📺 CANLI YAYINI İZLE
             </a>
           </div>
           
-          <Link href="/oyuncular" className="w-full mt-8 block">
-            <button className="w-full h-14 rounded-xl bg-[#111] border border-white/10 hover:border-[#ff3131]/50 text-white text-lg font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(255,49,49,0.2)] hover:bg-[#1a1a1a]">
-              👥 OYUNCU İSTATİSTİKLERİ
+          {/* OYUNCU İSTATİSTİKLERİ BUTONU */}
+          <Link href="/oyunculari" className="w-full mt-6 block">
+            <button className="w-full h-14 rounded-2xl bg-[#0c0c0c]/90 border border-white/15 hover:border-[#ff3131]/60 text-white text-base md:text-lg font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(255,49,49,0.3)] hover:bg-[#151515] cursor-pointer">
+              👥 OYUNCU İSTATİSTİKLERİ VE KARTLARI
             </button>
           </Link>
 
@@ -153,7 +219,8 @@ export default function Hero() {
             <div className="w-1/2"><NotificationButton /></div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 w-full mt-8">
+          {/* STATS COUNTER GRID BOXES */}
+          <div className="grid grid-cols-2 gap-4 w-full mt-6">
             {[
               { icon: "👥", value: "8", text: "TAKIM" },
               { icon: "⚽", value: "28", text: "MAÇ" },
@@ -162,11 +229,11 @@ export default function Hero() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-[#0f0f0f]/60 border border-white/5 hover:border-[#ff3131]/30 rounded-2xl p-5 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#1a1a1a]"
+                className="bg-[#0b0b0b]/80 border border-white/10 hover:border-[#ff3131]/50 rounded-2xl p-5 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#121212] shadow-lg"
               >
-                <div className="text-3xl mb-2 drop-shadow-md">{item.icon}</div>
-                <div className="text-[#ff3131] text-3xl font-black drop-shadow-[0_0_10px_rgba(255,49,49,0.3)]">{item.value}</div>
-                <div className="text-gray-400 text-xs font-bold mt-1 tracking-widest">{item.text}</div>
+                <div className="text-3xl mb-1.5 drop-shadow-md">{item.icon}</div>
+                <div className="text-[#ff3131] text-3xl font-black drop-shadow-[0_0_12px_rgba(255,49,49,0.4)]">{item.value}</div>
+                <div className="text-gray-400 text-[11px] font-extrabold mt-1 tracking-widest uppercase">{item.text}</div>
               </div>
             ))}
           </div>
@@ -184,8 +251,8 @@ export default function Hero() {
 
 function SponsorBox({ side }: { side: "left" | "right" }) {
   return (
-    <div className="bg-[#111]/90 border border-[#ff3131]/20 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-xl group hover:border-[#ff3131]/50 transition-all duration-500">
-      <div className="bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white py-2 px-4 font-black text-xs tracking-widest">
+    <div className="bg-[#0c0c0c]/90 border border-[#ff3131]/30 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl group hover:border-[#ff3131]/60 transition-all duration-500">
+      <div className="bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white py-2 px-4 font-black text-xs tracking-widest uppercase">
         REKLAM ALANI
       </div>
       
@@ -199,11 +266,11 @@ function SponsorBox({ side }: { side: "left" | "right" }) {
         <h3 className="m-0 mb-2 text-xl font-black text-white group-hover:text-[#ff3131] transition-colors">
           BURAYA REKLAM VERİN
         </h3>
-        <p className="m-0 mb-6 text-gray-400 text-xs md:text-sm leading-relaxed">
+        <p className="m-0 mb-6 text-gray-400 text-xs md:text-sm leading-relaxed font-semibold">
           Siz de markanızı binlerce sporsevere ulaştırın.
         </p>
 
-        <a href="https://wa.me/905010120016" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-black text-sm hover:bg-[#ff3131] hover:text-white hover:shadow-[0_5px_15px_rgba(255,49,49,0.4)] transition-all duration-300">
+        <a href="https://wa.me/905010120016" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-black text-sm hover:bg-[#ff3131] hover:text-white hover:shadow-[0_5px_20px_rgba(255,49,49,0.5)] transition-all duration-300">
           <span className="text-lg">📞</span> 
           <span>0501 012 0016</span>
         </a>
@@ -214,13 +281,13 @@ function SponsorBox({ side }: { side: "left" | "right" }) {
 
 function GoktugSponsorBox() {
   return (
-    <div className="bg-[#0b2b3a] border border-[#00d0ff]/40 rounded-2xl overflow-hidden flex flex-col shadow-[0_10px_30px_rgba(0,208,255,0.2)] group hover:border-[#00d0ff]/80 transition-all duration-500 relative h-full">
-      <div className="bg-gradient-to-r from-[#00d0ff] to-[#0088cc] text-white py-2 px-4 font-black text-[10px] tracking-widest text-center relative z-10">
+    <div className="bg-[#081e29] border border-[#00d0ff]/50 rounded-2xl overflow-hidden flex flex-col shadow-[0_10px_30px_rgba(0,208,255,0.25)] group hover:border-[#00d0ff]/90 transition-all duration-500 relative h-full">
+      <div className="bg-gradient-to-r from-[#00d0ff] to-[#0088cc] text-white py-2 px-4 font-black text-[10px] tracking-widest text-center relative z-10 uppercase">
         👑 ANA SPONSOR
       </div>
       
       <div className="p-4 flex flex-col items-center justify-between flex-1">
-        <div className="relative w-full aspect-[2/1] md:aspect-[21/9] rounded-lg overflow-hidden border border-white/5 group-hover:border-[#00d0ff]/40 transition-colors shadow-lg mb-4">
+        <div className="relative w-full aspect-[2/1] md:aspect-[21/9] rounded-lg overflow-hidden border border-white/10 group-hover:border-[#00d0ff]/50 transition-colors shadow-lg mb-4">
           <img 
             src="/logos/goktug.jpg" 
             alt="Göktuğ Bilişim" 
@@ -228,7 +295,7 @@ function GoktugSponsorBox() {
           />
         </div>
 
-        <a href="https://wa.me/905366660201" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#00d0ff]/10 border border-[#00d0ff]/50 text-[#00d0ff] py-2.5 rounded-xl font-black text-xs hover:bg-[#00d0ff] hover:text-black hover:shadow-[0_0_15px_rgba(0,208,255,0.6)] transition-all duration-300 mt-auto">
+        <a href="https://wa.me/905366660201" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#00d0ff]/10 border border-[#00d0ff]/60 text-[#00d0ff] py-2.5 rounded-xl font-black text-xs hover:bg-[#00d0ff] hover:text-black hover:shadow-[0_0_20px_rgba(0,208,255,0.7)] transition-all duration-300 mt-auto">
           <span className="text-sm">📞</span>
           <span>0536 666 02 01</span>
         </a>

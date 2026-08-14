@@ -1,11 +1,14 @@
 import Link from "next/link";
 
 const kartlar = [
+  { icon: "🌟", baslik: "Haftanın 7'si Seç", link: "/admin/haftanin-yedisi" },
+  { icon: "⚡", baslik: "Gol & Asist Krallığı", link: "/admin/istatistikler" },
   { icon: "🔴", baslik: "Canlı Maç", link: "/admin/canli-mac" },
   { icon: "⚽", baslik: "Maç Sonucu Gir", link: "/admin/mac-sonucu" },
   { icon: "🏆", baslik: "Puan Durumu", link: "/admin/puan-durumu" },
   { icon: "📅", baslik: "Fikstürü Düzenle", link: "/admin/fikstur" },
   { icon: "👥", baslik: "Takımları Yönet", link: "/admin/takimlar" },
+  { icon: "🏃‍♂️", baslik: "Takıma Oyuncu Ekle", link: "/admin/oyuncu-ekle" },
   { icon: "👤", baslik: "Oyuncuları Yönet", link: "/admin/oyuncular" },
   { icon: "📨", baslik: "Oyuncu Başvuruları", link: "/admin/basvurular" },
   { icon: "📸", baslik: "Fotoğraf Galerisi", link: "/admin/galeri" },
@@ -16,6 +19,7 @@ const kartlar = [
   { icon: "⚙️", baslik: "Ayarlar", link: "/admin/ayarlar" },
   { icon: "🎯", baslik: "Skor Tahminleri", link: "/admin/skor-tahminleri" },
   { icon: "📄", baslik: "Maç Esameleri", link: "/admin/esameler" },
+  { icon: "💸", baslik: "Transfer Borsası", link: "/admin/transfer" },
 ];
 
 export default function AdminPage() {

@@ -130,14 +130,28 @@ export default function EsameListesiPage() {
       .select("id, ad_soyad, forma_no, mevki, takim");
       
     if (data) {
-      // JavaScript üzerinde Türkçe karakter duyarlılığına takılmadan eşleştirme yapıyoruz
-      const hedefTakim = secilenTakim.toLocaleUpperCase("tr-TR").trim();
+      const normalizeTakim = (s: string) => {
+        if (!s) return "";
+        return s
+          .toLocaleLowerCase("tr-TR")
+          .replace(/ç/g, "c")
+          .replace(/ğ/g, "g")
+          .replace(/ı/g, "i")
+          .replace(/ö/g, "o")
+          .replace(/ş/g, "s")
+          .replace(/ü/g, "u")
+          .replace(/[^a-z0-9]/g, "");
+      };
+
+      const hedefTakim = normalizeTakim(secilenTakim);
+      // İlk kelimeyi alıp normalize ediyoruz (örn: Krokodilla FK -> krokodilla)
+      const hedefIlkKelime = normalizeTakim(secilenTakim.split(" ")[0]);
       
       const takimOyunculari = data.filter((o) => {
         if (!o.takim) return false;
-        const dbTakim = o.takim.toLocaleUpperCase("tr-TR").trim();
-        // Takım isimleri tam eşleşiyorsa veya ilk kelimeleri eşleşiyorsa al
-        return dbTakim === hedefTakim || dbTakim.includes(hedefTakim.split(' ')[0]);
+        const dbTakim = normalizeTakim(o.takim);
+        
+        return dbTakim === hedefTakim || dbTakim.includes(hedefIlkKelime);
       });
       
       setOyuncular(takimOyunculari);
