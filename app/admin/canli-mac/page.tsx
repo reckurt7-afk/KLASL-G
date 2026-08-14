@@ -23,6 +23,29 @@ export default function CanliMacPage() {
   const [sureCalisiyor, setSureCalisiyor] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Olay Ekleme State'leri
+  const [olayTipi, setOlayTipi] = useState("gol");
+  const [olayOyuncu, setOlayOyuncu] = useState("");
+  const [olayTakimYonu, setOlayTakimYonu] = useState("ev");
+
+  // Olay Ekleme Fonksiyonu
+  async function olayEkle() {
+    if (!seciliMac || !olayOyuncu) return;
+    const { error } = await supabase.from("mac_olaylari").insert({
+      mac_id: seciliMac.id,
+      dakika: seciliMac.dakika,
+      tip: olayTipi,
+      oyuncu: olayOyuncu,
+      takim_yonu: olayTakimYonu
+    });
+    if (error) {
+      alert("Olay eklenemedi: " + error.message);
+    } else {
+      alert("Olay başarıyla eklendi!");
+      setOlayOyuncu("");
+    }
+  }
+
   // 🔊 GOL SESİ - Maçkolik tarzı: kalabalık + korna + yükselen tiz + GOOOL anons
   function golSesiCal() {
     try {
@@ -496,6 +519,36 @@ export default function CanliMacPage() {
                   boxSizing: "border-box",
                 }}
               />
+            </div>
+            {/* OLAY EKLEME (ZAMAN TÜNELİ) */}
+            <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(255,49,49,0.3)" }}>
+              <h3 style={{ color: "#ff3131", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>⚡ ZAMAN TÜNELİNE OLAY EKLE</h3>
+              
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
+                <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
+                  <option value="ev">Ev Sahibi ({seciliMac.ev_sahibi})</option>
+                  <option value="deplasman">Deplasman ({seciliMac.deplasman})</option>
+                </select>
+                
+                <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
+                  <option value="gol">⚽ Gol</option>
+                  <option value="sari_kart">🟨 Sarı Kart</option>
+                  <option value="kirmizi_kart">🟥 Kırmızı Kart</option>
+                  <option value="degisiklik">🔄 Oyuncu Değişikliği</option>
+                </select>
+              </div>
+              
+              <div style={{ display: "flex", gap: 10 }}>
+                <input 
+                  value={olayOyuncu} 
+                  onChange={e => setOlayOyuncu(e.target.value)} 
+                  placeholder="Oyuncu adı..."
+                  style={{ flex: 1, padding: "10px 15px", background: "#222", color: "#fff", borderRadius: 8, border: "none" }}
+                />
+                <button onClick={olayEkle} style={{ padding: "10px 20px", background: "#ff3131", color: "#fff", borderRadius: 8, fontWeight: "bold", border: "none", cursor: "pointer" }}>
+                  Ekle ({seciliMac.dakika}')
+                </button>
+              </div>
             </div>
 
             {/* KONTROL BUTONLARI */}

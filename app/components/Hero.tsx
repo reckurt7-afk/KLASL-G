@@ -14,6 +14,45 @@ export default function Hero({
   onSelectTab?: (tab: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi") => void;
 }) {
   const [mac, setMac] = useState<any>(null);
+  const [olaylar, setOlaylar] = useState<any[]>([]);
+  const [golAnimasyon, setGolAnimasyon] = useState(false);
+  const [sonGolOlay, setSonGolOlay] = useState<any>(null);
+
+  // 🔊 Sentezleyici Ses (Maçkolik tarzı korna ve anons)
+  function golSesiCal() {
+    try {
+      const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+
+      // Korna sesi
+      const korna = ctx.createOscillator();
+      const kornaGain = ctx.createGain();
+      korna.type = "sawtooth";
+      korna.frequency.setValueAtTime(300, now);
+      korna.frequency.linearRampToValueAtTime(600, now + 0.5);
+      kornaGain.gain.setValueAtTime(0, now);
+      kornaGain.gain.linearRampToValueAtTime(0.3, now + 0.1);
+      kornaGain.gain.linearRampToValueAtTime(0, now + 1.2);
+      korna.connect(kornaGain);
+      kornaGain.connect(ctx.destination);
+      korna.start(now);
+      korna.stop(now + 1.2);
+
+      // Anons
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance("GOOOOOL!");
+        utterance.lang = "tr-TR";
+        utterance.rate = 0.6;
+        utterance.pitch = 1.2;
+        setTimeout(() => window.speechSynthesis.speak(utterance), 500);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   useEffect(() => {
     canliMacGetir();
@@ -33,8 +72,22 @@ export default function Hero({
       )
       .subscribe();
 
+    const channelOlay = supabase
+      .channel("mac-olaylari")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "mac_olaylari" }, (payload) => {
+        canliMacGetir();
+        if (payload.new.tip === "gol") {
+          setSonGolOlay(payload.new);
+          setGolAnimasyon(true);
+          golSesiCal();
+          setTimeout(() => setGolAnimasyon(false), 6000);
+        }
+      })
+      .subscribe();
+
     return () => {
       supabase.removeChannel(channel);
+      supabase.removeChannel(channelOlay);
     };
   }, []);
 
@@ -47,6 +100,15 @@ export default function Hero({
 
     if (data) {
       setMac(data);
+      const { data: olayData } = await supabase
+        .from("mac_olaylari")
+        .select("*")
+        .eq("mac_id", data.id)
+        .order("dakika", { ascending: false });
+      setOlaylar(olayData || []);
+    } else {
+      setMac(null);
+      setOlaylar([]);
     }
   }
 
@@ -205,7 +267,51 @@ export default function Hero({
             >
               📺 CANLI YAYINI İZLE
             </a>
+
+            {/* ZAMAN TÜNELİ */}
+            {mac && olaylar.length > 0 && (
+              <div className="mt-6 text-left">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[#ff3131]">⚡</span>
+                  <span className="text-white font-black text-sm tracking-widest">MAÇ OLAYLARI</span>
+                </div>
+                <div className="max-h-[160px] overflow-y-auto pr-2 flex flex-col gap-2 custom-scrollbar">
+                  {olaylar.map((olay, i) => (
+                    <div key={i} className="flex items-center gap-3 bg-black/40 border border-white/5 p-2.5 rounded-xl">
+                      <div className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#ff3131]/10 rounded-lg text-sm font-black text-[#ff3131]">
+                        {olay.dakika}'
+                      </div>
+                      <div className="text-xl">
+                        {olay.tip === "gol" ? "⚽" : olay.tip === "sari_kart" ? "🟨" : olay.tip === "kirmizi_kart" ? "🟥" : "🔄"}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-white font-bold text-sm truncate">{olay.oyuncu}</div>
+                        <div className="text-gray-400 text-xs truncate">
+                          {olay.takim_yonu === "ev" ? mac.ev_sahibi : mac.deplasman}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+          
+          {/* GOL ANİMASYONU OVERLAY */}
+          {golAnimasyon && sonGolOlay && (
+            <div className="fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
+              <div className="relative text-center scale-150 animate-bounce">
+                <div className="absolute -inset-10 bg-gradient-to-r from-[#ff3131] to-[#ff9000] blur-[100px] opacity-60"></div>
+                <h1 className="text-7xl md:text-9xl font-black text-white italic drop-shadow-[0_0_40px_rgba(255,49,49,1)] transform -rotate-6 tracking-tighter" style={{ textShadow: "4px 4px 0 #000, 8px 8px 0 #ff3131" }}>
+                  GOOOOOL!
+                </h1>
+                <div className="text-2xl md:text-4xl text-yellow-300 font-black mt-4 drop-shadow-[0_0_10px_rgba(0,0,0,1)] uppercase">
+                  ⚽ {sonGolOlay.oyuncu} ({sonGolOlay.dakika}')
+                </div>
+              </div>
+            </div>
+          )}
+
           
           {/* OYUNCU İSTATİSTİKLERİ BUTONU */}
           <Link href="/oyunculari" className="w-full mt-6 block">
