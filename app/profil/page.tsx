@@ -8,7 +8,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 const TEAM_LOGOS: Record<string, string> = {
-  "ALAÇAM SPOR": "/logos/alacam-spor.png",
+  "PS 5": "/logos/ps5.jpg",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
   "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",

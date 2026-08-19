@@ -15,7 +15,7 @@ type Oyuncu = {
 };
 
 const TEAM_LOGOS: Record<string, string> = {
-  "ALAÇAM SPOR": "/logos/alacam-spor.png",
+  "PS 5": "/logos/ps5.jpg",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
   "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",
@@ -62,7 +62,7 @@ export default function HaftaninYedisi() {
     { id: 4, ad_soyad: "Emre Belözoğlu", takim: "DÜNDAR KÖYÜ", mevki: "OS", genel_puan: 91 },
     { id: 5, ad_soyad: "Alex de Souza", takim: "GRAVYER FC", mevki: "OS", genel_puan: 94 },
     { id: 6, ad_soyad: "Gökdeniz Karadeniz", takim: "DİNAMO NALBANTOĞLU", mevki: "OS", genel_puan: 88 },
-    { id: 7, ad_soyad: "Burak Yılmaz", takim: "ALAÇAM SPOR", mevki: "FOR", genel_puan: 92 },
+    { id: 7, ad_soyad: "Burak Yılmaz", takim: "PS 5", mevki: "FOR", genel_puan: 92 },
   ];
 
   const displayKadro = kadro.length >= 7 ? kadro : defaultPlayers;

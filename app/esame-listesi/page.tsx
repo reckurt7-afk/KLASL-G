@@ -13,8 +13,7 @@ const logolar: Record<string, string> = {
   "Gravyer FC": "/logos/gravyer-fc.png",
   "Yediyol Black FC": "/logos/yediyol-black-fc.png",
   "Dündar Köyü": "/logos/dundar-koyu.png",
-  "Alaçam Spor": "/logos/alacam-spor.png",
-  "ALAÇAM SPOR": "/logos/alacam-spor.png",
+  "PS 5": "/logos/ps5.jpg",
 };
 
 const haftalar = [
@@ -30,7 +29,7 @@ const haftalar = [
     maclar: [
       ["Dinamo Nalbantoğlu", "BİSKREM FC"],
       ["Krokodilla FK", "Gravyer FC"],
-      ["Yeşil Bursa FC", "Alaçam Spor"],
+      ["Yeşil Bursa FC", "PS 5"],
       ["Dündar Köyü", "Yediyol Black FC"],
     ],
   },
@@ -38,7 +37,7 @@ const haftalar = [
     hafta: "3. HAFTA",
     maclar: [
       ["Dinamo Nalbantoğlu", "Gravyer FC"],
-      ["BİSKREM FC", "Alaçam Spor"],
+      ["BİSKREM FC", "PS 5"],
       ["Krokodilla FK", "Yediyol Black FC"],
       ["Yeşil Bursa FC", "Dündar Köyü"],
     ],
@@ -46,7 +45,7 @@ const haftalar = [
   {
     hafta: "4. HAFTA",
     maclar: [
-      ["Dinamo Nalbantoğlu", "Alaçam Spor"],
+      ["Dinamo Nalbantoğlu", "PS 5"],
       ["Gravyer FC", "Yediyol Black FC"],
       ["BİSKREM FC", "Dündar Köyü"],
       ["Krokodilla FK", "Yeşil Bursa FC"],
@@ -56,7 +55,7 @@ const haftalar = [
     hafta: "5. HAFTA",
     maclar: [
       ["Dinamo Nalbantoğlu", "Yediyol Black FC"],
-      ["Alaçam Spor", "Dündar Köyü"],
+      ["PS 5", "Dündar Köyü"],
       ["Gravyer FC", "Yeşil Bursa FC"],
       ["BİSKREM FC", "Krokodilla FK"],
     ],
@@ -66,7 +65,7 @@ const haftalar = [
     maclar: [
       ["Dinamo Nalbantoğlu", "Dündar Köyü"],
       ["Yediyol Black FC", "Yeşil Bursa FC"],
-      ["Alaçam Spor", "Krokodilla FK"],
+      ["PS 5", "Krokodilla FK"],
       ["Gravyer FC", "BİSKREM FC"],
     ],
   },
@@ -76,7 +75,7 @@ const haftalar = [
       ["Dinamo Nalbantoğlu", "Yeşil Bursa FC"],
       ["Dündar Köyü", "Krokodilla FK"],
       ["Yediyol Black FC", "BİSKREM FC"],
-      ["Alaçam Spor", "Gravyer FC"],
+      ["PS 5", "Gravyer FC"],
     ],
   },
 ];

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const takimlar = [
-  { ad: "ALAÇAM SPOR", logo: "/logos/alacam-spor.png", link: "/takim/alacam-spor" },
+  { ad: "PS 5", logo: "/logos/ps5.jpg", link: "/takim/ps-5" },
   { ad: "KROKODİLLA FC", logo: "/logos/krokodilla-fc.png", link: "/takim/krokodilla-fc" },
   { ad: "DÜNDAR KÖYÜ", logo: "/logos/dundar-koyu.png", link: "/takim/dundar-koyu" },
   { ad: "YEŞİL BURSA FC", logo: "/logos/yesil-bursa-fc.png", link: "/takim/yesil-bursa-fc" },

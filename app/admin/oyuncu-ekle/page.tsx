@@ -5,7 +5,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
 const TAKIMLAR = [
-  "ALAÇAM SPOR",
+  "PS 5",
   "DİNAMO NALBANTOĞLU",
   "KROKODİLLA FC",
   "DÜNDAR KÖYÜ",

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 const takimlar = [
-  "ALAÇAM SPOR",
+  "PS 5",
   "DİNAMO NALBANTOĞLU",
   "KROKODİLLA FC",
   "DÜNDAR KÖYÜ",

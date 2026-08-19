@@ -27,8 +27,8 @@ export default function TakimDetayPage() {
           }}
         >
           <Image
-            src="/logos/alacam-spor.png"
-            alt="Alaçam Spor"
+            src="/logos/ps5.jpg"
+            alt="PS 5"
             width={120}
             height={120}
             style={{ margin: "0 auto" }}
@@ -43,7 +43,7 @@ export default function TakimDetayPage() {
               marginBottom: 8,
             }}
           >
-            ALAÇAM SPOR
+            PS 5
           </h1>
 
           <p
