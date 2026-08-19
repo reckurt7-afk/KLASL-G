@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Hero({
   activeTab = "puanDurumu",
@@ -120,13 +121,23 @@ export default function Hero({
       <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-4 xl:pt-0">
         
         {/* Sol Sponsor */}
-        <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-2 xl:order-1">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-2 xl:order-1"
+        >
           <div className="w-full sm:w-[48%] xl:w-full"><GoktugSponsorBox /></div>
           <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="left" /></div>
-        </div>
+        </motion.div>
 
         {/* ANA İÇERİK (MERKEZ) */}
-        <div className="w-full max-w-[520px] flex flex-col items-center text-center order-1 xl:order-2">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full max-w-[520px] flex flex-col items-center text-center order-1 xl:order-2"
+        >
           
           <div className="relative group">
             <div className="absolute -inset-3 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
@@ -343,13 +354,18 @@ export default function Hero({
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Sağ Sponsor */}
-        <div className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-3">
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex xl:flex-col flex-row flex-wrap justify-center gap-4 xl:gap-6 w-full xl:w-[260px] shrink-0 xl:pt-[20px] order-3"
+        >
           <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="right" /></div>
           <div className="w-full sm:w-[48%] xl:w-full"><SponsorBox side="right" /></div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
