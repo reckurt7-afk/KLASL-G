@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Tv, Trophy, ClipboardList, Shield, Camera, Video, Megaphone, Clock } from "lucide-react";
+import { Home, Tv, Trophy, ClipboardList, Shield, Camera, Video, Megaphone, Clock, User } from "lucide-react";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const links = [
     { href: "/", label: "Ana Sayfa", icon: Home },
@@ -19,6 +21,7 @@ export default function Navbar() {
     { href: "/video-arsivi", label: "Videolar", icon: Video },
     { href: "/duyurular", label: "Duyurular", icon: Megaphone },
     { href: "/mac-saatleri", label: "Saatler", icon: Clock },
+    { href: user ? "/hesabim" : "/giris", label: user ? "Hesabım" : "Giriş", icon: User },
   ];
 
   return (
