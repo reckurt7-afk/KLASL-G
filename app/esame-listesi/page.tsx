@@ -13,7 +13,7 @@ const logolar: Record<string, string> = {
   "Gravyer FC": "/logos/gravyer-fc.png",
   "Yediyol Black FC": "/logos/yediyol-black-fc.png",
   "Dündar Köyü": "/logos/dundar-koyu.png",
-  "PS 5": "/logos/ps5.jpg",
+  "PS 5": "/logos/ps5.png",
 };
 
 const haftalar = [

@@ -18,7 +18,7 @@ type Oyuncu = {
 };
 
 const takimBilgileri: Record<string, { ad: string; logo: string; }> = {
-  "ps-5": { ad: "PS 5", logo: "/logos/ps5.jpg" },
+  "ps-5": { ad: "PS 5", logo: "/logos/ps5.png" },
   "dinamo-nalbantoglu": { ad: "DİNAMO NALBANTOĞLU", logo: "/logos/dinamo-nalbantoglu.png" },
   "krokodilla-fc": { ad: "KROKODİLLA FC", logo: "/logos/krokodilla-fc.png" },
   "dundar-koyu": { ad: "DÜNDAR KÖYÜ", logo: "/logos/dundar-koyu.png" },
@@ -122,7 +122,7 @@ export default function TakimDetayPage() {
 }
 
 const TEAM_LOGOS: Record<string, string> = {
-  "PS 5": "/logos/ps5.jpg",
+  "PS 5": "/logos/ps5.png",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
   "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",

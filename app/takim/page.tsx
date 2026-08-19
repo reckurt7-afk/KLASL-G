@@ -27,7 +27,7 @@ export default function TakimDetayPage() {
           }}
         >
           <Image
-            src="/logos/ps5.jpg"
+            src="/logos/ps5.png"
             alt="PS 5"
             width={120}
             height={120}

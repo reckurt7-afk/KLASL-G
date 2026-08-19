@@ -15,7 +15,7 @@ type Mac = {
 };
 
 const TEAM_LOGOS: Record<string, string> = {
-  "PS 5": "/logos/ps5.jpg",
+  "PS 5": "/logos/ps5.png",
   "Krokodilla FK": "/logos/krokodilla-fc.png",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
   "Dündar Köyü": "/logos/dundar-koyu.png",
