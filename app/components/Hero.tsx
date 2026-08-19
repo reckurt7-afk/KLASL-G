@@ -161,61 +161,6 @@ export default function Hero({
             3. SEZON
           </div>
 
-          {/* ÜST TARAFA ALINAN ŞIK ULTRA PROFESYONEL BUTONLAR BARİ */}
-          <div className="w-full mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
-            {/* HAFTANIN 7'Sİ BUTONU */}
-            <button
-              onClick={() => onSelectTab && onSelectTab("haftaninYedisi")}
-              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
-                activeTab === "haftaninYedisi"
-                  ? "bg-gradient-to-b from-[#ffd700] via-[#ffb700] to-[#c48d00] text-black shadow-[0_6px_30px_rgba(255,215,0,0.6)] scale-[1.04] border-2 border-yellow-200"
-                  : "bg-[#0c0c0c]/90 text-white border border-[#ffd700]/40 hover:border-[#ffd700] hover:shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:-translate-y-1"
-              }`}
-            >
-              <span className="text-xl">🌟</span>
-              <span className="tracking-tight uppercase font-black">HAFTANIN 7'Sİ</span>
-            </button>
-
-            {/* PUAN DURUMU BUTONU */}
-            <button
-              onClick={() => onSelectTab && onSelectTab("puanDurumu")}
-              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
-                activeTab === "puanDurumu"
-                  ? "bg-gradient-to-b from-[#ff3131] via-[#d61111] to-[#880000] text-white shadow-[0_6px_30px_rgba(255,49,49,0.6)] scale-[1.04] border-2 border-red-400"
-                  : "bg-[#0c0c0c]/90 text-white border border-white/15 hover:border-[#ff3131]/70 hover:shadow-[0_0_20px_rgba(255,49,49,0.3)] hover:-translate-y-1"
-              }`}
-            >
-              <span className="text-xl">🏆</span>
-              <span className="tracking-tight uppercase font-black">PUAN DURUMU</span>
-            </button>
-
-            {/* İSTATİSTİKLER BUTONU */}
-            <button
-              onClick={() => onSelectTab && onSelectTab("istatistikler")}
-              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
-                activeTab === "istatistikler"
-                  ? "bg-gradient-to-b from-[#ff3131] via-[#d61111] to-[#880000] text-white shadow-[0_6px_30px_rgba(255,49,49,0.6)] scale-[1.04] border-2 border-red-400"
-                  : "bg-[#0c0c0c]/90 text-white border border-white/15 hover:border-[#ff3131]/70 hover:shadow-[0_0_20px_rgba(255,49,49,0.3)] hover:-translate-y-1"
-              }`}
-            >
-              <span className="text-xl">⚡</span>
-              <span className="tracking-tight uppercase font-black">İSTATİSTİKLER</span>
-            </button>
-
-            {/* TRANSFER BORSASI BUTONU */}
-            <button
-              onClick={() => onSelectTab && onSelectTab("transferBorsasi")}
-              className={`py-3.5 px-2 rounded-2xl font-black text-xs sm:text-[10px] md:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all duration-300 shadow-xl cursor-pointer ${
-                activeTab === "transferBorsasi"
-                  ? "bg-gradient-to-b from-[#4ade80] via-[#16a34a] to-[#14532d] text-white shadow-[0_6px_30px_rgba(74,222,128,0.6)] scale-[1.04] border-2 border-[#86efac]"
-                  : "bg-[#0c0c0c]/90 text-white border border-[#4ade80]/40 hover:border-[#4ade80] hover:shadow-[0_0_20px_rgba(74,222,128,0.3)] hover:-translate-y-1"
-              }`}
-            >
-              <span className="text-xl">💸</span>
-              <span className="tracking-tight uppercase font-black">Borsa</span>
-            </button>
-          </div>
-
           {/* ULTRA ŞIK CANLI MAÇ KUTUSU */}
           <div className="w-full mt-6 bg-gradient-to-b from-[#0e0e0e]/95 via-[#090909]/90 to-[#050505]/95 border-2 border-[#ff3131]/40 hover:border-[#ff3131]/70 rounded-3xl p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden group transition-all duration-500">
             {/* Şık Arkaplan Işığı */}
