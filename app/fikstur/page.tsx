@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { publicFetch } from "../../lib/supabase";
+import Image from "next/image";
 
 type Mac = {
   id: number;
@@ -22,14 +23,46 @@ type HaftaGroup = {
   maclar: Mac[];
 };
 
+type TeamMap = Record<string, string>;
+
+function TeamLogo({ name, logoMap }: { name: string; logoMap: TeamMap }) {
+  const logo = logoMap[name];
+  if (logo) {
+    return (
+      <div className="w-12 h-12 relative drop-shadow-sm">
+        <Image src={logo} alt={name} fill className="object-contain" unoptimized />
+      </div>
+    );
+  }
+  return (
+    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center shadow-sm">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+  );
+}
+
 export default function FiksturPage() {
   const [haftalar, setHaftalar] = useState<HaftaGroup[]>([]);
   const [aktifHafta, setAktifHafta] = useState<number>(1);
+  const [logoMap, setLogoMap] = useState<TeamMap>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadFixtures();
+    Promise.all([loadFixtures(), loadTeams()]);
   }, []);
+
+  async function loadTeams() {
+    try {
+      const data = await publicFetch("takimlar", "select=ad,logo");
+      const map: TeamMap = {};
+      for (const t of data || []) {
+        if (t.ad && t.logo) map[t.ad] = t.logo;
+      }
+      setLogoMap(map);
+    } catch {}
+  }
 
   async function loadFixtures() {
     try {
@@ -176,11 +209,7 @@ export default function FiksturPage() {
                     <div className="flex items-center px-4 py-4">
                       {/* Home Team */}
                       <div className="flex-1 flex flex-col items-center gap-2 min-w-0">
-                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center shadow-sm">
-                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                          </svg>
-                        </div>
+                        <TeamLogo name={mac.ev_sahibi} logoMap={logoMap} />
                         <span className="text-[12px] md:text-[14px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2">
                           {mac.ev_sahibi}
                         </span>
@@ -207,11 +236,7 @@ export default function FiksturPage() {
 
                       {/* Away Team */}
                       <div className="flex-1 flex flex-col items-center gap-2 min-w-0">
-                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center shadow-sm">
-                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                          </svg>
-                        </div>
+                        <TeamLogo name={mac.deplasman} logoMap={logoMap} />
                         <span className="text-[12px] md:text-[14px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2">
                           {mac.deplasman}
                         </span>

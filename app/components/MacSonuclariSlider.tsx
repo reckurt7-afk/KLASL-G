@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { publicFetch } from "../../lib/supabase";
+import Image from "next/image";
 
 type Mac = {
   id: number;
@@ -13,39 +14,54 @@ type Mac = {
   oynandi: boolean;
   tarih: string | null;
   saat: string | null;
-  home_team?: { logo_url?: string };
-  away_team?: { logo_url?: string };
 };
+
+type TeamMap = Record<string, string>; // name -> logo path
+
+function TeamLogo({ name, logoMap }: { name: string; logoMap: TeamMap }) {
+  const logo = logoMap[name];
+  if (logo) {
+    return (
+      <div className="w-9 h-9 relative">
+        <Image src={logo} alt={name} fill className="object-contain drop-shadow-sm" unoptimized />
+      </div>
+    );
+  }
+  return (
+    <div className="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+  );
+}
 
 export default function MacSonuclariSlider() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [maclar, setMaclar] = useState<Mac[]>([]);
+  const [logoMap, setLogoMap] = useState<TeamMap>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadMatches();
+    Promise.all([loadMatches(), loadTeams()]).finally(() => setLoading(false));
   }, []);
 
   async function loadMatches() {
-    try {
-      // Oynanan son maçları getir (desc hafta ile en son haftalar önce)
-      const data = await publicFetch(
-        "maclar",
-        "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat&oynandi=eq.true&order=hafta.desc,id.desc&limit=20"
-      );
-      setMaclar(data || []);
-    } catch {
-      setMaclar([]);
-    } finally {
-      setLoading(false);
-    }
+    const data = await publicFetch(
+      "maclar",
+      "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat&oynandi=eq.true&order=hafta.desc,id.desc&limit=20"
+    );
+    setMaclar(data || []);
   }
 
-  const scroll = (dir: "left" | "right") => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: dir === "right" ? 260 : -260, behavior: "smooth" });
+  async function loadTeams() {
+    const data = await publicFetch("takimlar", "select=ad,logo");
+    const map: TeamMap = {};
+    for (const t of data || []) {
+      if (t.ad && t.logo) map[t.ad] = t.logo;
     }
-  };
+    setLogoMap(map);
+  }
 
   if (loading) {
     return (
@@ -59,30 +75,28 @@ export default function MacSonuclariSlider() {
     );
   }
 
-  // Fallback: eğer henüz hiç maç oynanmamışsa yaklaşan maçları göster
-  if (maclar.length === 0) {
-    return null;
-  }
+  if (maclar.length === 0) return null;
 
   return (
     <div className="w-full bg-white py-3 border-b border-gray-100">
-      <div className="max-w-[1600px] mx-auto px-4 relative">
+      <div className="max-w-[1600px] mx-auto px-4">
         <div
           ref={scrollRef}
           className="flex gap-3 overflow-x-auto snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          style={{ scrollbarWidth: "none" }}
         >
           {maclar.map((match) => {
             const dateStr = match.tarih
-              ? new Date(match.tarih).toLocaleDateString("tr-TR", { day: "numeric", month: "kısa" as any }) + (match.saat ? ` ${match.saat}` : "")
+              ? new Date(match.tarih).toLocaleDateString("tr-TR", { day: "numeric", month: "short" }) + (match.saat ? ` ${match.saat}` : "")
               : match.saat || "";
+
             return (
               <div
                 key={match.id}
                 className="min-w-[240px] border border-gray-100 rounded-xl bg-white p-3 shrink-0 snap-start shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer"
               >
                 {/* Status & Date */}
-                <div className="flex items-center justify-between mb-2.5">
+                <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">Bitti</span>
                   <span className="text-[10px] font-medium text-gray-400">{dateStr}</span>
                 </div>
@@ -91,16 +105,14 @@ export default function MacSonuclariSlider() {
                 <div className="flex items-center justify-between">
                   {/* Home */}
                   <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
+                    <TeamLogo name={match.ev_sahibi} logoMap={logoMap} />
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
                       {match.ev_sahibi}
                     </span>
                   </div>
 
                   {/* Score */}
-                  <div className="flex items-center gap-2 px-3 shrink-0">
+                  <div className="flex items-center gap-1.5 px-2 shrink-0">
                     <span className="text-[22px] font-black text-[#e60000] leading-none">{match.ev_skor ?? 0}</span>
                     <span className="text-gray-300 font-bold">–</span>
                     <span className="text-[22px] font-black text-gray-800 leading-none">{match.dep_skor ?? 0}</span>
@@ -108,9 +120,7 @@ export default function MacSonuclariSlider() {
 
                   {/* Away */}
                   <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
-                    <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
+                    <TeamLogo name={match.deplasman} logoMap={logoMap} />
                     <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
                       {match.deplasman}
                     </span>
@@ -118,7 +128,7 @@ export default function MacSonuclariSlider() {
                 </div>
 
                 {/* Footer */}
-                <div className="text-[9px] text-gray-400 font-bold mt-2.5 text-center border-t border-gray-100 pt-1.5">
+                <div className="text-[9px] text-gray-400 font-bold mt-2 text-center border-t border-gray-100 pt-1.5">
                   Klas Lig • {match.hafta}. HAFTA
                 </div>
               </div>
