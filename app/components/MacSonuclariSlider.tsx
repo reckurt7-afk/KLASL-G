@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { publicFetch } from "../../lib/supabase";
-import Image from "next/image";
+import { TeamLogo } from "./TeamLogo";
 
 type Mac = {
   id: number;
@@ -17,24 +17,6 @@ type Mac = {
 };
 
 type TeamMap = Record<string, string>; // name -> logo path
-
-function TeamLogo({ name, logoMap }: { name: string; logoMap: TeamMap }) {
-  const logo = logoMap[name];
-  if (logo) {
-    return (
-      <div className="w-9 h-9 relative">
-        <Image src={logo} alt={name} fill className="object-contain drop-shadow-sm" unoptimized />
-      </div>
-    );
-  }
-  return (
-    <div className="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      </svg>
-    </div>
-  );
-}
 
 export default function MacSonuclariSlider() {
   const scrollRef = useRef<HTMLDivElement>(null);
