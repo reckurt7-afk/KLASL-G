@@ -6,45 +6,66 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+const inputStyle = {
+  width: "100%",
+  background: "#ffffff",
+  border: "1px solid #cccccc",
+  borderRadius: 14,
+  padding: "16px 18px",
+  color: "#1a1a1a",
+  fontSize: 16,
+  outline: "none",
+  boxSizing: "border-box" as const,
+  transition: "border-color 0.2s",
+};
+
+const labelStyle = {
+  display: "block" as const,
+  color: "#666666",
+  fontSize: 12,
+  fontWeight: 700,
+  letterSpacing: 2,
+  textTransform: "uppercase" as const,
+  marginBottom: 10,
+};
+
 export default function GirisPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [sifre, setSifre] = useState("");
   const [loading, setLoading] = useState(false);
   const [hata, setHata] = useState("");
+  const [basarili, setBasarili] = useState(false);
 
   async function girisYap(e: React.FormEvent) {
     e.preventDefault();
     setHata("");
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password: sifre,
     });
 
     if (error) {
-      if (error.message.includes("Invalid login credentials") || error.message.includes("invalid_credentials")) {
-        setHata("E-posta veya şifre hatalı. Lütfen tekrar deneyin.");
-      } else if (error.message.includes("Email not confirmed")) {
-        setHata("E-posta adresin henüz doğrulanmamış.");
-      } else if (error.message.includes("Too many requests")) {
-        setHata("Çok fazla deneme yapıldı. Lütfen birkaç dakika bekleyin.");
-      } else {
-        setHata("Giriş yapılamadı: " + error.message);
-      }
+      setHata("E-posta veya şifre hatalı.");
       setLoading(false);
       return;
     }
 
-    router.refresh();
-    router.push("/");
+    setBasarili(true);
+    setLoading(false);
+    
+    // Yönlendirme
+    setTimeout(() => {
+      router.push("/lig");
+    }, 1500);
   }
 
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#070707",
+      background: "#f4f6f8",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -52,64 +73,41 @@ export default function GirisPage() {
       position: "relative",
       overflow: "hidden",
     }}>
-      {/* Arka plan glow efekti */}
-      <div style={{
-        position: "absolute",
-        top: "20%",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 600,
-        height: 600,
-        background: "radial-gradient(circle, rgba(255,49,49,0.12) 0%, transparent 70%)",
-        borderRadius: "50%",
-        filter: "blur(40px)",
-        pointerEvents: "none",
-      }} />
-
       <div style={{ width: "100%", maxWidth: 460, position: "relative", zIndex: 1 }}>
-
         {/* Logo Bölümü */}
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px" }}>
             <Image
               src="/icons/logo.png"
               alt="KLAS LİG"
               fill
-              style={{ objectFit: "contain", filter: "drop-shadow(0 0 20px rgba(255,49,49,0.6))" }}
+              style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
             />
           </div>
           <h1 style={{
-            color: "#fff",
+            color: "#1a1a1a",
             fontSize: 36,
             fontWeight: 900,
             letterSpacing: 6,
             margin: 0,
             lineHeight: 1,
           }}>KLAS LİG</h1>
-          <div style={{
-            color: "#ff3131",
-            fontSize: 13,
-            fontWeight: 800,
-            letterSpacing: 8,
-            marginTop: 6,
-          }}>BURSA</div>
         </div>
 
         {/* Kart */}
         <div style={{
-          background: "rgba(17,17,17,0.95)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "#ffffff",
+          border: "1px solid #eaeaea",
           borderRadius: 24,
-          padding: "40px 36px",
-          boxShadow: "0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,49,49,0.05)",
-          backdropFilter: "blur(20px)",
+          padding: "36px 32px",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.05)",
         }}>
-          <div style={{ marginBottom: 32 }}>
-            <h2 style={{ color: "#fff", fontSize: 28, fontWeight: 900, margin: "0 0 8px" }}>
-              Hoş Geldin 👋
+          <div style={{ marginBottom: 28 }}>
+            <h2 style={{ color: "#1a1a1a", fontSize: 28, fontWeight: 900, margin: "0 0 8px" }}>
+              Hoş Geldiniz 👤
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 16, margin: 0 }}>
-              Hesabınla giriş yap ve ligin keyfini çıkar.
+            <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
+              Hesabınıza giriş yapın.
             </p>
           </div>
 
@@ -119,133 +117,91 @@ export default function GirisPage() {
               border: "1px solid rgba(255,49,49,0.3)",
               borderRadius: 12,
               padding: "14px 18px",
-              color: "#ff6b6b",
+              color: "#e60000",
               fontSize: 15,
               fontWeight: 500,
               marginBottom: 24,
             }}>
-              ⚠️ {hata}
+              🚨 {hata}
             </div>
           )}
 
-          <form onSubmit={girisYap} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {basarili && (
+            <div style={{
+              background: "rgba(22,163,74,0.1)",
+              border: "1px solid rgba(22,163,74,0.3)",
+              borderRadius: 12,
+              padding: "14px 18px",
+              color: "#16a34a",
+              fontSize: 15,
+              fontWeight: 700,
+              marginBottom: 24,
+            }}>
+              ✅ Giriş başarılı! Lige yönlendiriliyorsunuz...
+            </div>
+          )}
+
+          <form onSubmit={girisYap} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
             <div>
-              <label style={{
-                display: "block",
-                color: "rgba(255,255,255,0.5)",
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                marginBottom: 10,
-              }}>
-                E-posta
-              </label>
+              <label style={labelStyle}>E-posta</label>
               <input
                 type="email"
                 required
-                autoComplete="email"
                 placeholder="ornek@mail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{
-                  width: "100%",
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: 14,
-                  padding: "16px 18px",
-                  color: "#fff",
-                  fontSize: 16,
-                  outline: "none",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                style={inputStyle}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
             <div>
-              <label style={{
-                display: "block",
-                color: "rgba(255,255,255,0.5)",
-                fontSize: 12,
-                fontWeight: 700,
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                marginBottom: 10,
-              }}>
-                Şifre
-              </label>
+              <label style={labelStyle}>Şifre</label>
               <input
                 type="password"
                 required
-                autoComplete="current-password"
-                placeholder="••••••••"
+                placeholder="Şifreniz"
                 value={sifre}
                 onChange={(e) => setSifre(e.target.value)}
-                style={{
-                  width: "100%",
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: 14,
-                  padding: "16px 18px",
-                  color: "#fff",
-                  fontSize: 16,
-                  outline: "none",
-                  boxSizing: "border-box",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                style={inputStyle}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || basarili}
               style={{
                 width: "100%",
                 padding: "18px",
-                background: loading ? "rgba(255,49,49,0.5)" : "linear-gradient(135deg, #ff3131 0%, #c01010 100%)",
+                background: (loading || basarili) ? "#f87171" : "#e60000",
                 color: "#fff",
                 border: "none",
                 borderRadius: 14,
                 fontSize: 17,
                 fontWeight: 900,
                 letterSpacing: 2,
-                cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 10px 30px rgba(255,49,49,0.35)",
-                marginTop: 4,
+                cursor: (loading || basarili) ? "not-allowed" : "pointer",
+                marginTop: 6,
                 transition: "all 0.2s",
               }}
             >
-              {loading ? (
-                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  <span style={{
-                    width: 20, height: 20,
-                    border: "2px solid rgba(255,255,255,0.3)",
-                    borderTopColor: "#fff",
-                    borderRadius: "50%",
-                    animation: "spin 0.8s linear infinite",
-                    display: "inline-block",
-                  }} />
-                  Giriş yapılıyor...
-                </span>
-              ) : "GİRİŞ YAP →"}
+              {loading ? "GİRİŞ YAPILIYOR..." : basarili ? "BAŞARILI!" : "GİRİŞ YAP 🚀"}
             </button>
           </form>
 
           <div style={{
             marginTop: 28,
             paddingTop: 24,
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid #eaeaea",
             textAlign: "center",
           }}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, margin: 0 }}>
+            <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
               Hesabın yok mu?{" "}
               <Link href="/kayit" style={{
-                color: "#ff3131",
+                color: "#e60000",
                 fontWeight: 800,
                 textDecoration: "none",
                 fontSize: 15,
@@ -256,13 +212,6 @@ export default function GirisPage() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }

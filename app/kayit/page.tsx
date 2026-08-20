@@ -8,11 +8,11 @@ import { useRouter } from "next/navigation";
 
 const inputStyle = {
   width: "100%",
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.1)",
+  background: "#ffffff",
+  border: "1px solid #cccccc",
   borderRadius: 14,
   padding: "16px 18px",
-  color: "#fff",
+  color: "#1a1a1a",
   fontSize: 16,
   outline: "none",
   boxSizing: "border-box" as const,
@@ -21,7 +21,7 @@ const inputStyle = {
 
 const labelStyle = {
   display: "block" as const,
-  color: "rgba(255,255,255,0.5)",
+  color: "#666666",
   fontSize: 12,
   fontWeight: 700,
   letterSpacing: 2,
@@ -32,14 +32,16 @@ const labelStyle = {
 export default function KayitPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    ad_soyad: "",
-    telefon: "",
+    full_name: "",
+    phone: "",
     email: "",
     sifre: "",
     sifreTekrar: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [hata, setHata] = useState("");
+  const [basarili, setBasarili] = useState(false);
 
   function degistir(alan: string, deger: string) {
     setForm({ ...form, [alan]: deger });
@@ -48,13 +50,14 @@ export default function KayitPage() {
   async function kayitOl(e: React.FormEvent) {
     e.preventDefault();
     setHata("");
+    setBasarili(false);
 
-    if (form.ad_soyad.trim().length < 3) {
+    if (form.full_name.trim().length < 3) {
       setHata("Ad soyad en az 3 karakter olmalıdır.");
       return;
     }
 
-    const telefonTemiz = form.telefon.replace(/\s/g, "");
+    const telefonTemiz = form.phone.replace(/\s/g, "");
     if (!/^(05|5)\d{9}$/.test(telefonTemiz)) {
       setHata("Geçerli bir telefon numarası girin. (05XXXXXXXXX)");
       return;
@@ -73,9 +76,9 @@ export default function KayitPage() {
     setLoading(true);
 
     const { data: varMi } = await supabase
-      .from("profiller")
+      .from("profiles")
       .select("id")
-      .eq("telefon", telefonTemiz)
+      .eq("phone", telefonTemiz)
       .maybeSingle();
 
     if (varMi) {
@@ -89,8 +92,8 @@ export default function KayitPage() {
       password: form.sifre,
       options: {
         data: {
-          ad_soyad: form.ad_soyad.trim(),
-          telefon: telefonTemiz,
+          full_name: form.full_name.trim(),
+          phone: telefonTemiz,
         },
       },
     });
@@ -105,23 +108,18 @@ export default function KayitPage() {
       return;
     }
 
-    if (data.user) {
-      await supabase.from("profiller").insert({
-        id: data.user.id,
-        ad_soyad: form.ad_soyad.trim(),
-        telefon: telefonTemiz,
-        email: form.email.trim(),
-      });
-    }
-
-    router.refresh();
-    router.push("/");
+    setBasarili(true);
+    setLoading(false);
+    
+    setTimeout(() => {
+      router.push("/lig");
+    }, 2000);
   }
 
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#070707",
+      background: "#f4f6f8",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -129,22 +127,7 @@ export default function KayitPage() {
       position: "relative",
       overflow: "hidden",
     }}>
-      {/* Arka plan glow efekti */}
-      <div style={{
-        position: "absolute",
-        top: "15%",
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: 600,
-        height: 600,
-        background: "radial-gradient(circle, rgba(255,49,49,0.12) 0%, transparent 70%)",
-        borderRadius: "50%",
-        filter: "blur(40px)",
-        pointerEvents: "none",
-      }} />
-
       <div style={{ width: "100%", maxWidth: 460, position: "relative", zIndex: 1 }}>
-
         {/* Logo Bölümü */}
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px" }}>
@@ -152,40 +135,32 @@ export default function KayitPage() {
               src="/icons/logo.png"
               alt="KLAS LİG"
               fill
-              style={{ objectFit: "contain", filter: "drop-shadow(0 0 20px rgba(255,49,49,0.6))" }}
+              style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
             />
           </div>
           <h1 style={{
-            color: "#fff",
+            color: "#1a1a1a",
             fontSize: 36,
             fontWeight: 900,
             letterSpacing: 6,
             margin: 0,
             lineHeight: 1,
           }}>KLAS LİG</h1>
-          <div style={{
-            color: "#ff3131",
-            fontSize: 13,
-            fontWeight: 800,
-            letterSpacing: 8,
-            marginTop: 6,
-          }}>BURSA</div>
         </div>
 
         {/* Kart */}
         <div style={{
-          background: "rgba(17,17,17,0.95)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "#ffffff",
+          border: "1px solid #eaeaea",
           borderRadius: 24,
           padding: "36px 32px",
-          boxShadow: "0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,49,49,0.05)",
-          backdropFilter: "blur(20px)",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.05)",
         }}>
           <div style={{ marginBottom: 28 }}>
-            <h2 style={{ color: "#fff", fontSize: 28, fontWeight: 900, margin: "0 0 8px" }}>
-              Kayıt Ol ⚽
+            <h2 style={{ color: "#1a1a1a", fontSize: 28, fontWeight: 900, margin: "0 0 8px" }}>
+              Kayıt Ol 👤
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, margin: 0 }}>
+            <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
               Hemen üye ol, ligin içinde yerini al.
             </p>
           </div>
@@ -196,12 +171,27 @@ export default function KayitPage() {
               border: "1px solid rgba(255,49,49,0.3)",
               borderRadius: 12,
               padding: "14px 18px",
-              color: "#ff6b6b",
+              color: "#e60000",
               fontSize: 15,
               fontWeight: 500,
               marginBottom: 24,
             }}>
-              ⚠️ {hata}
+              🚨 {hata}
+            </div>
+          )}
+
+          {basarili && (
+            <div style={{
+              background: "rgba(22,163,74,0.1)",
+              border: "1px solid rgba(22,163,74,0.3)",
+              borderRadius: 12,
+              padding: "14px 18px",
+              color: "#16a34a",
+              fontSize: 15,
+              fontWeight: 700,
+              marginBottom: 24,
+            }}>
+              ✅ Kayıt başarılı! Lige yönlendiriliyorsunuz...
             </div>
           )}
 
@@ -212,11 +202,11 @@ export default function KayitPage() {
                 type="text"
                 required
                 placeholder="Adınız Soyadınız"
-                value={form.ad_soyad}
-                onChange={(e) => degistir("ad_soyad", e.target.value)}
+                value={form.full_name}
+                onChange={(e) => degistir("full_name", e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
@@ -226,13 +216,13 @@ export default function KayitPage() {
                 type="tel"
                 required
                 placeholder="05XXXXXXXXX"
-                value={form.telefon}
-                onChange={(e) => degistir("telefon", e.target.value)}
+                value={form.phone}
+                onChange={(e) => degistir("phone", e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
-              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: 12, marginTop: 6 }}>
+              <p style={{ color: "#888888", fontSize: 12, marginTop: 6 }}>
                 Her kullanıcının yalnızca 1 hesabı olabilir.
               </p>
             </div>
@@ -246,8 +236,8 @@ export default function KayitPage() {
                 value={form.email}
                 onChange={(e) => degistir("email", e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
@@ -260,8 +250,8 @@ export default function KayitPage() {
                 value={form.sifre}
                 onChange={(e) => degistir("sifre", e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
@@ -274,56 +264,43 @@ export default function KayitPage() {
                 value={form.sifreTekrar}
                 onChange={(e) => degistir("sifreTekrar", e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#ff3131"}
-                onBlur={(e) => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onFocus={(e) => e.target.style.borderColor = "#e60000"}
+                onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || basarili}
               style={{
                 width: "100%",
                 padding: "18px",
-                background: loading ? "rgba(255,49,49,0.5)" : "linear-gradient(135deg, #ff3131 0%, #c01010 100%)",
+                background: (loading || basarili) ? "#f87171" : "#e60000",
                 color: "#fff",
                 border: "none",
                 borderRadius: 14,
                 fontSize: 17,
                 fontWeight: 900,
                 letterSpacing: 2,
-                cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: loading ? "none" : "0 10px 30px rgba(255,49,49,0.35)",
+                cursor: (loading || basarili) ? "not-allowed" : "pointer",
                 marginTop: 6,
                 transition: "all 0.2s",
               }}
             >
-              {loading ? (
-                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  <span style={{
-                    width: 20, height: 20,
-                    border: "2px solid rgba(255,255,255,0.3)",
-                    borderTopColor: "#fff",
-                    borderRadius: "50%",
-                    animation: "spin 0.8s linear infinite",
-                    display: "inline-block",
-                  }} />
-                  Kayıt yapılıyor...
-                </span>
-              ) : "KAYIT OL →"}
+              {loading ? "KAYIT YAPILIYOR..." : basarili ? "BAŞARILI!" : "KAYIT OL 🚀"}
             </button>
           </form>
 
           <div style={{
             marginTop: 28,
             paddingTop: 24,
-            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderTop: "1px solid #eaeaea",
             textAlign: "center",
           }}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 15, margin: 0 }}>
+            <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
               Zaten hesabın var mı?{" "}
               <Link href="/giris" style={{
-                color: "#ff3131",
+                color: "#e60000",
                 fontWeight: 800,
                 textDecoration: "none",
                 fontSize: 15,
@@ -334,13 +311,6 @@ export default function KayitPage() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }
