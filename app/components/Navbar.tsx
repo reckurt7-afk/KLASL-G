@@ -6,10 +6,19 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Home, Tv, Trophy, ClipboardList, Shield, Camera, Video, Megaphone, Clock, User } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
+import { useCityStore } from "@/app/store/cityStore";
+import { supabase } from "@/lib/supabase";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { selectedCityId } = useCityStore();
+  const [cities, setCities] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase.from("cities").select("*").then(({data}) => { if(data) setCities(data); });
+  }, []);
 
   const links = [
     { href: "/", label: "Ana Sayfa", icon: Home },
@@ -26,7 +35,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[9999] bg-[#070707]/85 backdrop-blur-2xl border-b border-[#ff3131]/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+      <header className="fixed top-[32px] left-0 right-0 z-[9999] bg-[#070707]/85 backdrop-blur-2xl border-b border-[#ff3131]/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
         <div className="max-w-[1600px] mx-auto px-4">
           <div className="flex items-center justify-between h-[75px]">
             {/* Logo */}
@@ -36,7 +45,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <span className="text-xl font-black text-white tracking-widest leading-none group-hover:text-[#ff3131] transition-colors duration-300">KLAS LİG</span>
-                <span className="text-[10px] text-[#ff3131] font-bold tracking-[0.3em]">BURSA</span>
+                <span className="text-[10px] text-[#ff3131] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
 

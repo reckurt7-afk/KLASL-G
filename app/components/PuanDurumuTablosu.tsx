@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
+import { useCityStore } from "@/app/store/cityStore";
 import { motion } from "framer-motion";
 
 type Takim = {
@@ -22,6 +23,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setYukleniyor(true);
     async function takimlariGetir() {
       const data = await publicFetch(
         "teams",
@@ -31,7 +33,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
       setLoading(false);
     }
     takimlariGetir();
-  }, []);
+  }, [selectedCityId]);
 
   const skeletons = Array.from({ length: mini ? 4 : 8 });
   const displayTakimlar = mini ? takimlar.slice(0, 4) : takimlar;

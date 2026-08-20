@@ -1,5 +1,6 @@
 import ServiceWorkerRegister from "./components/ServiceWorkerRegister";
 import Navbar from "./components/Navbar";
+import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import GolSesiDinleyici from "./components/GolSesiDinleyici";
 import CanliSkorBandi from "./components/CanliSkorBandi";
@@ -50,6 +51,7 @@ export default function RootLayout({
           <ServiceWorkerRegister />
           <CanliSkorBandi />
           <GolSesiDinleyici />
+          <Topbar />
           <Navbar />
           {children}
           <Footer />

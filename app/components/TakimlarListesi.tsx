@@ -4,9 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
+import { useCityStore } from "@/app/store/cityStore";
 import { motion } from "framer-motion";
 
 export default function TakimlarListesi() {
+  const { selectedCityId } = useCityStore();
   const [loading, setLoading] = useState(true);
   const [takimlar, setTakimlar] = useState<any[]>([]);
 
@@ -17,7 +19,7 @@ export default function TakimlarListesi() {
       setLoading(false);
     }
     getir();
-  }, []);
+  }, [selectedCityId]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -4,6 +4,7 @@ import NotificationButton from "./NotificationButton";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
+import { useCityStore } from "@/app/store/cityStore";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -14,6 +15,7 @@ export default function Hero({
   activeTab?: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi";
   onSelectTab?: (tab: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi") => void;
 }) {
+  const { selectedCityId } = useCityStore();
   const [mac, setMac] = useState<any>(null);
   const [olaylar, setOlaylar] = useState<any[]>([]);
   const [golAnimasyon, setGolAnimasyon] = useState(false);
@@ -90,13 +92,14 @@ export default function Hero({
       supabase.removeChannel(channel);
       supabase.removeChannel(channelOlay);
     };
-  }, []);
+  }, [selectedCityId]);
 
   async function canliMacGetir() {
     const { data } = await supabase
       .from("matches")
       .select("*, home_team:home_team_id(name,logo), away_team:away_team_id(name,logo)")
       .eq("is_live", true)
+      .eq("league_id", selectedCityId)
       .single();
 
     if (data) {

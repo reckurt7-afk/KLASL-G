@@ -1,0 +1,45 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { useCityStore } from "@/app/store/cityStore";
+import { motion } from "framer-motion";
+
+export default function Topbar() {
+  const [cities, setCities] = useState<any[]>([]);
+  const { selectedCityId, setSelectedCityId } = useCityStore();
+
+  useEffect(() => {
+    async function loadCities() {
+      const { data } = await supabase.from("cities").select("*").order("id");
+      if (data) setCities(data);
+    }
+    loadCities();
+  }, []);
+
+  if (cities.length === 0) return null;
+
+  return (
+    <div className="bg-[#000] border-b border-[#ff3131]/20 text-[10px] sm:text-xs font-bold text-gray-400 overflow-x-auto hide-scrollbar z-[10000] fixed top-0 w-full flex items-center shadow-lg">
+      <div className="max-w-[1600px] mx-auto px-4 w-full flex items-center gap-1 sm:gap-2 py-1.5 whitespace-nowrap">
+        <span className="text-[#ff3131] tracking-widest uppercase mr-2 sm:mr-4 flex items-center gap-1">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff3131]"></span>
+          </span>
+          SEHIR SECIMI:
+        </span>
+        
+        {cities.map(c => (
+          <button 
+            key={c.id} 
+            onClick={() => setSelectedCityId(c.id)}
+            className={`px-3 sm:px-4 py-1 rounded-full uppercase tracking-wider transition-all duration-300 ${selectedCityId === c.id ? 'bg-[#ff3131] text-white shadow-[0_0_10px_rgba(255,49,49,0.5)]' : 'hover:bg-white/10 hover:text-white'}`}
+          >
+            {c.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
