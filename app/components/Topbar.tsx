@@ -20,7 +20,7 @@ export default function Topbar() {
   if (cities.length === 0) return null;
 
   return (
-    <div className="bg-[#000] border-b border-[#ff3131]/20 text-[10px] sm:text-xs font-bold text-gray-400 overflow-x-auto hide-scrollbar z-[10000] fixed top-0 w-full flex items-center shadow-lg">
+    <div className="bg-[#000] border-b border-[#ff3131]/20 text-[10px] sm:text-xs font-bold text-gray-500 overflow-x-auto hide-scrollbar z-[10000] fixed top-0 w-full flex items-center shadow-lg">
       <div className="max-w-[1600px] mx-auto px-4 w-full flex items-center gap-1 sm:gap-2 py-1.5 whitespace-nowrap">
         <span className="text-[#ff3131] tracking-widest uppercase mr-2 sm:mr-4 flex items-center gap-1">
           <span className="relative flex h-2 w-2">
@@ -34,7 +34,7 @@ export default function Topbar() {
           <button 
             key={c.id} 
             onClick={() => setSelectedCityId(c.id)}
-            className={`px-3 sm:px-4 py-1 rounded-full uppercase tracking-wider transition-all duration-300 ${selectedCityId === c.id ? 'bg-[#ff3131] text-white shadow-[0_0_10px_rgba(255,49,49,0.5)]' : 'hover:bg-white/10 hover:text-white'}`}
+            className={`px-3 sm:px-4 py-1 rounded-full uppercase tracking-wider transition-all duration-300 ${selectedCityId === c.id ? 'bg-[#ff3131] text-gray-900 shadow-[0_0_10px_rgba(255,49,49,0.5)]' : 'hover:bg-gray-100 hover:text-gray-900'}`}
           >
             {c.name}
           </button>

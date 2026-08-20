@@ -44,7 +44,7 @@ export default function Navbar() {
                 <Image src="/icons/logo.png" alt="Logo" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-black text-white tracking-widest leading-none group-hover:text-[#ff3131] transition-colors duration-300">KLAS LİG</span>
+                <span className="text-xl font-black text-gray-900 tracking-widest leading-none group-hover:text-[#ff3131] transition-colors duration-300">KLAS LİG</span>
                 <span className="text-[10px] text-[#ff3131] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
@@ -61,11 +61,11 @@ export default function Navbar() {
                       whileTap={{ scale: 0.95 }}
                       className={`px-3 py-2 rounded-xl text-[13px] font-bold transition-all duration-300 flex items-center gap-1.5
                         ${isActive
-                          ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white shadow-[0_4px_15px_rgba(255,49,49,0.4)]"
-                          : "text-gray-300 hover:bg-white/10 hover:text-white"
+                          ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-gray-900 shadow-[0_4px_15px_rgba(255,49,49,0.4)]"
+                          : "text-gray-300 hover:bg-gray-100 hover:text-gray-900"
                       }`}
                     >
-                      <Icon size={16} className={isActive ? "text-white" : "text-[#ff3131]"} />
+                      <Icon size={16} className={isActive ? "text-gray-900" : "text-[#ff3131]"} />
                       <span>{link.label}</span>
                     </motion.div>
                   </Link>
@@ -88,14 +88,14 @@ export default function Navbar() {
                   whileTap={{ scale: 0.9 }}
                   className={`flex-shrink-0 flex flex-col items-center justify-center w-[72px] h-[72px] rounded-2xl text-[10px] font-bold transition-all duration-300
                     ${isActive
-                      ? "bg-[#ff3131]/10 border border-[#ff3131]/50 text-white shadow-[inset_0_4px_10px_rgba(255,49,49,0.2)]"
-                      : "text-gray-400 border border-transparent hover:bg-white/5 hover:text-white"
+                      ? "bg-[#ff3131]/10 border border-[#ff3131]/50 text-gray-900 shadow-[inset_0_4px_10px_rgba(255,49,49,0.2)]"
+                      : "text-gray-500 border border-transparent hover:bg-white/5 hover:text-gray-900"
                   }`}
                 >
                   <Icon 
                     size={24} 
                     strokeWidth={isActive ? 2.5 : 2} 
-                    className={`mb-1 transition-colors ${isActive ? "text-[#ff3131] drop-shadow-[0_2px_5px_rgba(255,49,49,0.8)]" : "text-gray-400"}`} 
+                    className={`mb-1 transition-colors ${isActive ? "text-[#ff3131] drop-shadow-[0_2px_5px_rgba(255,49,49,0.8)]" : "text-gray-500"}`} 
                   />
                   <span className="truncate w-full text-center px-0.5">
                     {link.label}
