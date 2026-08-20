@@ -35,11 +35,16 @@ export default function LandingPage() {
 
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[100px] pb-24 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.35] mix-blend-luminosity"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1920')" }}
-        ></div>
+        {/* Background YouTube Video */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-[0.35] mix-blend-luminosity"
+            src="https://www.youtube.com/embed/Ko6NF27yHgQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=Ko6NF27yHgQ&playsinline=1"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        </div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/90 via-[#070b14]/60 to-[#070b14]"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1200px] mx-auto px-4 gap-8">
