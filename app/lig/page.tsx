@@ -3,6 +3,7 @@
 import { useCityStore } from "../store/cityStore";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
+import Link from "next/link";
 
 type Haber = {
   id: number;
@@ -84,7 +85,11 @@ export default function LigMerkezi() {
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
           {haberler.map((haber) => (
-            <div key={haber.id} className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm">
+            <Link 
+              key={haber.id} 
+              href={`/duyuru/${haber.id}`}
+              className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm block"
+            >
               <div 
                 className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
                 style={{ backgroundImage: `url(${haber.resim})` }}
@@ -111,7 +116,7 @@ export default function LigMerkezi() {
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

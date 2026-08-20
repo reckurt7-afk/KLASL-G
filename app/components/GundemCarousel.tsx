@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { publicFetch } from "../../lib/supabase";
+import Link from "next/link";
 
 type Haber = {
   id: number;
@@ -90,9 +91,10 @@ export default function GundemCarousel() {
             style={{ scrollbarWidth: "none" }}
           >
             {haberler.map((haber) => (
-              <div
+              <Link
                 key={haber.id}
-                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer"
+                href={`/duyuru/${haber.id}`}
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
               >
                 {/* Background */}
                 {haber.resim ? (
@@ -119,7 +121,7 @@ export default function GundemCarousel() {
                   <h3 className="text-white font-black text-[15px] md:text-[18px] leading-snug mb-1 line-clamp-2">{haber.baslik}</h3>
                   {haber.ozet && <p className="text-gray-300 text-[12px] line-clamp-1">{haber.ozet}</p>}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

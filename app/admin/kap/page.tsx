@@ -13,23 +13,26 @@ type Haber = {
   resim?: string | null; 
 };
 
-function parseHaber(h: any): { baslik: string; ozet: string; resim: string | null; kategori: string; aktif: boolean; id: number; created_at: string } {
+function parseHaber(h: any) {
   let ozet = h.aciklama || "";
   let resim: string | null = null;
+  let detay = "";
   try {
     const parsed = JSON.parse(h.aciklama || "{}");
     if (parsed.ozet !== undefined) {
       ozet = parsed.ozet;
       resim = parsed.resim || null;
+      detay = parsed.detay || "";
     }
   } catch {}
-  return { id: h.id, baslik: h.baslik, ozet, resim, kategori: h.renk || "KAP", aktif: h.aktif, created_at: h.created_at };
+  return { id: h.id, baslik: h.baslik, ozet, detay, resim, kategori: h.renk || "KAP", aktif: h.aktif, created_at: h.created_at };
 }
 
 export default function KapBildirimleriAdminPage() {
   const [haberler, setHaberler] = useState<ReturnType<typeof parseHaber>[]>([]);
   const [baslik, setBaslik] = useState("");
   const [ozet, setOzet] = useState("");
+  const [detay, setDetay] = useState("");
   const [resimUrl, setResimUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -64,8 +67,8 @@ export default function KapBildirimleriAdminPage() {
 
     const payload = {
       baslik: baslik.trim(),
-      aciklama: JSON.stringify({ ozet: ozet.trim(), resim: resimUrl || null }),
-      renk: "KAP", // Sabit kategori
+      aciklama: JSON.stringify({ ozet: ozet.trim(), detay: detay.trim(), resim: resimUrl || null }),
+      renk: "KAP", 
       aktif: true,
     };
 
@@ -93,6 +96,7 @@ export default function KapBildirimleriAdminPage() {
     setEditId(h.id);
     setBaslik(h.baslik);
     setOzet(h.ozet);
+    setDetay(h.detay);
     setResimUrl(h.resim || "");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -101,15 +105,16 @@ export default function KapBildirimleriAdminPage() {
     setEditId(null);
     setBaslik("");
     setOzet("");
+    setDetay("");
     setResimUrl("");
     if (fileRef.current) fileRef.current.value = "";
   }
 
   return (
-    <div className="max-w-[1000px] mx-auto p-4 md:p-8 font-sans animate-in fade-in zoom-in-95 duration-300">
+    <div className="max-w-[1000px] mx-auto p-4 md:p-8 font-sans">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-[28px] font-black text-[#1a1a2e] flex items-center gap-3">
+          <h1 className="text-[28px] font-black text-[#1a1a2e]">
             KAP Bildirimleri
           </h1>
           <p className="text-gray-500 font-medium mt-1">Buradan lig sayfasındaki KAP Bildirimlerini yönetebilirsiniz.</p>
@@ -135,13 +140,19 @@ export default function KapBildirimleriAdminPage() {
               </div>
 
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Özet Metin</label>
-                <textarea value={ozet} onChange={e => setOzet(e.target.value)} rows={3} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all resize-none" placeholder="Bildirim içeriği..." />
+                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Kısa Özet</label>
+                <textarea value={ozet} onChange={e => setOzet(e.target.value)} rows={2} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all resize-none" placeholder="Kısa liste özeti..." />
               </div>
 
               <div>
-                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Kapak Görseli</label>
+                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Haber Detayı (İçerik)</label>
+                <textarea value={detay} onChange={e => setDetay(e.target.value)} rows={6} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all" placeholder="Tüm haber detayları..." />
+              </div>
+
+              <div>
+                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Kapak Görseli (Görsel URL veya Yükle)</label>
                 <div className="flex gap-2">
+                  <input type="text" value={resimUrl} onChange={e => setResimUrl(e.target.value)} placeholder="https://..." className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000]" />
                   <input type="file" accept="image/*" ref={fileRef} className="hidden" onChange={async (e) => {
                     const f = e.target.files?.[0];
                     if (f) {
@@ -149,21 +160,18 @@ export default function KapBildirimleriAdminPage() {
                       if (url) setResimUrl(url);
                     }
                   }} />
-                  <button onClick={() => fileRef.current?.click()} type="button" disabled={uploading} className="flex-1 bg-gray-50 border border-gray-200 text-gray-600 font-semibold px-4 py-2.5 rounded-xl text-[13px] hover:bg-gray-100 transition-colors">
-                    {uploading ? "Yükleniyor..." : "Dosya Seç"}
+                  <button onClick={() => fileRef.current?.click()} type="button" disabled={uploading} className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-2 rounded-xl text-[12px] border border-gray-200 transition-colors">
+                    Yükle
                   </button>
-                  {resimUrl && (
-                    <div className="w-10 h-10 rounded-lg bg-cover bg-center border border-gray-200" style={{ backgroundImage: `url(${resimUrl})` }} />
-                  )}
                 </div>
               </div>
 
               <div className="pt-4 flex gap-2">
-                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#e60000] hover:bg-[#cc0000] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50">
+                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#e60000] hover:bg-[#cc0000] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-[14px]">
                   {saving ? "Kaydediliyor..." : (editId ? "Güncelle" : "Yayınla")}
                 </button>
                 {editId && (
-                  <button onClick={resetForm} className="bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold px-4 py-3 rounded-xl transition-colors">
+                  <button onClick={resetForm} className="bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold px-4 py-3 rounded-xl transition-colors text-[14px]">
                     İptal
                   </button>
                 )}
