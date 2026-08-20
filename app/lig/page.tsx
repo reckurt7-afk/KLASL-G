@@ -2,7 +2,7 @@
 
 import { useCityStore } from "../store/cityStore";
 import { useEffect, useState } from "react";
-import { publicFetch } from "../lib/supabase";
+import { publicFetch } from "@/lib/supabase";
 
 type Haber = {
   id: number;
