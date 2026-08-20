@@ -34,40 +34,40 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-screen min-h-[850px] flex flex-col items-center justify-center bg-[#070b14] mt-[76px]">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[100px] pb-24">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1920')] bg-cover bg-center opacity-[0.25] mix-blend-luminosity"></div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/70 via-[#070b14]/50 to-[#070b14]"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/80 via-[#070b14]/60 to-[#070b14]"></div>
 
-        <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1200px] mx-auto px-4 mt-8">
+        <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1200px] mx-auto px-4 gap-8">
           
           {/* Top Badge */}
-          <div className="border border-[#e60000]/40 bg-[#070b14]/70 backdrop-blur-md rounded-full px-5 py-2 flex items-center gap-2.5 mb-10 shadow-[0_0_15px_rgba(230,0,0,0.15)]">
+          <div className="border border-[#e60000]/40 bg-[#070b14]/70 backdrop-blur-md rounded-full px-5 py-2 flex items-center justify-center gap-2.5 shadow-[0_0_15px_rgba(230,0,0,0.15)]">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            <span className="text-white text-[11px] font-black tracking-[0.2em] uppercase mt-0.5">TÜRKİYE'NİN #1 HALI SAHA PLATFORMU</span>
+            <span className="text-white text-[10px] md:text-[11px] font-black tracking-[0.2em] uppercase mt-0.5">TÜRKİYE'NİN #1 HALI SAHA PLATFORMU</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
 
           {/* Center Logo */}
-          <div className="w-[190px] h-[190px] bg-white rounded-full flex items-center justify-center p-5 mb-10 shadow-[0_0_50px_rgba(255,255,255,0.15)]">
+          <div className="w-[160px] h-[160px] md:w-[190px] md:h-[190px] bg-white rounded-full flex items-center justify-center p-5 shadow-[0_0_50px_rgba(255,255,255,0.15)] shrink-0">
             <Image src="/icons/logo.png" width={150} height={150} alt="Klas Lig" className="object-contain" />
           </div>
 
           {/* Title */}
-          <h1 className="text-[28px] md:text-[34px] text-white font-semibold mb-10 w-full tracking-tight">
+          <h1 className="text-[26px] md:text-[34px] text-white font-semibold w-full tracking-tight max-w-3xl">
             Halı saha futbolunun <span className="font-black text-[#e60000]">en kapsamlı platformu</span> ile sahaya çık!
           </h1>
 
           {/* App Stores */}
-          <div className="flex flex-row items-center justify-center gap-5 mb-10 w-full">
-            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center gap-4 min-w-[190px] transition-colors shadow-lg border border-white/10">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-2">
+            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center justify-center gap-4 min-w-[170px] transition-colors shadow-lg border border-white/10">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91 1.65.17 2.79 1.12 3.45 2.11-2.96 1.76-2.48 5.86.36 7.03-.68 1.63-1.51 3.23-2.54 4.54l-.48.98zM12.03 7.25C11.96 3.73 15.35 1 15.42 1c-.11 4.29-4.14 6.77-3.39 6.25z"/></svg>
               <div className="text-left flex flex-col justify-center">
                 <span className="text-[10px] text-gray-300 font-medium leading-[1]">Apple</span>
                 <span className="font-bold text-[15px] leading-tight">App Store</span>
               </div>
             </button>
-            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center gap-4 min-w-[190px] transition-colors shadow-lg border border-white/10">
+            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center justify-center gap-4 min-w-[170px] transition-colors shadow-lg border border-white/10">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M3.208 20.672L16.27 13.12 3.208 5.57l-.022 15.102z"/><path d="M17.15 12.612L20.638 10.6 18.06 9.11l-1.928 1.112z"/><path d="M3.315 20.612l13.835-7.99 1.93-1.114-2.616-1.51-13.15 7.59z"/><path d="M3.315 5.568l13.15-7.59 2.616-1.51-1.93-1.114-13.835 7.99z"/></svg>
               <div className="text-left flex flex-col justify-center">
                 <span className="text-[10px] text-gray-300 font-medium leading-[1]">Android</span>
@@ -77,30 +77,30 @@ export default function LandingPage() {
           </div>
 
           {/* Stats Badges */}
-          <div className="flex flex-row items-center justify-center gap-4 mb-14 w-full">
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-2.5 shadow-sm">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 w-full mt-2">
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide">40 Şehir</span>
+              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">40 Şehir</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-2.5 shadow-sm">
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide">16.364+ Oyuncu</span>
+              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">16.364+ Oyuncu</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-2.5 shadow-sm">
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide">1.395+ Takım</span>
+              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">1.395+ Takım</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-row items-center justify-center gap-6 w-full">
-            <Link href="/lig" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold px-10 py-3.5 rounded-[10px] transition-colors flex items-center gap-2 text-[14px]">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
+            <Link href="/lig" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold px-10 py-3.5 rounded-[10px] transition-colors flex items-center justify-center gap-2 text-[14px]">
               Keşfet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </Link>
-            <Link href="/lig" className="bg-[#0a192f]/40 border border-white/20 hover:bg-[#0a192f]/60 text-white font-bold px-8 py-3.5 rounded-[10px] transition-colors flex items-center gap-3 text-[14px] backdrop-blur-md">
+            <Link href="/lig" className="bg-[#0a192f]/40 border border-white/20 hover:bg-[#0a192f]/60 text-white font-bold px-8 py-3.5 rounded-[10px] transition-colors flex items-center justify-center gap-3 text-[14px] backdrop-blur-md">
               Misafir Girişi <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
             </Link>
-            <Link href="/giris" className="bg-transparent text-white font-bold px-6 py-3.5 rounded-[10px] hover:bg-white/5 transition-colors flex items-center gap-2 text-[14px]">
+            <Link href="/giris" className="bg-transparent text-white font-bold px-6 py-3.5 rounded-[10px] hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-[14px]">
               Giriş Yap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </Link>
           </div>
