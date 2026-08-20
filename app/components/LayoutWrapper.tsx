@@ -141,23 +141,37 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
       </div>
 
-      {/* Mobile Bottom Tab Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 flex justify-around items-stretch" style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
-        {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex flex-col items-center justify-center gap-0.5 py-2.5 flex-1 transition-colors ${
-                isActive ? "text-[#e60000]" : "text-gray-400"
-              }`}
-            >
-              {item.icon}
-              <span className="text-[10px] font-bold">{item.label}</span>
-            </Link>
-          );
-        })}
+      {/* Mobile Bottom Sponsor Marquee */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-[#1a1a2e] border-t-2 border-[#e60000] z-50 pb-[env(safe-area-inset-bottom,0px)] overflow-hidden shadow-[0_-5px_15px_rgba(0,0,0,0.2)]">
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            animation: marquee 15s linear infinite;
+            display: flex;
+            width: max-content;
+          }
+        `}} />
+        <div className="h-[46px] flex items-center">
+          <div className="animate-marquee items-center text-white font-black text-[13px] uppercase tracking-wider">
+            {/* Ilk Yarı */}
+            <div className="flex items-center gap-8 px-4">
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">🔥</span> SPONSORLUK ALANI</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">⚡</span> YENİ SEZON BAŞLIYOR</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">📺</span> MAÇLAR KLAS LİG TV'DE</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">🏆</span> BURSA'NIN EN BÜYÜĞÜ</span>
+            </div>
+            {/* Ikinci Yarı (Loop icin kopyası) */}
+            <div className="flex items-center gap-8 px-4">
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">🔥</span> SPONSORLUK ALANI</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">⚡</span> YENİ SEZON BAŞLIYOR</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">📺</span> MAÇLAR KLAS LİG TV'DE</span>
+              <span className="flex items-center gap-2"><span className="text-[#e60000] text-[16px]">🏆</span> BURSA'NIN EN BÜYÜĞÜ</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
