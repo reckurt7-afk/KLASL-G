@@ -7,10 +7,66 @@ import GundemCarousel from "./GundemCarousel";
 import MacSonuclariSlider from "./MacSonuclariSlider";
 import Link from "next/link";
 
+const NAV_ITEMS = [
+  {
+    href: "/lig",
+    label: "Haberler",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+        <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/puan-durumu",
+    label: "Puan D.",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/fikstur",
+    label: "Fikstür",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/>
+      </svg>
+    ),
+  },
+  {
+    href: "/takimlar",
+    label: "Takımlar",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    ),
+  },
+];
+
+const SIDEBAR_ITEMS = [
+  { href: "/lig", label: "HABERLER", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> },
+  { href: "/genel-bakis", label: "GENEL BAKIŞ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+  { href: "/puan-durumu", label: "PUAN DURUMU", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/></svg> },
+  { href: "/fikstur", label: "MAÇ PROGRAMI", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+  { href: "/takimlar", label: "TAKIM İSTATİSTİKLERİ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+  { href: "/oyunculari", label: "OYUNCU İSTATİSTİKLERİ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+  { href: "/transfer-borsasi", label: "TRANSFER BORSASI", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> },
+  { href: "/ceza-tahtasi", label: "CEZA TAHTASI", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> },
+];
+
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
-  // Hide complex layout on splash screen and auth pages
   const isSplash = pathname === "/";
   const isAuth = pathname.startsWith("/giris") || pathname.startsWith("/kayit") || pathname.startsWith("/admin");
 
@@ -18,7 +74,6 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return <>{children}</>;
   }
 
-  // Phase 5 Exact Match Layout
   return (
     <div className="flex flex-col bg-[#f4f6f8] min-h-screen font-sans">
       <Header />
@@ -27,62 +82,82 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <MacSonuclariSlider />
 
       {/* Two Column Section */}
-      <div className="max-w-[1600px] mx-auto w-full px-4 py-8 flex flex-col lg:flex-row gap-6">
+      <div className="max-w-[1600px] mx-auto w-full px-3 md:px-6 py-6 flex flex-col lg:flex-row gap-5">
         
-        {/* Left Sidebar (Desktop Only) */}
-        <aside className="w-[260px] hidden lg:block shrink-0">
-          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm sticky top-[90px]">
+        {/* Left Sidebar — Desktop Only */}
+        <aside className="w-[240px] hidden lg:block shrink-0">
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm sticky top-[86px]">
             <nav className="flex flex-col">
-              <Link href="/lig" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/lig' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">📰</span> HABERLER
-              </Link>
-              <Link href="/genel-bakis" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/genel-bakis' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">📊</span> GENEL BAKIŞ
-              </Link>
-              <Link href="/puan-durumu" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/puan-durumu' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">🏆</span> PUAN DURUMU
-              </Link>
-              <Link href="/fikstur" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/fikstur' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">📅</span> MAÇ PROGRAMI
-              </Link>
-              <Link href="/takimlar" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/takimlar' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">🛡️</span> TAKIM İSTATİSTİKLERİ
-              </Link>
-              <Link href="/transfer-borsasi" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/transfer-borsasi' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">💸</span> TRANSFER BORSASI
-              </Link>
-              <Link href="/ceza-tahtasi" className={`flex items-center gap-3 px-6 py-4 font-bold transition-colors ${pathname === '/ceza-tahtasi' ? 'bg-[#e60000] text-white' : 'text-gray-700 hover:bg-gray-50'}`}>
-                <span className="text-lg">⚖️</span> CEZA TAHTASI
-              </Link>
+              {SIDEBAR_ITEMS.map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-5 py-3.5 text-[13px] font-bold transition-colors border-b border-gray-50 last:border-0 ${
+                      isActive
+                        ? "bg-[#e60000] text-white"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }`}
+                  >
+                    <span className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`}>{item.icon}</span>
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </aside>
 
-        {/* Mobile Navbar (Visible only on small screens, instead of left sidebar) */}
-        <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 flex justify-around p-3 pb-safe">
-          <Link href="/lig" className="flex flex-col items-center text-red-600">
-             <span className="text-xl">📰</span>
-             <span className="text-[10px] font-bold mt-1">Haberler</span>
-          </Link>
-          <Link href="/puan-durumu" className="flex flex-col items-center text-gray-400">
-             <span className="text-xl">🏆</span>
-             <span className="text-[10px] font-bold mt-1">Puan D.</span>
-          </Link>
-          <Link href="/fikstur" className="flex flex-col items-center text-gray-400">
-             <span className="text-xl">📅</span>
-             <span className="text-[10px] font-bold mt-1">Fikstür</span>
-          </Link>
-          <Link href="/takimlar" className="flex flex-col items-center text-gray-400">
-             <span className="text-xl">🛡️</span>
-             <span className="text-[10px] font-bold mt-1">Takımlar</span>
-          </Link>
+        {/* Mobile: Sidebar as collapsible menu above content */}
+        <div className="lg:hidden w-full">
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mb-4">
+            <nav className="flex flex-col">
+              {SIDEBAR_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-5 py-3.5 text-[13px] font-bold transition-colors border-b border-gray-50 last:border-0 ${
+                      isActive
+                        ? "bg-[#e60000] text-white"
+                        : "text-gray-600"
+                    }`}
+                  >
+                    <span className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`}>{item.icon}</span>
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-6 shadow-[0_5px_20px_rgba(0,0,0,0.02)] mb-20 lg:mb-0 relative">
+        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-4 md:p-6 shadow-sm mb-24 lg:mb-0">
           {children}
         </main>
 
+      </div>
+
+      {/* Mobile Bottom Tab Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-50 flex justify-around items-stretch" style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
+        {NAV_ITEMS.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex flex-col items-center justify-center gap-0.5 py-2.5 flex-1 transition-colors ${
+                isActive ? "text-[#e60000]" : "text-gray-400"
+              }`}
+            >
+              {item.icon}
+              <span className="text-[10px] font-bold">{item.label}</span>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
