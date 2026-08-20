@@ -1,54 +1,63 @@
 "use client";
 
 import { useCityStore } from "../store/cityStore";
+import { useEffect, useState } from "react";
+import { publicFetch } from "../lib/supabase";
 
-const MOCK_HABERLER = [
-  {
-    id: 1,
-    title: "KAP BİLDİRİMİ",
-    summary: "Hafta sonu oynanacak olan büyük derbide iki namağlup takım karşı karşıya geliyor. Hazırlıklar tamamlandı.",
-    date: "9 Ara 2026",
-    category: "HABER",
-    image: "https://images.unsplash.com/photo-1518605368461-1e12dce38a42?q=80&w=600"
-  },
-  {
-    id: 2,
-    title: "KAP BİLDİRİMİ",
-    summary: "Geçen sezonun gol kralı yeni takımıyla ilk antrenmanına çıktı. Taraftarlar heyecanlı.",
-    date: "26 Kas 2026",
-    category: "HABER",
-    image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=600"
-  },
-  {
-    id: 3,
-    title: "KAP BİLDİRİMİ",
-    summary: "Bu haftanın kritik mücadelelerini yönetecek hakem triosu Merkez Hakem Kurulu tarafından açıklandı.",
-    date: "20 Kas 2026",
-    category: "HABER",
-    image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600"
-  },
-  {
-    id: 4,
-    title: "KAP BİLDİRİMİ",
-    summary: "Lig maçlarının oynanacağı tüm sahalarda zemin iyileştirme çalışmaları son sürat devam ediyor.",
-    date: "16 Eki 2026",
-    category: "HABER",
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600"
-  },
-  {
-    id: 5,
-    title: "KAP BİLDİRİMİ",
-    summary: "Lig maçlarının oynanacağı tüm sahalarda zemin iyileştirme çalışmaları son sürat devam ediyor.",
-    date: "30 Ağu 2026",
-    category: "HABER",
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600"
-  }
-];
+type Haber = {
+  id: number;
+  baslik: string;
+  ozet: string;
+  resim: string | null;
+  kategori: string;
+  created_at: string;
+};
 
 export default function LigMerkezi() {
   const { selectedCityId } = useCityStore();
+  const [haberler, setHaberler] = useState<Haber[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  // Selected city name can be derived from ID. For now just mock.
   const cityName = selectedCityId === 1 ? "İstanbul" : selectedCityId === 2 ? "Bursa" : selectedCityId === 3 ? "İzmir" : "Türkiye";
+
+  useEffect(() => {
+    async function fetchHaberler() {
+      try {
+        const data = await publicFetch("duyurular", "select=*&order=created_at.desc");
+        const parsed = data.map((d: any) => {
+          let ozet = d.aciklama || "";
+          let resim = "https://images.unsplash.com/photo-1518605368461-1e12dce38a42?q=80&w=600";
+          try {
+            const j = JSON.parse(d.aciklama || "{}");
+            if (j.ozet !== undefined) {
+              ozet = j.ozet;
+              if (j.resim) resim = j.resim;
+            }
+          } catch {}
+          return {
+            id: d.id,
+            baslik: d.baslik,
+            ozet,
+            resim,
+            kategori: d.renk || "HABER",
+            created_at: d.created_at
+          };
+        });
+        setHaberler(parsed);
+      } catch (err) {
+        console.error("Haberler yüklenemedi", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchHaberler();
+  }, []);
+
+  const formatDate = (dateStr: string) => {
+    const d = new Date(dateStr);
+    return `${d.getDate()} ${d.toLocaleString('tr-TR', { month: 'short' }).toUpperCase()} ${d.getFullYear()}`;
+  };
 
   return (
     <div className="w-full flex flex-col fade-in">
@@ -63,43 +72,49 @@ export default function LigMerkezi() {
            <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve haberler</p>
          </div>
          <div className="ml-auto w-7 h-7 bg-red-50 text-[#e60000] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
-            {MOCK_HABERLER.length}
+            {haberler.length}
          </div>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
-        {MOCK_HABERLER.map((haber) => (
-          <div key={haber.id} className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm">
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
-              style={{ backgroundImage: `url(${haber.image})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-            
-            {/* Top Badges */}
-            <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
-              <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded border border-white/10 uppercase tracking-wider">
-                {haber.date.split(" ")[0]} {haber.date.split(" ")[1].substring(0, 3)}
-              </span>
-              <span className="bg-[#e60000] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shadow-sm">
-                {haber.category}
-              </span>
-            </div>
+      {loading ? (
+        <div className="w-full py-12 flex justify-center"><div className="w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div></div>
+      ) : haberler.length === 0 ? (
+        <div className="w-full py-12 text-center text-gray-500 font-bold">Henüz haber bulunmuyor.</div>
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
+          {haberler.map((haber) => (
+            <div key={haber.id} className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm">
+              <div 
+                className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
+                style={{ backgroundImage: `url(${haber.resim})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              
+              {/* Top Badges */}
+              <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded border border-white/10 uppercase tracking-wider">
+                  {formatDate(haber.created_at)}
+                </span>
+                <span className="bg-[#e60000] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shadow-sm">
+                  {haber.kategori.toUpperCase()}
+                </span>
+              </div>
 
-            {/* Bottom Content */}
-            <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
-              <h3 className="text-white font-black text-[14px] md:text-[16px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
-                {haber.title}
-              </h3>
-              <p className="text-gray-300 text-[10px] md:text-[11px] font-medium opacity-80 mt-2 flex items-center gap-1 group-hover:text-white transition-colors">
-                DEVAMINI OKU
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </p>
+              {/* Bottom Content */}
+              <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
+                <h3 className="text-white font-black text-[14px] md:text-[16px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
+                  {haber.baslik}
+                </h3>
+                <p className="text-gray-300 text-[10px] md:text-[11px] font-medium opacity-80 mt-2 flex items-center gap-1 group-hover:text-white transition-colors">
+                  DEVAMINI OKU
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
