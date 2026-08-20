@@ -83,37 +83,37 @@ export default function LigMerkezi() {
       ) : haberler.length === 0 ? (
         <div className="w-full py-12 text-center text-gray-500 font-bold">Henüz haber bulunmuyor.</div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
+        <div className="flex flex-wrap gap-3 md:gap-4 w-full">
           {haberler.map((haber) => (
             <Link 
               key={haber.id} 
               href={`/duyuru/${haber.id}`}
-              className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm block"
+              className="relative w-[150px] h-[210px] md:w-[170px] md:h-[240px] rounded-[14px] overflow-hidden group cursor-pointer shadow-sm block shrink-0"
             >
               <div 
-                className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
+                className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" 
                 style={{ backgroundImage: `url(${haber.resim})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
               
               {/* Top Badges */}
-              <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
-                <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded border border-white/10 uppercase tracking-wider">
+              <div className="absolute top-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[8px] font-bold px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">
                   {formatDate(haber.created_at)}
                 </span>
-                <span className="bg-[#e60000] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shadow-sm">
+                <span className="bg-[#e60000] text-white text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
                   {haber.kategori.toUpperCase()}
                 </span>
               </div>
 
               {/* Bottom Content */}
-              <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
-                <h3 className="text-white font-black text-[14px] md:text-[16px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
+              <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col z-10">
+                <h3 className="text-white font-black text-[12px] md:text-[13px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
                   {haber.baslik}
                 </h3>
-                <p className="text-gray-300 text-[10px] md:text-[11px] font-medium opacity-80 mt-2 flex items-center gap-1 group-hover:text-white transition-colors">
+                <p className="text-gray-300 text-[9px] md:text-[10px] font-bold opacity-90 mt-1 flex items-center gap-1 group-hover:text-white transition-colors uppercase">
                   DEVAMINI OKU
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </p>
               </div>
             </Link>
