@@ -23,7 +23,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setYukleniyor(true);
+    setLoading(true);
     async function takimlariGetir() {
       const data = await publicFetch(
         "teams",

@@ -14,8 +14,9 @@ export default function TakimlarListesi() {
 
   useEffect(() => {
     async function getir() {
-      const data = await publicFetch("teams", "select=id,name,logo&order=name.asc");
-      if (data.length > 0) setTakimlar(data);
+      setLoading(true);
+      const data = await publicFetch("teams", `select=id,name,logo&league_id=eq.${selectedCityId}&order=name.asc`);
+      setTakimlar(data || []);
       setLoading(false);
     }
     getir();
