@@ -12,6 +12,7 @@ type Mac = {
   tarih: string | null;
   saat: string | null;
   saha: string | null;
+  durum?: string | null;
 };
 
 const TEAM_LOGOS: Record<string, string> = {
@@ -39,7 +40,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
     async function maclariGetir() {
       const data = await publicFetch(
         "maclar",
-        "select=id,hafta,ev_sahibi,deplasman,tarih,saat,saha&order=hafta.asc,saat.asc"
+        "select=id,hafta,ev_sahibi,deplasman,tarih,saat,saha,durum&order=hafta.asc,saat.asc"
       );
       if (data.length > 0) setMaclar(data);
       setLoading(false);
@@ -112,7 +113,13 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                         <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">Başlama</span>
                         <div className="bg-[#070707] border border-[rgba(255,255,255,0.07)] rounded-xl px-2 md:px-4 py-1.5 md:py-2">
                           <span className="text-white font-black text-lg md:text-2xl">
-                            {mac.saat ? mac.saat.substring(0, 5) : "--:--"}
+                            {mac.durum === "ERTELENDİ" ? (
+                              <span className="text-[#ff3131] text-sm md:text-base">ERTELENDİ</span>
+                            ) : mac.saat ? (
+                              mac.saat.substring(0, 5)
+                            ) : (
+                              "--:--"
+                            )}
                           </span>
                         </div>
                       </div>
