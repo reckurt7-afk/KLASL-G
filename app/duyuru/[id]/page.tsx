@@ -65,29 +65,20 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
   return (
     <div className="w-full max-w-[1200px] mx-auto px-4 py-6 font-sans">
       
-      {/* Görsel ve Başlık (Evrensel Bulanık Arka Plan & Sığdırma Tasarımı) */}
-      <div className="relative w-full h-[280px] sm:h-[380px] md:h-[480px] rounded-2xl md:rounded-3xl overflow-hidden shadow-md mb-6 bg-gray-950">
+      {/* Görsel ve Başlık */}
+      <div className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-md mb-6">
         {showImage ? (
-          <>
-            {/* Arka Plan Bulanık Görsel */}
-            <img 
-              src={showImage} 
-              alt="background blur" 
-              className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-30 select-none pointer-events-none" 
-            />
-            {/* Ortadaki Orijinal Görsel (Kırpılmadan Sığdırılır) */}
-            <img 
-              src={showImage} 
-              alt={haber.baslik} 
-              className="relative mx-auto h-full w-auto object-contain z-10 block" 
-            />
-          </>
+          <img 
+            src={showImage} 
+            alt={haber.baslik} 
+            className="w-full h-auto block" 
+          />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#e60000]/80" />
+          <div className="w-full aspect-video bg-gradient-to-br from-[#1a1a2e] to-[#e60000]/80" />
         )}
         
-        {/* Karartma Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-none z-20" />
+        {/* Karartma Overlay Sadece Altta */}
+        <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none z-20" />
         
         {/* Yazılar (Görselin Sol Alt Köşesinde) */}
         <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white z-30">
