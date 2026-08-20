@@ -164,13 +164,6 @@ export default function ProfilPage() {
               👑 ADMİN PANELİNE GİT
             </Link>
           )}
-          
-          <button
-            onClick={cikisYap}
-            className="w-full py-4 bg-[#1a0a0a] border border-red-900/50 text-red-400 font-black rounded-2xl hover:bg-red-500/10 hover:border-red-500/50 transition-all duration-200"
-          >
-            🚪 Çıkış Yap
-          </button>
         </div>
       </div>
     </div>
