@@ -82,6 +82,18 @@ export default function AdminGundemPage() {
       ({ error } = await supabase.from("duyurular").update(payload).eq("id", editId));
     } else {
       ({ error } = await supabase.from("duyurular").insert(payload));
+      
+      if (!error) {
+        // Yeni haber eklendiğinde abonelere bildirim gönder
+        fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "KAP BİLDİRİMİ: " + baslik.trim(),
+            mesaj: ozet.trim() || "Klas Lig sistemine yeni bir duyuru eklendi, hemen incele!",
+          })
+        }).catch(err => console.error("Bildirim gönderme hatası:", err));
+      }
     }
 
     setSaving(false);
