@@ -65,7 +65,7 @@ export default function Hero({
         {
           event: "*",
           schema: "public",
-          table: "maclar",
+          table: "matches",
         },
         () => {
           canliMacGetir();
@@ -75,9 +75,9 @@ export default function Hero({
 
     const channelOlay = supabase
       .channel("mac-olaylari")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "mac_olaylari" }, (payload) => {
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "match_events" }, (payload) => {
         canliMacGetir();
-        if (payload.new.tip === "gol") {
+        if (payload.new.event_type === "GOL") {
           setSonGolOlay(payload.new);
           setGolAnimasyon(true);
           golSesiCal();
@@ -94,18 +94,18 @@ export default function Hero({
 
   async function canliMacGetir() {
     const { data } = await supabase
-      .from("maclar")
-      .select("*")
-      .eq("canli", true)
+      .from("matches")
+      .select("*, home_team:home_team_id(name,logo), away_team:away_team_id(name,logo)")
+      .eq("is_live", true)
       .single();
 
     if (data) {
       setMac(data);
       const { data: olayData } = await supabase
-        .from("mac_olaylari")
-        .select("*")
-        .eq("mac_id", data.id)
-        .order("dakika", { ascending: false });
+        .from("match_events")
+        .select("*, players(first_name, last_name)")
+        .eq("match_id", data.id)
+        .order("minute", { ascending: false });
       setOlaylar(olayData || []);
     } else {
       setMac(null);
@@ -177,13 +177,13 @@ export default function Hero({
             <div className="text-white text-2xl md:text-3xl font-black leading-snug">
               {mac ? (
                 <div className="flex flex-col items-center gap-2">
-                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.ev_sahibi}</div>
+                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.home_team?.name}</div>
 
                   <div className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ff3131] via-[#e61c1c] to-[#a11212] drop-shadow-[0_0_25px_rgba(255,49,49,0.7)] my-4 tracking-tighter">
-                    {mac.ev_skor} - {mac.dep_skor}
+                    {mac.home_score} - {mac.away_score}
                   </div>
 
-                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.deplasman}</div>
+                  <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.away_team?.name}</div>
                 </div>
               ) : (
                 <div className="text-gray-400 text-lg md:text-xl font-bold py-6">Şu an oynanan canlı maç bulunmuyor.</div>
@@ -195,7 +195,7 @@ export default function Hero({
                 <div className="flex justify-around items-center">
                   <div className="flex flex-col items-center">
                     <span className="text-[#ff3131] text-xl">⏱️</span>
-                    <span className="font-black text-white">{mac.dakika}'</span>
+                    <span className="font-black text-white">{mac.current_minute}'</span>
                   </div>
                   <div className="flex flex-col items-center">
                     <span className="text-[#ff3131] text-xl">📍</span>
@@ -235,15 +235,15 @@ export default function Hero({
                   {olaylar.map((olay, i) => (
                     <div key={i} className="flex items-center gap-3 bg-black/40 border border-white/5 p-2.5 rounded-xl">
                       <div className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#ff3131]/10 rounded-lg text-sm font-black text-[#ff3131]">
-                        {olay.dakika}'
+                        {olay.minute}'
                       </div>
                       <div className="text-xl">
-                        {olay.tip === "gol" ? "⚽" : olay.tip === "sari_kart" ? "🟨" : olay.tip === "kirmizi_kart" ? "🟥" : "🔄"}
+                        {olay.event_type === "GOL" ? "⚽" : olay.event_type === "SARI_KART" ? "🟨" : olay.event_type === "KIRMIZI_KART" ? "🟥" : "🔄"}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-white font-bold text-sm truncate">{olay.oyuncu}</div>
+                        <div className="text-white font-bold text-sm truncate">{(olay.players ? (olay.players.first_name + " " + (olay.players.last_name||"")) : "Bilinmeyen")}</div>
                         <div className="text-gray-400 text-xs truncate">
-                          {olay.takim_yonu === "ev" ? mac.ev_sahibi : mac.deplasman}
+                          {olay.team_id === mac.home_team_id ? mac.home_team?.name : mac.away_team?.name}
                         </div>
                       </div>
                     </div>
@@ -262,7 +262,7 @@ export default function Hero({
                   GOOOOOL!
                 </h1>
                 <div className="text-2xl md:text-4xl text-yellow-300 font-black mt-4 drop-shadow-[0_0_10px_rgba(0,0,0,1)] uppercase">
-                  ⚽ {sonGolOlay.oyuncu} ({sonGolOlay.dakika}')
+                  ⚽ {(sonGolOlay.players ? (sonGolOlay.players.first_name + " " + (sonGolOlay.players.last_name||"")) : "Bilinmeyen")} ({sonGolOlay.minute}')
                 </div>
               </div>
             </div>
