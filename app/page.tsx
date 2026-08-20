@@ -77,31 +77,31 @@ export default function LandingPage() {
           </div>
 
           {/* Stats Badges */}
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3 w-full mt-2">
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">40 Şehir</span>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">40 Şehir</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">16.364+ Oyuncu</span>
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">16.364+ Oyuncu</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center justify-center gap-2.5 shadow-sm">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
-              <span className="text-white font-bold text-[13px] tracking-wide whitespace-nowrap">1.395+ Takım</span>
+            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
+              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">1.395+ Takım</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
-            <Link href="/lig" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold px-10 py-3.5 rounded-[10px] transition-colors flex items-center justify-center gap-2 text-[14px]">
-              Keşfet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-5 w-full mt-8">
+            <Link href="/lig" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold px-12 py-4 rounded-[12px] transition-colors flex items-center justify-center gap-3 text-[16px] md:text-[18px]">
+              Keşfet <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </Link>
-            <Link href="/lig" className="bg-[#0a192f]/40 border border-white/20 hover:bg-[#0a192f]/60 text-white font-bold px-8 py-3.5 rounded-[10px] transition-colors flex items-center justify-center gap-3 text-[14px] backdrop-blur-md">
-              Misafir Girişi <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            <Link href="/lig" className="bg-[#0a192f]/40 border border-white/20 hover:bg-[#0a192f]/60 text-white font-bold px-10 py-4 rounded-[12px] transition-colors flex items-center justify-center gap-3 text-[16px] md:text-[18px] backdrop-blur-md">
+              Misafir Girişi <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
             </Link>
-            <Link href="/giris" className="bg-transparent text-white font-bold px-6 py-3.5 rounded-[10px] hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-[14px]">
-              Giriş Yap <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <Link href="/giris" className="bg-transparent text-white font-bold px-8 py-4 rounded-[12px] hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-[16px] md:text-[18px]">
+              Giriş Yap <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </Link>
           </div>
         </div>
