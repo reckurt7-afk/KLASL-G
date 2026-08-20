@@ -79,17 +79,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-6 shadow-sm mb-20 lg:mb-0">
-          <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-xl border border-red-100">
-             <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white text-xl shadow-sm">📰</div>
-             <div>
-               <h1 className="text-xl font-black text-gray-900">Lig Merkezi</h1>
-               <p className="text-xs text-gray-500 font-bold">Şehrin son gelişmeleri ve lig durumu</p>
-             </div>
-             <div className="ml-auto bg-white border border-gray-200 px-3 py-1 rounded-full text-xs font-bold text-gray-600 shadow-sm">
-                10
-             </div>
-          </div>
+        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-6 shadow-[0_5px_20px_rgba(0,0,0,0.02)] mb-20 lg:mb-0 relative">
           {children}
         </main>
 

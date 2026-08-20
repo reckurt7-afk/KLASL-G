@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import MacSaatleriListesi from "../components/MacSaatleriListesi";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
