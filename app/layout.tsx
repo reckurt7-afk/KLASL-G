@@ -34,6 +34,8 @@ export const viewport: Viewport = {
   themeColor: "#070707",
 };
 
+import LayoutWrapper from "./components/LayoutWrapper";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,13 +51,10 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <ServiceWorkerRegister />
-          <CanliSkorBandi />
           <GolSesiDinleyici />
-          <Topbar />
-          <Navbar />
-          {children}
-          <Footer />
-          <ReklamBandi />
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
         </AuthProvider>
       </body>
     </html>
