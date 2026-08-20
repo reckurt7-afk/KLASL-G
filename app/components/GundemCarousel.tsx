@@ -38,7 +38,7 @@ export default function GundemCarousel() {
   async function loadHaberler() {
     try {
       const data = await publicFetch("duyurular", "select=id,baslik,aciklama,renk,aktif,created_at&aktif=eq.true&order=created_at.desc&limit=8");
-      const parsed = (data || []).map(parseHaber).filter((h: Haber) => h.baslik);
+      const parsed = (data || []).map(parseHaber).filter((h: Haber) => h.baslik && h.kategori !== "KAP");
       setHaberler(parsed.length > 0 ? parsed : MOCK_FALLBACK);
     } catch {
       setHaberler(MOCK_FALLBACK);

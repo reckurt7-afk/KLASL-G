@@ -26,6 +26,7 @@ export default function DuyurularPage() {
       .from("duyurular")
       .select("*")
       .eq("aktif", true)
+      .neq("renk", "KAP")
       .order("created_at", { ascending: false });
 
     if (!error && data) {

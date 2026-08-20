@@ -24,7 +24,7 @@ export default function LigMerkezi() {
   useEffect(() => {
     async function fetchHaberler() {
       try {
-        const data = await publicFetch("duyurular", "select=*&order=created_at.desc");
+        const data = await publicFetch("duyurular", "select=*&renk=eq.KAP&order=created_at.desc");
         const parsed = data.map((d: any) => {
           let ozet = d.aciklama || "";
           let resim = "https://images.unsplash.com/photo-1518605368461-1e12dce38a42?q=80&w=600";
