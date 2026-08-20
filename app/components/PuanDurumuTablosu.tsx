@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
+import { motion } from "framer-motion";
 
 type Takim = {
   id: number;
@@ -35,10 +36,23 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
   const skeletons = Array.from({ length: mini ? 4 : 8 });
   const displayTakimlar = mini ? takimlar.slice(0, 4) : takimlar;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
   return (
     <div className="w-full">
       <div className="text-center mb-8 sm:mb-12">
-        <h2 className="text-3xl md:text-5xl font-black text-white">🏆 PUAN DURUMU</h2>
+        <h2 className="section-title">🏆 PUAN DURUMU</h2>
         <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG BURSA</p>
       </div>
 
@@ -56,7 +70,12 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
               <div className="text-center text-white">P</div>
             </div>
 
-            <div className="flex flex-col bg-[#111]">
+            <motion.div 
+              className="flex flex-col bg-transparent"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+            >
               {loading ? (
                 skeletons.map((_, i) => (
                   <div key={i} className="grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center border-b border-[rgba(255,255,255,0.03)] p-2 sm:p-4">
@@ -80,41 +99,46 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                   let medal: React.ReactNode = i + 1;
                   
                   if (i === 0) {
-                    rankColor = "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]";
-                    rowBg = "bg-yellow-500/[0.03]";
-                    medal = "👑";
+                    rankColor = "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]";
+                    rowBg = "bg-gradient-to-r from-yellow-500/10 to-transparent border-l-[3px] border-l-yellow-500";
+                    medal = "🥇";
                   } else if (i === 1) {
                     rankColor = "text-gray-300 drop-shadow-[0_0_8px_rgba(209,213,219,0.5)]";
-                    rowBg = "bg-gray-400/[0.03]";
+                    rowBg = "bg-gradient-to-r from-gray-400/10 to-transparent border-l-[3px] border-l-gray-300";
                     medal = "🥈";
                   } else if (i === 2) {
                     rankColor = "text-amber-600 drop-shadow-[0_0_8px_rgba(217,119,6,0.5)]";
-                    rowBg = "bg-amber-600/[0.03]";
+                    rowBg = "bg-gradient-to-r from-amber-600/10 to-transparent border-l-[3px] border-l-amber-600";
                     medal = "🥉";
+                  } else if (i >= takimlar.length - 2 && !mini) {
+                    rankColor = "text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]";
+                    rowBg = "bg-gradient-to-r from-red-500/10 to-transparent border-l-[3px] border-l-red-500";
+                  } else {
+                    rowBg = "border-l-[3px] border-l-transparent";
                   }
 
                   return (
-                    <div key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-[rgba(255,255,255,0.03)] last:border-b-0 text-white p-2 sm:p-4 transition-all duration-300 hover:bg-white/[0.02] group text-[11px] sm:text-sm`}>
+                    <motion.div variants={itemVariants} key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-[rgba(255,255,255,0.03)] last:border-b-0 text-white p-2 sm:p-4 transition-all duration-300 hover:bg-white/[0.04] group text-[11px] sm:text-sm`}>
                       <div className={`font-black text-[13px] sm:text-lg text-center ${rankColor} transition-transform group-hover:scale-110`}>
                         {medal}
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
-                        <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-[#070707] border border-[rgba(255,255,255,0.1)] group-hover:border-[#ff3131]/50 transition-colors flex items-center justify-center">
+                        <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-[#070707] border border-[rgba(255,255,255,0.1)] group-hover:border-[#ff3131]/70 transition-colors flex items-center justify-center shadow-lg">
                           <Image src={t.logo} alt={t.ad} fill className="object-contain p-[2px] sm:p-1" />
                         </div>
                         <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#ff3131] transition-colors">{t.ad}</span>
                       </div>
                       <div className="text-center text-gray-400">{t.oynanan}</div>
-                      <div className="text-center font-medium text-green-500">{t.galibiyet}</div>
-                      <div className="text-center font-medium text-gray-500">{t.beraberlik}</div>
-                      <div className="text-center font-medium text-red-500">{t.maglubiyet}</div>
+                      <div className="text-center font-medium text-green-500 drop-shadow-md">{t.galibiyet}</div>
+                      <div className="text-center font-medium text-gray-500 drop-shadow-md">{t.beraberlik}</div>
+                      <div className="text-center font-medium text-red-500 drop-shadow-md">{t.maglubiyet}</div>
                       <div className="text-center font-bold text-gray-300">{t.averaj > 0 ? `+${t.averaj}` : t.averaj}</div>
-                      <div className="text-center font-black text-[12px] sm:text-base text-white bg-[#ff3131] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_10px_rgba(255,49,49,0.2)]">{t.puan}</div>
-                    </div>
+                      <div className="text-center font-black text-[12px] sm:text-base text-white bg-gradient-to-br from-[#ff3131] to-[#a11212] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(255,49,49,0.3)]">{t.puan}</div>
+                    </motion.div>
                   );
                 })
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
