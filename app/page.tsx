@@ -35,16 +35,11 @@ export default function LandingPage() {
 
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[100px] pb-24 overflow-hidden">
-        {/* Background Video */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover z-0 opacity-[0.35] mix-blend-luminosity"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-soccer-player-kicking-the-ball-in-the-stadium-14282-large.mp4" type="video/mp4" />
-        </video>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center opacity-[0.35] mix-blend-luminosity"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1920')" }}
+        ></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/90 via-[#070b14]/60 to-[#070b14]"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1200px] mx-auto px-4 gap-8">
