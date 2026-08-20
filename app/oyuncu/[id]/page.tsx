@@ -23,7 +23,7 @@ type Oyuncu = {
 const TEAM_LOGOS: Record<string, string> = {
   "PS 5": "/logos/ps5.png",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
-  "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
+  "NOVA FC": "/logos/nova-fc.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",
   "YEDİYOL BLACK FC": "/logos/yediyol-black-fc.png",
   "GRAVYER FC": "/logos/gravyer-fc.png",

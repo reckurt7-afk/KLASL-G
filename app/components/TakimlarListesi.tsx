@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const takimlar = [
   { ad: "PS 5", logo: "/logos/ps5.png", link: "/takim/ps-5" },
   { ad: "KROKODİLLA FC", logo: "/logos/krokodilla-fc.png", link: "/takim/krokodilla-fc" },
-  { ad: "DÜNDAR KÖYÜ", logo: "/logos/dundar-koyu.png", link: "/takim/dundar-koyu" },
+  { ad: "NOVA FC", logo: "/logos/nova-fc.png", link: "/takim/nova-fc" },
   { ad: "YEŞİL BURSA FC", logo: "/logos/yesil-bursa-fc.png", link: "/takim/yesil-bursa-fc" },
   { ad: "YEDİYOL BLACK FC", logo: "/logos/yediyol-black-fc.png", link: "/takim/yediyol-black-fc" },
   { ad: "GRAVYER FC", logo: "/logos/gravyer-fc.png", link: "/takim/gravyer-fc" },

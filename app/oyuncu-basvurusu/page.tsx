@@ -7,7 +7,7 @@ const takimlar = [
   "PS 5",
   "DİNAMO NALBANTOĞLU",
   "KROKODİLLA FC",
-  "DÜNDAR KÖYÜ",
+  "NOVA FC",
   "YEŞİL BURSA FC",
   "YEDİYOL BLACK FC",
   "GRAVYER FC",

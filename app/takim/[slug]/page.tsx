@@ -21,7 +21,7 @@ const takimBilgileri: Record<string, { ad: string; logo: string; }> = {
   "ps-5": { ad: "PS 5", logo: "/logos/ps5.png" },
   "dinamo-nalbantoglu": { ad: "DİNAMO NALBANTOĞLU", logo: "/logos/dinamo-nalbantoglu.png" },
   "krokodilla-fc": { ad: "KROKODİLLA FC", logo: "/logos/krokodilla-fc.png" },
-  "dundar-koyu": { ad: "DÜNDAR KÖYÜ", logo: "/logos/dundar-koyu.png" },
+  "nova-fc": { ad: "NOVA FC", logo: "/logos/nova-fc.png" },
   "yesil-bursa-fc": { ad: "YEŞİL BURSA FC", logo: "/logos/yesil-bursa-fc.png" },
   "yediyol-black-fc": { ad: "YEDİYOL BLACK FC", logo: "/logos/yediyol-black-fc.png" },
   "gravyer-fc": { ad: "GRAVYER FC", logo: "/logos/gravyer-fc.png" },
@@ -124,7 +124,7 @@ export default function TakimDetayPage() {
 const TEAM_LOGOS: Record<string, string> = {
   "PS 5": "/logos/ps5.png",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
-  "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
+  "NOVA FC": "/logos/nova-fc.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",
   "YEDİYOL BLACK FC": "/logos/yediyol-black-fc.png",
   "GRAVYER FC": "/logos/gravyer-fc.png",

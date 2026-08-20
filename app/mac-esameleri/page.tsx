@@ -14,7 +14,7 @@ type Oyuncu = {
 const takimlar = [
   "PS 5",
   "Dinamo Nalbantoğlu",
-  "Dündar Köyü",
+  "NOVA FC",
   "KROKODİLLA FC",
   "Yeşil Bursa FC",
   "Yediyol Black FC",
@@ -28,7 +28,7 @@ const haftalar = [
     maclar: [
       ["Dinamo Nalbantoğlu", "KROKODİLLA FC"],
       ["Yeşil Bursa FC", "BİSKREM FC"],
-      ["Dündar Köyü", "GRAVYER FC"],
+      ["NOVA FC", "GRAVYER FC"],
       ["Yediyol Black FC", "PS 5"],
     ],
   },
@@ -38,7 +38,7 @@ const haftalar = [
       ["Dinamo Nalbantoğlu", "BİSKREM FC"],
       ["KROKODİLLA FC", "GRAVYER FC"],
       ["Yeşil Bursa FC", "PS 5"],
-      ["Dündar Köyü", "Yediyol Black FC"],
+      ["NOVA FC", "Yediyol Black FC"],
     ],
   },
   {
@@ -47,7 +47,7 @@ const haftalar = [
       ["Dinamo Nalbantoğlu", "GRAVYER FC"],
       ["BİSKREM FC", "PS 5"],
       ["KROKODİLLA FC", "Yediyol Black FC"],
-      ["Yeşil Bursa FC", "Dündar Köyü"],
+      ["Yeşil Bursa FC", "NOVA FC"],
     ],
   },
   {
@@ -55,7 +55,7 @@ const haftalar = [
     maclar: [
       ["Dinamo Nalbantoğlu", "PS 5"],
       ["GRAVYER FC", "Yediyol Black FC"],
-      ["BİSKREM FC", "Dündar Köyü"],
+      ["BİSKREM FC", "NOVA FC"],
       ["KROKODİLLA FC", "Yeşil Bursa FC"],
     ],
   },

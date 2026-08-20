@@ -12,7 +12,7 @@ const logolar: Record<string, string> = {
   "BİSKREM FC": "/logos/biskrem-fc.png",
   "Gravyer FC": "/logos/gravyer-fc.png",
   "Yediyol Black FC": "/logos/yediyol-black-fc.png",
-  "Dündar Köyü": "/logos/dundar-koyu.png",
+  "NOVA FC": "/logos/nova-fc.png",
   "PS 5": "/logos/ps5.png",
 };
 
@@ -21,7 +21,7 @@ const haftalar = [
     hafta: "1. HAFTA",
     maclar: [
       ["Yeşil Bursa FC", "BİSKREM FC"],
-      ["Dündar Köyü", "Gravyer FC"],
+      ["NOVA FC", "Gravyer FC"],
     ],
   },
   {
@@ -30,7 +30,7 @@ const haftalar = [
       ["Dinamo Nalbantoğlu", "BİSKREM FC"],
       ["Krokodilla FK", "Gravyer FC"],
       ["Yeşil Bursa FC", "PS 5"],
-      ["Dündar Köyü", "Yediyol Black FC"],
+      ["NOVA FC", "Yediyol Black FC"],
     ],
   },
   {
@@ -39,7 +39,7 @@ const haftalar = [
       ["Dinamo Nalbantoğlu", "Gravyer FC"],
       ["BİSKREM FC", "PS 5"],
       ["Krokodilla FK", "Yediyol Black FC"],
-      ["Yeşil Bursa FC", "Dündar Köyü"],
+      ["Yeşil Bursa FC", "NOVA FC"],
     ],
   },
   {
@@ -47,7 +47,7 @@ const haftalar = [
     maclar: [
       ["Dinamo Nalbantoğlu", "PS 5"],
       ["Gravyer FC", "Yediyol Black FC"],
-      ["BİSKREM FC", "Dündar Köyü"],
+      ["BİSKREM FC", "NOVA FC"],
       ["Krokodilla FK", "Yeşil Bursa FC"],
     ],
   },
@@ -55,7 +55,7 @@ const haftalar = [
     hafta: "5. HAFTA",
     maclar: [
       ["Dinamo Nalbantoğlu", "Yediyol Black FC"],
-      ["PS 5", "Dündar Köyü"],
+      ["PS 5", "NOVA FC"],
       ["Gravyer FC", "Yeşil Bursa FC"],
       ["BİSKREM FC", "Krokodilla FK"],
     ],
@@ -63,7 +63,7 @@ const haftalar = [
   {
     hafta: "6. HAFTA",
     maclar: [
-      ["Dinamo Nalbantoğlu", "Dündar Köyü"],
+      ["Dinamo Nalbantoğlu", "NOVA FC"],
       ["Yediyol Black FC", "Yeşil Bursa FC"],
       ["PS 5", "Krokodilla FK"],
       ["Gravyer FC", "BİSKREM FC"],
@@ -73,7 +73,7 @@ const haftalar = [
     hafta: "7. HAFTA",
     maclar: [
       ["Dinamo Nalbantoğlu", "Yeşil Bursa FC"],
-      ["Dündar Köyü", "Krokodilla FK"],
+      ["NOVA FC", "Krokodilla FK"],
       ["Yediyol Black FC", "BİSKREM FC"],
       ["PS 5", "Gravyer FC"],
     ],

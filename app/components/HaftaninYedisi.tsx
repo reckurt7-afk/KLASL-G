@@ -17,7 +17,7 @@ type Oyuncu = {
 const TEAM_LOGOS: Record<string, string> = {
   "PS 5": "/logos/ps5.png",
   "KROKODİLLA FC": "/logos/krokodilla-fc.png",
-  "DÜNDAR KÖYÜ": "/logos/dundar-koyu.png",
+  "NOVA FC": "/logos/nova-fc.png",
   "YEŞİL BURSA FC": "/logos/yesil-bursa-fc.png",
   "YEDİYOL BLACK FC": "/logos/yediyol-black-fc.png",
   "GRAVYER FC": "/logos/gravyer-fc.png",
@@ -59,7 +59,7 @@ export default function HaftaninYedisi() {
     { id: 1, ad_soyad: "Ahmet Yılmaz", takim: "YEŞİL BURSA FC", mevki: "KL", genel_puan: 89 },
     { id: 2, ad_soyad: "Mehmet Demir", takim: "YEDİYOL BLACK FC", mevki: "DEF", genel_puan: 87 },
     { id: 3, ad_soyad: "Caner Erkin", takim: "KROKODİLLA FC", mevki: "DEF", genel_puan: 86 },
-    { id: 4, ad_soyad: "Emre Belözoğlu", takim: "DÜNDAR KÖYÜ", mevki: "OS", genel_puan: 91 },
+    { id: 4, ad_soyad: "Emre Belözoğlu", takim: "NOVA FC", mevki: "OS", genel_puan: 91 },
     { id: 5, ad_soyad: "Alex de Souza", takim: "GRAVYER FC", mevki: "OS", genel_puan: 94 },
     { id: 6, ad_soyad: "Gökdeniz Karadeniz", takim: "DİNAMO NALBANTOĞLU", mevki: "OS", genel_puan: 88 },
     { id: 7, ad_soyad: "Burak Yılmaz", takim: "PS 5", mevki: "FOR", genel_puan: 92 },
