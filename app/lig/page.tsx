@@ -5,34 +5,42 @@ import { useCityStore } from "../store/cityStore";
 const MOCK_HABERLER = [
   {
     id: 1,
-    title: "Şehrin En Büyük Derbisi!",
+    title: "KAP BİLDİRİMİ",
     summary: "Hafta sonu oynanacak olan büyük derbide iki namağlup takım karşı karşıya geliyor. Hazırlıklar tamamlandı.",
-    date: "20 Ağustos 2026",
-    category: "ÖN İNCELEME",
+    date: "9 Ara 2026",
+    category: "HABER",
     image: "https://images.unsplash.com/photo-1518605368461-1e12dce38a42?q=80&w=600"
   },
   {
     id: 2,
-    title: "Yıldız Oyuncu Transfer Oldu",
+    title: "KAP BİLDİRİMİ",
     summary: "Geçen sezonun gol kralı yeni takımıyla ilk antrenmanına çıktı. Taraftarlar heyecanlı.",
-    date: "19 Ağustos 2026",
-    category: "TRANSFER",
+    date: "26 Kas 2026",
+    category: "HABER",
     image: "https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=600"
   },
   {
     id: 3,
-    title: "Hakem Atamaları Belli Oldu",
+    title: "KAP BİLDİRİMİ",
     summary: "Bu haftanın kritik mücadelelerini yönetecek hakem triosu Merkez Hakem Kurulu tarafından açıklandı.",
-    date: "18 Ağustos 2026",
-    category: "DUYURU",
+    date: "20 Kas 2026",
+    category: "HABER",
     image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600"
   },
   {
     id: 4,
-    title: "Saha Zeminleri Yenileniyor",
+    title: "KAP BİLDİRİMİ",
     summary: "Lig maçlarının oynanacağı tüm sahalarda zemin iyileştirme çalışmaları son sürat devam ediyor.",
-    date: "17 Ağustos 2026",
-    category: "ALTYAPI",
+    date: "16 Eki 2026",
+    category: "HABER",
+    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600"
+  },
+  {
+    id: 5,
+    title: "KAP BİLDİRİMİ",
+    summary: "Lig maçlarının oynanacağı tüm sahalarda zemin iyileştirme çalışmaları son sürat devam ediyor.",
+    date: "30 Ağu 2026",
+    category: "HABER",
     image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600"
   }
 ];
@@ -40,56 +48,58 @@ const MOCK_HABERLER = [
 export default function LigMerkezi() {
   const { selectedCityId } = useCityStore();
 
-  // Selected city name can be derived from ID. For now just mock.
   const cityName = selectedCityId === 1 ? "İstanbul" : selectedCityId === 2 ? "Bursa" : selectedCityId === 3 ? "İzmir" : "Türkiye";
 
   return (
     <div className="w-full flex flex-col fade-in">
       
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-xl border border-red-100">
-         <div className="w-10 h-10 bg-[#e60000] rounded-lg flex items-center justify-center text-white shadow-sm">
-           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+      <div className="flex items-center gap-4 mb-5 bg-white h-[70px] rounded-2xl border border-gray-100 shadow-sm px-4">
+         <div className="w-12 h-12 bg-[#e60000] rounded-xl flex items-center justify-center text-white shadow-md shrink-0">
+           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
          </div>
-         <div>
-           <h1 className="text-[20px] font-black text-[#1a1a2e]">{cityName} Haberleri</h1>
-           <p className="text-[12px] text-gray-500 font-bold">Şehrin son gelişmeleri ve haberler</p>
+         <div className="flex flex-col justify-center">
+           <h1 className="text-[15px] md:text-[17px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Haberleri</h1>
+           <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve haberler</p>
          </div>
-         <div className="ml-auto bg-white border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold text-gray-600 shadow-sm">
-            {MOCK_HABERLER.length} Haber
+         <div className="ml-auto w-7 h-7 bg-red-50 text-[#e60000] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
+            {MOCK_HABERLER.length}
          </div>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 w-full">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 w-full">
         {MOCK_HABERLER.map((haber) => (
-          <div key={haber.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group cursor-pointer flex flex-col">
-            <div className="relative w-full h-[200px] overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
-                style={{ backgroundImage: `url(${haber.image})` }}
-              ></div>
-              <div className="absolute top-3 left-3 bg-[#e60000] text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded">
-                {haber.category}
-              </div>
-            </div>
+          <div key={haber.id} className="relative w-full aspect-[3/4] md:h-[320px] rounded-2xl overflow-hidden group cursor-pointer shadow-sm">
+            <div 
+              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" 
+              style={{ backgroundImage: `url(${haber.image})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             
-            <div className="p-5 flex flex-col flex-1">
-              <span className="text-[11px] text-gray-400 font-bold mb-2 flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                {haber.date}
+            {/* Top Badges */}
+            <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+              <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded border border-white/10 uppercase tracking-wider">
+                {haber.date.split(" ")[0]} {haber.date.split(" ")[1].substring(0, 3)}
               </span>
-              <h3 className="text-[17px] font-black text-[#1a1a2e] mb-2 leading-snug group-hover:text-[#e60000] transition-colors">
+              <span className="bg-[#e60000] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shadow-sm">
+                {haber.category}
+              </span>
+            </div>
+
+            {/* Bottom Content */}
+            <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
+              <h3 className="text-white font-black text-[14px] md:text-[16px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
                 {haber.title}
               </h3>
-              <p className="text-gray-500 text-[13px] leading-relaxed line-clamp-3">
-                {haber.summary}
+              <p className="text-gray-300 text-[10px] md:text-[11px] font-medium opacity-80 mt-2 flex items-center gap-1 group-hover:text-white transition-colors">
+                DEVAMINI OKU
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </p>
             </div>
           </div>
         ))}
       </div>
-
     </div>
   );
 }

@@ -10,7 +10,7 @@ import Link from "next/link";
 const NAV_ITEMS = [
   {
     href: "/lig",
-    label: "Haberler",
+    label: "HABERLER",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   },
   {
     href: "/puan-durumu",
-    label: "Puan D.",
+    label: "PUAN DURUMU",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/>
@@ -82,10 +82,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <MacSonuclariSlider />
 
       {/* Two Column Section */}
-      <div className="max-w-[1600px] mx-auto w-full px-3 md:px-6 py-6 flex flex-col lg:flex-row gap-5">
+      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-5">
         
         {/* Left Sidebar — Desktop Only */}
-        <aside className="w-[240px] hidden lg:block shrink-0">
+        <aside className="w-[260px] hidden lg:block shrink-0">
           <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm sticky top-[86px]">
             <nav className="flex flex-col">
               {SIDEBAR_ITEMS.map((item) => {
@@ -94,13 +94,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-3 px-5 py-3.5 text-[13px] font-bold transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
                       isActive
                         ? "bg-[#e60000] text-white"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
                     }`}
                   >
-                    <span className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`}>{item.icon}</span>
+                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e60000]"}`}>{item.icon}</span>
                     {item.label}
                   </Link>
                 );
@@ -114,18 +114,18 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
           <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mb-4">
             <nav className="flex flex-col">
               {SIDEBAR_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-3 px-5 py-3.5 text-[13px] font-bold transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
                       isActive
                         ? "bg-[#e60000] text-white"
-                        : "text-gray-600"
+                        : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
                     }`}
                   >
-                    <span className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`}>{item.icon}</span>
+                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e60000]"}`}>{item.icon}</span>
                     {item.label}
                   </Link>
                 );

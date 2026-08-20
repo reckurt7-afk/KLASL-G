@@ -48,7 +48,7 @@ export default function MacSonuclariSlider() {
   if (loading) {
     return (
       <div className="w-full bg-white py-3 border-b border-gray-100">
-        <div className="max-w-[1600px] mx-auto px-4 flex gap-3 overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-6 flex gap-3 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="min-w-[240px] h-[110px] border border-gray-100 rounded-xl bg-gray-50 animate-pulse shrink-0" />
           ))}
@@ -61,7 +61,7 @@ export default function MacSonuclariSlider() {
 
   return (
     <div className="w-full bg-white py-3 border-b border-gray-100">
-      <div className="max-w-[1600px] mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         <div
           ref={scrollRef}
           className="flex gap-3 overflow-x-auto snap-x snap-mandatory"

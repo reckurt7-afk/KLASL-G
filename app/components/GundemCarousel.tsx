@@ -63,7 +63,7 @@ export default function GundemCarousel() {
 
   return (
     <div className="w-full bg-white pt-6 pb-4">
-      <div className="max-w-[1600px] mx-auto px-4">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-[20px] font-black text-gray-900">Gündem</h2>
