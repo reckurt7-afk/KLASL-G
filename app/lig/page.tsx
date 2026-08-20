@@ -28,7 +28,7 @@ export default function LigMerkezi() {
         const data = await publicFetch("duyurular", "select=*&renk=eq.KAP&order=created_at.desc");
         const parsed = data.map((d: any) => {
           let ozet = d.aciklama || "";
-          let resim = "https://images.unsplash.com/photo-1518605368461-1e12dce38a42?q=80&w=600";
+          let resim = "/images/default-kap.jpg";
           try {
             const j = JSON.parse(d.aciklama || "{}");
             if (j.ozet !== undefined) {

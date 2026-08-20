@@ -101,20 +101,29 @@ export default function LandingPage() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6 w-full mt-10">
-            <Link href="/lig" className="group bg-[#e60000] hover:bg-[#cc0000] text-white font-black px-10 py-4 rounded-xl transition-all shadow-[0_0_25px_rgba(230,0,0,0.4)] hover:shadow-[0_0_35px_rgba(230,0,0,0.6)] hover:-translate-y-1 flex items-center justify-center gap-3 text-[17px] md:text-[19px] min-w-[200px]">
-              KEŞFET
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3.5 w-full mt-10">
+            <Link 
+              href="/lig" 
+              className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(230,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(230,0,0,0.3)] hover:-translate-y-0.5"
+            >
+              Keşfet
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </Link>
             
-            <Link href="/lig" className="group border-2 border-[#e60000] bg-black/40 hover:bg-[#e60000] text-white font-black px-10 py-4 rounded-xl transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:-translate-y-1 backdrop-blur-md flex items-center justify-center gap-3 text-[17px] md:text-[19px] min-w-[200px]">
-              MİSAFİR GİRİŞİ
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <Link 
+              href="/lig" 
+              className="border border-white/25 bg-black/20 hover:bg-white/10 text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm"
+            >
+              Misafir Girişi
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </Link>
 
-            <Link href="/giris" className="group border-2 border-white/80 bg-black/40 hover:bg-white text-white hover:text-black font-black px-10 py-4 rounded-xl transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:-translate-y-1 backdrop-blur-md flex items-center justify-center gap-3 text-[17px] md:text-[19px] min-w-[200px]">
-              GİRİŞ YAP
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <Link 
+              href="/giris" 
+              className="border border-white/25 bg-black/20 hover:bg-white/10 text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm"
+            >
+              Giriş Yap
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </Link>
           </div>
         </div>

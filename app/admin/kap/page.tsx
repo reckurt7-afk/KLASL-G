@@ -65,9 +65,11 @@ export default function KapBildirimleriAdminPage() {
     if (!baslik.trim()) { setMsg({ tip: "hata", yazi: "Başlık zorunludur." }); return; }
     setSaving(true); setMsg(null);
 
+    const finalResimUrl = resimUrl.trim() || "/images/default-kap.jpg";
+
     const payload = {
       baslik: baslik.trim(),
-      aciklama: JSON.stringify({ ozet: ozet.trim(), detay: detay.trim(), resim: resimUrl || null }),
+      aciklama: JSON.stringify({ ozet: ozet.trim(), detay: detay.trim(), resim: finalResimUrl }),
       renk: "KAP", 
       aktif: true,
     };
@@ -79,8 +81,29 @@ export default function KapBildirimleriAdminPage() {
       ({ error } = await supabase.from("duyurular").insert(payload));
     }
 
+    if (error) {
+      setSaving(false);
+      setMsg({ tip: "hata", yazi: error.message });
+      return;
+    }
+
+    // Yeni eklendiyse telefonlara otomatik push bildirim gönder
+    if (editId === null) {
+      try {
+        await fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "KAP BİLDİRİMİ 📢",
+            mesaj: baslik.trim(),
+          }),
+        });
+      } catch (err) {
+        console.error("Bildirim gönderme hatası:", err);
+      }
+    }
+
     setSaving(false);
-    if (error) { setMsg({ tip: "hata", yazi: error.message }); return; }
     setMsg({ tip: "ok", yazi: editId ? "KAP Bildirimi güncellendi!" : "KAP Bildirimi eklendi ve yayınlandı!" });
     resetForm();
     loadHaberler();
