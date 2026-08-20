@@ -19,6 +19,7 @@ type Takim = {
 };
 
 export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) {
+  const { selectedCityId } = useCityStore();
   const [takimlar, setTakimlar] = useState<Takim[]>([]);
   const [loading, setLoading] = useState(true);
 
