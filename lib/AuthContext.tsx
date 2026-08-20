@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setSession(null);
     setProfil(null);
-    window.location.href = "/giris";
+    window.location.href = "/";
   }
 
   return (
