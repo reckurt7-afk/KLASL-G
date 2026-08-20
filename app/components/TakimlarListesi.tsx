@@ -59,7 +59,16 @@ export default function TakimlarListesi() {
           animate="show"
         >
           {takimlar.map((takim) => {
-            const slug = takim.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, '');
+            const slug = takim.name
+              .toLowerCase()
+              .replace(/ğ/g, "g")
+              .replace(/ü/g, "u")
+              .replace(/ş/g, "s")
+              .replace(/ı/g, "i")
+              .replace(/ö/g, "o")
+              .replace(/ç/g, "c")
+              .replace(/ /g, "-")
+              .replace(/[^\w-]/g, "");
             return (
               <motion.div variants={itemVariants} key={takim.id}>
                 <Link href={`/takim/${slug}`} className="group block h-full">
