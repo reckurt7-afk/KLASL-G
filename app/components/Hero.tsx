@@ -64,13 +64,13 @@ export default function Hero({
     canliMacGetir();
 
     const channel = supabase
-      .channel("canli-mac")
+      .channel("hero-canli-mac")
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
-          table: "matches",
+          table: "maclar",
         },
         () => {
           canliMacGetir();
@@ -79,10 +79,10 @@ export default function Hero({
       .subscribe();
 
     const channelOlay = supabase
-      .channel("mac-olaylari")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "match_events" }, (payload) => {
+      .channel("hero-mac-olaylari")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "mac_olaylari" }, (payload) => {
         canliMacGetir();
-        if (payload.new.event_type === "GOL") {
+        if (payload.new.tip === "GOL") {
           setSonGolOlay(payload.new);
           setGolAnimasyon(true);
           golSesiCal();
@@ -99,20 +99,49 @@ export default function Hero({
 
   async function canliMacGetir() {
     const { data } = await supabase
-      .from("matches")
-      .select("*, home_team:home_team_id(name,logo), away_team:away_team_id(name,logo)")
-      .eq("is_live", true)
-      .eq("league_id", selectedCityId)
+      .from("maclar")
+      .select("*")
+      .eq("canli", true)
+      .eq("city_id", selectedCityId || 1)
+      .order("id", { ascending: false })
+      .limit(1)
       .single();
 
     if (data) {
-      setMac(data);
+      // Map it to match the existing component structure expectation if needed, or modify component rendering
+      // The original component expects data.home_team.name, data.home_team.logo, data.home_score
+      // We will map `maclar` structure to what Hero expects below, OR we can just pass the raw data and fix the rendering.
+      // Wait, let's just fetch team logos as well.
+      const tumTakimlar = await supabase.from("takimlar").select("ad,logo").eq("city_id", selectedCityId || 1);
+      const evTakim = tumTakimlar.data?.find(t => t.ad === data.ev_sahibi);
+      const depTakim = tumTakimlar.data?.find(t => t.ad === data.deplasman);
+      
+      const mappedMac = {
+        ...data,
+        home_team: { name: data.ev_sahibi, logo: evTakim?.logo },
+        away_team: { name: data.deplasman, logo: depTakim?.logo },
+        home_score: data.ev_skor,
+        away_score: data.dep_skor,
+        minute: data.dakika,
+        match_status: data.durum
+      };
+      
+      setMac(mappedMac);
+      
       const { data: olayData } = await supabase
-        .from("match_events")
-        .select("*, players(first_name, last_name)")
-        .eq("match_id", data.id)
-        .order("minute", { ascending: false });
-      setOlaylar(olayData || []);
+        .from("mac_olaylari")
+        .select("*")
+        .eq("mac_id", data.id)
+        .order("dakika", { ascending: false });
+        
+      const mappedOlay = (olayData || []).map(o => ({
+        ...o,
+        event_type: o.tip,
+        minute: o.dakika,
+        team_direction: o.takim_yonu,
+        players: { first_name: o.oyuncu, last_name: "" }
+      }));
+      setOlaylar(mappedOlay);
     } else {
       setMac(null);
       setOlaylar([]);
