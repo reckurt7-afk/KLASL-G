@@ -43,9 +43,9 @@ export default function GundemCarousel() {
     try {
       const data = await publicFetch("duyurular", "select=id,baslik,aciklama,renk,aktif,created_at&aktif=eq.true&order=created_at.desc&limit=8");
       const parsed = (data || []).map(parseHaber).filter((h: Haber) => h.baslik && h.kategori !== "KAP");
-      setHaberler(parsed.length > 0 ? parsed : MOCK_FALLBACK);
+      setHaberler(parsed);
     } catch {
-      setHaberler(MOCK_FALLBACK);
+      setHaberler([]);
     }
   }
 

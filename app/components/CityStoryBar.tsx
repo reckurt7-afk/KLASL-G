@@ -1,27 +1,28 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCityStore } from "../store/cityStore";
+import { supabase } from "@/lib/supabase";
 import Image from "next/image";
-
-const MOCK_CITIES = [
-  { id: 1, name: "Bursa", label: "O:8 120 AKTİF" },
-  { id: 2, name: "İstanbul", label: "O:18 419" },
-  { id: 3, name: "İzmir", label: "O: BEKLEMEDE" },
-  { id: 4, name: "Antalya", label: "O:22 BEKLEMEDE" },
-  { id: 5, name: "Ankara", label: "O: BEKLEMEDE" },
-  { id: 6, name: "Gaziantep", label: "O: BEKLEMEDE" },
-  { id: 7, name: "Mersin", label: "O: BEKLEMEDE" },
-  { id: 8, name: "Kocaeli", label: "O: BEKLEMEDE" },
-  { id: 9, name: "Trabzon", label: "O: BEKLEMEDE" },
-  { id: 10, name: "Samsun", label: "O: BEKLEMEDE" },
-  { id: 11, name: "Konya", label: "O: BEKLEMEDE" },
-  { id: 12, name: "Adana", label: "O: BEKLEMEDE" },
-];
 
 export default function CityStoryBar() {
   const { selectedCityId, setSelectedCityId } = useCityStore();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [cities, setCities] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchCities() {
+      const { data } = await supabase.from("cities").select("*").order("id", { ascending: true });
+      if (data) {
+        setCities(data);
+        // Eğer seçili şehir yoksa veya listede yoksa, varsayılan olarak Bursa'yı (1) veya ilk şehri seç
+        if (!selectedCityId && data.length > 0) {
+          setSelectedCityId(data[0].id);
+        }
+      }
+    }
+    fetchCities();
+  }, []);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
@@ -59,7 +60,7 @@ export default function CityStoryBar() {
         className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-10"
         style={{ scrollbarWidth: "none" }}
       >
-        {MOCK_CITIES.map((city) => {
+        {cities.map((city) => {
           const isSelected = selectedCityId === city.id;
           return (
             <div
@@ -82,7 +83,7 @@ export default function CityStoryBar() {
                   {city.name}
                 </span>
                 <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
-                  {city.label}
+                  {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
                 </span>
               </div>
               {/* Heart */}
