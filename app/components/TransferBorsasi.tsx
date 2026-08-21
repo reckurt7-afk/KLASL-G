@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import { publicFetch } from "@/lib/supabase";
 import OyuncuKarti from "./OyuncuKarti";
 
@@ -17,6 +18,8 @@ type Oyuncu = {
 };
 
 export default function TransferBorsasi() {
+  const { selectedCityId } = useCityStore();
+
   const [isOpen, setIsOpen] = useState<boolean | null>(null);
   const [oyuncular, setOyuncular] = useState<Oyuncu[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,7 +27,7 @@ export default function TransferBorsasi() {
 
   useEffect(() => {
     fetchBorsaData();
-  }, []);
+  }, [selectedCityId]);
 
   async function fetchBorsaData() {
     setLoading(true);

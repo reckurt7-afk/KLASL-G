@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import { publicFetch } from "../../lib/supabase";
 import { TeamLogo } from "./TeamLogo";
 
@@ -19,6 +20,8 @@ type Mac = {
 type TeamMap = Record<string, string>; // name -> logo path
 
 export default function MacSonuclariSlider() {
+  const { selectedCityId } = useCityStore();
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [maclar, setMaclar] = useState<Mac[]>([]);
   const [logoMap, setLogoMap] = useState<TeamMap>({});
@@ -26,7 +29,7 @@ export default function MacSonuclariSlider() {
 
   useEffect(() => {
     Promise.all([loadMatches(), loadTeams()]).finally(() => setLoading(false));
-  }, []);
+  }, [selectedCityId]);
 
   async function loadMatches() {
     const data = await publicFetch(

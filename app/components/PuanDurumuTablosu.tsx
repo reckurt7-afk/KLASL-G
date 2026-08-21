@@ -52,11 +52,13 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
     show: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
   };
 
+  const cityName = selectedCityId === 1 ? "BURSA" : selectedCityId === 2 ? "İSTANBUL" : selectedCityId === 3 ? "İZMİR" : "TÜRKİYE";
+
   return (
     <div className="w-full">
       <div className="text-center mb-8 sm:mb-12">
-        <h2 className="section-title">🏆 PUAN DURUMU</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG BURSA</p>
+        <h2 className="section-title">LİG PUAN DURUMU</h2>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG {cityName}</p>
       </div>
 
       <div className="card overflow-hidden p-0 border-0 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">

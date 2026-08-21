@@ -7,6 +7,8 @@ import { supabase } from "@/lib/supabase";
 import { useCityStore } from "@/app/store/cityStore";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import GoktugSponsorBox from "./GoktugSponsorBox";
+import SponsorBox from "./SponsorBox";
 
 export default function Hero({
   activeTab = "puanDurumu",
@@ -16,6 +18,7 @@ export default function Hero({
   onSelectTab?: (tab: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi") => void;
 }) {
   const { selectedCityId } = useCityStore();
+  const cityName = selectedCityId === 1 ? "BURSA" : selectedCityId === 2 ? "ÝSTANBUL" : selectedCityId === 3 ? "ÝZMÝR" : "TÜRKÝYE";
   const [mac, setMac] = useState<any>(null);
   const [olaylar, setOlaylar] = useState<any[]>([]);
   const [golAnimasyon, setGolAnimasyon] = useState(false);
@@ -157,7 +160,7 @@ export default function Hero({
           <h1 className="text-4xl md:text-6xl font-black mt-3 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             KLAS LÄ°G
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.5)]">BURSA</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.5)]">{cityName}</span>
           </h1>
 
           <div className="mt-1.5 font-black text-xs md:text-sm tracking-[0.3em] text-[#ff3131] bg-[#ff3131]/15 px-4 py-1 rounded-full border border-[#ff3131]/40 shadow-[0_0_15px_rgba(255,49,49,0.2)]">

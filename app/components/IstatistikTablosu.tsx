@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import Image from "next/image";
 import Link from "next/link";
 import { publicFetch } from "@/lib/supabase";
@@ -29,6 +30,8 @@ const TEAM_LOGOS: Record<string, string> = {
 };
 
 export default function IstatistikTablosu() {
+  const { selectedCityId } = useCityStore();
+
   const [tab, setTab] = useState<"gol" | "asist" | "kaleci">("gol");
   const [oyuncular, setOyuncular] = useState<OyuncuStat[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +47,7 @@ export default function IstatistikTablosu() {
       setLoading(false);
     }
     istatistikleriGetir();
-  }, []);
+  }, [selectedCityId]);
 
   // Filter & Sort based on active tab
   const filteredOyuncular = [...oyuncular]

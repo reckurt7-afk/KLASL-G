@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import { publicFetch } from "../../lib/supabase";
 import Link from "next/link";
 
@@ -30,11 +31,13 @@ function parseHaber(h: any): Haber {
 }
 
 export default function GundemCarousel() {
+  const { selectedCityId } = useCityStore();
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const [haberler, setHaberler] = useState<Haber[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
 
-  useEffect(() => { loadHaberler(); }, []);
+  useEffect(() => { loadHaberler(); }, [selectedCityId]);
 
   async function loadHaberler() {
     try {

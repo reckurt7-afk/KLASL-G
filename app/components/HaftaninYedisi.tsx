@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import Image from "next/image";
 import Link from "next/link";
 import { publicFetch } from "@/lib/supabase";
@@ -26,6 +27,8 @@ const TEAM_LOGOS: Record<string, string> = {
 };
 
 export default function HaftaninYedisi() {
+  const { selectedCityId } = useCityStore();
+
   const [kadro, setKadro] = useState<Oyuncu[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -53,7 +56,7 @@ export default function HaftaninYedisi() {
       setLoading(false);
     }
     kadroGetir();
-  }, []);
+  }, [selectedCityId]);
 
   const defaultPlayers: Oyuncu[] = [
     { id: 1, ad_soyad: "Ahmet Yılmaz", takim: "YEŞİL BURSA FC", mevki: "KL", genel_puan: 89 },

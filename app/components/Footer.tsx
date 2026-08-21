@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useCityStore } from "@/app/store/cityStore";
 import Image from "next/image";
 
 
 
 export default function Footer() {
+  const { selectedCityId } = useCityStore();
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "�stanbul" : selectedCityId === 3 ? "�zmir" : "T�rkiye";
   return (
     <footer className="bg-[#070707] border-t border-[rgba(255,49,49,0.15)] pb-24 lg:pb-0">
       <div className="max-w-[1200px] mx-auto px-5 pt-12 pb-8">
@@ -21,7 +24,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-white font-black text-lg tracking-widest leading-none">KLAS LİG</div>
-                <div className="text-[#ff3131] text-[10px] font-black tracking-[0.3em]">BURSA</div>
+                <div className="text-[#ff3131] text-[10px] font-black tracking-[0.3em]">{cityName.toUpperCase()}</div>
               </div>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed mb-5">
@@ -43,7 +46,7 @@ export default function Footer() {
         {/* Alt Bölüm */}
         <div className="border-t border-[rgba(255,255,255,0.06)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} Klas Lig Bursa. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Klas Lig {cityName}. Tüm hakları saklıdır.
           </div>
           <div className="text-gray-700 text-xs">
             ⚽ 3. Sezon

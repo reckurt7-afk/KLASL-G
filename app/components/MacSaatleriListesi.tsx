@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useCityStore } from "@/app/store/cityStore";
 import Image from "next/image";
 import { publicFetch } from "@/lib/supabase";
 
@@ -32,6 +33,8 @@ const TEAM_LOGOS: Record<string, string> = {
 };
 
 export default function MacSaatleriListesi({ mini = false }: { mini?: boolean }) {
+  const { selectedCityId } = useCityStore();
+
   const [maclar, setMaclar] = useState<Mac[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +48,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
       setLoading(false);
     }
     maclariGetir();
-  }, []);
+  }, [selectedCityId]);
 
   const haftalar = mini
     ? [maclar.length > 0 ? maclar[0].hafta : 1]

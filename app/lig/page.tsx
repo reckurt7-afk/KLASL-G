@@ -20,7 +20,7 @@ export default function LigMerkezi() {
   const [loading, setLoading] = useState(true);
 
   // Selected city name can be derived from ID. For now just mock.
-  const cityName = selectedCityId === 1 ? "İstanbul" : selectedCityId === 2 ? "Bursa" : selectedCityId === 3 ? "İzmir" : "Türkiye";
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
 
   useEffect(() => {
     async function fetchHaberler() {
@@ -53,7 +53,7 @@ export default function LigMerkezi() {
       }
     }
     fetchHaberler();
-  }, []);
+  }, [selectedCityId]);
 
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
