@@ -19,14 +19,14 @@ export default function LandingPage() {
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Klas Lig TV
             </div>
-            <div className="flex items-center gap-2">
-              <Link href="/giris" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold text-[13px] px-6 py-2.5 rounded transition-colors flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
-                Giriş Yap
+            <div className="flex items-center gap-3">
+              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[13px] px-6 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-sm">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold text-[13px] px-6 py-2.5 rounded transition-colors flex items-center gap-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-                Üye Ol
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[13px] px-6 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                ÜYE OL
               </Link>
             </div>
           </div>
