@@ -36,7 +36,7 @@ export async function publicFetch(
       }
     }
 
-    const url = `${SUPA_URL}/rest/v1/${tablo}?${formattedParams}`;
+    const url = `${SUPA_URL}/rest/v1/${tablo}?${formattedParams}&_cb=${Date.now()}`;
     const res = await fetch(url, {
       headers: {
         apikey: SUPA_KEY,
