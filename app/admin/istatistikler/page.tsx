@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { publicFetch, supabase } from "@/lib/supabase";
+import { publicFetch } from "@/lib/supabase";
+import { useCityStore } from "@/app/store/cityStore";
 
 type Oyuncu = {
   id: number;
@@ -18,17 +19,17 @@ type Oyuncu = {
 export default function AdminIstatistiklerPage() {
   const [oyuncular, setOyuncular] = useState<Oyuncu[]>([]);
   const [loading, setLoading] = useState(true);
-  const [savingId, setSavingId] = useState<number | null>(null);
-  const [message, setMessage] = useState<string>("");
+  const { selectedCityId } = useCityStore();
 
   useEffect(() => {
     fetchOyuncular();
-  }, []);
+  }, [selectedCityId]);
 
   async function fetchOyuncular() {
     setLoading(true);
-    // Fetch all players using publicFetch
-    const data = await publicFetch("oyuncular", "select=*&order=gol.desc,ad_soyad.asc");
+    // Fetch all players using publicFetch, ordered by goals then assists
+    const data = await publicFetch("oyuncular", `select=*&order=gol.desc,asist.desc,ad_soyad.asc`);
+    
     if (data && data.length > 0) {
       // DEDUPLICATE BY NAME: Keep only 1 record per player name
       const map = new Map<string, Oyuncu>();
@@ -45,39 +46,14 @@ export default function AdminIstatistiklerPage() {
         }
       });
 
-      setOyuncular(Array.from(map.values()));
+      // Map values and sort again just to be safe
+      const sorted = Array.from(map.values()).sort((a, b) => b.gol - a.gol || b.asist - a.asist);
+      setOyuncular(sorted);
+    } else {
+      setOyuncular([]);
     }
     setLoading(false);
   }
-
-  const handleStatChange = (id: number, field: keyof Oyuncu, value: any) => {
-    setOyuncular((prev) =>
-      prev.map((o) => (o.id === id ? { ...o, [field]: value } : o))
-    );
-  };
-
-  const saveOyuncu = async (o: Oyuncu) => {
-    setSavingId(o.id);
-    setMessage("");
-    const { error } = await supabase
-      .from("oyuncular")
-      .update({
-        gol: Number(o.gol),
-        asist: Number(o.asist),
-        mac: Number(o.mac),
-        genel_puan: Number(o.genel_puan),
-        mevki: o.mevki || "OS",
-      })
-      .eq("id", o.id);
-
-    setSavingId(null);
-    if (!error) {
-      setMessage(`✅ ${o.ad_soyad} istatistikleri başarıyla kaydedildi.`);
-      setTimeout(() => setMessage(""), 3000);
-    } else {
-      setMessage(`❌ Kaydetme hatası: ${error.message}`);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-white pt-24 pb-12 px-4 md:px-8">
@@ -87,10 +63,10 @@ export default function AdminIstatistiklerPage() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 border-b border-white/10 pb-4">
           <div>
             <h1 className="text-2xl md:text-4xl font-black text-white flex items-center gap-3">
-              ⚡ GOL & ASİST KRALLIĞI YÖNETİMİ
+              👑 GOL & ASİST KRALLIĞI (OTOMATİK)
             </h1>
-            <p className="text-gray-400 text-sm mt-1">
-              Oyuncuların Gol, Asist, Maç sayısı ve Rating değerlerini buradan anında güncelleyebilirsiniz. (Tekilleştirilmiş Liste)
+            <p className="text-gray-400 text-sm mt-2 max-w-2xl">
+              Bu tablo, <strong className="text-[#ff3131]">Maç Sonucu</strong> ve <strong className="text-[#ff3131]">Canlı Maç</strong> ekranlarından girilen maç olaylarına (Gol/Asist) göre <strong className="text-white">otomatik</strong> olarak hesaplanır. Manuel müdahale kapalıdır.
             </p>
           </div>
 
@@ -102,94 +78,56 @@ export default function AdminIstatistiklerPage() {
           </Link>
         </div>
 
-        {message && (
-          <div className="mb-6 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold text-center">
-            {message}
-          </div>
-        )}
-
         {/* PLAYERS LIST TABLE */}
         <div className="bg-[#121212] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="bg-[#1a1a1a] text-gray-400 uppercase text-xs font-black border-b border-white/10">
                 <tr>
+                  <th className="p-4 text-center w-12">#</th>
                   <th className="p-4">Oyuncu Adı</th>
                   <th className="p-4">Takım</th>
-                  <th className="p-4">Mevki</th>
                   <th className="p-4 text-center">⚽ Gol</th>
-                  <th className="p-4 text-center">🎯 Asist</th>
+                  <th className="p-4 text-center">👟 Asist</th>
                   <th className="p-4 text-center">👕 Maç</th>
                   <th className="p-4 text-center">⭐ Rating</th>
-                  <th className="p-4 text-right">İşlem</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {loading ? (
                   <tr>
-                    <td colSpan={8} className="text-center p-8 text-gray-400 font-bold">
-                      Oyuncular Yükleniyor...
+                    <td colSpan={7} className="text-center p-8 text-gray-400 font-bold">
+                      İstatistikler Yükleniyor...
                     </td>
                   </tr>
                 ) : oyuncular.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="text-center p-8 text-gray-400">
-                      Kayıtlı oyuncu bulunamadı.
+                    <td colSpan={7} className="text-center p-8 text-gray-400">
+                      Henüz istatistik bulunmuyor. Maç olayları girildikçe bu tablo dolacaktır.
                     </td>
                   </tr>
                 ) : (
-                  oyuncular.map((o) => (
-                    <tr key={o.id} className="hover:bg-white/[0.02]">
-                      <td className="p-4 font-black text-white">{o.ad_soyad}</td>
+                  oyuncular.map((o, index) => (
+                    <tr key={o.id} className="hover:bg-white/[0.02] transition-colors">
+                      <td className="p-4 text-center font-black text-gray-500">
+                        {index + 1}
+                      </td>
+                      <td className="p-4 font-black text-white flex items-center gap-3">
+                        {index === 0 && <span className="text-2xl" title="Gol Kralı">👑</span>}
+                        {o.ad_soyad}
+                      </td>
                       <td className="p-4 text-gray-400 font-semibold">{o.takim}</td>
-                      <td className="p-4">
-                        <input
-                          type="text"
-                          value={o.mevki || ""}
-                          onChange={(e) => handleStatChange(o.id, "mevki", e.target.value)}
-                          className="w-16 bg-black/60 border border-white/10 rounded-lg px-2 py-1 text-center font-bold text-white text-xs"
-                        />
+                      <td className="p-4 text-center font-black text-[#ff3131] text-lg">
+                        {o.gol}
                       </td>
-                      <td className="p-4 text-center">
-                        <input
-                          type="number"
-                          value={o.gol}
-                          onChange={(e) => handleStatChange(o.id, "gol", e.target.value)}
-                          className="w-16 bg-black/60 border border-[#ff3131]/40 rounded-lg px-2 py-1 text-center font-black text-[#ff3131] text-sm"
-                        />
+                      <td className="p-4 text-center font-black text-blue-400 text-lg">
+                        {o.asist}
                       </td>
-                      <td className="p-4 text-center">
-                        <input
-                          type="number"
-                          value={o.asist}
-                          onChange={(e) => handleStatChange(o.id, "asist", e.target.value)}
-                          className="w-16 bg-black/60 border border-blue-500/40 rounded-lg px-2 py-1 text-center font-black text-blue-400 text-sm"
-                        />
+                      <td className="p-4 text-center font-bold text-gray-300">
+                        {o.mac}
                       </td>
-                      <td className="p-4 text-center">
-                        <input
-                          type="number"
-                          value={o.mac}
-                          onChange={(e) => handleStatChange(o.id, "mac", e.target.value)}
-                          className="w-16 bg-black/60 border border-white/10 rounded-lg px-2 py-1 text-center font-bold text-gray-300 text-xs"
-                        />
-                      </td>
-                      <td className="p-4 text-center">
-                        <input
-                          type="number"
-                          value={o.genel_puan}
-                          onChange={(e) => handleStatChange(o.id, "genel_puan", e.target.value)}
-                          className="w-16 bg-black/60 border border-yellow-500/40 rounded-lg px-2 py-1 text-center font-black text-yellow-400 text-sm"
-                        />
-                      </td>
-                      <td className="p-4 text-right">
-                        <button
-                          onClick={() => saveOyuncu(o)}
-                          disabled={savingId === o.id}
-                          className="px-4 py-1.5 bg-[#ff3131] hover:bg-[#d61111] text-white font-black rounded-xl text-xs transition-all shadow-md disabled:opacity-50 cursor-pointer"
-                        >
-                          {savingId === o.id ? "Kaydediliyor..." : "Kaydet"}
-                        </button>
+                      <td className="p-4 text-center font-black text-yellow-400">
+                        {o.genel_puan}
                       </td>
                     </tr>
                   ))

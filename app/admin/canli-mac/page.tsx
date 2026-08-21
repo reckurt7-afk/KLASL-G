@@ -24,7 +24,7 @@ export default function CanliMacPage() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Olay Ekleme State'leri
-  const [olayTipi, setOlayTipi] = useState("gol");
+  const [olayTipi, setOlayTipi] = useState("GOL");
   const [olayOyuncu, setOlayOyuncu] = useState("");
   const [olayTakimYonu, setOlayTakimYonu] = useState("ev");
 
@@ -531,10 +531,11 @@ export default function CanliMacPage() {
                 </select>
                 
                 <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
-                  <option value="gol">⚽ Gol</option>
-                  <option value="sari_kart">🟨 Sarı Kart</option>
-                  <option value="kirmizi_kart">🟥 Kırmızı Kart</option>
-                  <option value="degisiklik">🔄 Oyuncu Değişikliği</option>
+                  <option value="GOL">⚽ Gol</option>
+                  <option value="ASIST">👟 Asist</option>
+                  <option value="SARI_KART">🟨 Sarı Kart</option>
+                  <option value="KIRMIZI_KART">🟥 Kırmızı Kart</option>
+                  <option value="DEGISIKLIK">🔄 Oyuncu Değişikliği</option>
                 </select>
               </div>
               
