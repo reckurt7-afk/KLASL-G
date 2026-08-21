@@ -5,18 +5,18 @@ import { useCityStore } from "../store/cityStore";
 import Image from "next/image";
 
 const MOCK_CITIES = [
-  { id: 1, name: "İstanbul", teams: 18, players: 419 },
-  { id: 2, name: "Bursa", teams: 21, players: 279 },
-  { id: 3, name: "İzmir", teams: 14, players: 147 },
-  { id: 4, name: "Antalya", teams: 22, players: 321 },
-  { id: 5, name: "Ankara", teams: 45, players: 880 },
-  { id: 6, name: "Gaziantep", teams: 34, players: 413 },
-  { id: 7, name: "Mersin", teams: 110, players: 1617 },
-  { id: 8, name: "Kocaeli", teams: 37, players: 590 },
-  { id: 9, name: "Trabzon", teams: 85, players: 1006 },
-  { id: 10, name: "Samsun", teams: 28, players: 512 },
-  { id: 11, name: "Konya", teams: 19, players: 310 },
-  { id: 12, name: "Adana", teams: 26, players: 395 },
+  { id: 1, name: "İstanbul", label: "O:18 419" },
+  { id: 2, name: "Bursa", label: "O:8 120 AKTİF" },
+  { id: 3, name: "İzmir", label: "O: BEKLEMEDE" },
+  { id: 4, name: "Antalya", label: "O:22 BEKLEMEDE" },
+  { id: 5, name: "Ankara", label: "O: BEKLEMEDE" },
+  { id: 6, name: "Gaziantep", label: "O: BEKLEMEDE" },
+  { id: 7, name: "Mersin", label: "O: BEKLEMEDE" },
+  { id: 8, name: "Kocaeli", label: "O: BEKLEMEDE" },
+  { id: 9, name: "Trabzon", label: "O: BEKLEMEDE" },
+  { id: 10, name: "Samsun", label: "O: BEKLEMEDE" },
+  { id: 11, name: "Konya", label: "O: BEKLEMEDE" },
+  { id: 12, name: "Adana", label: "O: BEKLEMEDE" },
 ];
 
 export default function CityStoryBar() {
@@ -81,10 +81,8 @@ export default function CityStoryBar() {
                 <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#3b5bdb]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
-                <span className="text-[9px] text-gray-400 font-medium">
-                  O:{city.teams}&nbsp;
-                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="inline-block"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  {city.players}
+                <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
+                  {city.label}
                 </span>
               </div>
               {/* Heart */}
