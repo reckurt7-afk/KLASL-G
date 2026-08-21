@@ -18,6 +18,10 @@ export default function SuperAdminDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newCity, setNewCity] = useState({ name: "", slug: "", code: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Manage Modal State
+  const [manageCity, setManageCity] = useState<any>(null);
+  const [adminEmail, setAdminEmail] = useState("");
 
   useEffect(() => {
     if (loading) return;
@@ -26,15 +30,10 @@ export default function SuperAdminDashboard() {
       return;
     }
 
-    // Role kontrolünü geçici olarak (senin testin için) devre dışı bırakıyorum. 
-    // Direkt süper admin olarak içeri alıyorum.
-    const checkRole = async () => {
-      setIsSuperAdmin(true);
-      setCheckingRole(false);
-      loadDashboardData();
-    };
-
-    checkRole();
+    // Geçici bypass
+    setIsSuperAdmin(true);
+    setCheckingRole(false);
+    loadDashboardData();
   }, [user, loading, router]);
 
   const loadDashboardData = async () => {
@@ -59,8 +58,6 @@ export default function SuperAdminDashboard() {
     if (!newCity.name || !newCity.slug || !newCity.code) return alert("Lütfen tüm alanları doldurun.");
     
     setIsSubmitting(true);
-    
-    // En son id'yi bul ve 1 ekle
     const nextId = cities.length > 0 ? Math.max(...cities.map(c => Number(c.id))) + 1 : 1;
 
     const { error } = await supabase.from("cities").insert({
@@ -90,7 +87,6 @@ export default function SuperAdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 relative">
-      {/* HEADER & STATS */}
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div>
@@ -121,7 +117,6 @@ export default function SuperAdminDashboard() {
           </div>
         </div>
 
-        {/* CITIES LIST */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-800">Şehir Temsilcilikleri</h2>
           <button 
@@ -147,8 +142,8 @@ export default function SuperAdminDashboard() {
                 <p className="text-sm text-gray-500 mb-4">/{city.slug} - Kod: {city.code}</p>
                 <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
                   <span className="text-xs font-semibold text-gray-400">Tenant ID: {city.id}</span>
-                  <button className="text-[#e60000] hover:text-[#cc0000] text-sm font-bold">
-                    Yönet →
+                  <button onClick={() => setManageCity(city)} className="text-[#e60000] hover:text-[#cc0000] text-sm font-bold">
+                    Yönet -&gt;
                   </button>
                 </div>
               </div>
@@ -157,7 +152,6 @@ export default function SuperAdminDashboard() {
         </div>
       </div>
 
-      {/* MODAL */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
@@ -183,6 +177,51 @@ export default function SuperAdminDashboard() {
                 {isSubmitting ? "Ekleniyor..." : "Şehri Oluştur ve Sistemi Başlat"}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {manageCity && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-lg shadow-2xl relative">
+            <button onClick={() => {setManageCity(null); setAdminEmail('');}} className="absolute top-4 right-4 text-gray-400 hover:text-gray-900">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <h2 className="text-2xl font-black text-gray-900 mb-6">{manageCity.name} Yönetimi</h2>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-6">
+              <h3 className="text-lg font-bold text-gray-800 mb-2">Şehir Temsilcisi (Admin) Ata</h3>
+              <p className="text-sm text-gray-500 mb-4">
+                Bu şehri yönetecek kişinin e-posta adresini girin. (Kullanıcının önce siteye kayıt olmuş olması gerekir.)
+              </p>
+              <div className="flex gap-2">
+                <input 
+                  type="email"
+                  value={adminEmail}
+                  onChange={(e) => setAdminEmail(e.target.value)}
+                  placeholder="temsilci@klaslig.com"
+                  className="flex-1 border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#e60000] focus:border-transparent outline-none"
+                />
+                <button 
+                  onClick={async () => {
+                    if(!adminEmail) return alert('Lütfen e-posta girin');
+                    const { data, error } = await supabase.rpc('assign_city_admin_by_email', {
+                      admin_email: adminEmail,
+                      target_city_id: manageCity.id
+                    });
+                    if(error) alert('Hata: ' + error.message);
+                    else { alert(data); setAdminEmail(''); }
+                  }}
+                  className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold px-4 py-2 rounded-lg transition-colors"
+                >
+                  Yetki Ver
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
+              <button onClick={() => setManageCity(null)} className="text-gray-500 hover:text-gray-900 font-bold px-4 py-2 rounded-lg transition-colors">Kapat</button>
+            </div>
           </div>
         </div>
       )}
