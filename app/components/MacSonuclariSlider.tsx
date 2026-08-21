@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useCityStore } from "@/app/store/cityStore";
-import { publicFetch } from "../../lib/supabase";
+import { publicFetch, supabase } from "../../lib/supabase";
 import { TeamLogo } from "./TeamLogo";
 
 type Mac = {
@@ -150,4 +150,5 @@ export default function MacSonuclariSlider() {
     </div>
   );
 }
+
 
