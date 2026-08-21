@@ -2,6 +2,26 @@ import Link from "next/link";
 
 const ADMIN_CARDS = [
   {
+    title: "Canlı Maç & Olaylar",
+    desc: "Maç skoru, gol, asist ve kartları yönet",
+    link: "/admin/canli-mac",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    ),
+  },
+  {
+    title: "Oyuncu İstatistikleri",
+    desc: "Gol ve Asist Krallığı (Otomatik)",
+    link: "/admin/istatistikler",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 20v-6M6 20V10M18 20V4"/>
+      </svg>
+    ),
+  },
+  {
     title: "Maç Sonucu Gir",
     desc: "Maç skorlarını ve durumlarını güncelle",
     link: "/admin/mac-sonucu",
