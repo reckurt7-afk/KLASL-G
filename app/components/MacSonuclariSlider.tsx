@@ -25,10 +25,6 @@ export default function MacSonuclariSlider() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [maclar, setMaclar] = useState<Mac[]>([]);
   const [logoMap, setLogoMap] = useState<TeamMap>({});
-
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [maclar, setMaclar] = useState<Mac[]>([]);
-  const [logoMap, setLogoMap] = useState<TeamMap>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -154,3 +150,4 @@ export default function MacSonuclariSlider() {
     </div>
   );
 }
+
