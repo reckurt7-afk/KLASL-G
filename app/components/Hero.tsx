@@ -7,8 +7,8 @@ import { supabase } from "@/lib/supabase";
 import { useCityStore } from "@/app/store/cityStore";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import GoktugSponsorBox from "./GoktugSponsorBox";
-import SponsorBox from "./SponsorBox";
+
+
 
 export default function Hero({
   activeTab = "puanDurumu",
@@ -18,7 +18,7 @@ export default function Hero({
   onSelectTab?: (tab: "haftaninYedisi" | "puanDurumu" | "istatistikler" | "transferBorsasi") => void;
 }) {
   const { selectedCityId } = useCityStore();
-  const cityName = selectedCityId === 1 ? "BURSA" : selectedCityId === 2 ? "ÝSTANBUL" : selectedCityId === 3 ? "ÝZMÝR" : "TÜRKÝYE";
+  const cityName = selectedCityId === 1 ? "BURSA" : selectedCityId === 2 ? "ï¿½STANBUL" : selectedCityId === 3 ? "ï¿½ZMï¿½R" : "Tï¿½RKï¿½YE";
   const [mac, setMac] = useState<any>(null);
   const [olaylar, setOlaylar] = useState<any[]>([]);
   const [golAnimasyon, setGolAnimasyon] = useState(false);
