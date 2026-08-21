@@ -1,4 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr";
+import { useCityStore } from "@/app/store/cityStore";
 
 const SUPA_URL =
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
@@ -17,7 +18,24 @@ export async function publicFetch(
   params: string = "select=*"
 ): Promise<any[]> {
   try {
-    const formattedParams = params.includes("=") ? params : `select=${params}`;
+    let formattedParams = params.includes("=") ? params : `select=${params}`;
+    
+    // Yalnızca şehre bağlı olan ana tablolara city_id filtresini otomatik ekle
+    const cityScopedTables = ['takimlar', 'oyuncular', 'maclar', 'fikstur', 'duyurular', 'hakemler', 'puan_durumu', 'ayarlar'];
+    const leagueScopedTables = ['teams', 'matches', 'match_events'];
+    
+    if (cityScopedTables.includes(tablo)) {
+      if (!formattedParams.includes('city_id=')) {
+        const cityId = useCityStore.getState().selectedCityId || 1;
+        formattedParams += `&city_id=eq.${cityId}`;
+      }
+    } else if (leagueScopedTables.includes(tablo)) {
+      if (!formattedParams.includes('league_id=')) {
+        const cityId = useCityStore.getState().selectedCityId || 1;
+        formattedParams += `&league_id=eq.${cityId}`;
+      }
+    }
+
     const url = `${SUPA_URL}/rest/v1/${tablo}?${formattedParams}`;
     const res = await fetch(url, {
       headers: {
