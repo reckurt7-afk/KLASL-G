@@ -25,6 +25,10 @@ export default function MacSonuclariSlider() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [maclar, setMaclar] = useState<Mac[]>([]);
   const [logoMap, setLogoMap] = useState<TeamMap>({});
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [maclar, setMaclar] = useState<Mac[]>([]);
+  const [logoMap, setLogoMap] = useState<TeamMap>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ export default function MacSonuclariSlider() {
   async function loadMatches() {
     const data = await publicFetch(
       "maclar",
-      "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat&oynandi=eq.true&order=hafta.desc,id.desc&limit=20"
+      "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat,canli,durum,dakika&or=(oynandi.eq.true,canli.eq.true)&order=canli.desc,hafta.desc,id.desc&limit=20"
     );
     setMaclar(data || []);
   }
@@ -47,6 +51,19 @@ export default function MacSonuclariSlider() {
     }
     setLogoMap(map);
   }
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("slider-live")
+      .on("postgres_changes", { event: "*", schema: "public", table: "maclar" }, () => {
+        loadMatches();
+      })
+      .subscribe();
+      
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -70,7 +87,7 @@ export default function MacSonuclariSlider() {
           className="flex gap-3 overflow-x-auto snap-x snap-mandatory"
           style={{ scrollbarWidth: "none" }}
         >
-          {maclar.map((match) => {
+          {maclar.map((match: any) => {
             const dateStr = match.tarih
               ? new Date(match.tarih).toLocaleDateString("tr-TR", { day: "numeric", month: "short" }) + (match.saat ? ` ${match.saat}` : "")
               : match.saat || "";
@@ -78,11 +95,23 @@ export default function MacSonuclariSlider() {
             return (
               <div
                 key={match.id}
-                className="min-w-[240px] border border-gray-100 rounded-xl bg-white p-3 shrink-0 snap-start shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer"
+                className={`min-w-[240px] border ${match.canli ? 'border-red-500 bg-red-50/30' : 'border-gray-100 bg-white'} rounded-xl p-3 shrink-0 snap-start shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer`}
               >
                 {/* Status & Date */}
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">Bitti</span>
+                  {match.canli ? (
+                    <span className="text-[10px] font-bold text-white bg-red-600 px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
+                      CANLI {match.dakika ? `${match.dakika}'` : ''}
+                    </span>
+                  ) : match.durum === "Devre Arası" ? (
+                    <span className="text-[10px] font-bold text-white bg-orange-500 px-2 py-0.5 rounded">
+                      DEVRE ARASI
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                      Bitti
+                    </span>
+                  )}
                   <span className="text-[10px] font-medium text-gray-400">{dateStr}</span>
                 </div>
 
@@ -98,9 +127,9 @@ export default function MacSonuclariSlider() {
 
                   {/* Score */}
                   <div className="flex items-center gap-1.5 px-2 shrink-0">
-                    <span className="text-[22px] font-black text-[#e60000] leading-none">{match.ev_skor ?? 0}</span>
-                    <span className="text-gray-300 font-bold">–</span>
-                    <span className="text-[22px] font-black text-gray-800 leading-none">{match.dep_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-[#e60000]'}`}>{match.ev_skor ?? 0}</span>
+                    <span className="text-gray-300 font-bold">-</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
                   </div>
 
                   {/* Away */}
@@ -113,8 +142,9 @@ export default function MacSonuclariSlider() {
                 </div>
 
                 {/* Footer */}
-                <div className="text-[9px] text-gray-400 font-bold mt-2 text-center border-t border-gray-100 pt-1.5">
-                  Klas Lig • {match.hafta}. HAFTA
+                <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
+                  {match.canli && <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>}
+                  <span className={match.canli ? "text-red-500" : "text-gray-400"}>Klas Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );
