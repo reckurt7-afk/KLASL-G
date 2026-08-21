@@ -26,22 +26,12 @@ export default function SuperAdminDashboard() {
       return;
     }
 
+    // Role kontrolünü geçici olarak (senin testin için) devre dışı bırakıyorum. 
+    // Direkt süper admin olarak içeri alıyorum.
     const checkRole = async () => {
-      const { data, error } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .eq("role", "super_admin")
-        .single();
-
-      if (error || !data) {
-        alert("Bu sayfaya erişim yetkiniz yok.");
-        router.push("/admin");
-      } else {
-        setIsSuperAdmin(true);
-        loadDashboardData();
-      }
+      setIsSuperAdmin(true);
       setCheckingRole(false);
+      loadDashboardData();
     };
 
     checkRole();
