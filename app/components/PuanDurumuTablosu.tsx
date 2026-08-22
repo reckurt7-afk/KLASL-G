@@ -56,12 +56,14 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
 
   return (
     <div className="w-full">
-      <div className="text-center mb-8 sm:mb-12">
-        <h2 className="section-title">LİG PUAN DURUMU</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG {cityName}</p>
-      </div>
+      {!mini && (
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="section-title">LİG PUAN DURUMU</h2>
+          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">KLAS LİG {cityName}</p>
+        </div>
+      )}
 
-      <div className="card overflow-hidden p-0 border-0 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div className={`card overflow-hidden p-0 border-0 ${mini ? "" : "shadow-[0_10px_30px_rgba(0,0,0,0.5)]"}`}>
         <div className="w-full overflow-x-auto">
           <div className="min-w-[320px]">
             <div className="sticky top-0 z-20 grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 bg-white/95 border-b border-gray-100 backdrop-blur-md border-b border-gray-200 text-gray-500 font-bold text-[10px] sm:text-xs uppercase tracking-wider p-2 sm:p-4 items-center">
