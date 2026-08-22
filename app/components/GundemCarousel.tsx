@@ -97,7 +97,7 @@ export default function GundemCarousel() {
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-xl overflow-hidden shrink-0 snap-start group cursor-pointer block border border-gray-100 hover:border-red-200 shadow-sm hover:shadow-md transition-all"
               >
                 {/* Background */}
                 {haber.resim ? (
@@ -106,23 +106,22 @@ export default function GundemCarousel() {
                     style={{ backgroundImage: `url(${haber.resim})` }}
                   />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] to-[#e60000]/80" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#111] to-[#e50914]/90" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
+                <div className="absolute bottom-0 left-0 right-0 p-5">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <span className="bg-[#e60000] text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
+                    <span className="bg-[#e50914] text-white text-[9px] font-black px-2 py-0.5 rounded-sm flex items-center gap-1 uppercase tracking-wider">
                       {formatDate(haber.created_at)}
                     </span>
-                    <span className="text-white text-[10px] font-bold bg-white/20 px-2 py-1 rounded backdrop-blur-sm">
-                      ★ {haber.kategori}
+                    <span className="text-gray-300 text-[9px] font-bold bg-white/10 px-2 py-0.5 rounded-sm backdrop-blur-md border border-white/10 uppercase tracking-wider">
+                      {haber.kategori}
                     </span>
                   </div>
-                  <h3 className="text-white font-black text-[15px] md:text-[18px] leading-snug mb-1 line-clamp-2">{haber.baslik}</h3>
-                  {haber.ozet && <p className="text-gray-300 text-[12px] line-clamp-1">{haber.ozet}</p>}
+                  <h3 className="text-white font-black text-[16px] md:text-[20px] leading-tight mb-1.5 line-clamp-2 group-hover:text-red-100 transition-colors">{haber.baslik}</h3>
+                  {haber.ozet && <p className="text-gray-400 text-[12px] line-clamp-1 font-medium">{haber.ozet}</p>}
                 </div>
               </Link>
             ))}

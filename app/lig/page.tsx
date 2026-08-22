@@ -64,15 +64,15 @@ export default function LigMerkezi() {
     <div className="w-full flex flex-col fade-in">
       
       {/* Header */}
-      <div className="flex items-center gap-4 mb-5 bg-white h-[70px] rounded-2xl border border-gray-100 shadow-sm px-4">
-         <div className="w-12 h-12 bg-[#e60000] rounded-xl flex items-center justify-center text-white shadow-md shrink-0">
+      <div className="flex items-center gap-4 mb-5 bg-white h-[70px] rounded-xl border border-gray-100 shadow-sm px-4">
+         <div className="w-12 h-12 bg-[#e50914] rounded-xl flex items-center justify-center text-white shadow-sm shrink-0">
            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
          </div>
          <div className="flex flex-col justify-center">
            <h1 className="text-[15px] md:text-[17px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Haberleri</h1>
            <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve haberler</p>
          </div>
-         <div className="ml-auto w-7 h-7 bg-red-50 text-[#e60000] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
+         <div className="ml-auto w-7 h-7 bg-red-50 text-[#e50914] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
             {haberler.length}
          </div>
       </div>
@@ -101,7 +101,7 @@ export default function LigMerkezi() {
                 <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[8px] font-bold px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">
                   {formatDate(haber.created_at)}
                 </span>
-                <span className="bg-[#e60000] text-white text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
+                <span className="bg-[#e50914] text-white text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
                   {haber.kategori.toUpperCase()}
                 </span>
               </div>
@@ -123,3 +123,4 @@ export default function LigMerkezi() {
     </div>
   );
 }
+
