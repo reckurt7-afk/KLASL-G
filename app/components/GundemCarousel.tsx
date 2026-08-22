@@ -90,7 +90,7 @@ export default function GundemCarousel() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory"
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-2 pb-4"
             style={{ scrollbarWidth: "none" }}
           >
             {haberler.map((haber) => (
@@ -146,4 +146,5 @@ export default function GundemCarousel() {
     </div>
   );
 }
+
 

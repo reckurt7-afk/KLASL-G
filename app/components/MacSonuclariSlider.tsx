@@ -63,7 +63,7 @@ export default function MacSonuclariSlider() {
 
   if (loading) {
     return (
-      <div className="w-full bg-white py-3 border-b border-gray-100">
+      <div className="w-full bg-white py-4">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 flex gap-3 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="min-w-[240px] h-[110px] border border-gray-100 rounded-xl bg-gray-50 animate-pulse shrink-0" />
@@ -76,11 +76,11 @@ export default function MacSonuclariSlider() {
   if (maclar.length === 0) return null;
 
   return (
-    <div className="w-full bg-white py-3 border-b border-gray-100">
+    <div className="w-full bg-white py-4">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory"
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-2 pb-4 pt-1"
           style={{ scrollbarWidth: "none" }}
         >
           {maclar.map((match: any) => {
@@ -91,8 +91,11 @@ export default function MacSonuclariSlider() {
             return (
               <div
                 key={match.id}
-                className={`min-w-[240px] border ${match.canli ? 'border-red-500 bg-red-50/30' : 'border-gray-100 bg-white'} rounded-xl p-3 shrink-0 snap-start shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer`}
+                className={`min-w-[240px] bg-white rounded-xl p-3 shrink-0 snap-start shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 hover:-translate-y-0.5 transition-all cursor-pointer relative overflow-hidden`}
               >
+                {/* Dynamic Top Border like the screenshot */}
+                <div className={`absolute top-0 left-0 right-0 h-[3px] ${["bg-red-500", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][match.id % 5]}`}></div>
+                
                 {/* Status & Date */}
                 <div className="flex items-center justify-between mb-2">
                   {match.canli ? (
@@ -150,6 +153,9 @@ export default function MacSonuclariSlider() {
     </div>
   );
 }
+
+
+
 
 
 

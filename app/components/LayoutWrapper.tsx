@@ -95,6 +95,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <GundemCarousel />
       <MacSonuclariSlider />
 
+      {/* The red separator line like the screenshot */}
+      <div className="w-full bg-[#f4f6f8] pt-2">
+         <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6">
+            <div className="w-full h-[2px] bg-[#e60000] rounded-full opacity-20"></div>
+         </div>
+      </div>
+      
       {/* Two Column Section */}
       <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8">
         
@@ -157,5 +164,6 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     </div>
   );
 }
+
 
 
