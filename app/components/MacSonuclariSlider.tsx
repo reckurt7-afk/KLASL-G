@@ -32,10 +32,18 @@ export default function MacSonuclariSlider() {
   }, [selectedCityId]);
 
   async function loadMatches() {
-    const data = await publicFetch(
+    // Try played/live first, fallback to any recent matches with scores
+    let data = await publicFetch(
       "maclar",
       "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat,canli,durum,dakika&or=(oynandi.eq.true,canli.eq.true)&order=canli.desc,hafta.desc,id.desc&limit=20"
     );
+    // Fallback: show any matches that have scores
+    if (!data || data.length === 0) {
+      data = await publicFetch(
+        "maclar",
+        "select=id,hafta,ev_sahibi,deplasman,ev_skor,dep_skor,oynandi,tarih,saat,canli,durum,dakika&ev_skor=not.is.null&order=hafta.desc,id.desc&limit=20"
+      );
+    }
     setMaclar(data || []);
   }
 
