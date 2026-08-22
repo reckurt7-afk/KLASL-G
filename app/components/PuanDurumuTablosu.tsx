@@ -64,7 +64,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
       <div className="card overflow-hidden p-0 border-0 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
         <div className="w-full overflow-x-auto">
           <div className="min-w-[320px]">
-            <div className="sticky top-0 z-20 grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 bg-white/95 border-b border-gray-200 backdrop-blur-md border-b border-gray-200 text-gray-500 font-bold text-[10px] sm:text-xs uppercase tracking-wider p-2 sm:p-4 items-center">
+            <div className="sticky top-0 z-20 grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 bg-white/95 border-b border-gray-100 backdrop-blur-md border-b border-gray-200 text-gray-500 font-bold text-[10px] sm:text-xs uppercase tracking-wider p-2 sm:p-4 items-center">
               <div className="text-center">S</div>
               <div>TAKIM</div>
               <div className="text-center">O</div>
@@ -83,7 +83,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
             >
               {loading ? (
                 skeletons.map((_, i) => (
-                  <div key={i} className="grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center border-b border-gray-200 p-2 sm:p-4">
+                  <div key={i} className="grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center border-b border-gray-100 p-2 sm:p-4">
                     <div className="skeleton h-4 sm:h-6 w-full rounded"></div>
                     <div className="flex items-center gap-2">
                       <div className="skeleton w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] rounded-full shrink-0"></div>
@@ -123,7 +123,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                   }
 
                   return (
-                    <motion.div variants={itemVariants} key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-gray-200 last:border-b-0 text-gray-900 p-2 sm:p-4 transition-all duration-300 hover:bg-gray-50 group text-[11px] sm:text-sm`}>
+                    <motion.div variants={itemVariants} key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-gray-100 last:border-b-0 text-gray-900 p-2 sm:p-4 transition-all duration-300 hover:bg-gray-50 group text-[11px] sm:text-sm`}>
                       <div className={`font-black text-[13px] sm:text-lg text-center ${rankColor} transition-transform group-hover:scale-110`}>
                         {medal}
                       </div>
@@ -150,4 +150,3 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
     </div>
   );
 }
-

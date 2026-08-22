@@ -100,7 +100,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         
         {/* Left Sidebar — Desktop Only */}
         <aside className="w-[260px] hidden lg:block shrink-0">
-          <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm sticky top-[86px]">
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm sticky top-[86px]">
             <nav className="flex flex-col">
               {SIDEBAR_ITEMS.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -108,13 +108,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center gap-3 px-4 py-3.5 text-[13px] font-black transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
                       isActive
-                        ? "bg-[#e50914] text-white shadow-[0_2px_10px_rgba(229,9,20,0.1)]"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-[#e50914]"
+                        ? "bg-[#e60000] text-white"
+                        : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
                     }`}
                   >
-                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e50914]"}`}>{item.icon}</span>
+                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e60000]"}`}>{item.icon}</span>
                     {item.label}
                   </Link>
                 );
@@ -125,7 +125,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
         {/* Mobile: Sidebar as collapsible menu above content */}
         <div className="lg:hidden w-full">
-          <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm mb-4">
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mb-4">
             <nav className="flex flex-col">
               {SIDEBAR_ITEMS.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -133,13 +133,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center gap-3 px-4 py-3.5 text-[13px] font-black transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
                       isActive
-                        ? "bg-[#e50914] text-white shadow-[0_2px_10px_rgba(229,9,20,0.1)]"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-[#e50914]"
+                        ? "bg-[#e60000] text-white"
+                        : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
                     }`}
                   >
-                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e50914]"}`}>{item.icon}</span>
+                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e60000]"}`}>{item.icon}</span>
                     {item.label}
                   </Link>
                 );
@@ -149,7 +149,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] bg-white rounded-xl border border-gray-100 p-4 md:p-6 shadow-sm">
+        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-4 md:p-6 shadow-sm">
           {children}
         </main>
 
@@ -157,4 +157,3 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     </div>
   );
 }
-

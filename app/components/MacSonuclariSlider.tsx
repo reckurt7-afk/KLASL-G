@@ -91,66 +91,56 @@ export default function MacSonuclariSlider() {
             return (
               <div
                 key={match.id}
-                className={`min-w-[210px] sm:min-w-[240px] border ${
-                  match.canli ? "border-[#e50914] bg-red-50/10 shadow-[0_4px_12px_rgba(229,9,20,0.1)]" : "border-gray-200 bg-white"
-                } rounded-xl p-3 shrink-0 snap-start hover:shadow-md transition-shadow cursor-pointer flex flex-col`}
+                className={`min-w-[240px] border ${match.canli ? 'border-red-500 bg-red-50/30' : 'border-gray-100 bg-white'} rounded-xl p-3 shrink-0 snap-start shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer`}
               >
-                {/* Header (Date & Status) */}
-                <div className="flex justify-between items-center mb-2.5">
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-                    {dateStr}
-                  </span>
+                {/* Status & Date */}
+                <div className="flex items-center justify-between mb-2">
                   {match.canli ? (
-                    <span className="text-[10px] font-black text-[#e50914] flex items-center gap-1.5 bg-red-50 px-2 py-0.5 rounded">
-                      <span className="w-1.5 h-1.5 bg-[#e50914] rounded-full animate-ping"></span>
-                      {match.dakika ? `${match.dakika}'` : 'CANLI'}
+                    <span className="text-[10px] font-bold text-white bg-red-600 px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
+                      CANLI {match.dakika ? `${match.dakika}'` : ''}
+                    </span>
+                  ) : match.durum === "Devre Arası" ? (
+                    <span className="text-[10px] font-bold text-white bg-orange-500 px-2 py-0.5 rounded">
+                      DEVRE ARASI
                     </span>
                   ) : (
-                    <span className="text-[10px] font-bold text-gray-400">
-                      {match.durum === "Devre Arası" ? "İY" : "MS"}
+                    <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+                      Bitti
                     </span>
                   )}
+                  <span className="text-[10px] font-medium text-gray-400">{dateStr}</span>
                 </div>
 
-                {/* Teams Layout (Vertical) */}
-                <div className="flex flex-col gap-2 flex-1">
-                  {/* Home Team Row */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <TeamLogo name={match.ev_sahibi} logoMap={logoMap} />
-                      <span className={`text-[12px] font-semibold truncate ${match.canli ? 'text-gray-900' : 'text-gray-700'}`}>
-                        {match.ev_sahibi}
-                      </span>
-                    </div>
-                    <span className={`text-[15px] font-black w-6 text-center ${match.canli ? 'text-[#e50914]' : 'text-gray-900'}`}>
-                      {match.ev_skor ?? "-"}
+                {/* Teams */}
+                <div className="flex items-center justify-between">
+                  {/* Home */}
+                  <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
+                    <TeamLogo name={match.ev_sahibi} logoMap={logoMap} />
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
+                      {match.ev_sahibi}
                     </span>
                   </div>
-                  
-                  {/* Away Team Row */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <TeamLogo name={match.deplasman} logoMap={logoMap} />
-                      <span className={`text-[12px] font-semibold truncate ${match.canli ? 'text-gray-900' : 'text-gray-700'}`}>
-                        {match.deplasman}
-                      </span>
-                    </div>
-                    <span className={`text-[15px] font-black w-6 text-center ${match.canli ? 'text-[#e50914]' : 'text-gray-900'}`}>
-                      {match.dep_skor ?? "-"}
+
+                  {/* Score */}
+                  <div className="flex items-center gap-1.5 px-2 shrink-0">
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-[#e60000]'}`}>{match.ev_skor ?? 0}</span>
+                    <span className="text-gray-300 font-bold">-</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
+                  </div>
+
+                  {/* Away */}
+                  <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
+                    <TeamLogo name={match.deplasman} logoMap={logoMap} />
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
+                      {match.deplasman}
                     </span>
                   </div>
                 </div>
 
                 {/* Footer */}
-                <div className="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center text-[10px]">
-                  <span className="text-gray-400 font-medium">
-                    Klas Lig • {match.hafta}. Hafta
-                  </span>
-                  {match.saha && (
-                    <span className="text-gray-400 font-medium truncate max-w-[80px] text-right">
-                      {match.saha}
-                    </span>
-                  )}
+                <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
+                  {match.canli && <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>}
+                  <span className={match.canli ? "text-red-500" : "text-gray-400"}>Klas Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );
