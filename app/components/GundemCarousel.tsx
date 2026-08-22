@@ -90,14 +90,14 @@ export default function GundemCarousel() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-3 overflow-x-auto snap-x snap-mandatory"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory"
             style={{ scrollbarWidth: "none" }}
           >
             {haberler.map((haber) => (
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
               >
                 {/* Background */}
                 {haber.resim ? (
@@ -146,3 +146,4 @@ export default function GundemCarousel() {
     </div>
   );
 }
+

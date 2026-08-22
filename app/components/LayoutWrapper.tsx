@@ -96,19 +96,19 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <MacSonuclariSlider />
 
       {/* Two Column Section */}
-      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-5">
+      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8">
         
         {/* Left Sidebar — Desktop Only */}
         <aside className="w-[260px] hidden lg:block shrink-0">
-          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm sticky top-[86px]">
-            <nav className="flex flex-col">
+          <div className="bg-white border border-gray-100 rounded-xl shadow-sm sticky top-[86px] p-2">
+            <nav className="flex flex-col gap-1">
               {SIDEBAR_ITEMS.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors rounded-lg ${
                       isActive
                         ? "bg-[#e60000] text-white"
                         : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
@@ -126,14 +126,14 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         {/* Mobile: Sidebar as collapsible menu above content */}
         <div className="lg:hidden w-full">
           <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mb-4">
-            <nav className="flex flex-col">
+            <nav className="flex flex-col gap-1">
               {SIDEBAR_ITEMS.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors border-b border-gray-50 last:border-0 ${
+                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors rounded-lg ${
                       isActive
                         ? "bg-[#e60000] text-white"
                         : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
@@ -157,3 +157,5 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     </div>
   );
 }
+
+

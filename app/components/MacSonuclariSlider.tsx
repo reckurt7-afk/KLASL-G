@@ -80,7 +80,7 @@ export default function MacSonuclariSlider() {
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         <div
           ref={scrollRef}
-          className="flex gap-3 overflow-x-auto snap-x snap-mandatory"
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory"
           style={{ scrollbarWidth: "none" }}
         >
           {maclar.map((match: any) => {
@@ -150,5 +150,6 @@ export default function MacSonuclariSlider() {
     </div>
   );
 }
+
 
 
