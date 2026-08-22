@@ -34,7 +34,10 @@ export const viewport: Viewport = {
   themeColor: "#070707",
 };
 
+import { Inter } from "next/font/google";
 import LayoutWrapper from "./components/LayoutWrapper";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export default function RootLayout({
   children,
@@ -42,13 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" className={inter.className}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body className="bg-[#f5f6f8] text-[#111111] antialiased selection:bg-[#e50914] selection:text-white">
         <AuthProvider>
           <ServiceWorkerRegister />
           <GolSesiDinleyici />
@@ -59,4 +59,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+}
