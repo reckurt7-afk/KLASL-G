@@ -72,14 +72,14 @@ export default function CityStoryBar() {
               <div
                 className={`w-[100px] h-[80px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
-                    ? "border-[#3b5bdb] bg-[#eef2ff] shadow-md"
+                    ? "border-[#e60000] bg-red-50 shadow-md"
                     : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
                 }`}
               >
                 <div className="w-8 h-8 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="object-contain" />
                 </div>
-                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#3b5bdb]" : "text-gray-700"}`}>
+                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#e60000]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
                 <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
@@ -99,3 +99,4 @@ export default function CityStoryBar() {
     </div>
   );
 }
+

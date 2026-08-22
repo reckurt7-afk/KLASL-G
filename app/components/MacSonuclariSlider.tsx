@@ -85,7 +85,7 @@ export default function MacSonuclariSlider() {
         >
           {maclar.map((match: any) => {
             const dateStr = match.tarih
-              ? new Date(match.tarih).toLocaleDateString("tr-TR", { day: "numeric", month: "short" }) + (match.saat ? ` ${match.saat}` : "")
+              ? match.tarih + (match.saat ? ` ${match.saat}` : "")
               : match.saat || "";
 
             return (
@@ -119,7 +119,7 @@ export default function MacSonuclariSlider() {
                   {/* Home */}
                   <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
                     <TeamLogo name={match.ev_sahibi} logoMap={logoMap} />
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight truncate w-full px-1">
                       {match.ev_sahibi}
                     </span>
                   </div>
@@ -134,7 +134,7 @@ export default function MacSonuclariSlider() {
                   {/* Away */}
                   <div className="flex flex-col items-center gap-1 flex-1 min-w-0">
                     <TeamLogo name={match.deplasman} logoMap={logoMap} />
-                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight line-clamp-2 w-full px-1">
+                    <span className="text-[10px] font-bold text-gray-700 text-center leading-tight truncate w-full px-1">
                       {match.deplasman}
                     </span>
                   </div>
@@ -153,6 +153,8 @@ export default function MacSonuclariSlider() {
     </div>
   );
 }
+
+
 
 
 

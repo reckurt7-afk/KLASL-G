@@ -26,7 +26,7 @@ export default function Header() {
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image src="/icons/logo.png" width={40} height={40} alt="Klas Lig" className="object-contain drop-shadow-sm" />
-          <span className="font-black text-xl tracking-tight text-gray-900">KLAS LÄ°G</span>
+          <span className="font-black text-xl tracking-tight text-gray-900">KLAS <span className="text-[#e60000]">LÝG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
@@ -106,3 +106,5 @@ export default function Header() {
     </header>
   );
 }
+
+
