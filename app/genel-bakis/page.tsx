@@ -4,7 +4,7 @@ import { useCityStore } from "../store/cityStore";
 
 export default function GenelBakis() {
   const { selectedCityId } = useCityStore();
-  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "Ä°stanbul" : selectedCityId === 3 ? "Ä°zmir" : "TÃ¼rkiye";
 
   return (
     <div className="w-full flex flex-col fade-in pb-10">
@@ -17,8 +17,8 @@ export default function GenelBakis() {
            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
          </div>
          <div className="flex flex-col justify-center">
-           <h1 className="text-[15px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">HAFTANIN ALTIN 7'Sİ</h1>
-           <p className="text-[11px] md:text-[13px] text-gray-500 font-bold leading-none">{cityName} - 4. Hafta En İyileri</p>
+           <h1 className="text-[15px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">HAFTANIN ALTIN 7'SÄ°</h1>
+           <p className="text-[11px] md:text-[13px] text-gray-500 font-bold leading-none">{cityName} - 4. Hafta En Ä°yileri</p>
          </div>
       </div>
 
@@ -58,19 +58,20 @@ export default function GenelBakis() {
           {/* Players Overlay */}
           <div className="absolute inset-0 z-10">
              {/* GK */}
-             <PlayerCard name="Ahmet Yılmaz" team="Gravyer FC" pos="KL" rating={92} top="86%" left="50%" />
+             <PlayerCard name="Ahmet Yılmaz" team="Gravyer FC" pos="KL" rating={92} top="88%" left="50%" />
              
              {/* DEF */}
-             <PlayerCard name="Burak Demir" team="Krokodilla" pos="ST" rating={89} top="68%" left="28%" />
-             <PlayerCard name="Can Kaya" team="PS 5" pos="ST" rating={88} top="68%" left="72%" />
+             <PlayerCard name="Burak Demir" team="Krokodilla" pos="SĞB" rating={89} top="68%" left="22%" />
+             <PlayerCard name="Can Kaya" team="PS 5" pos="ST" rating={88} top="72%" left="50%" />
+             <PlayerCard name="Hasan Can" team="Yediyol" pos="SLB" rating={87} top="68%" left="78%" />
              
              {/* MID */}
-             <PlayerCard name="Ali Vefa" team="Yeşil Bursa" pos="SĞO" rating={94} top="43%" left="20%" />
-             <PlayerCard name="Kemal Sun" team="Gravyer FC" pos="MO" rating={95} top="35%" left="50%" />
-             <PlayerCard name="Emre Can" team="Biskrem M." pos="SLO" rating={90} top="43%" left="80%" />
+             <PlayerCard name="Ali Vefa" team="Yeşil Bursa" pos="SĞA" rating={94} top="42%" left="22%" />
+             <PlayerCard name="Kemal Sun" team="Gravyer FC" pos="MO" rating={95} top="46%" left="50%" />
+             <PlayerCard name="Emre Can" team="Biskrem M." pos="SLA" rating={90} top="42%" left="78%" />
              
              {/* FWD */}
-             <PlayerCard name="Mustafa S." team="Krokodilla" pos="SNT" rating={97} top="14%" left="50%" />
+             <PlayerCard name="Mustafa S." team="Krokodilla" pos="SNT" rating={97} top="16%" left="50%" />
           </div>
       </div>
     </div>
@@ -111,3 +112,4 @@ function PlayerCard({ name, team, pos, rating, top, left }: { name: string, team
     </div>
   )
 }
+
