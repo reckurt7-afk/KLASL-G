@@ -126,6 +126,36 @@ export default function LandingPage() {
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </Link>
           </div>
+
+          {/* New Prominent Feature Buttons */}
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 w-full mt-6">
+             <Link 
+                href="/genel-bakis"
+                className="group relative overflow-hidden bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-[#1a1a2e] font-black text-[15px] px-8 h-[54px] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_5px_20px_rgba(245,158,11,0.4)] hover:shadow-[0_8px_25px_rgba(245,158,11,0.6)] hover:-translate-y-1 hover:scale-105"
+             >
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out"></div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                HAFTANIN ALTIN 8'İ
+             </Link>
+
+             <button 
+                onClick={() => {
+                  if (typeof window !== 'undefined' && 'Notification' in window) {
+                    Notification.requestPermission().then(p => {
+                      if (p === 'granted') alert('Bildirimler başarıyla açıldı!');
+                      else alert('Bildirim izni reddedildi.');
+                    });
+                  } else {
+                    alert('Bildirimler yakında aktif olacak!');
+                  }
+                }}
+                className="group relative overflow-hidden bg-gradient-to-r from-[#1da1f2] to-[#0077b5] text-white font-black text-[15px] px-8 h-[54px] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_5px_20px_rgba(29,161,242,0.4)] hover:shadow-[0_8px_25px_rgba(29,161,242,0.6)] hover:-translate-y-1 hover:scale-105"
+             >
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                BİLDİRİMLERİ AÇ
+             </button>
+          </div>
         </div>
       </section>
 
