@@ -51,7 +51,7 @@ export default function LandingPage() {
           icon: "/icons/logo.png",
           badge: "/icons/logo.png",
           vibrate: [200, 100, 200]
-        });
+        } as any);
         // alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
       } else {
         alert("Abonelik kaydedilemedi.");
