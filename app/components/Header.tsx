@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useAuth } from "@/lib/AuthContext";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export default function Header() {
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image src="/icons/logo.png" width={40} height={40} alt="Klas Lig" className="object-contain drop-shadow-sm" />
-          <span className="font-black text-xl tracking-tight text-gray-900">KLAS L─░G</span>
+          <span className="font-black text-xl tracking-tight text-gray-900">KLAS <span className="text-[#e60000]">LİG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
@@ -37,7 +37,7 @@ export default function Header() {
           </div>
           
           <button className="text-gray-500 hover:text-gray-900 text-xl">
-            ­şöı
+            🔍
           </button>
 
           {loading ? (
@@ -56,8 +56,8 @@ export default function Header() {
                   </div>
                 )}
                 <div className="hidden md:flex flex-col text-left">
-                  <span className="text-sm font-bold text-gray-900 leading-tight line-clamp-1">{profil?.ad_soyad || "Kullan─▒c─▒"}</span>
-                  <span className="text-[10px] text-gray-500">Hesab─▒m</span>
+                  <span className="text-sm font-bold text-gray-900 leading-tight line-clamp-1">{profil?.ad_soyad || "Kullanıcı"}</span>
+                  <span className="text-[10px] text-gray-500">Hesabım</span>
                 </div>
               </button>
 
@@ -69,7 +69,7 @@ export default function Header() {
                       {(profil?.ad_soyad || user.email || "K")[0]}
                     </div>
                     <div className="flex flex-col overflow-hidden">
-                      <span className="font-bold text-[13px] truncate">{profil?.ad_soyad || "Kullan─▒c─▒"}</span>
+                      <span className="font-bold text-[13px] truncate">{profil?.ad_soyad || "Kullanıcı"}</span>
                       <span className="text-[10px] text-red-100 truncate">{user.email}</span>
                     </div>
                   </div>
@@ -78,14 +78,14 @@ export default function Header() {
                     onClick={() => setDropdownOpen(false)}
                     className="px-4 py-2 text-[13px] font-bold hover:bg-white/10 transition-colors mx-2 rounded-lg"
                   >
-                    Bilgilerimi G├╝ncelle
+                    Bilgilerimi Güncelle
                   </Link>
                   <button 
                     onClick={() => { setDropdownOpen(false); cikisYap(); }}
                     className="px-4 py-2 text-[13px] font-bold hover:bg-white/10 transition-colors mx-2 rounded-lg flex items-center gap-2 text-left"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    ├ç─▒k─▒┼ş Yap
+                    Çıkış Yap
                   </button>
                 </div>
               )}
@@ -97,7 +97,7 @@ export default function Header() {
               </div>
               <div className="hidden md:flex flex-col text-left">
                 <span className="text-sm font-bold text-gray-900 leading-tight">Misafir</span>
-                <span className="text-[10px] text-gray-500">Giri┼ş Yap</span>
+                <span className="text-[10px] text-gray-500">Giriş Yap</span>
               </div>
             </Link>
           )}
