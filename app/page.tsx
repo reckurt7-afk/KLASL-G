@@ -45,7 +45,14 @@ export default function LandingPage() {
       });
 
       if (response.ok) {
-        alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
+        // Show immediate welcome notification
+        await reg.showNotification("KLAS LİG", {
+          body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",
+          icon: "/icons/logo.png",
+          badge: "/icons/logo.png",
+          vibrate: [200, 100, 200]
+        });
+        // alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
       } else {
         alert("Abonelik kaydedilemedi.");
       }
