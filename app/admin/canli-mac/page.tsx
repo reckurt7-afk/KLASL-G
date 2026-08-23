@@ -244,411 +244,244 @@ export default function CanliMacPage() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0b0b0b", color: "#fff", padding: "90px 20px" }}>
-      <h1 style={{ textAlign: "center", color: "#ff3131", marginBottom: 30, fontWeight: 900, fontSize: 28 }}>
-        🔴 CANLI MAÇ YÖNETİMİ
-      </h1>
+    <div className="min-h-screen bg-[#050505] pt-12 pb-24 font-sans relative overflow-hidden text-white">
+      {/* Background Glow */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
+      
+      <div className="max-w-[800px] mx-auto px-5 relative z-10">
+        
+        {/* Header */}
+        <div className="flex items-center gap-4 mb-8">
+          <div className="w-12 h-12 bg-[#e60000]/10 border border-[#e60000]/30 rounded-xl flex items-center justify-center text-[#e60000] shadow-[0_0_20px_rgba(230,0,0,0.15)]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <h1 className="text-[26px] font-black text-white tracking-tight leading-none mb-1">
+              CANLI MAÇ YÖNETİMİ
+            </h1>
+            <p className="text-[13px] text-gray-400 font-medium">Saha kenarı komuta merkezi</p>
+          </div>
+        </div>
 
-      <div style={{ maxWidth: 700, margin: "0 auto", background: "#151515", borderRadius: 20, padding: 24, border: "1px solid rgba(255,49,49,0.15)" }}>
-        <select
-          value={seciliMac?.id || ""}
-          onChange={(e) => {
-            const mac = maclar.find((m) => m.id === Number(e.target.value));
-            setSeciliMac(mac || null);
-            setSureCalisiyor(false);
-          }}
-          style={{
-            width: "100%",
-            height: 55,
-            borderRadius: 12,
-            background: "#222",
-            color: "#fff",
-            padding: "0 15px",
-            fontSize: 16,
-            border: "1px solid rgba(255,255,255,0.1)",
-          }}
-        >
-          <option value="">Maç Seçiniz</option>
-          {maclar.map((m) => (
-            <option key={m.id} value={m.id}>
-              {m.hafta}. Hafta | {m.ev_sahibi || "Ev Sahibi"} - {m.deplasman || "Deplasman"}
-            </option>
-          ))}
-        </select>
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-gray-800/80 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+          {/* Subtle top red glow */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#e60000] to-transparent opacity-50"></div>
 
-        {seciliMac && (
-          <>
-            {/* Maç Başlığı */}
-            <div style={{ textAlign: "center", marginTop: 30, marginBottom: 10 }}>
-              <div style={{ fontSize: 13, color: "#ff3131", fontWeight: 700, letterSpacing: 3, marginBottom: 8 }}>
-                {seciliMac.hafta}. HAFTA
-              </div>
-              <h2 style={{ fontSize: 22, fontWeight: 900, margin: 0 }}>
-                {seciliMac.ev_sahibi || "Ev Sahibi"} 🆚 {seciliMac.deplasman || "Deplasman"}
-              </h2>
-              {seciliMac.canli && (
-                <div style={{
-                  display: "inline-block",
-                  background: "rgba(255,49,49,0.15)",
-                  border: "1px solid rgba(255,49,49,0.4)",
-                  color: "#ff3131",
-                  padding: "4px 14px",
-                  borderRadius: 20,
-                  fontSize: 12,
-                  fontWeight: 800,
-                  marginTop: 10,
-                  animation: "pulse 1.5s infinite",
-                }}>
-                  🔴 CANLI
-                </div>
-              )}
-            </div>
+          <div className="relative z-10">
+            <select
+              value={seciliMac?.id || ''}
+              onChange={(e) => {
+                const mac = maclar.find((m) => m.id === Number(e.target.value));
+                setSeciliMac(mac || null);
+                setSureCalisiyor(false);
+              }}
+              className="w-full h-14 rounded-xl bg-[#141414] text-white px-4 text-[15px] font-medium border border-gray-800 focus:border-[#e60000] focus:ring-1 focus:ring-[#e60000] outline-none transition-all shadow-inner appearance-none"
+            >
+              <option value="">Maç Seçiniz...</option>
+              {maclar.map((m) => (
+                <option key={m.id} value={m.id}>
+                  {m.hafta}. Hafta | {m.ev_sahibi || 'Ev Sahibi'} - {m.deplasman || 'Deplasman'}
+                </option>
+              ))}
+            </select>
+          </div>
 
-            {/* SKOR */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr auto 1fr",
-              alignItems: "center",
-              textAlign: "center",
-              gap: 15,
-              marginTop: 20,
-              background: "#0d0d0d",
-              borderRadius: 16,
-              padding: "20px 10px",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}>
-              <div>
-                <div style={{ fontSize: 12, color: "#888", fontWeight: 700, marginBottom: 8 }}>{seciliMac.ev_sahibi}</div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  <button onClick={async () => {
-                    const yeniSkor = Math.max(0, seciliMac.ev_skor - 1);
-                    if (yeniSkor < seciliMac.ev_skor) {
-                      await macGuncelle("ev_skor", yeniSkor);
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.ev_sahibi} golü iptal edildi! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
-                        }),
-                      });
-                    }
-                  }} style={skorBtnStyle}>➖</button>
-
-                  <h1 style={{ fontSize: 48, margin: 0, fontWeight: 900, color: "#fff" }}>{seciliMac.ev_skor}</h1>
-
-                  <button onClick={async () => {
-                    const golAtan = prompt(`${seciliMac.ev_sahibi} için golü kim attı? (Boş bırakabilirsiniz)`);
-                    const yeniSkor = seciliMac.ev_skor + 1;
-                    golSesiCal(); // 🔊 GOOOL sesi (sadece adminde de çalar)
-                    
-                    // İki alanı aynı anda güncelle (İsim bilgisini durum sütununa gizliyoruz)
-                    const { error } = await supabase
-                      .from("maclar")
-                      .update({ ev_skor: yeniSkor, durum: `Canlı|${golAtan || ""}` })
-                      .eq("id", seciliMac.id);
-                      
-                    if (!error) {
-                      setSeciliMac({ ...seciliMac, ev_skor: yeniSkor });
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "⚽ GOOOL!",
-                          mesaj: golAtan 
-                            ? `${seciliMac.ev_sahibi} adına ${golAtan} topu ağlara gönderdi! Skor: ${yeniSkor}-${seciliMac.dep_skor}`
-                            : `${seciliMac.ev_sahibi} gol attı! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
-                        }),
-                      });
-                    }
-                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
-                </div>
-              </div>
-
-              <h1 style={{ fontSize: 36, color: "#555", margin: 0 }}>-</h1>
-
-              <div>
-                <div style={{ fontSize: 12, color: "#888", fontWeight: 700, marginBottom: 8 }}>{seciliMac.deplasman}</div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
-                  <button onClick={async () => {
-                    const yeniSkor = Math.max(0, seciliMac.dep_skor - 1);
-                    if (yeniSkor < seciliMac.dep_skor) {
-                      await macGuncelle("dep_skor", yeniSkor);
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.deplasman} golü iptal edildi! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
-                        }),
-                      });
-                    }
-                  }} style={skorBtnStyle}>➖</button>
-
-                  <h1 style={{ fontSize: 48, margin: 0, fontWeight: 900, color: "#fff" }}>{seciliMac.dep_skor}</h1>
-
-                  <button onClick={async () => {
-                    const golAtan = prompt(`${seciliMac.deplasman} için golü kim attı? (Boş bırakabilirsiniz)`);
-                    const yeniSkor = seciliMac.dep_skor + 1;
-                    golSesiCal(); // 🔊 GOOOL sesi!
-                    
-                    const { error } = await supabase
-                      .from("maclar")
-                      .update({ dep_skor: yeniSkor, durum: `Canlı|${golAtan || ""}` })
-                      .eq("id", seciliMac.id);
-                      
-                    if (!error) {
-                      setSeciliMac({ ...seciliMac, dep_skor: yeniSkor });
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "⚽ GOOOL!",
-                          mesaj: golAtan 
-                            ? `${seciliMac.deplasman} adına ${golAtan} topu ağlara gönderdi! Skor: ${seciliMac.ev_skor}-${yeniSkor}`
-                            : `${seciliMac.deplasman} gol attı! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
-                        }),
-                      });
-                    }
-                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
-                </div>
-              </div>
-            </div>
-
-            {/* DAKİKA + SÜRE BAŞLAT */}
-            <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 style={{ textAlign: "center", color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, margin: "0 0 12px" }}>DAKİKA</h3>
-              <div style={{ display: "flex", justifyContent: "center", gap: 12, alignItems: "center" }}>
-                <button onClick={() => macGuncelle("dakika", Math.max(0, seciliMac.dakika - 1))} style={skorBtnStyle}>➖</button>
-                <h2 style={{ fontSize: 40, margin: 0, fontWeight: 900, minWidth: 80, textAlign: "center" }}>{seciliMac.dakika}&apos;</h2>
-                <button onClick={() => macGuncelle("dakika", seciliMac.dakika + 1)} style={skorBtnStyle}>➕</button>
-              </div>
-
-              <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 16 }}>
-                <button
-                  onClick={() => {
-                    if (sureCalisiyor) {
-                      setSureCalisiyor(false);
-                    } else {
-                      setSureCalisiyor(true);
-                    }
-                  }}
-                  style={{
-                    padding: "12px 28px",
-                    background: sureCalisiyor
-                      ? "linear-gradient(135deg, #dc2626, #991b1b)"
-                      : "linear-gradient(135deg, #16a34a, #15803d)",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 12,
-                    fontSize: 15,
-                    fontWeight: 800,
-                    cursor: "pointer",
-                    boxShadow: sureCalisiyor
-                      ? "0 4px 15px rgba(220,38,38,0.4)"
-                      : "0 4px 15px rgba(22,163,74,0.4)",
-                  }}
-                >
-                  {sureCalisiyor ? "⏸️ Süreyi Durdur" : "⏱️ Süreyi Başlat"}
-                </button>
-
-                <button
-                  onClick={() => {
-                    setSureCalisiyor(false);
-                    macGuncelle("dakika", 0);
-                  }}
-                  style={{
-                    padding: "12px 20px",
-                    background: "#333",
-                    color: "#fff",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 12,
-                    fontSize: 15,
-                    fontWeight: 800,
-                    cursor: "pointer",
-                  }}
-                >
-                  🔄 Sıfırla
-                </button>
-              </div>
-
-              {sureCalisiyor && (
-                <div style={{ textAlign: "center", marginTop: 10, color: "#16a34a", fontSize: 12, fontWeight: 700 }}>
-                  ✅ Süre otomatik olarak ilerliyor (dakikada 1 artıyor)
-                </div>
-              )}
-            </div>
-
-            {/* HAKEM */}
-            <div style={{ marginTop: 20 }}>
-              <h3 style={{ color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 8 }}>HAKEM</h3>
-              <input
-                value={seciliMac.hakem || ""}
-                onChange={(e) => macGuncelle("hakem", e.target.value)}
-                placeholder="Hakem adı"
-                style={{
-                  width: "100%",
-                  height: 48,
-                  padding: "0 15px",
-                  borderRadius: 12,
-                  background: "#0d0d0d",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  fontSize: 15,
-                  boxSizing: "border-box",
-                }}
-              />
-            </div>
-
-            {/* YOUTUBE */}
-            <div style={{ marginTop: 16 }}>
-              <h3 style={{ color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 8 }}>YOUTUBE YAYIN LİNKİ</h3>
-              <input
-                value={seciliMac.youtube_link || ""}
-                onChange={(e) => macGuncelle("youtube_link", e.target.value)}
-                placeholder="https://youtube.com/..."
-                style={{
-                  width: "100%",
-                  height: 48,
-                  padding: "0 15px",
-                  borderRadius: 12,
-                  background: "#0d0d0d",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  fontSize: 15,
-                  boxSizing: "border-box",
-                }}
-              />
-            </div>
-            {/* OLAY EKLEME (ZAMAN TÜNELİ) */}
-            <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(255,49,49,0.3)" }}>
-              <h3 style={{ color: "#ff3131", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>⚡ ZAMAN TÜNELİNE OLAY EKLE</h3>
+          {seciliMac && (
+            <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
-                <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
-                  <option value="ev">Ev Sahibi ({seciliMac.ev_sahibi})</option>
-                  <option value="deplasman">Deplasman ({seciliMac.deplasman})</option>
-                </select>
+              {/* SKOR TABLOSU */}
+              <div className="flex items-center justify-between bg-[#111] rounded-2xl p-6 border border-gray-800/80 mb-6 relative overflow-hidden shadow-lg">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#e60000]/5 to-transparent pointer-events-none"></div>
                 
-                <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
-                  <option value="GOL">⚽ Gol</option>
-                  <option value="ASIST">👟 Asist</option>
-                  <option value="SARI_KART">🟨 Sarı Kart</option>
-                  <option value="KIRMIZI_KART">🟥 Kırmızı Kart</option>
-                  <option value="DEGISIKLIK">🔄 Oyuncu Değişikliği</option>
-                </select>
+                {/* Ev Sahibi */}
+                <div className="flex-1 flex flex-col items-center">
+                  <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Ev Sahibi</span>
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 text-[10px] text-gray-600 text-center leading-tight overflow-hidden">
+                    Logo
+                  </div>
+                  <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
+                    {seciliMac.ev_sahibi}
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <button onClick={() => macGuncelle('ev_skor', Math.max(0, (seciliMac.ev_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
+                    <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.ev_skor || 0}</span>
+                    <button onClick={() => { macGuncelle('ev_skor', (seciliMac.ev_skor || 0) + 1); golSesiCal(); }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
+                  </div>
+                </div>
+
+                {/* Orta (Dakika & Durum) */}
+                <div className="flex flex-col items-center justify-center px-4 shrink-0">
+                  <div className="text-[12px] font-bold text-[#e60000] tracking-wider mb-2 bg-[#e60000]/10 px-3 py-1 rounded-full border border-[#e60000]/20">
+                    {seciliMac.durum}
+                  </div>
+                  
+                  <div className="flex items-center gap-2 mb-2 group">
+                    <button onClick={() => macGuncelle('dakika', Math.max(0, (seciliMac.dakika || 0) - 1))} className="text-gray-600 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    
+                    <div className="text-[42px] font-black text-white leading-none tracking-tighter" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>
+                      {seciliMac.dakika}'
+                    </div>
+                    
+                    <button onClick={() => macGuncelle('dakika', (seciliMac.dakika || 0) + 1)} className="text-gray-600 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                  </div>
+
+                  {sureCalisiyor && (
+                    <div className="flex items-center gap-1 text-[#16a34a] text-[11px] font-bold mt-1 bg-[#16a34a]/10 px-2 py-1 rounded-md border border-[#16a34a]/20 animate-pulse">
+                      <div className="w-2 h-2 rounded-full bg-[#16a34a]"></div>
+                      Süre Akıyor
+                    </div>
+                  )}
+                </div>
+
+                {/* Deplasman */}
+                <div className="flex-1 flex flex-col items-center">
+                  <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Deplasman</span>
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 text-[10px] text-gray-600 text-center leading-tight overflow-hidden">
+                    Logo
+                  </div>
+                  <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
+                    {seciliMac.deplasman}
+                  </div>
+                  <div className="flex items-center gap-3 mt-4">
+                    <button onClick={() => { macGuncelle('dep_skor', (seciliMac.dep_skor || 0) + 1); golSesiCal(); }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
+                    <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.dep_skor || 0}</span>
+                    <button onClick={() => macGuncelle('dep_skor', Math.max(0, (seciliMac.dep_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
+                  </div>
+                </div>
               </div>
-              
-              <div style={{ display: "flex", gap: 10 }}>
-                <input 
-                  value={olayOyuncu} 
-                  onChange={e => setOlayOyuncu(e.target.value)} 
-                  placeholder="Oyuncu adı..."
-                  style={{ flex: 1, padding: "10px 15px", background: "#222", color: "#fff", borderRadius: 8, border: "none" }}
-                />
-                <button onClick={olayEkle} style={{ padding: "10px 20px", background: "#ff3131", color: "#fff", borderRadius: 8, fontWeight: "bold", border: "none", cursor: "pointer" }}>
-                  Ekle ({seciliMac.dakika}')
+
+              {/* HAKEM & YOUTUBE */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-[#111] p-4 rounded-2xl border border-gray-800/80">
+                  <h3 className="text-gray-500 text-[11px] font-black tracking-widest mb-2 uppercase flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Hakem
+                  </h3>
+                  <input
+                    value={seciliMac.hakem || ''}
+                    onChange={(e) => macGuncelle('hakem', e.target.value)}
+                    placeholder="Hakem adını giriniz..."
+                    className="w-full h-12 bg-[#1a1a1a] text-white px-4 rounded-xl text-[14px] font-medium border border-gray-800 focus:border-[#e60000] outline-none transition-colors"
+                  />
+                </div>
+                
+                <div className="bg-[#111] p-4 rounded-2xl border border-gray-800/80">
+                  <h3 className="text-gray-500 text-[11px] font-black tracking-widest mb-2 uppercase flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    YouTube Linki
+                  </h3>
+                  <input
+                    value={seciliMac.youtube_link || ''}
+                    onChange={(e) => macGuncelle('youtube_link', e.target.value)}
+                    placeholder="https://youtube.com/..."
+                    className="w-full h-12 bg-[#1a1a1a] text-white px-4 rounded-xl text-[14px] font-medium border border-gray-800 focus:border-[#e60000] outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              {/* ZAMAN TÜNELİNE OLAY EKLE */}
+              <div className="bg-[#1a0f0f] border border-[#e60000]/30 rounded-2xl p-5 mb-8 shadow-[0_0_20px_rgba(230,0,0,0.05)] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#e60000]/10 blur-[40px] pointer-events-none"></div>
+                
+                <h3 className="text-[#e60000] text-[13px] font-black tracking-widest mb-4 uppercase flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Zaman Tüneline Olay Ekle
+                </h3>
+                
+                <div className="flex flex-col md:flex-row gap-3 mb-3 relative z-10">
+                  <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} className="flex-1 h-12 bg-[#141414] text-white px-3 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]">
+                    <option value="ev">Ev Sahibi ({seciliMac.ev_sahibi})</option>
+                    <option value="deplasman">Deplasman ({seciliMac.deplasman})</option>
+                  </select>
+                  
+                  <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} className="flex-1 h-12 bg-[#141414] text-white px-3 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]">
+                    <option value="GOL">⚽ Gol</option>
+                    <option value="ASIST">🎯 Asist</option>
+                    <option value="SARI_KART">🟨 Sarı Kart</option>
+                    <option value="KIRMIZI_KART">🟥 Kırmızı Kart</option>
+                    <option value="DEGISIKLIK">🔄 Oyuncu Değişikliği</option>
+                  </select>
+                </div>
+                
+                <div className="flex gap-3 relative z-10">
+                  <input 
+                    value={olayOyuncu} 
+                    onChange={e => setOlayOyuncu(e.target.value)} 
+                    placeholder="Telsizden gelen oyuncu adını yazın..."
+                    className="flex-1 h-12 bg-[#141414] text-white px-4 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]"
+                  />
+                  <button onClick={olayEkle} className="h-12 px-6 bg-[#e60000] hover:bg-[#ff3333] text-white rounded-xl font-bold text-[14px] shadow-[0_0_15px_rgba(230,0,0,0.3)] transition-colors whitespace-nowrap">
+                    Ekle ({seciliMac.dakika}')
+                  </button>
+                </div>
+              </div>
+
+              {/* KONTROL BUTONLARI */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button
+                  onClick={() => { canliDurumGuncelle(true); setSureCalisiyor(true); }}
+                  className="h-14 bg-[#16a34a]/10 hover:bg-[#16a34a]/20 border border-[#16a34a]/40 text-[#16a34a] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Başlat
+                </button>
+
+                <button
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    setSureCalisiyor(false);
+                    const { error } = await supabase.from('maclar').update({ canli: false, durum: 'Devre Arası' }).eq('id', seciliMac.id);
+                    if (!error) {
+                      setSeciliMac({ ...seciliMac, canli: false, durum: 'Devre Arası' });
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⏸ DEVRE ARASI', mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}` }) });
+                    }
+                  }}
+                  className="h-14 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 border border-[#f59e0b]/40 text-[#f59e0b] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                  Devre
+                </button>
+
+                <button
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    const { error } = await supabase.from('maclar').update({ canli: true, durum: 'Canlı' }).eq('id', seciliMac.id);
+                    if (!error) {
+                      setSeciliMac({ ...seciliMac, canli: true, durum: 'Canlı' });
+                      setSureCalisiyor(true);
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '▶ İKİNCİ YARI', mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı başladı!` }) });
+                    }
+                  }}
+                  className="h-14 bg-[#2563eb]/10 hover:bg-[#2563eb]/20 border border-[#2563eb]/40 text-[#2563eb] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  2.Yarı
+                </button>
+
+                <button
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    setSureCalisiyor(false);
+                    const { error } = await supabase.from('maclar').update({ canli: false, durum: 'Maç Sona Erdi' }).eq('id', seciliMac.id);
+                    if (!error) {
+                      setSeciliMac({ ...seciliMac, canli: false, durum: 'Maç Sona Erdi' });
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '🏁 MAÇ SONA ERDİ!', mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}` }) });
+                    }
+                  }}
+                  className="h-14 bg-[#dc2626]/10 hover:bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#dc2626] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><rect x="9" y="9" width="6" height="6"/></svg>
+                  Bitir
                 </button>
               </div>
             </div>
-
-            {/* KONTROL BUTONLARI */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10, marginTop: 28 }}>
-              <button
-                onClick={() => {
-                  canliDurumGuncelle(true);
-                  setSureCalisiyor(true);
-                }}
-                style={btnStyle("#16a34a")}
-              >
-                ▶️ Başlat
-              </button>
-
-              <button
-                onClick={async () => {
-                  if (!seciliMac) return;
-                  setSureCalisiyor(false);
-                  const { error } = await supabase
-                    .from("maclar")
-                    .update({ canli: false, durum: "Devre Arası" })
-                    .eq("id", seciliMac.id);
-                  if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: false, durum: "Devre Arası" });
-                    await fetch("/api/send-notification", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        baslik: "⏸️ DEVRE ARASI",
-                        mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
-                      }),
-                    });
-                  }
-                }}
-                style={btnStyle("#f59e0b")}
-              >
-                ⏸️ Devre
-              </button>
-
-              <button
-                onClick={async () => {
-                  if (!seciliMac) return;
-                  const { error } = await supabase
-                    .from("maclar")
-                    .update({ canli: true, durum: "Canlı" })
-                    .eq("id", seciliMac.id);
-                  if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: true, durum: "Canlı" });
-                    setSureCalisiyor(true);
-                    await fetch("/api/send-notification", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        baslik: "▶️ İKİNCİ YARI",
-                        mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı başladı!`,
-                      }),
-                    });
-                  }
-                }}
-                style={btnStyle("#2563eb")}
-              >
-                ▶️ 2.Yarı
-              </button>
-
-              <button
-                onClick={async () => {
-                  if (!seciliMac) return;
-                  setSureCalisiyor(false);
-                  const { error } = await supabase
-                    .from("maclar")
-                    .update({ canli: false, durum: "Maç Sona Erdi" })
-                    .eq("id", seciliMac.id);
-                  if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: false, durum: "Maç Sona Erdi" });
-                    await fetch("/api/send-notification", {
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        baslik: "🏁 MAÇ SONA ERDİ!",
-                        mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
-                      }),
-                    });
-                  }
-                }}
-                style={btnStyle("#dc2626")}
-              >
-                🏁 Bitir
-              </button>
-            </div>
-          </>
-        )}
+          )}
+        </div>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-      `}</style>
     </div>
   );
 }
