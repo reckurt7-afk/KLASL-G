@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, Tv, Trophy, ClipboardList, Shield, Camera, Video, Megaphone, Clock, User } from "lucide-react";
+import { Home, Tv, Trophy, ClipboardList, Shield, Camera, Video, Megaphone, Clock, User, BarChart2 } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
 import { useCityStore } from "@/app/store/cityStore";
 import { supabase } from "@/lib/supabase";
@@ -23,6 +23,7 @@ export default function Navbar() {
   const links = [
     { href: "/", label: "Ana Sayfa", icon: Home },
     { href: "/canli-yayin", label: "Canlı Yayın", icon: Tv },
+    { href: "/istatistikler", label: "İstatistikler", icon: BarChart2 },
     { href: "/puan-durumu", label: "Puan Durumu", icon: Trophy },
     { href: "/esame-listesi", label: "Esame Listesi", icon: ClipboardList },
     { href: "/takimlar", label: "Takımlar", icon: Shield },
