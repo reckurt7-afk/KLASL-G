@@ -7,18 +7,17 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
   try {
-    const { baslik, mesaj, url } = await req.json();
+    const { baslik, mesaj } = await req.json();
 
     if (!baslik || !mesaj) {
       return NextResponse.json({ success: false, error: "baslik ve mesaj gerekli" }, { status: 400 });
     }
 
     // VAPID key kontrolü
-    const vapidEmail = process.env.VAPID_EMAIL;
     const vapidPublic = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
     const vapidPrivate = process.env.VAPID_PRIVATE_KEY;
 
-    if (!vapidEmail || !vapidPublic || !vapidPrivate) {
+    if (!vapidPublic || !vapidPrivate) {
       console.warn("VAPID keys eksik - bildirim gönderilemiyor");
       return NextResponse.json({
         success: true,
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     webpush.setVapidDetails(
-      vapidEmail,
+      "mailto:recepkurt7@gmail.com",
       vapidPublic,
       vapidPrivate
     );
@@ -56,7 +55,7 @@ export async function POST(req: Request) {
         gonderilen: 0,
         hatali: 0,
         toplam: 0,
-        uyari: "Kay─▒tl─▒ abone yok",
+        uyari: "Kayıtlı abone yok",
       });
     }
 
@@ -76,15 +75,14 @@ export async function POST(req: Request) {
           JSON.stringify({
             title: baslik,
             body: mesaj,
-            url: url || "/"
           })
         );
         gonderilen++;
       } catch (err: any) {
         hatali++;
-        console.log("Bildirim hatas─▒:", err?.statusCode, err?.message);
+        console.log("Bildirim hatası:", err?.statusCode, err?.message);
 
-        // Ge├ğersiz aboneleri sil
+        // Geçersiz aboneleri sil
         if (err?.statusCode === 404 || err?.statusCode === 410) {
           await supabase
             .from("bildirim_aboneleri")
@@ -102,7 +100,7 @@ export async function POST(req: Request) {
     });
 
   } catch (err: any) {
-    console.error("send-notification hatas─▒:", err);
+    console.error("send-notification hatası:", err);
     return NextResponse.json(
       { success: false, error: err?.message || "Bilinmeyen hata" },
       { status: 500 }

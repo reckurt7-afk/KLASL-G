@@ -15,8 +15,6 @@ type Mac = {
   canli: boolean;
   hakem: string;
   youtube_link: string;
-  ev_logo?: string;
-  dep_logo?: string;
 };
 
 export default function CanliMacPage() {
@@ -44,14 +42,6 @@ export default function CanliMacPage() {
       alert("Olay eklenemedi: " + error.message);
     } else {
       alert("Olay başarıyla eklendi!");
-      let emoji = "🔔";
-      if (olayTipi === "GOL") emoji = "⚽ GOL!";
-      if (olayTipi === "SARI_KART") emoji = "🟨 SARI KART";
-      if (olayTipi === "KIRMIZI_KART") emoji = "🟥 KIRMIZI KART";
-      if (olayTipi === "ASIST") emoji = "🎯 ASİST";
-      if (olayTipi === "DEGISIKLIK") emoji = "🔄 DEĞİŞİKLİK";
-      const takimAdi = olayTakimYonu === "ev" ? seciliMac.ev_sahibi : seciliMac.deplasman;
-      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: emoji + ' | ' + takimAdi, mesaj: seciliMac.dakika + ". Dakika - Oyuncu: " + olayOyuncu, url: "/" }) });
       setOlayOyuncu("");
     }
   }
@@ -167,15 +157,8 @@ export default function CanliMacPage() {
 
   async function maclariGetir() {
     const data = await publicFetch("maclar", "select=*&order=hafta.asc");
-
     // null olan skorları 0'a çevir
-    const teamData = await publicFetch("teams", "select=name,logo");
-    const teams = teamData || [];
-    const getLogo = (name: string) => teams.find((t: any) => t.name === name)?.logo || "";
-
     const normalize = (data || []).map((m: any) => ({
-      ev_logo: getLogo(m.ev_sahibi || ""),
-      dep_logo: getLogo(m.deplasman || ""),
       ...m,
       ev_skor: m.ev_skor ?? 0,
       dep_skor: m.dep_skor ?? 0,
@@ -313,8 +296,8 @@ export default function CanliMacPage() {
                 {/* Ev Sahibi */}
                 <div className="flex-1 flex flex-col items-center">
                   <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Ev Sahibi</span>
-                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 overflow-hidden">
-                    {seciliMac.ev_logo ? <img src={seciliMac.ev_logo} alt="logo" className="w-full h-full object-contain p-1" /> : <span className="text-[10px] text-gray-600">Logo</span>}
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 text-[10px] text-gray-600 text-center leading-tight overflow-hidden">
+                    Logo
                   </div>
                   <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
                     {seciliMac.ev_sahibi}
@@ -322,11 +305,7 @@ export default function CanliMacPage() {
                   <div className="flex items-center gap-3 mt-4">
                     <button onClick={() => macGuncelle('ev_skor', Math.max(0, (seciliMac.ev_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
                     <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.ev_skor || 0}</span>
-                    <button onClick={async () => { 
-    await macGuncelle('ev_skor', (seciliMac.ev_skor || 0) + 1); 
-    golSesiCal(); 
-    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⚽ GOL! | ' + seciliMac.ev_sahibi + ' ' + ((seciliMac.ev_skor || 0) + 1) + ' - ' + (seciliMac.dep_skor || 0) + ' ' + seciliMac.deplasman, mesaj: seciliMac.dakika + ". Dakika", url: "/" }) }); 
-  }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
+                    <button onClick={() => { macGuncelle('ev_skor', (seciliMac.ev_skor || 0) + 1); golSesiCal(); }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
                   </div>
                 </div>
 
@@ -361,18 +340,14 @@ export default function CanliMacPage() {
                 {/* Deplasman */}
                 <div className="flex-1 flex flex-col items-center">
                   <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Deplasman</span>
-                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 overflow-hidden">
-                    {seciliMac.dep_logo ? <img src={seciliMac.dep_logo} alt="logo" className="w-full h-full object-contain p-1" /> : <span className="text-[10px] text-gray-600">Logo</span>}
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 text-[10px] text-gray-600 text-center leading-tight overflow-hidden">
+                    Logo
                   </div>
                   <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
                     {seciliMac.deplasman}
                   </div>
                   <div className="flex items-center gap-3 mt-4">
-                    <button onClick={async () => { 
-    await macGuncelle('dep_skor', (seciliMac.dep_skor || 0) + 1); 
-    golSesiCal(); 
-    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⚽ GOL! | ' + seciliMac.ev_sahibi + ' ' + (seciliMac.ev_skor || 0) + ' - ' + ((seciliMac.dep_skor || 0) + 1) + ' ' + seciliMac.deplasman, mesaj: seciliMac.dakika + ". Dakika", url: "/" }) }); 
-  }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
+                    <button onClick={() => { macGuncelle('dep_skor', (seciliMac.dep_skor || 0) + 1); golSesiCal(); }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
                     <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.dep_skor || 0}</span>
                     <button onClick={() => macGuncelle('dep_skor', Math.max(0, (seciliMac.dep_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
                   </div>
@@ -448,11 +423,7 @@ export default function CanliMacPage() {
               {/* KONTROL BUTONLARI */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <button
-                  onClick={async () => { 
-    await canliDurumGuncelle(true); 
-    setSureCalisiyor(true); 
-    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '▶ MAÇ BAŞLADI | ' + seciliMac.ev_sahibi + ' - ' + seciliMac.deplasman, mesaj: 'Maç an itibariyle başladı!', url: "/" }) }); 
-  }}
+                  onClick={() => { canliDurumGuncelle(true); setSureCalisiyor(true); }}
                   className="h-14 bg-[#16a34a]/10 hover:bg-[#16a34a]/20 border border-[#16a34a]/40 text-[#16a34a] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
