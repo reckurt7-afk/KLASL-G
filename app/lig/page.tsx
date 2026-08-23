@@ -4,7 +4,6 @@ import { useCityStore } from "../store/cityStore";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
 import Link from "next/link";
-import PuanDurumuTablosu from "../components/PuanDurumuTablosu";
 
 type Haber = {
   id: number;
@@ -62,8 +61,7 @@ export default function LigMerkezi() {
   };
 
   return (
-    <div className="w-full flex gap-8 items-start fade-in">
-      <div className="flex-1 flex flex-col min-w-0">
+    <div className="w-full flex flex-col fade-in">
       
       {/* Header */}
       <div className="flex items-center gap-4 mb-5 bg-white h-[70px] rounded-xl border border-gray-100 shadow-sm px-4">
@@ -121,23 +119,8 @@ export default function LigMerkezi() {
             </Link>
           ))}
         </div>
-      )}
-      
-      </div> {/* End Left Column */}
-      
-      {/* Right Column (Widget) */}
-      <div className="hidden xl:flex w-[340px] shrink-0 flex-col gap-6">
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="bg-[#e50914] text-white px-4 py-3 flex items-center justify-between">
-            <span className="font-black text-[14px]">CANLI PUAN DURUMU</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/></svg>
-          </div>
-          <div className="p-0">
-            <PuanDurumuTablosu mini={true} />
-          </div>
-        </div>
-      </div>
-    </div>
+      )}    </div>
   );
 }
+
 
