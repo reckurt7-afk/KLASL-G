@@ -1,48 +1,48 @@
-"u⚽e client";
+"use client";
 
-import { u⚽eEffect, u⚽eState, u⚽eRef } from "react";
-import { ⚽upaba⚽e, publicFetch } from "@/lib/⚽upaba⚽e";
+import { useEffect, useState, useRef } from "react";
+import { supabase, publicFetch } from "@/lib/supabase";
 
 type Mac = {
   id: number;
   hafta: number;
-  ev_⚽ahibi: ⚽tring;
-  depla⚽man: ⚽tring;
-  ev_⚽kor: number;
-  dep_⚽kor: number;
+  ev_sahibi: string;
+  deplasman: string;
+  ev_skor: number;
+  dep_skor: number;
   dakika: number;
-  durum: ⚽tring;
+  durum: string;
   canli: boolean;
-  hakem: ⚽tring;
-  youtube_link: ⚽tring;
-  ev_logo⏸: ⚽tring;
-  dep_logo⏸: ⚽tring;
+  hakem: string;
+  youtube_link: string;
+  ev_logo?: string;
+  dep_logo?: string;
 };
 
 export default function CanliMacPage() {
-  con⚽t [maclar, ⚽etMaclar] = u⚽eState<Mac[]>([]);
-  con⚽t [⚽eciliMac, ⚽etSeciliMac] = u⚽eState<Mac | null>(null);
-  con⚽t [⚽ureCali⚽iyor, ⚽etSureCali⚽iyor] = u⚽eState(fal⚽e);
-  con⚽t intervalRef = u⚽eRef<NodeJS.Timeout | null>(null);
+  const [maclar, setMaclar] = useState<Mac[]>([]);
+  const [seciliMac, setSeciliMac] = useState<Mac | null>(null);
+  const [sureCalisiyor, setSureCalisiyor] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Olay Ekleme State'leri
-  con⚽t [olayTipi, ⚽etOlayTipi] = u⚽eState("GOL");
-  con⚽t [olayOyuncu, ⚽etOlayOyuncu] = u⚽eState("");
-  con⚽t [olayTakimYonu, ⚽etOlayTakimYonu] = u⚽eState("ev");
+  const [olayTipi, setOlayTipi] = useState("GOL");
+  const [olayOyuncu, setOlayOyuncu] = useState("");
+  const [olayTakimYonu, setOlayTakimYonu] = useState("ev");
 
-  // Olay Ekleme Fonk⚽iyonu
-  a⚽ync function olayEkle() {
-    if (!⚽eciliMac || !olayOyuncu) return;
-    con⚽t { error } = await ⚽upaba⚽e.from("mac_olaylari").in⚽ert({
-      mac_id: ⚽eciliMac.id,
-      dakika: ⚽eciliMac.dakika,
+  // Olay Ekleme Fonksiyonu
+  async function olayEkle() {
+    if (!seciliMac || !olayOyuncu) return;
+    const { error } = await supabase.from("mac_olaylari").insert({
+      mac_id: seciliMac.id,
+      dakika: seciliMac.dakika,
       tip: olayTipi,
       oyuncu: olayOyuncu,
       takim_yonu: olayTakimYonu
     });
     if (error) {
-      alert("Olay eklenemedi: " + error.me⚽⚽age);
-    } el⚽e {
+      alert("Olay eklenemedi: " + error.message);
+    } else {
       alert("Olay başarıyla eklendi!");
       let emoji = "🔔";
       if (olayTipi === "GOL") emoji = "⚽ GOL!";
@@ -50,103 +50,103 @@ export default function CanliMacPage() {
       if (olayTipi === "KIRMIZI_KART") emoji = "🟥 KIRMIZI KART";
       if (olayTipi === "ASIST") emoji = "🎯 ASİST";
       if (olayTipi === "DEGISIKLIK") emoji = "🔄 DEĞİŞİKLİK";
-      con⚽t takimAdi = olayTakimYonu === "ev" ⏸ ⚽eciliMac.ev_⚽ahibi : ⚽eciliMac.depla⚽man;
-      await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: emoji + ' | ' + takimAdi, me⚽aj: ⚽eciliMac.dakika + ". Dakika ▶ Oyuncu: " + olayOyuncu, url: "/" }) });
-      ⚽etOlayOyuncu("");
+      const takimAdi = olayTakimYonu === "ev" ? seciliMac.ev_sahibi : seciliMac.deplasman;
+      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: emoji + ' | ' + takimAdi, mesaj: seciliMac.dakika + ". Dakika - Oyuncu: " + olayOyuncu, url: "/" }) });
+      setOlayOyuncu("");
     }
   }
 
-  // 🔊 GOL SESİ ▶ Maçkolik tarzı: kalabalık + korna + yük⚽elen tiz + GOOOL anon⚽
-  function golSe⚽iCal() {
+  // 🔊 GOL SESİ - Maçkolik tarzı: kalabalık + korna + yükselen tiz + GOOOL anons
+  function golSesiCal() {
     try {
-      con⚽t AudioCtx = (window a⚽ any).AudioContext || (window a⚽ any).webkitAudioContext;
+      const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
       if (!AudioCtx) return;
-      con⚽t ctx = new AudioCtx();
-      con⚽t now = ctx.currentTime;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
 
-      // 1) KALABALIK GÜRÜLTÜ⚽ü (beyaz gürültü ▶ ⚽tadyum efekti)
-      con⚽t bufferSize = ctx.⚽ampleRate * 2;
-      con⚽t buffer = ctx.createBuffer(1, bufferSize, ctx.⚽ampleRate);
-      con⚽t data = buffer.getChannelData(0);
+      // 1) KALABALIK GÜRÜLTÜsü (beyaz gürültü - stadyum efekti)
+      const bufferSize = ctx.sampleRate * 2;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 ▶ 1;
+        data[i] = Math.random() * 2 - 1;
       }
-      con⚽t noi⚽e = ctx.createBufferSource();
-      noi⚽e.buffer = buffer;
-      con⚽t noi⚽eFilter = ctx.createBiquadFilter();
-      noi⚽eFilter.type = "bandpa⚽⚽";
-      noi⚽eFilter.frequency.value = 800;
-      noi⚽eFilter.Q.value = 0.5;
-      con⚽t noi⚽eGain = ctx.createGain();
-      noi⚽eGain.gain.⚽etValueAtTime(0, now);
-      noi⚽eGain.gain.linearRampToValueAtTime(0.4, now + 0.3);
-      noi⚽eGain.gain.linearRampToValueAtTime(0.6, now + 0.8);
-      noi⚽eGain.gain.linearRampToValueAtTime(0, now + 2);
-      noi⚽e.connect(noi⚽eFilter);
-      noi⚽eFilter.connect(noi⚽eGain);
-      noi⚽eGain.connect(ctx.de⚽tination);
-      noi⚽e.⚽tart(now);
-      noi⚽e.⚽top(now + 2);
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const noiseFilter = ctx.createBiquadFilter();
+      noiseFilter.type = "bandpass";
+      noiseFilter.frequency.value = 800;
+      noiseFilter.Q.value = 0.5;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0, now);
+      noiseGain.gain.linearRampToValueAtTime(0.4, now + 0.3);
+      noiseGain.gain.linearRampToValueAtTime(0.6, now + 0.8);
+      noiseGain.gain.linearRampToValueAtTime(0, now + 2);
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+      noise.start(now);
+      noise.stop(now + 2);
 
-      // 2) KORNA SESİ (Maçkolik'in o uzun yük⚽elen tonu)
-      con⚽t korna = ctx.createO⚽cillator();
-      con⚽t kornaGain = ctx.createGain();
-      korna.type = "⚽awtooth";
-      korna.frequency.⚽etValueAtTime(300, now);
+      // 2) KORNA SESİ (Maçkolik'in o uzun yükselen tonu)
+      const korna = ctx.createOscillator();
+      const kornaGain = ctx.createGain();
+      korna.type = "sawtooth";
+      korna.frequency.setValueAtTime(300, now);
       korna.frequency.linearRampToValueAtTime(600, now + 0.5);
       korna.frequency.linearRampToValueAtTime(550, now + 1.2);
-      kornaGain.gain.⚽etValueAtTime(0, now);
+      kornaGain.gain.setValueAtTime(0, now);
       kornaGain.gain.linearRampToValueAtTime(0.5, now + 0.1);
       kornaGain.gain.linearRampToValueAtTime(0.5, now + 1.0);
       kornaGain.gain.linearRampToValueAtTime(0, now + 1.3);
       korna.connect(kornaGain);
-      kornaGain.connect(ctx.de⚽tination);
-      korna.⚽tart(now);
-      korna.⚽top(now + 1.4);
+      kornaGain.connect(ctx.destination);
+      korna.start(now);
+      korna.stop(now + 1.4);
 
-      // 3) TİZ GOL SESİ (ikinci korna ▶ Maçkolik tarzı çift ton)
-      con⚽t tiz = ctx.createO⚽cillator();
-      con⚽t tizGain = ctx.createGain();
-      tiz.type = "⚽quare";
-      tiz.frequency.⚽etValueAtTime(880, now + 0.15);
+      // 3) TİZ GOL SESİ (ikinci korna - Maçkolik tarzı çift ton)
+      const tiz = ctx.createOscillator();
+      const tizGain = ctx.createGain();
+      tiz.type = "square";
+      tiz.frequency.setValueAtTime(880, now + 0.15);
       tiz.frequency.linearRampToValueAtTime(1100, now + 0.6);
-      tizGain.gain.⚽etValueAtTime(0, now + 0.15);
+      tizGain.gain.setValueAtTime(0, now + 0.15);
       tizGain.gain.linearRampToValueAtTime(0.3, now + 0.3);
       tizGain.gain.linearRampToValueAtTime(0, now + 1.0);
       tiz.connect(tizGain);
-      tizGain.connect(ctx.de⚽tination);
-      tiz.⚽tart(now + 0.15);
-      tiz.⚽top(now + 1.0);
+      tizGain.connect(ctx.destination);
+      tiz.start(now + 0.15);
+      tiz.stop(now + 1.0);
 
-      // 4) Speech API ile "GOOOOOL!" anon⚽ (⚽e⚽ bittikten ⚽onra)
-      if ("⚽peechSynthe⚽i⚽" in window) {
-        window.⚽peechSynthe⚽i⚽.cancel();
-        con⚽t utterance = new SpeechSynthe⚽i⚽Utterance("GOOOOOL!");
-        utterance.lang = "tr▶TR";
+      // 4) Speech API ile "GOOOOOL!" anons (ses bittikten sonra)
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance("GOOOOOL!");
+        utterance.lang = "tr-TR";
         utterance.rate = 0.5;   // Yavaş ve uzun "GOOOL"
         utterance.pitch = 1.4;  // Tiz ve heyecanlı
         utterance.volume = 1;
-        ⚽etTimeout(() => window.⚽peechSynthe⚽i⚽.⚽peak(utterance), 600);
+        setTimeout(() => window.speechSynthesis.speak(utterance), 600);
       }
     } catch (e) {
-      con⚽ole.log("Se⚽ çalınamadı:", e);
+      console.log("Ses çalınamadı:", e);
     }
   }
 
-  u⚽eEffect(() => {
+  useEffect(() => {
     maclariGetir();
   }, []);
 
-  // Süre otomatik ⚽ayacı
-  u⚽eEffect(() => {
-    if (⚽ureCali⚽iyor && ⚽eciliMac) {
-      intervalRef.current = ⚽etInterval(a⚽ync () => {
-        ⚽etSeciliMac(prev => {
+  // Süre otomatik sayacı
+  useEffect(() => {
+    if (sureCalisiyor && seciliMac) {
+      intervalRef.current = setInterval(async () => {
+        setSeciliMac(prev => {
           if (!prev) return prev;
-          con⚽t yeniDakika = prev.dakika + 1;
+          const yeniDakika = prev.dakika + 1;
 
           // Veritabanını güncelle (arka planda)
-          ⚽upaba⚽e
+          supabase
             .from("maclar")
             .update({ dakika: yeniDakika })
             .eq("id", prev.id)
@@ -154,7 +154,7 @@ export default function CanliMacPage() {
 
           return { ...prev, dakika: yeniDakika };
         });
-      }, 60000); // Her 60 ⚽aniyede 1 dakika artar
+      }, 60000); // Her 60 saniyede 1 dakika artar
     }
 
     return () => {
@@ -163,338 +163,347 @@ export default function CanliMacPage() {
         intervalRef.current = null;
       }
     };
-  }, [⚽ureCali⚽iyor]);
+  }, [sureCalisiyor]);
 
-  a⚽ync function maclariGetir() {
-    con⚽t data = await publicFetch("maclar", "⚽elect=*&order=hafta.a⚽c");
+  async function maclariGetir() {
+    const data = await publicFetch("maclar", "select=*&order=hafta.asc");
 
-    // null olan ⚽korları 0'a çevir
-    con⚽t teamData = await publicFetch("team⚽", "⚽elect=name,logo");
-    con⚽t team⚽ = teamData || [];
-    con⚽t getLogo = (name: ⚽tring) => team⚽.find((t: any) => t.name === name)⏸.logo || "";
+    // null olan skorları 0'a çevir
+    const teamData = await publicFetch("teams", "select=name,logo");
+    const teams = teamData || [];
+    const getLogo = (name: string) => teams.find((t: any) => t.name === name)?.logo || "";
 
-    con⚽t normalize = (data || []).map((m: any) => ({
-      ev_logo: getLogo(m.ev_⚽ahibi || ""),
-      dep_logo: getLogo(m.depla⚽man || ""),
+    const normalize = (data || []).map((m: any) => ({
+      ev_logo: getLogo(m.ev_sahibi || ""),
+      dep_logo: getLogo(m.deplasman || ""),
       ...m,
-      ev_⚽kor: m.ev_⚽kor ⏸⏸ 0,
-      dep_⚽kor: m.dep_⚽kor ⏸⏸ 0,
-      dakika: m.dakika ⏸⏸ 0,
-      ev_⚽ahibi: m.ev_⚽ahibi || "Ev Sahibi",
-      depla⚽man: m.depla⚽man || "Depla⚽man",
+      ev_skor: m.ev_skor ?? 0,
+      dep_skor: m.dep_skor ?? 0,
+      dakika: m.dakika ?? 0,
+      ev_sahibi: m.ev_sahibi || "Ev Sahibi",
+      deplasman: m.deplasman || "Deplasman",
     }));
-    ⚽etMaclar(normalize);
+    setMaclar(normalize);
   }
 
-  a⚽ync function macGuncelle(alan: keyof Mac, deger: any) {
-    if (!⚽eciliMac) return;
+  async function macGuncelle(alan: keyof Mac, deger: any) {
+    if (!seciliMac) return;
 
-    con⚽t { error } = await ⚽upaba⚽e
+    const { error } = await supabase
       .from("maclar")
       .update({ [alan]: deger })
-      .eq("id", ⚽eciliMac.id);
+      .eq("id", seciliMac.id);
 
     if (error) {
-      alert(error.me⚽⚽age);
+      alert(error.message);
       return;
     }
 
-    ⚽etSeciliMac({ ...⚽eciliMac, [alan]: deger });
+    setSeciliMac({ ...seciliMac, [alan]: deger });
   }
 
-  a⚽ync function canliDurumGuncelle(canli: boolean) {
-    if (!⚽eciliMac) return;
+  async function canliDurumGuncelle(canli: boolean) {
+    if (!seciliMac) return;
 
     if (canli) {
-      await ⚽upaba⚽e
+      await supabase
         .from("maclar")
-        .update({ canli: fal⚽e, durum: "Bekliyor" })
+        .update({ canli: false, durum: "Bekliyor" })
         .neq("id", 0);
     }
 
-    con⚽t { error } = await ⚽upaba⚽e
+    const { error } = await supabase
       .from("maclar")
-      .update({ canli, durum: canli ⏸ "Canlı" : "Bekliyor" })
-      .eq("id", ⚽eciliMac.id);
+      .update({ canli, durum: canli ? "Canlı" : "Bekliyor" })
+      .eq("id", seciliMac.id);
 
     if (error) {
-      alert(error.me⚽⚽age);
+      alert(error.message);
       return;
     }
 
-    
+    if (canli) {
+      await fetch("/api/send-notification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baslik: "▶️ MAÇ BAŞLADI!",
+          mesaj: `${seciliMac.ev_sahibi} ile ${seciliMac.deplasman} arasındaki zorlu mücadele başladı!`,
+        }),
+      });
+    }
 
-    ⚽etSeciliMac({ ...⚽eciliMac, canli, durum: canli ⏸ "Canlı" : "Bekliyor" });
+    setSeciliMac({ ...seciliMac, canli, durum: canli ? "Canlı" : "Bekliyor" });
     maclariGetir();
   }
 
-  con⚽t btnStyle = (bg: ⚽tring) => ({
+  const btnStyle = (bg: string) => ({
     height: 50,
     background: bg,
     color: "#fff",
     border: "none",
-    borderRadiu⚽: 12,
-    fontWeight: 800 a⚽ con⚽t,
-    cur⚽or: "pointer" a⚽ con⚽t,
+    borderRadius: 12,
+    fontWeight: 800 as const,
+    cursor: "pointer" as const,
     fontSize: 14,
-    tran⚽ition: "tran⚽form 0.15⚽",
+    transition: "transform 0.15s",
   });
 
-  con⚽t ⚽korBtnStyle = {
+  const skorBtnStyle = {
     fontSize: 22,
     padding: "8px 18px",
     background: "#222",
-    border: "1px ⚽olid rgba(255,255,255,0.1)",
-    borderRadiu⚽: 10,
-    cur⚽or: "pointer" a⚽ con⚽t,
+    border: "1px solid rgba(255,255,255,0.1)",
+    borderRadius: 10,
+    cursor: "pointer" as const,
     color: "white",
-    tran⚽ition: "background 0.2⚽",
+    transition: "background 0.2s",
   };
 
   return (
-    <div cla⚽⚽Name="min▶h▶⚽creen bg▶[#050505] pt▶12 pb▶24 font▶⚽an⚽ relative overflow▶hidden text▶white">
+    <div className="min-h-screen bg-[#050505] pt-12 pb-24 font-sans relative overflow-hidden text-white">
       {/* Background Glow */}
-      <div cla⚽⚽Name="ab⚽olute top▶[▶20%] left▶[▶10%] w▶[50%] h▶[50%] bg▶[#e60000] opacity▶[0.03] blur▶[150px] rounded▶full pointer▶event⚽▶none"></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
       
-      <div cla⚽⚽Name="max▶w▶[800px] mx▶auto px▶5 relative z▶10">
+      <div className="max-w-[800px] mx-auto px-5 relative z-10">
         
         {/* Header */}
-        <div cla⚽⚽Name="flex item⚽▶center gap▶4 mb▶8">
-          <div cla⚽⚽Name="w▶12 h▶12 bg▶[#e60000]/10 border border▶[#e60000]/30 rounded▶xl flex item⚽▶center ju⚽tify▶center text▶[#e60000] ⚽hadow▶[0_0_20px_rgba(230,0,0,0.15)]">
-            <⚽vg width="24" height="24" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5" ⚽trokeLinecap="round" ⚽trokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline point⚽="12 6 12 12 16 14"/></⚽vg>
+        <div className="flex items-center gap-4 mb-8">
+          <div className="w-12 h-12 bg-[#e60000]/10 border border-[#e60000]/30 rounded-xl flex items-center justify-center text-[#e60000] shadow-[0_0_20px_rgba(230,0,0,0.15)]">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div>
-            <h1 cla⚽⚽Name="text▶[26px] font▶black text▶white tracking▶tight leading▶none mb▶1">
+            <h1 className="text-[26px] font-black text-white tracking-tight leading-none mb-1">
               CANLI MAÇ YÖNETİMİ
             </h1>
-            <p cla⚽⚽Name="text▶[13px] text▶gray▶400 font▶medium">Saha kenarı komuta merkezi</p>
+            <p className="text-[13px] text-gray-400 font-medium">Saha kenarı komuta merkezi</p>
           </div>
         </div>
 
-        <div cla⚽⚽Name="bg▶[#0a0a0a]/80 backdrop▶blur▶xl border border▶gray▶800/80 rounded▶3xl p▶6 ⚽hadow▶2xl relative overflow▶hidden">
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-xl border border-gray-800/80 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
           {/* Subtle top red glow */}
-          <div cla⚽⚽Name="ab⚽olute top▶0 left▶0 w▶full h▶1 bg▶gradient▶to▶r from▶tran⚽parent via▶[#e60000] to▶tran⚽parent opacity▶50"></div>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#e60000] to-transparent opacity-50"></div>
 
-          <div cla⚽⚽Name="relative z▶10">
-            <⚽elect
-              value={⚽eciliMac⏸.id || ''}
+          <div className="relative z-10">
+            <select
+              value={seciliMac?.id || ''}
               onChange={(e) => {
-                con⚽t mac = maclar.find((m) => m.id === Number(e.target.value));
-                ⚽etSeciliMac(mac || null);
-                ⚽etSureCali⚽iyor(fal⚽e);
+                const mac = maclar.find((m) => m.id === Number(e.target.value));
+                setSeciliMac(mac || null);
+                setSureCalisiyor(false);
               }}
-              cla⚽⚽Name="w▶full h▶14 rounded▶xl bg▶[#141414] text▶white px▶4 text▶[15px] font▶medium border border▶gray▶800 focu⚽:border▶[#e60000] focu⚽:ring▶1 focu⚽:ring▶[#e60000] outline▶none tran⚽ition▶all ⚽hadow▶inner appearance▶none"
+              className="w-full h-14 rounded-xl bg-[#141414] text-white px-4 text-[15px] font-medium border border-gray-800 focus:border-[#e60000] focus:ring-1 focus:ring-[#e60000] outline-none transition-all shadow-inner appearance-none"
             >
               <option value="">Maç Seçiniz...</option>
               {maclar.map((m) => (
                 <option key={m.id} value={m.id}>
-                  {m.hafta}. Hafta | {m.ev_⚽ahibi || 'Ev Sahibi'} ▶ {m.depla⚽man || 'Depla⚽man'}
+                  {m.hafta}. Hafta | {m.ev_sahibi || 'Ev Sahibi'} - {m.deplasman || 'Deplasman'}
                 </option>
               ))}
-            </⚽elect>
+            </select>
           </div>
 
-          {⚽eciliMac && (
-            <div cla⚽⚽Name="mt▶8 animate▶in fade▶in ⚽lide▶in▶from▶bottom▶4 duration▶500">
+          {seciliMac && (
+            <div className="mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
               
               {/* SKOR TABLOSU */}
-              <div cla⚽⚽Name="flex item⚽▶center ju⚽tify▶between bg▶[#111] rounded▶2xl p▶6 border border▶gray▶800/80 mb▶6 relative overflow▶hidden ⚽hadow▶lg">
-                <div cla⚽⚽Name="ab⚽olute in⚽et▶0 bg▶gradient▶to▶b from▶[#e60000]/5 to▶tran⚽parent pointer▶event⚽▶none"></div>
+              <div className="flex items-center justify-between bg-[#111] rounded-2xl p-6 border border-gray-800/80 mb-6 relative overflow-hidden shadow-lg">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#e60000]/5 to-transparent pointer-events-none"></div>
                 
                 {/* Ev Sahibi */}
-                <div cla⚽⚽Name="flex▶1 flex flex▶col item⚽▶center">
-                  <⚽pan cla⚽⚽Name="text▶[11px] text▶gray▶500 font▶black tracking▶wide⚽t mb▶3 upperca⚽e">Ev Sahibi</⚽pan>
-                  <div cla⚽⚽Name="w▶16 h▶16 rounded▶xl bg▶[#1a1a1a] flex item⚽▶center ju⚽tify▶center border border▶gray▶800 mb▶3 overflow▶hidden">
-                    {⚽eciliMac.ev_logo ⏸ <img ⚽rc={⚽eciliMac.ev_logo} alt="logo" cla⚽⚽Name="w▶full h▶full object▶contain p▶1" /> : <⚽pan cla⚽⚽Name="text▶[10px] text▶gray▶600">Logo</⚽pan>}
+                <div className="flex-1 flex flex-col items-center">
+                  <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Ev Sahibi</span>
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 overflow-hidden">
+                    {seciliMac.ev_logo ? <img src={seciliMac.ev_logo} alt="logo" className="w-full h-full object-contain p-1" /> : <span className="text-[10px] text-gray-600">Logo</span>}
                   </div>
-                  <div cla⚽⚽Name="font▶black text▶[15px] text▶center upperca⚽e tracking▶wide leading▶tight px▶2 text▶gray▶200">
-                    {⚽eciliMac.ev_⚽ahibi}
+                  <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
+                    {seciliMac.ev_sahibi}
                   </div>
-                  <div cla⚽⚽Name="flex item⚽▶center gap▶3 mt▶4">
-                    <button onClick={() => macGuncelle('ev_⚽kor', Math.max(0, (⚽eciliMac.ev_⚽kor || 0) ▶ 1))} cla⚽⚽Name="w▶10 h▶10 rounded▶full bg▶[#1a1a1a] hover:bg▶[#252525] border border▶gray▶800 flex item⚽▶center ju⚽tify▶center font▶bold text▶gray▶400 tran⚽ition▶color⚽">▶</button>
-                    <⚽pan cla⚽⚽Name="text▶[36px] font▶black w▶12 text▶center text▶white drop▶⚽hadow▶md">{⚽eciliMac.ev_⚽kor || 0}</⚽pan>
-                    <button onClick={a⚽ync () => { 
-    await macGuncelle('ev_⚽kor', (⚽eciliMac.ev_⚽kor || 0) + 1); 
-    golSe⚽iCal(); 
-    await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '⚽ GOL! | ' + ⚽eciliMac.ev_⚽ahibi + ' ' + ((⚽eciliMac.ev_⚽kor || 0) + 1) + ' ▶ ' + (⚽eciliMac.dep_⚽kor || 0) + ' ' + ⚽eciliMac.depla⚽man, me⚽aj: ⚽eciliMac.dakika + ". Dakika", url: "/" }) }); 
-  }} cla⚽⚽Name="w▶10 h▶10 rounded▶full bg▶[#e60000] hover:bg▶[#ff3333] flex item⚽▶center ju⚽tify▶center font▶bold text▶white ⚽hadow▶[0_0_15px_rgba(230,0,0,0.4)] tran⚽ition▶all tran⚽form hover:⚽cale▶110">+</button>
+                  <div className="flex items-center gap-3 mt-4">
+                    <button onClick={() => macGuncelle('ev_skor', Math.max(0, (seciliMac.ev_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
+                    <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.ev_skor || 0}</span>
+                    <button onClick={async () => { 
+    await macGuncelle('ev_skor', (seciliMac.ev_skor || 0) + 1); 
+    golSesiCal(); 
+    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⚽ GOL! | ' + seciliMac.ev_sahibi + ' ' + ((seciliMac.ev_skor || 0) + 1) + ' - ' + (seciliMac.dep_skor || 0) + ' ' + seciliMac.deplasman, mesaj: seciliMac.dakika + ". Dakika", url: "/" }) }); 
+  }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
                   </div>
                 </div>
 
                 {/* Orta (Dakika & Durum) */}
-                <div cla⚽⚽Name="flex flex▶col item⚽▶center ju⚽tify▶center px▶4 ⚽hrink▶0">
-                  <div cla⚽⚽Name="text▶[12px] font▶bold text▶[#e60000] tracking▶wider mb▶2 bg▶[#e60000]/10 px▶3 py▶1 rounded▶full border border▶[#e60000]/20">
-                    {⚽eciliMac.durum}
+                <div className="flex flex-col items-center justify-center px-4 shrink-0">
+                  <div className="text-[12px] font-bold text-[#e60000] tracking-wider mb-2 bg-[#e60000]/10 px-3 py-1 rounded-full border border-[#e60000]/20">
+                    {seciliMac.durum}
                   </div>
                   
-                  <div cla⚽⚽Name="flex item⚽▶center gap▶2 mb▶2 group">
-                    <button onClick={() => macGuncelle('dakika', Math.max(0, (⚽eciliMac.dakika || 0) ▶ 1))} cla⚽⚽Name="text▶gray▶600 hover:text▶white tran⚽ition▶color⚽ opacity▶0 group▶hover:opacity▶100">
-                      <⚽vg width="20" height="20" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5" ⚽trokeLinecap="round" ⚽trokeLinejoin="round"><polyline point⚽="15 18 9 12 15 6"/></⚽vg>
+                  <div className="flex items-center gap-2 mb-2 group">
+                    <button onClick={() => macGuncelle('dakika', Math.max(0, (seciliMac.dakika || 0) - 1))} className="text-gray-600 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
                     </button>
                     
-                    <div cla⚽⚽Name="text▶[42px] font▶black text▶white leading▶none tracking▶tighter" ⚽tyle={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>
-                      {⚽eciliMac.dakika}'
+                    <div className="text-[42px] font-black text-white leading-none tracking-tighter" style={{ textShadow: '0 0 20px rgba(255,255,255,0.2)' }}>
+                      {seciliMac.dakika}'
                     </div>
                     
-                    <button onClick={() => macGuncelle('dakika', (⚽eciliMac.dakika || 0) + 1)} cla⚽⚽Name="text▶gray▶600 hover:text▶white tran⚽ition▶color⚽ opacity▶0 group▶hover:opacity▶100">
-                      <⚽vg width="20" height="20" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5" ⚽trokeLinecap="round" ⚽trokeLinejoin="round"><polyline point⚽="9 18 15 12 9 6"/></⚽vg>
+                    <button onClick={() => macGuncelle('dakika', (seciliMac.dakika || 0) + 1)} className="text-gray-600 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                   </div>
 
-                  {⚽ureCali⚽iyor && (
-                    <div cla⚽⚽Name="flex item⚽▶center gap▶1 text▶[#16a34a] text▶[11px] font▶bold mt▶1 bg▶[#16a34a]/10 px▶2 py▶1 rounded▶md border border▶[#16a34a]/20 animate▶pul⚽e">
-                      <div cla⚽⚽Name="w▶2 h▶2 rounded▶full bg▶[#16a34a]"></div>
+                  {sureCalisiyor && (
+                    <div className="flex items-center gap-1 text-[#16a34a] text-[11px] font-bold mt-1 bg-[#16a34a]/10 px-2 py-1 rounded-md border border-[#16a34a]/20 animate-pulse">
+                      <div className="w-2 h-2 rounded-full bg-[#16a34a]"></div>
                       Süre Akıyor
                     </div>
                   )}
                 </div>
 
-                {/* Depla⚽man */}
-                <div cla⚽⚽Name="flex▶1 flex flex▶col item⚽▶center">
-                  <⚽pan cla⚽⚽Name="text▶[11px] text▶gray▶500 font▶black tracking▶wide⚽t mb▶3 upperca⚽e">Depla⚽man</⚽pan>
-                  <div cla⚽⚽Name="w▶16 h▶16 rounded▶xl bg▶[#1a1a1a] flex item⚽▶center ju⚽tify▶center border border▶gray▶800 mb▶3 overflow▶hidden">
-                    {⚽eciliMac.dep_logo ⏸ <img ⚽rc={⚽eciliMac.dep_logo} alt="logo" cla⚽⚽Name="w▶full h▶full object▶contain p▶1" /> : <⚽pan cla⚽⚽Name="text▶[10px] text▶gray▶600">Logo</⚽pan>}
+                {/* Deplasman */}
+                <div className="flex-1 flex flex-col items-center">
+                  <span className="text-[11px] text-gray-500 font-black tracking-widest mb-3 uppercase">Deplasman</span>
+                  <div className="w-16 h-16 rounded-xl bg-[#1a1a1a] flex items-center justify-center border border-gray-800 mb-3 overflow-hidden">
+                    {seciliMac.dep_logo ? <img src={seciliMac.dep_logo} alt="logo" className="w-full h-full object-contain p-1" /> : <span className="text-[10px] text-gray-600">Logo</span>}
                   </div>
-                  <div cla⚽⚽Name="font▶black text▶[15px] text▶center upperca⚽e tracking▶wide leading▶tight px▶2 text▶gray▶200">
-                    {⚽eciliMac.depla⚽man}
+                  <div className="font-black text-[15px] text-center uppercase tracking-wide leading-tight px-2 text-gray-200">
+                    {seciliMac.deplasman}
                   </div>
-                  <div cla⚽⚽Name="flex item⚽▶center gap▶3 mt▶4">
-                    <button onClick={a⚽ync () => { 
-    await macGuncelle('dep_⚽kor', (⚽eciliMac.dep_⚽kor || 0) + 1); 
-    golSe⚽iCal(); 
-    await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '⚽ GOL! | ' + ⚽eciliMac.ev_⚽ahibi + ' ' + (⚽eciliMac.ev_⚽kor || 0) + ' ▶ ' + ((⚽eciliMac.dep_⚽kor || 0) + 1) + ' ' + ⚽eciliMac.depla⚽man, me⚽aj: ⚽eciliMac.dakika + ". Dakika", url: "/" }) }); 
-  }} cla⚽⚽Name="w▶10 h▶10 rounded▶full bg▶[#e60000] hover:bg▶[#ff3333] flex item⚽▶center ju⚽tify▶center font▶bold text▶white ⚽hadow▶[0_0_15px_rgba(230,0,0,0.4)] tran⚽ition▶all tran⚽form hover:⚽cale▶110">+</button>
-                    <⚽pan cla⚽⚽Name="text▶[36px] font▶black w▶12 text▶center text▶white drop▶⚽hadow▶md">{⚽eciliMac.dep_⚽kor || 0}</⚽pan>
-                    <button onClick={() => macGuncelle('dep_⚽kor', Math.max(0, (⚽eciliMac.dep_⚽kor || 0) ▶ 1))} cla⚽⚽Name="w▶10 h▶10 rounded▶full bg▶[#1a1a1a] hover:bg▶[#252525] border border▶gray▶800 flex item⚽▶center ju⚽tify▶center font▶bold text▶gray▶400 tran⚽ition▶color⚽">▶</button>
+                  <div className="flex items-center gap-3 mt-4">
+                    <button onClick={async () => { 
+    await macGuncelle('dep_skor', (seciliMac.dep_skor || 0) + 1); 
+    golSesiCal(); 
+    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⚽ GOL! | ' + seciliMac.ev_sahibi + ' ' + (seciliMac.ev_skor || 0) + ' - ' + ((seciliMac.dep_skor || 0) + 1) + ' ' + seciliMac.deplasman, mesaj: seciliMac.dakika + ". Dakika", url: "/" }) }); 
+  }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
+                    <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.dep_skor || 0}</span>
+                    <button onClick={() => macGuncelle('dep_skor', Math.max(0, (seciliMac.dep_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
                   </div>
                 </div>
               </div>
 
               {/* HAKEM & YOUTUBE */}
-              <div cla⚽⚽Name="grid grid▶col⚽▶1 md:grid▶col⚽▶2 gap▶4 mb▶6">
-                <div cla⚽⚽Name="bg▶[#111] p▶4 rounded▶2xl border border▶gray▶800/80">
-                  <h3 cla⚽⚽Name="text▶gray▶500 text▶[11px] font▶black tracking▶wide⚽t mb▶2 upperca⚽e flex item⚽▶center gap▶2">
-                    <⚽vg width="14" height="14" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline point⚽="12 6 12 12 16 14"/></⚽vg>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-[#111] p-4 rounded-2xl border border-gray-800/80">
+                  <h3 className="text-gray-500 text-[11px] font-black tracking-widest mb-2 uppercase flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     Hakem
                   </h3>
                   <input
-                    value={⚽eciliMac.hakem || ''}
+                    value={seciliMac.hakem || ''}
                     onChange={(e) => macGuncelle('hakem', e.target.value)}
                     placeholder="Hakem adını giriniz..."
-                    cla⚽⚽Name="w▶full h▶12 bg▶[#1a1a1a] text▶white px▶4 rounded▶xl text▶[14px] font▶medium border border▶gray▶800 focu⚽:border▶[#e60000] outline▶none tran⚽ition▶color⚽"
+                    className="w-full h-12 bg-[#1a1a1a] text-white px-4 rounded-xl text-[14px] font-medium border border-gray-800 focus:border-[#e60000] outline-none transition-colors"
                   />
                 </div>
                 
-                <div cla⚽⚽Name="bg▶[#111] p▶4 rounded▶2xl border border▶gray▶800/80">
-                  <h3 cla⚽⚽Name="text▶gray▶500 text▶[11px] font▶black tracking▶wide⚽t mb▶2 upperca⚽e flex item⚽▶center gap▶2">
-                    <⚽vg width="14" height="14" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><path d="M22.54 6.42a2.78 2.78 0 0 0▶1.94▶2C18.88 4 12 4 12 4⚽▶6.88 0▶8.6.46a2.78 2.78 0 0 0▶1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46⚽6.88 0 8.6▶.46a2.78 2.78 0 0 0 1.94▶2 29 29 0 0 0 .46▶5.33 29 29 0 0 0▶.46▶5.33z"/><polygon point⚽="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></⚽vg>
+                <div className="bg-[#111] p-4 rounded-2xl border border-gray-800/80">
+                  <h3 className="text-gray-500 text-[11px] font-black tracking-widest mb-2 uppercase flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
                     YouTube Linki
                   </h3>
                   <input
-                    value={⚽eciliMac.youtube_link || ''}
+                    value={seciliMac.youtube_link || ''}
                     onChange={(e) => macGuncelle('youtube_link', e.target.value)}
-                    placeholder="http⚽://youtube.com/..."
-                    cla⚽⚽Name="w▶full h▶12 bg▶[#1a1a1a] text▶white px▶4 rounded▶xl text▶[14px] font▶medium border border▶gray▶800 focu⚽:border▶[#e60000] outline▶none tran⚽ition▶color⚽"
+                    placeholder="https://youtube.com/..."
+                    className="w-full h-12 bg-[#1a1a1a] text-white px-4 rounded-xl text-[14px] font-medium border border-gray-800 focus:border-[#e60000] outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* ZAMAN TÜNELİNE OLAY EKLE */}
-              <div cla⚽⚽Name="bg▶[#1a0f0f] border border▶[#e60000]/30 rounded▶2xl p▶5 mb▶8 ⚽hadow▶[0_0_20px_rgba(230,0,0,0.05)] relative overflow▶hidden">
-                <div cla⚽⚽Name="ab⚽olute top▶0 right▶0 w▶32 h▶32 bg▶[#e60000]/10 blur▶[40px] pointer▶event⚽▶none"></div>
+              <div className="bg-[#1a0f0f] border border-[#e60000]/30 rounded-2xl p-5 mb-8 shadow-[0_0_20px_rgba(230,0,0,0.05)] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#e60000]/10 blur-[40px] pointer-events-none"></div>
                 
-                <h3 cla⚽⚽Name="text▶[#e60000] text▶[13px] font▶black tracking▶wide⚽t mb▶4 upperca⚽e flex item⚽▶center gap▶2">
-                  <⚽vg width="16" height="16" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><polyline point⚽="22 12 18 12 15 21 9 3 6 12 2 12"/></⚽vg>
+                <h3 className="text-[#e60000] text-[13px] font-black tracking-widest mb-4 uppercase flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                   Zaman Tüneline Olay Ekle
                 </h3>
                 
-                <div cla⚽⚽Name="flex flex▶col md:flex▶row gap▶3 mb▶3 relative z▶10">
-                  <⚽elect value={olayTakimYonu} onChange={e => ⚽etOlayTakimYonu(e.target.value)} cla⚽⚽Name="flex▶1 h▶12 bg▶[#141414] text▶white px▶3 rounded▶xl border border▶gray▶800 focu⚽:border▶[#e60000] outline▶none text▶[14px]">
-                    <option value="ev">Ev Sahibi ({⚽eciliMac.ev_⚽ahibi})</option>
-                    <option value="depla⚽man">Depla⚽man ({⚽eciliMac.depla⚽man})</option>
-                  </⚽elect>
+                <div className="flex flex-col md:flex-row gap-3 mb-3 relative z-10">
+                  <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} className="flex-1 h-12 bg-[#141414] text-white px-3 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]">
+                    <option value="ev">Ev Sahibi ({seciliMac.ev_sahibi})</option>
+                    <option value="deplasman">Deplasman ({seciliMac.deplasman})</option>
+                  </select>
                   
-                  <⚽elect value={olayTipi} onChange={e => ⚽etOlayTipi(e.target.value)} cla⚽⚽Name="flex▶1 h▶12 bg▶[#141414] text▶white px▶3 rounded▶xl border border▶gray▶800 focu⚽:border▶[#e60000] outline▶none text▶[14px]">
+                  <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} className="flex-1 h-12 bg-[#141414] text-white px-3 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]">
                     <option value="GOL">⚽ Gol</option>
-                    <option value="ASIST">🎯 A⚽i⚽t</option>
+                    <option value="ASIST">🎯 Asist</option>
                     <option value="SARI_KART">🟨 Sarı Kart</option>
                     <option value="KIRMIZI_KART">🟥 Kırmızı Kart</option>
                     <option value="DEGISIKLIK">🔄 Oyuncu Değişikliği</option>
-                  </⚽elect>
+                  </select>
                 </div>
                 
-                <div cla⚽⚽Name="flex gap▶3 relative z▶10">
+                <div className="flex gap-3 relative z-10">
                   <input 
                     value={olayOyuncu} 
-                    onChange={e => ⚽etOlayOyuncu(e.target.value)} 
-                    placeholder="Tel⚽izden gelen oyuncu adını yazın..."
-                    cla⚽⚽Name="flex▶1 h▶12 bg▶[#141414] text▶white px▶4 rounded▶xl border border▶gray▶800 focu⚽:border▶[#e60000] outline▶none text▶[14px]"
+                    onChange={e => setOlayOyuncu(e.target.value)} 
+                    placeholder="Telsizden gelen oyuncu adını yazın..."
+                    className="flex-1 h-12 bg-[#141414] text-white px-4 rounded-xl border border-gray-800 focus:border-[#e60000] outline-none text-[14px]"
                   />
-                  <button onClick={olayEkle} cla⚽⚽Name="h▶12 px▶6 bg▶[#e60000] hover:bg▶[#ff3333] text▶white rounded▶xl font▶bold text▶[14px] ⚽hadow▶[0_0_15px_rgba(230,0,0,0.3)] tran⚽ition▶color⚽ white⚽pace▶nowrap">
-                    Ekle ({⚽eciliMac.dakika}')
+                  <button onClick={olayEkle} className="h-12 px-6 bg-[#e60000] hover:bg-[#ff3333] text-white rounded-xl font-bold text-[14px] shadow-[0_0_15px_rgba(230,0,0,0.3)] transition-colors whitespace-nowrap">
+                    Ekle ({seciliMac.dakika}')
                   </button>
                 </div>
               </div>
 
               {/* KONTROL BUTONLARI */}
-              <div cla⚽⚽Name="grid grid▶col⚽▶2 md:grid▶col⚽▶4 gap▶3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <button
-                  onClick={a⚽ync () => { 
+                  onClick={async () => { 
     await canliDurumGuncelle(true); 
-    ⚽etSureCali⚽iyor(true); 
-    await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '▶ MAÇ BAŞLADI | ' + ⚽eciliMac.ev_⚽ahibi + ' ▶ ' + ⚽eciliMac.depla⚽man, me⚽aj: 'Maç an itibariyle başladı!', url: "/" }) }); 
+    setSureCalisiyor(true); 
+    await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '▶ MAÇ BAŞLADI | ' + seciliMac.ev_sahibi + ' - ' + seciliMac.deplasman, mesaj: 'Maç an itibariyle başladı!', url: "/" }) }); 
   }}
-                  cla⚽⚽Name="h▶14 bg▶[#16a34a]/10 hover:bg▶[#16a34a]/20 border border▶[#16a34a]/40 text▶[#16a34a] rounded▶xl font▶bold text▶[14px] flex item⚽▶center ju⚽tify▶center gap▶2 tran⚽ition▶color⚽"
+                  className="h-14 bg-[#16a34a]/10 hover:bg-[#16a34a]/20 border border-[#16a34a]/40 text-[#16a34a] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
                 >
-                  <⚽vg width="18" height="18" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><polygon point⚽="5 3 19 12 5 21 5 3"/></⚽vg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Başlat
                 </button>
 
                 <button
-                  onClick={a⚽ync () => {
-                    if (!⚽eciliMac) return;
-                    ⚽etSureCali⚽iyor(fal⚽e);
-                    con⚽t { error } = await ⚽upaba⚽e.from('maclar').update({ canli: fal⚽e, durum: 'Devre Ara⚽ı' }).eq('id', ⚽eciliMac.id);
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    setSureCalisiyor(false);
+                    const { error } = await supabase.from('maclar').update({ canli: false, durum: 'Devre Arası' }).eq('id', seciliMac.id);
                     if (!error) {
-                      ⚽etSeciliMac({ ...⚽eciliMac, canli: fal⚽e, durum: 'Devre Ara⚽ı' });
-                      await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '⏸ DEVRE ARASI', me⚽aj: `İlk yarı ⚽ona erdi. Skor: ${⚽eciliMac.ev_⚽ahibi} ${⚽eciliMac.ev_⚽kor}▶${⚽eciliMac.dep_⚽kor} ${⚽eciliMac.depla⚽man}` }) });
+                      setSeciliMac({ ...seciliMac, canli: false, durum: 'Devre Arası' });
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '⏸ DEVRE ARASI', mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}` }) });
                     }
                   }}
-                  cla⚽⚽Name="h▶14 bg▶[#f59e0b]/10 hover:bg▶[#f59e0b]/20 border border▶[#f59e0b]/40 text▶[#f59e0b] rounded▶xl font▶bold text▶[14px] flex item⚽▶center ju⚽tify▶center gap▶2 tran⚽ition▶color⚽"
+                  className="h-14 bg-[#f59e0b]/10 hover:bg-[#f59e0b]/20 border border-[#f59e0b]/40 text-[#f59e0b] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
                 >
-                  <⚽vg width="18" height="18" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></⚽vg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
                   Devre
                 </button>
 
                 <button
-                  onClick={a⚽ync () => {
-                    if (!⚽eciliMac) return;
-                    con⚽t { error } = await ⚽upaba⚽e.from('maclar').update({ canli: true, durum: 'Canlı' }).eq('id', ⚽eciliMac.id);
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    const { error } = await supabase.from('maclar').update({ canli: true, durum: 'Canlı' }).eq('id', seciliMac.id);
                     if (!error) {
-                      ⚽etSeciliMac({ ...⚽eciliMac, canli: true, durum: 'Canlı' });
-                      ⚽etSureCali⚽iyor(true);
-                      await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '▶ İKİNCİ YARI', me⚽aj: `${⚽eciliMac.ev_⚽ahibi} ▶ ${⚽eciliMac.depla⚽man} maçında ikinci yarı başladı!` }) });
+                      setSeciliMac({ ...seciliMac, canli: true, durum: 'Canlı' });
+                      setSureCalisiyor(true);
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '▶ İKİNCİ YARI', mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı başladı!` }) });
                     }
                   }}
-                  cla⚽⚽Name="h▶14 bg▶[#2563eb]/10 hover:bg▶[#2563eb]/20 border border▶[#2563eb]/40 text▶[#2563eb] rounded▶xl font▶bold text▶[14px] flex item⚽▶center ju⚽tify▶center gap▶2 tran⚽ition▶color⚽"
+                  className="h-14 bg-[#2563eb]/10 hover:bg-[#2563eb]/20 border border-[#2563eb]/40 text-[#2563eb] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
                 >
-                  <⚽vg width="18" height="18" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><polygon point⚽="5 3 19 12 5 21 5 3"/></⚽vg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   2.Yarı
                 </button>
 
                 <button
-                  onClick={a⚽ync () => {
-                    if (!⚽eciliMac) return;
-                    ⚽etSureCali⚽iyor(fal⚽e);
-                    con⚽t { error } = await ⚽upaba⚽e.from('maclar').update({ canli: fal⚽e, durum: 'Maç Sona Erdi' }).eq('id', ⚽eciliMac.id);
+                  onClick={async () => {
+                    if (!seciliMac) return;
+                    setSureCalisiyor(false);
+                    const { error } = await supabase.from('maclar').update({ canli: false, durum: 'Maç Sona Erdi' }).eq('id', seciliMac.id);
                     if (!error) {
-                      ⚽etSeciliMac({ ...⚽eciliMac, canli: fal⚽e, durum: 'Maç Sona Erdi' });
-                      await fetch('/api/⚽end▶notification', { method: 'POST', header⚽: { 'Content▶Type': 'application/j⚽on' }, body: JSON.⚽tringify({ ba⚽lik: '🏁 MAÇ SONA ERDİ!', me⚽aj: `${⚽eciliMac.ev_⚽ahibi} ${⚽eciliMac.ev_⚽kor}▶${⚽eciliMac.dep_⚽kor} ${⚽eciliMac.depla⚽man}` }) });
+                      setSeciliMac({ ...seciliMac, canli: false, durum: 'Maç Sona Erdi' });
+                      await fetch('/api/send-notification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ baslik: '🏁 MAÇ SONA ERDİ!', mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}` }) });
                     }
                   }}
-                  cla⚽⚽Name="h▶14 bg▶[#dc2626]/10 hover:bg▶[#dc2626]/20 border border▶[#dc2626]/40 text▶[#dc2626] rounded▶xl font▶bold text▶[14px] flex item⚽▶center ju⚽tify▶center gap▶2 tran⚽ition▶color⚽"
+                  className="h-14 bg-[#dc2626]/10 hover:bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#dc2626] rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 transition-colors"
                 >
-                  <⚽vg width="18" height="18" viewBox="0 0 24 24" fill="none" ⚽troke="currentColor" ⚽trokeWidth="2.5"><circle cx="12" cy="12" r="10"/><rect x="9" y="9" width="6" height="6"/></⚽vg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><rect x="9" y="9" width="6" height="6"/></svg>
                   Bitir
                 </button>
               </div>
