@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import InstallButton from "./components/InstallButton";
 
 export default function LandingPage() {
   return (
@@ -66,22 +67,12 @@ export default function LandingPage() {
             Halı saha futbolunun <span className="font-black text-[#e60000]">en kapsamlı platformu</span> ile sahaya çık!
           </h1>
 
-          {/* App Stores */}
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-2">
-            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center justify-center gap-4 min-w-[170px] transition-colors shadow-lg border border-white/10">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91 1.65.17 2.79 1.12 3.45 2.11-2.96 1.76-2.48 5.86.36 7.03-.68 1.63-1.51 3.23-2.54 4.54l-.48.98zM12.03 7.25C11.96 3.73 15.35 1 15.42 1c-.11 4.29-4.14 6.77-3.39 6.25z"/></svg>
-              <div className="text-left flex flex-col justify-center">
-                <span className="text-[10px] text-gray-300 font-medium leading-[1]">Apple</span>
-                <span className="font-bold text-[15px] leading-tight">App Store</span>
-              </div>
-            </button>
-            <button className="bg-black hover:bg-[#111] text-white rounded-[14px] px-6 py-3.5 flex items-center justify-center gap-4 min-w-[170px] transition-colors shadow-lg border border-white/10">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M3.208 20.672L16.27 13.12 3.208 5.57l-.022 15.102z"/><path d="M17.15 12.612L20.638 10.6 18.06 9.11l-1.928 1.112z"/><path d="M3.315 20.612l13.835-7.99 1.93-1.114-2.616-1.51-13.15 7.59z"/><path d="M3.315 5.568l13.15-7.59 2.616-1.51-1.93-1.114-13.835 7.99z"/></svg>
-              <div className="text-left flex flex-col justify-center">
-                <span className="text-[10px] text-gray-300 font-medium leading-[1]">Android</span>
-                <span className="font-bold text-[15px] leading-tight">Google Play</span>
-              </div>
-            </button>
+          {/* Install PWA */}
+          <div className="flex flex-col items-center w-full mt-2">
+            <InstallButton />
+            <p className="text-gray-400 text-[11px] md:text-[13px] font-medium max-w-md mx-auto text-center mt-3">
+              Maç sonuçları, puan durumları, takımlar ve KLAS LİG haberlerine telefonundan hızlıca ulaş.
+            </p>
           </div>
 
           {/* Stats Badges */}
