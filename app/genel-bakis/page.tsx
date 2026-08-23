@@ -4,7 +4,7 @@ import { useCityStore } from "../store/cityStore";
 
 export default function GenelBakis() {
   const { selectedCityId } = useCityStore();
-  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "Ä°stanbul" : selectedCityId === 3 ? "Ä°zmir" : "TÃ¼rkiye";
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
 
   return (
     <div className="w-full flex flex-col fade-in pb-10">
@@ -17,8 +17,8 @@ export default function GenelBakis() {
            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
          </div>
          <div className="flex flex-col justify-center">
-           <h1 className="text-[15px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">HAFTANIN ALTIN 7'SÄ°</h1>
-           <p className="text-[11px] md:text-[13px] text-gray-500 font-bold leading-none">{cityName} - 4. Hafta En Ä°yileri</p>
+           <h1 className="text-[15px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">HAFTANIN ALTIN 8'İ</h1>
+           <p className="text-[11px] md:text-[13px] text-gray-500 font-bold leading-none">{cityName} - 4. Hafta En İyileri</p>
          </div>
       </div>
 
@@ -112,4 +112,3 @@ function PlayerCard({ name, team, pos, rating, top, left }: { name: string, team
     </div>
   )
 }
-
