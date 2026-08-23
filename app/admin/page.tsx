@@ -145,48 +145,65 @@ const ADMIN_CARDS = [
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-[#f4f6f8] pt-8 pb-20 font-sans">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6">
+    <div className="min-h-screen bg-[#050505] pt-12 pb-24 font-sans relative overflow-hidden">
+      {/* Background Glow Effects */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-[1250px] mx-auto px-5 md:px-8 relative z-10">
         
         {/* Admin Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-8">
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <div className="w-14 h-14 bg-[#e60000] rounded-xl flex items-center justify-center text-white shadow-md">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-xl border border-gray-800/60 rounded-3xl p-8 shadow-2xl mb-12 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#e60000]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          
+          <div className="flex items-center gap-6 mb-6 md:mb-0 relative z-10">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#e60000] to-[#990000] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(230,0,0,0.3)] border border-[#ff3333]/30">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/>
               </svg>
             </div>
             <div>
-              <h1 className="text-[22px] md:text-[26px] font-black text-[#1a1a2e] leading-tight">Yönetim Paneli</h1>
-              <p className="text-[13px] md:text-[14px] text-gray-500 font-medium">Klas Lig sistemini buradan yönetebilirsiniz.</p>
+              <h1 className="text-[28px] md:text-[34px] font-black text-white tracking-tight leading-none mb-2 drop-shadow-md">
+                YÖNETİM PANELİ
+              </h1>
+              <p className="text-[14px] md:text-[15px] text-gray-400 font-medium tracking-wide">
+                Klas Lig Komuta Merkezi
+              </p>
             </div>
           </div>
           <Link 
             href="/"
-            className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-3 rounded-xl transition-colors text-[14px]"
+            className="flex items-center justify-center gap-2 bg-[#141414] hover:bg-[#1f1f1f] border border-gray-800 hover:border-gray-600 text-gray-300 hover:text-white font-bold px-6 py-4 rounded-xl transition-all duration-300 text-[14px] shadow-lg relative z-10"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            Siteye Dön
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            SİTEYE DÖN
           </Link>
         </div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
           {ADMIN_CARDS.map((kart, i) => (
             <Link
               key={i}
               href={kart.link}
-              className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-[#e60000]/30 transition-all duration-200 flex flex-col hover:-translate-y-1"
+              className="group relative bg-[#0a0a0a]/60 backdrop-blur-md border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 flex flex-col hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(230,0,0,0.15)] hover:border-[#e60000]/50 overflow-hidden"
             >
-              <div className="w-12 h-12 bg-gray-50 group-hover:bg-red-50 text-gray-500 group-hover:text-[#e60000] rounded-xl flex items-center justify-center mb-4 transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#e60000]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              
+              <div className="w-14 h-14 bg-[#141414] group-hover:bg-[#e60000] text-gray-400 group-hover:text-white rounded-xl flex items-center justify-center mb-5 transition-all duration-300 border border-gray-800 group-hover:border-[#ff3333] shadow-inner relative z-10">
                 {kart.icon}
               </div>
-              <h2 className="text-[16px] font-black text-[#1a1a2e] mb-1 group-hover:text-[#e60000] transition-colors">
+              <h2 className="text-[17px] font-black text-gray-200 mb-2 group-hover:text-white transition-colors tracking-wide relative z-10">
                 {kart.title}
               </h2>
-              <p className="text-[12px] text-gray-500 font-medium leading-relaxed">
+              <p className="text-[13px] text-gray-500 font-medium leading-relaxed group-hover:text-gray-400 transition-colors relative z-10">
                 {kart.desc}
               </p>
+              
+              {/* Decorative Arrow */}
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#e60000]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
             </Link>
           ))}
         </div>
