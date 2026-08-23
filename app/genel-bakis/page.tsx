@@ -3,7 +3,8 @@
 import { useCityStore } from "../store/cityStore";
 
 export default function GenelBakis() {
-  const { cityName } = useCityStore();
+  const { selectedCityId } = useCityStore();
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
 
   return (
     <div className="w-full flex flex-col fade-in pb-10">
