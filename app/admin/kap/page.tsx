@@ -75,10 +75,14 @@ export default function KapBildirimleriAdminPage() {
     };
 
     let error;
+    let newId = null;
+
     if (editId !== null) {
       ({ error } = await supabase.from("duyurular").update(payload).eq("id", editId));
     } else {
-      ({ error } = await supabase.from("duyurular").insert(payload));
+      const { data, error: insertError } = await supabase.from("duyurular").insert(payload).select("id").single();
+      error = insertError;
+      newId = data?.id;
     }
 
     if (error) {
@@ -94,8 +98,9 @@ export default function KapBildirimleriAdminPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "KAP BİLDİRİMİ 📢",
+            baslik: "KLAS LİG BURSA KAP BİLDİRİMİ",
             mesaj: baslik.trim(),
+            url: newId ? `/duyuru/${newId}` : "/lig"
           }),
         });
       } catch (err) {

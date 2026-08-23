@@ -7,7 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
   try {
-    const { baslik, mesaj } = await req.json();
+    const { baslik, mesaj, url } = await req.json();
 
     if (!baslik || !mesaj) {
       return NextResponse.json({ success: false, error: "baslik ve mesaj gerekli" }, { status: 400 });
@@ -75,6 +75,7 @@ export async function POST(req: Request) {
           JSON.stringify({
             title: baslik,
             body: mesaj,
+            url: url || "/",
           })
         );
         gonderilen++;
