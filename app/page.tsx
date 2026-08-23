@@ -5,6 +5,51 @@ import Link from "next/link";
 import InstallButton from "./components/InstallButton";
 
 export default function LandingPage() {
+  const subscribeUser = async () => {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+      alert("Tarayıcınız bildirimleri desteklemiyor.");
+      return;
+    }
+    
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        alert('Bildirim izni reddedildi. Ayarlardan izin vermeniz gerekiyor.');
+        return;
+      }
+
+      const reg = await navigator.serviceWorker.ready;
+      
+      const padding = '='.repeat((4 - "BO_BXVoGvCSZLsa1dn22EfZ4yFhFnFYduukaTSaDGSszKwDF6F_N7SY4KnUKE-RkkqapIDtvyi7u8r9jCfk2xjM".length % 4) % 4);
+      const base64 = ("BO_BXVoGvCSZLsa1dn22EfZ4yFhFnFYduukaTSaDGSszKwDF6F_N7SY4KnUKE-RkkqapIDtvyi7u8r9jCfk2xjM" + padding).replace(/\-/g, '+').replace(/_/g, '/');
+      const rawData = window.atob(base64);
+      const outputArray = new Uint8Array(rawData.length);
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+
+      const subscription = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: outputArray
+      });
+
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        body: JSON.stringify(subscription),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (response.ok) {
+        alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
+      } else {
+        alert("Abonelik kaydedilemedi.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Bir hata oluştu.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white text-[#1a1a2e] font-sans overflow-x-hidden selection:bg-red-100">
       
@@ -121,16 +166,7 @@ export default function LandingPage() {
           {/* New Prominent Feature Buttons */}
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 w-full mt-6">
              <button 
-                onClick={() => {
-                  if (typeof window !== 'undefined' && 'Notification' in window) {
-                    Notification.requestPermission().then(p => {
-                      if (p === 'granted') alert('Bildirimler başarıyla açıldı!');
-                      else alert('Bildirim izni reddedildi.');
-                    });
-                  } else {
-                    alert('Bildirimler yakında aktif olacak!');
-                  }
-                }}
+                onClick={subscribeUser}
                 className="group relative overflow-hidden bg-gradient-to-r from-[#1da1f2] to-[#0077b5] text-white font-black text-[15px] px-8 h-[54px] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_5px_20px_rgba(29,161,242,0.4)] hover:shadow-[0_8px_25px_rgba(29,161,242,0.6)] hover:-translate-y-1 hover:scale-105"
              >
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>

@@ -84,7 +84,23 @@ export default function AdminGundemPage() {
 
     setSaving(false);
     if (error) { setMsg({ tip: "hata", yazi: error.message }); return; }
-    setMsg({ tip: "ok", yazi: editId ? "Haber güncellendi!" : "Haber eklendi ve yayınlandı!" });
+
+    if (editId === null) {
+      try {
+        await fetch("/api/send-notification", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            baslik: "📰 Yeni Haber: " + baslik.trim(),
+            mesaj: "Klas Lig'de yeni haber yayında, detaylar için tıkla!",
+          }),
+        });
+      } catch (err) {
+        console.error("Bildirim hatası:", err);
+      }
+    }
+
+    setMsg({ tip: "ok", yazi: editId ? "Haber güncellendi!" : "Haber eklendi ve yayınlandı! Bildirim gönderildi." });
     resetForm();
     loadHaberler();
   }
