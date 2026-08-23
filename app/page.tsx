@@ -28,7 +28,12 @@ export default function LandingPage() {
         outputArray[i] = rawData.charCodeAt(i);
       }
 
-      const subscription = await reg.pushManager.subscribe({
+      let subscription = await reg.pushManager.getSubscription();
+      if (subscription) {
+        await subscription.unsubscribe();
+      }
+
+      subscription = await reg.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: outputArray
       });
@@ -44,9 +49,9 @@ export default function LandingPage() {
       } else {
         alert("Abonelik kaydedilemedi.");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Bir hata oluştu.");
+      alert("Bir hata oluştu: " + (error.message || error));
     }
   };
 
