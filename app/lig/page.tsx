@@ -69,8 +69,8 @@ export default function LigMerkezi() {
            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
          </div>
          <div className="flex flex-col justify-center">
-           <h1 className="text-[15px] md:text-[17px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Haberleri</h1>
-           <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve haberler</p>
+           <h1 className="text-[15px] md:text-[17px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Transfer KAP</h1>
+           <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve transferler</p>
          </div>
          <div className="ml-auto w-7 h-7 bg-red-50 text-[#e60000] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
             {haberler.length}
