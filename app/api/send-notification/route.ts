@@ -14,10 +14,11 @@ export async function POST(req: Request) {
     }
 
     // VAPID key kontrolü
+    const vapidEmail = process.env.VAPID_EMAIL;
     const vapidPublic = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
     const vapidPrivate = process.env.VAPID_PRIVATE_KEY;
 
-    if (!vapidPublic || !vapidPrivate) {
+    if (!vapidEmail || !vapidPublic || !vapidPrivate) {
       console.warn("VAPID keys eksik - bildirim gönderilemiyor");
       return NextResponse.json({
         success: true,
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     webpush.setVapidDetails(
-      "mailto:recepkurt7@gmail.com",
+      vapidEmail,
       vapidPublic,
       vapidPrivate
     );
