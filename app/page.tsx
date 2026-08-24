@@ -20,8 +20,9 @@ export default function LandingPage() {
 
       const reg = await navigator.serviceWorker.ready;
       
-      const padding = '='.repeat((4 - process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!.length % 4) % 4);
-      const base64 = (process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY! + padding).replace(/\-/g, '+').replace(/_/g, '/');
+      const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || "";
+      const padding = '='.repeat((4 - vapidKey.length % 4) % 4);
+      const base64 = (vapidKey + padding).replace(/\-/g, '+').replace(/_/g, '/');
       const rawData = window.atob(base64);
       const outputArray = new Uint8Array(rawData.length);
       for (let i = 0; i < rawData.length; ++i) {
