@@ -303,7 +303,23 @@ export default function CanliMacPage() {
                     {seciliMac.ev_sahibi}
                   </div>
                   <div className="flex items-center gap-3 mt-4">
-                    <button onClick={() => macGuncelle('ev_skor', Math.max(0, (seciliMac.ev_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
+                    <button onClick={async () => {
+  if ((seciliMac.ev_skor || 0) <= 0) return;
+  const yeniSkor = (seciliMac.ev_skor || 0) - 1;
+  const { error } = await supabase.from('maclar').update({ ev_skor: yeniSkor }).eq('id', seciliMac.id);
+  if (!error) {
+    setSeciliMac({ ...seciliMac, ev_skor: yeniSkor });
+    await fetch("/api/send-notification", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        baslik: "❌ GOL İPTAL",
+        mesaj: `${seciliMac.ev_sahibi} golü iptal edildi. Skor: ${yeniSkor}-${seciliMac.dep_skor || 0}`,
+        url: "/"
+      }),
+    });
+  }
+}} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
                     <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.ev_skor || 0}</span>
                     <button onClick={async () => { 
   const golAtan = prompt(`${seciliMac.ev_sahibi} için golü kim attı? (Boş bırakabilirsiniz)`);
@@ -389,7 +405,23 @@ export default function CanliMacPage() {
   }
 }} className="w-10 h-10 rounded-full bg-[#e60000] hover:bg-[#ff3333] flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all transform hover:scale-110">+</button>
                     <span className="text-[36px] font-black w-12 text-center text-white drop-shadow-md">{seciliMac.dep_skor || 0}</span>
-                    <button onClick={() => macGuncelle('dep_skor', Math.max(0, (seciliMac.dep_skor || 0) - 1))} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
+                    <button onClick={async () => {
+  if ((seciliMac.dep_skor || 0) <= 0) return;
+  const yeniSkor = (seciliMac.dep_skor || 0) - 1;
+  const { error } = await supabase.from('maclar').update({ dep_skor: yeniSkor }).eq('id', seciliMac.id);
+  if (!error) {
+    setSeciliMac({ ...seciliMac, dep_skor: yeniSkor });
+    await fetch("/api/send-notification", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        baslik: "❌ GOL İPTAL",
+        mesaj: `${seciliMac.deplasman} golü iptal edildi. Skor: ${seciliMac.ev_skor || 0}-${yeniSkor}`,
+        url: "/"
+      }),
+    });
+  }
+}} className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-gray-800 flex items-center justify-center font-bold text-gray-400 transition-colors">-</button>
                   </div>
                 </div>
               </div>
