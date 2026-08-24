@@ -62,6 +62,7 @@ export async function POST(req: Request) {
 
     let gonderilen = 0;
     let hatali = 0;
+    let hatalar: any[] = [];
 
     for (const abone of aboneler) {
       try {
@@ -81,6 +82,7 @@ export async function POST(req: Request) {
         gonderilen++;
       } catch (err: any) {
         hatali++;
+        hatalar.push({ endpoint: abone.endpoint.substring(0, 30), status: err?.statusCode, msg: err?.message });
         console.log("Bildirim hatası:", err?.statusCode, err?.message);
 
         // Geçersiz aboneleri sil
@@ -98,6 +100,7 @@ export async function POST(req: Request) {
       toplam: aboneler.length,
       gonderilen,
       hatali,
+      hatalar
     });
 
   } catch (err: any) {
