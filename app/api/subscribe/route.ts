@@ -50,6 +50,16 @@ export async function POST(req: Request) {
           }]);
           
         if (insertError) throw insertError;
+      } else {
+        const { error: updateError } = await supabase
+          .from("bildirim_aboneleri")
+          .update({
+            p256dh: subscription.keys.p256dh,
+            auth: subscription.keys.auth
+          })
+          .eq("id", existing.id);
+          
+        if (updateError) throw updateError;
       }
     }
 
