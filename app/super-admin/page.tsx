@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function SuperAdminDashboard() {
-  const { user, profil, loading } = useAuth();
+  const { user, profil, role, loading } = useAuth();
   const router = useRouter();
   const [cities, setCities] = useState<any[]>([]);
   const [stats, setStats] = useState({ takimlar: 0, oyuncular: 0, maclar: 0 });
@@ -30,11 +30,20 @@ export default function SuperAdminDashboard() {
       return;
     }
 
-    // Geçici bypass
-    setIsSuperAdmin(true);
-    setCheckingRole(false);
-    loadDashboardData();
-  }, [user, loading, router]);
+    // Kurucu Yetkisi Kontrolü (Sadece sana özel)
+    const isRecep = profil?.ad_soyad?.toLowerCase().includes("recep");
+    const isSuperRole = role === "super_admin";
+    
+    if (isRecep || isSuperRole) {
+      setIsSuperAdmin(true);
+      setCheckingRole(false);
+      loadDashboardData();
+    } else {
+      // Yetkisiz girişi engelle ve geri gönder
+      alert("Bu sayfaya erişim yetkiniz bulunmuyor! Sadece sistem kurucusu erişebilir.");
+      router.push("/");
+    }
+  }, [user, profil, role, loading, router]);
 
   const loadDashboardData = async () => {
     const { data: cityData } = await supabase.from("cities").select("*").order("id", { ascending: true });
