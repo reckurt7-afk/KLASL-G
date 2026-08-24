@@ -7,6 +7,8 @@ import { TeamLogo } from "./TeamLogo";
 
 type Mac = {
   id: number;
+  canli?: boolean;
+  durum?: string;
   hafta: number;
   ev_sahibi: string;
   deplasman: string;
@@ -88,7 +90,7 @@ export default function MacSonuclariSlider() {
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         <div
           ref={scrollRef}
-          onScroll={handleScroll}
+          
           className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-0 pb-4 pt-2"
           style={{ scrollbarWidth: "none" }}
         >
