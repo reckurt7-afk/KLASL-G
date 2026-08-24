@@ -66,23 +66,23 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-[#1a1a2e] font-sans overflow-x-hidden selection:bg-red-100">
       
       {/* HEADER */}
-      <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[64px] md:h-[76px] flex items-center shadow-sm">
+      <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
         <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 md:gap-3">
-            <Image src="/icons/logo.png" width={40} height={40} alt="Klas Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
-            <span className="font-black text-[18px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS LİG</span>
+            <Image src="/icons/logo.png" width={44} height={44} alt="Klas Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
+            <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS <span className="text-[#e60000]">LİG</span></span>
           </Link>
-          <div className="flex items-center gap-2 md:gap-6">
+          <div className="flex items-center gap-3 md:gap-6">
             <div className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Klas Lig TV
             </div>
             <div className="flex items-center gap-2 md:gap-3">
-              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[11px] md:text-[13px] px-3 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
+              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[12px] md:text-[13px] px-4 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[11px] md:text-[13px] px-3 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[12px] md:text-[13px] px-4 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
@@ -114,19 +114,19 @@ export default function LandingPage() {
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
-          <div className="relative flex items-center justify-center my-2">
-            <div className="absolute inset-0 bg-white/20 blur-[40px] rounded-full scale-150"></div>
+          <div className="relative flex items-center justify-center my-2 mt-4">
+            <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
             <Image 
               src="/icons/logo.png" 
-              width={160} 
-              height={160} 
+              width={180} 
+              height={180} 
               alt="Klas Lig" 
-              className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[140px] md:w-[180px]" 
+              className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[170px] md:w-[210px]" 
             />
           </div>
 
           {/* Title */}
-          <h1 className="text-[32px] md:text-[48px] leading-[1.15] text-white font-black w-full tracking-tight">
+          <h1 className="text-[32px] md:text-[48px] leading-[1.15] text-white font-black w-full tracking-tight mt-2">
             Halı saha futbolunun <br className="md:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a30000]">
               en kapsamlı platformu
@@ -136,24 +136,24 @@ export default function LandingPage() {
           {/* Install PWA */}
           <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px]">
             <InstallButton />
-            <p className="text-white/60 text-[13px] md:text-[15px] font-medium text-center mt-4 leading-relaxed">
+            <p className="text-white/70 text-[13px] md:text-[15px] font-medium text-center mt-4 leading-relaxed">
               Maç sonuçları, puan durumları, takımlar ve özel haberlere telefonundan anında ulaş.
             </p>
           </div>
 
           {/* Stats Badges */}
           <div className="flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full mt-2">
-            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+            <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">40 Şehir</span>
+              <span className="text-white font-bold text-[13px] md:text-[15px]">40 Şehir</span>
             </div>
-            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+            <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">16.364+ Oyuncu</span>
+              <span className="text-white font-bold text-[13px] md:text-[15px]">16.364+ Oyuncu</span>
             </div>
-            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+            <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
-              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">1.395+ Takım</span>
+              <span className="text-white font-bold text-[13px] md:text-[15px]">1.395+ Takım</span>
             </div>
           </div>
 
@@ -161,23 +161,23 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-6">
             <Link 
               href="/lig" 
-              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#e60000] to-[#b30000] hover:from-[#ff3131] hover:to-[#cc0000] text-white font-bold text-[15px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
+              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#e60000] to-[#b30000] hover:from-[#ff3131] hover:to-[#cc0000] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
             >
               Platformu Keşfet
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </Link>
             
             <Link 
               href="/giris" 
-              className="border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-[14px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+              className="border border-white/30 bg-white/15 hover:bg-white/25 text-white font-bold text-[15px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-md shadow-sm"
             >
               Giriş Yap
             </Link>
             <Link 
               href="/lig" 
-              className="border border-white/20 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white font-bold text-[14px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+              className="border border-white/30 bg-white/15 hover:bg-white/25 text-white font-bold text-[15px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-md shadow-sm"
             >
-              Misafir
+              Misafir Girişi
             </Link>
           </div>
 
