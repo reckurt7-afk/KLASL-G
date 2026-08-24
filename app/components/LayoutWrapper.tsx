@@ -132,7 +132,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
         {/* Mobile: Sidebar as collapsible menu above content */}
         <div className="lg:hidden w-full">
-          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.03)] mb-2">
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.03)] mb-6 mt-4">
             <nav className="flex flex-col">
               {SIDEBAR_ITEMS.map((item, idx) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -140,7 +140,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center justify-between px-5 py-4 transition-colors ${
+                    className={`group flex items-center justify-between px-6 py-5 transition-colors ${
                       isActive
                         ? "bg-red-50/50"
                         : "hover:bg-gray-50"

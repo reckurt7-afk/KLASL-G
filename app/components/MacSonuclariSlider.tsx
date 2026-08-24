@@ -71,7 +71,7 @@ export default function MacSonuclariSlider() {
 
   if (loading) {
     return (
-      <div className="w-full bg-white py-4">
+      <div className="w-full bg-white py-8">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 flex gap-3 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="min-w-[240px] h-[110px] border border-gray-100 rounded-xl bg-gray-50 animate-pulse shrink-0" />
@@ -89,7 +89,7 @@ export default function MacSonuclariSlider() {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-0 pb-4 pt-2"
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-0 pb-4 pt-2"
           style={{ scrollbarWidth: "none" }}
         >
           {maclar.map((match) => {
@@ -97,13 +97,13 @@ export default function MacSonuclariSlider() {
             return (
               <div
                 key={match.id}
-                className={`min-w-[85vw] sm:min-w-[300px] md:min-w-[320px] bg-white rounded-2xl p-4 shrink-0 snap-start shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 cursor-pointer relative overflow-hidden`}
+                className={`min-w-[85vw] sm:min-w-[300px] md:min-w-[320px] bg-white rounded-2xl p-5 shrink-0 snap-start shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 cursor-pointer relative overflow-hidden`}
               >
                 {/* Top decorative line */}
                 <div className={`absolute top-0 left-0 right-0 h-[4px] ${["bg-red-500", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][match.id % 5]}`}></div>
                 
                 {/* Header (Status & Date) */}
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between mb-4">
                   {match.canli ? (
                     <span className="text-[11px] font-black text-white bg-red-600 px-2.5 py-1 rounded-md animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)] flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
@@ -152,7 +152,7 @@ export default function MacSonuclariSlider() {
                 </div>
 
                 {/* Footer (League & Week) */}
-                <div className="text-[10px] font-black mt-3 text-center border-t border-gray-100 pt-2 flex justify-center items-center gap-1.5 uppercase tracking-wide">
+                <div className="text-[10px] font-black mt-4 text-center border-t border-gray-100 pt-2 flex justify-center items-center gap-1.5 uppercase tracking-wide">
                   {match.canli && <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>}
                   <span className={match.canli ? "text-red-500" : "text-gray-400"}>Klas Lig • {match.hafta}. HAFTA</span>
                 </div>

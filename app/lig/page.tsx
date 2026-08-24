@@ -64,7 +64,7 @@ export default function LigMerkezi() {
     <div className="w-full flex flex-col fade-in">
       
       {/* Header */}
-      <div className="flex items-center gap-4 mb-5 bg-gradient-to-r from-red-50 to-white h-[76px] rounded-2xl border border-red-100 shadow-sm px-5">
+      <div className="flex items-center gap-4 mb-6 mt-4 bg-gradient-to-r from-red-50 to-white h-[76px] rounded-2xl border border-red-100 shadow-sm px-5">
          <div className="w-12 h-12 bg-gradient-to-br from-[#e60000] to-[#b30000] rounded-xl flex items-center justify-center text-white shadow-[0_4px_10px_rgba(230,0,0,0.3)] shrink-0">
            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
          </div>
@@ -83,12 +83,12 @@ export default function LigMerkezi() {
       ) : haberler.length === 0 ? (
         <div className="w-full py-12 text-center text-gray-500 font-bold">Henüz haber bulunmuyor.</div>
       ) : (
-        <div className="flex flex-wrap gap-4 md:gap-5 w-full">
+        <div className="flex flex-wrap gap-5 md:gap-6 w-full">
           {haberler.map((haber) => (
             <Link 
               key={haber.id} 
               href={`/duyuru/${haber.id}`}
-              className="relative w-[150px] h-[210px] md:w-[170px] md:h-[240px] rounded-[14px] overflow-hidden group cursor-pointer shadow-sm block shrink-0"
+              className="relative w-[160px] h-[220px] md:w-[180px] md:h-[260px] rounded-[14px] overflow-hidden group cursor-pointer shadow-sm block shrink-0"
             >
               <div 
                 className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" 
@@ -107,7 +107,7 @@ export default function LigMerkezi() {
               </div>
 
               {/* Bottom Content */}
-              <div className="absolute inset-x-0 bottom-0 p-3 flex flex-col z-10">
+              <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
                 <h3 className="text-white font-black text-[12px] md:text-[13px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
                   {haber.baslik}
                 </h3>

@@ -31,7 +31,7 @@ export default function CityStoryBar() {
   };
 
   return (
-    <div className="w-full bg-white border-b border-gray-100 py-4 relative">
+    <div className="w-full bg-white border-b border-gray-100 py-6 relative">
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
@@ -57,7 +57,7 @@ export default function CityStoryBar() {
       {/* Scrollable Row */}
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-10"
+        className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-10"
         style={{ scrollbarWidth: "none" }}
       >
         {cities.map((city) => {
@@ -70,7 +70,7 @@ export default function CityStoryBar() {
             >
               {/* Card - Pill Design */}
               <div
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-full transition-all duration-300 border-2 ${
+                className={`flex items-center gap-3 px-5 py-3 rounded-full transition-all duration-300 border-2 ${
                   isSelected
                     ? "border-[#e60000] bg-gradient-to-r from-red-50 to-white shadow-[0_4px_12px_rgba(230,0,0,0.12)] scale-[1.02]"
                     : "border-gray-100 bg-white hover:bg-gray-50 hover:border-gray-200"

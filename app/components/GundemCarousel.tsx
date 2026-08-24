@@ -66,10 +66,10 @@ export default function GundemCarousel() {
   const formatDate = (s: string) => new Date(s).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div className="w-full bg-white pt-6 pb-4">
+    <div className="w-full bg-white pt-8 pb-8">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <h2 className="text-[20px] font-black text-gray-900">Gündem</h2>
           <div className="flex items-center gap-1.5">
             {haberler.map((_, i) => (
@@ -111,7 +111,7 @@ export default function GundemCarousel() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-90" />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center gap-2 mb-3 flex-wrap">
                     <span className="bg-[#e60000] text-white text-[11px] font-black px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm">
                       <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse inline-block"></span>
