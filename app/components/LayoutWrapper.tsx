@@ -132,22 +132,33 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
         {/* Mobile: Sidebar as collapsible menu above content */}
         <div className="lg:hidden w-full">
-          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm mb-4">
-            <nav className="flex flex-col gap-1">
-              {SIDEBAR_ITEMS.map((item) => {
+          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.03)] mb-2">
+            <nav className="flex flex-col">
+              {SIDEBAR_ITEMS.map((item, idx) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center gap-3 px-5 py-4 text-[14px] md:text-[15px] font-black transition-colors rounded-lg ${
+                    className={`group flex items-center justify-between px-5 py-4 transition-colors ${
                       isActive
-                        ? "bg-[#e60000] text-white"
-                        : "text-gray-600 hover:bg-red-50 hover:text-[#e60000]"
-                    }`}
+                        ? "bg-red-50/50"
+                        : "hover:bg-gray-50"
+                    } ${idx !== SIDEBAR_ITEMS.length - 1 ? 'border-b border-gray-50' : ''}`}
                   >
-                    <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "text-gray-400 group-hover:text-[#e60000]"}`}>{item.icon}</span>
-                    {item.label}
+                    <div className="flex items-center gap-3.5">
+                      <div className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${
+                        isActive ? "bg-[#e60000] text-white shadow-sm" : "bg-gray-100 text-gray-500 group-hover:bg-[#e60000] group-hover:text-white"
+                      }`}>
+                        {item.icon}
+                      </div>
+                      <span className={`text-[14px] font-black tracking-tight ${isActive ? "text-[#e60000]" : "text-gray-700 group-hover:text-[#e60000]"}`}>
+                        {item.label}
+                      </span>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${isActive ? "text-[#e60000] translate-x-1" : "text-gray-300 group-hover:text-[#e60000] group-hover:translate-x-1"}`}>
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </Link>
                 );
               })}

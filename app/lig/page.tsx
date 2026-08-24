@@ -64,15 +64,15 @@ export default function LigMerkezi() {
     <div className="w-full flex flex-col fade-in">
       
       {/* Header */}
-      <div className="flex items-center gap-4 mb-5 bg-white h-[70px] rounded-xl border border-gray-100 shadow-sm px-4">
-         <div className="w-12 h-12 bg-[#e60000] rounded-xl flex items-center justify-center text-white shadow-md shrink-0">
+      <div className="flex items-center gap-4 mb-5 bg-gradient-to-r from-red-50 to-white h-[76px] rounded-2xl border border-red-100 shadow-sm px-5">
+         <div className="w-12 h-12 bg-gradient-to-br from-[#e60000] to-[#b30000] rounded-xl flex items-center justify-center text-white shadow-[0_4px_10px_rgba(230,0,0,0.3)] shrink-0">
            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
          </div>
          <div className="flex flex-col justify-center">
-           <h1 className="text-[15px] md:text-[17px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Transfer KAP</h1>
-           <p className="text-[11px] md:text-[12px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve transferler</p>
+           <h1 className="text-[16px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Transfer KAP</h1>
+           <p className="text-[11px] md:text-[13px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve transferler</p>
          </div>
-         <div className="ml-auto w-7 h-7 bg-red-50 text-[#e60000] rounded-full flex items-center justify-center text-[11px] font-black shrink-0">
+         <div className="ml-auto w-8 h-8 bg-white text-[#e60000] border border-red-100 rounded-full flex items-center justify-center text-[13px] font-black shrink-0 shadow-sm">
             {haberler.length}
          </div>
       </div>
