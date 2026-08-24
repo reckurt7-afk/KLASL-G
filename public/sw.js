@@ -24,11 +24,16 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: data.body || "Yeni bildirim var!",
-    icon: "/icons/logo.png",
-    vibrate: [300, 100, 300, 100, 300], // Gol heyecanı için 3'lü titreme
-    sound: data.ses || undefined, // Ses URL'i
+    icon: data.icon || "/icons/logo.png",
+    image: data.image,
+    badge: data.badge,
+    requireInteraction: data.requireInteraction,
+    actions: data.actions,
+    vibrate: data.vibrate || [300, 100, 300, 100, 300], // Gol heyecanı için 3'lü titreme
+    sound: data.sound || undefined, // Ses URL'i
     data: {
-      url: "/",
+      url: data.url || "/",
+      youtube_link: data.youtube_link
     },
   };
 
@@ -40,7 +45,23 @@ self.addEventListener("push", (event) => {
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
+  let urlToOpen = event.notification.data?.url || "/";
+  if (event.action === "youtube" && event.notification.data?.youtube_link) {
+    urlToOpen = event.notification.data.youtube_link;
+  } else if (event.action === "canli") {
+    urlToOpen = "/";
+  }
+
   event.waitUntil(
-    clients.openWindow("/")
+    clients.matchAll({ type: "window" }).then((clientList) => {
+      for (const client of clientList) {
+        if (client.url === urlToOpen && "focus" in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
   );
 });

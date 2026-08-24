@@ -77,6 +77,14 @@ export async function POST(req: Request) {
           JSON.stringify({
             title: baslik,
             body: mesaj,
+            icon: reqData.icon,
+            image: reqData.image,
+            badge: reqData.badge,
+            url: reqData.url,
+            youtube_link: reqData.youtube_link,
+            vibrate: reqData.vibrate,
+            actions: reqData.actions,
+            requireInteraction: reqData.requireInteraction
           })
         );
         gonderilen++;

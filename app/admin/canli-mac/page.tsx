@@ -52,7 +52,21 @@ export default function CanliMacPage() {
         case "DEGISIKLIK": baslik = "🔄 OYUNCU DEĞİŞİKLİĞİ"; mesaj = `${takim} takımında ${olayOyuncu} oyuna dahil oldu.`; break;
         default: baslik = "⚡ MAÇ OLAYI"; mesaj = `${takim} takımından ${olayOyuncu} ile ilgili yeni bir gelişme var.`;
       }
-      await fetch("/api/send-notification", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ baslik, mesaj, url: "/" }) });
+      await fetch("/api/send-notification", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify({ 
+          baslik, 
+          mesaj, 
+          url: "/",
+          youtube_link: seciliMac.youtube_link,
+          requireInteraction: true,
+          actions: [
+            { action: "canli", title: "🟢 Canlı Skor" },
+            ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+          ]
+        }) 
+      });
       alert("Olay başarıyla eklendi!");
       setOlayOyuncu("");
     }
@@ -362,14 +376,21 @@ export default function CanliMacPage() {
                       
                     if (!error) {
                       setSeciliMac({ ...seciliMac, ev_skor: yeniSkor });
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "⚽ GOOOL!",
-                          mesaj: `${seciliMac.ev_sahibi} gol attı! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
-                        }),
-                      });
+                        await fetch("/api/send-notification", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            baslik: `⚽ GOOOL! | ${seciliMac.ev_sahibi}`,
+                            mesaj: `${seciliMac.ev_sahibi} ağları havalandırdı!\nMevcut Skor: ${yeniSkor} - ${seciliMac.dep_skor}`,
+                            url: "/",
+                            youtube_link: seciliMac.youtube_link,
+                            requireInteraction: true,
+                            actions: [
+                              { action: "canli", title: "🟢 Canlı Skor" },
+                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+                            ]
+                          }),
+                        });
                     }
                   }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
                 </div>
@@ -409,14 +430,21 @@ export default function CanliMacPage() {
                       
                     if (!error) {
                       setSeciliMac({ ...seciliMac, dep_skor: yeniSkor });
-                      await fetch("/api/send-notification", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          baslik: "⚽ GOOOL!",
-                          mesaj: `${seciliMac.deplasman} gol attı! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
-                        }),
-                      });
+                        await fetch("/api/send-notification", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            baslik: `⚽ GOOOL! | ${seciliMac.deplasman}`,
+                            mesaj: `${seciliMac.deplasman} ağları havalandırdı!\nMevcut Skor: ${seciliMac.ev_skor} - ${yeniSkor}`,
+                            url: "/",
+                            youtube_link: seciliMac.youtube_link,
+                            requireInteraction: true,
+                            actions: [
+                              { action: "canli", title: "🟢 Canlı Skor" },
+                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+                            ]
+                          }),
+                        });
                     }
                   }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
                 </div>
