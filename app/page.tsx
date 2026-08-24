@@ -66,24 +66,24 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-[#1a1a2e] font-sans overflow-x-hidden selection:bg-red-100">
       
       {/* HEADER */}
-      <header className="fixed top-0 w-full z-50 bg-white border-b border-gray-100 h-[76px] flex items-center">
-        <div className="w-full max-w-[1400px] mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/icons/logo.png" width={48} height={48} alt="Klas Lig Logo" className="object-contain" />
-            <span className="font-black text-[22px] tracking-tight text-[#1a1a2e]">KLAS LİG</span>
+      <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[64px] md:h-[76px] flex items-center shadow-sm">
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
+            <Image src="/icons/logo.png" width={40} height={40} alt="Klas Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
+            <span className="font-black text-[18px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS LİG</span>
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 md:gap-6">
             <div className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Klas Lig TV
             </div>
-            <div className="flex items-center gap-3">
-              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[13px] px-6 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-sm">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <div className="flex items-center gap-2 md:gap-3">
+              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[11px] md:text-[13px] px-3 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[13px] px-6 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[11px] md:text-[13px] px-3 py-2 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
             </div>
@@ -92,97 +92,103 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[100px] pb-24 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[90px] pb-16 overflow-hidden">
         {/* Background YouTube Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <iframe
-            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-[0.35] mix-blend-luminosity"
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-[0.25] mix-blend-luminosity"
             src="https://www.youtube.com/embed/Ko6NF27yHgQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=Ko6NF27yHgQ&playsinline=1"
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
           ></iframe>
         </div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/90 via-[#070b14]/60 to-[#070b14]"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/95 via-[#070b14]/75 to-[#070b14]"></div>
 
-        <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1200px] mx-auto px-4 gap-8">
+        <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1000px] mx-auto px-5 gap-6">
           
           {/* Top Badge */}
-          <div className="border border-[#e60000]/40 bg-[#070b14]/70 backdrop-blur-md rounded-full px-5 py-2 flex items-center justify-center gap-2.5 shadow-[0_0_15px_rgba(230,0,0,0.15)]">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            <span className="text-white text-[10px] md:text-[11px] font-black tracking-[0.2em] uppercase mt-0.5">TÜRKİYE'NİN #1 HALI SAHA PLATFORMU</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <div className="border border-[#e60000]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse"></span>
+            <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye'nin #1 Platformu</span>
           </div>
 
-          {/* Center Logo */}
-          <div className="w-[160px] h-[160px] md:w-[190px] md:h-[190px] bg-white rounded-full flex items-center justify-center p-5 shadow-[0_0_50px_rgba(255,255,255,0.15)] shrink-0">
-            <Image src="/icons/logo.png" width={150} height={150} alt="Klas Lig" className="object-contain" />
+          {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
+          <div className="relative flex items-center justify-center my-2">
+            <div className="absolute inset-0 bg-white/20 blur-[40px] rounded-full scale-150"></div>
+            <Image 
+              src="/icons/logo.png" 
+              width={160} 
+              height={160} 
+              alt="Klas Lig" 
+              className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[140px] md:w-[180px]" 
+            />
           </div>
 
           {/* Title */}
-          <h1 className="text-[26px] md:text-[34px] text-white font-semibold w-full tracking-tight max-w-3xl">
-            Halı saha futbolunun <span className="font-black text-[#e60000]">en kapsamlı platformu</span> ile sahaya çık!
+          <h1 className="text-[32px] md:text-[48px] leading-[1.15] text-white font-black w-full tracking-tight">
+            Halı saha futbolunun <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a30000]">
+              en kapsamlı platformu
+            </span>
           </h1>
 
           {/* Install PWA */}
-          <div className="flex flex-col items-center w-full mt-2">
+          <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px]">
             <InstallButton />
-            <p className="text-gray-400 text-[11px] md:text-[13px] font-medium max-w-md mx-auto text-center mt-3">
-              Maç sonuçları, puan durumları, takımlar ve KLAS LİG haberlerine telefonundan hızlıca ulaş.
+            <p className="text-white/60 text-[13px] md:text-[15px] font-medium text-center mt-4 leading-relaxed">
+              Maç sonuçları, puan durumları, takımlar ve özel haberlere telefonundan anında ulaş.
             </p>
           </div>
 
           {/* Stats Badges */}
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full mt-4">
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">40 Şehir</span>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full mt-2">
+            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">40 Şehir</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">16.364+ Oyuncu</span>
+            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">16.364+ Oyuncu</span>
             </div>
-            <div className="border border-[#e60000]/40 bg-black/40 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-center gap-3 shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
-              <span className="text-white font-bold text-[15px] md:text-[16px] tracking-wide whitespace-nowrap">1.395+ Takım</span>
+            <div className="border border-white/10 bg-white/5 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
+              <span className="text-white/90 font-bold text-[13px] md:text-[15px]">1.395+ Takım</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3.5 w-full mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-6">
             <Link 
               href="/lig" 
-              className="bg-[#e60000] hover:bg-[#cc0000] text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(230,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(230,0,0,0.3)] hover:-translate-y-0.5"
+              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#e60000] to-[#b30000] hover:from-[#ff3131] hover:to-[#cc0000] text-white font-bold text-[15px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
             >
-              Keşfet
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              Platformu Keşfet
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </Link>
             
             <Link 
-              href="/lig" 
-              className="border border-white/25 bg-black/20 hover:bg-white/10 text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm"
-            >
-              Misafir Girişi
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </Link>
-
-            <Link 
               href="/giris" 
-              className="border border-white/25 bg-black/20 hover:bg-white/10 text-white font-bold text-[14px] w-[185px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 backdrop-blur-sm"
+              className="border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-[14px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
             >
               Giriş Yap
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </Link>
+            <Link 
+              href="/lig" 
+              className="border border-white/20 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white font-bold text-[14px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+            >
+              Misafir
             </Link>
           </div>
 
-          {/* New Prominent Feature Buttons */}
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 w-full mt-6">
+          {/* Notifications Button */}
+          <div className="w-full max-w-[360px] md:max-w-[440px] mt-1">
              <button 
                 onClick={subscribeUser}
-                className="group relative overflow-hidden bg-gradient-to-r from-[#1da1f2] to-[#0077b5] text-white font-black text-[15px] px-8 h-[54px] rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_5px_20px_rgba(29,161,242,0.4)] hover:shadow-[0_8px_25px_rgba(29,161,242,0.6)] hover:-translate-y-1 hover:scale-105"
+                className="group relative overflow-hidden w-full bg-gradient-to-r from-[#0077b5] to-[#1da1f2] text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_5px_15px_rgba(29,161,242,0.3)] hover:-translate-y-1"
              >
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                 BİLDİRİMLERİ AÇ
              </button>
           </div>
