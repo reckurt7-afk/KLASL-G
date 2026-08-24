@@ -110,7 +110,7 @@ export default function LandingPage() {
           {/* Top Badge */}
           <div className="border border-[#e60000]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse"></span>
-            <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye'nin #1 Platformu</span>
+            <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye&apos;nin #1 Platformu</span>
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}

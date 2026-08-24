@@ -7,7 +7,8 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
   try {
-    const { baslik, mesaj } = await req.json();
+    const reqBody = await req.json();
+    const { baslik, mesaj, icon, image, badge, url, youtube_link, vibrate, actions, requireInteraction } = reqBody;
 
     if (!baslik || !mesaj) {
       return NextResponse.json({ success: false, error: "baslik ve mesaj gerekli" }, { status: 400 });
@@ -77,14 +78,14 @@ export async function POST(req: Request) {
           JSON.stringify({
             title: baslik,
             body: mesaj,
-            icon: reqData.icon,
-            image: reqData.image,
-            badge: reqData.badge,
-            url: reqData.url,
-            youtube_link: reqData.youtube_link,
-            vibrate: reqData.vibrate,
-            actions: reqData.actions,
-            requireInteraction: reqData.requireInteraction
+            icon: icon,
+            image: image,
+            badge: badge,
+            url: url,
+            youtube_link: youtube_link,
+            vibrate: vibrate,
+            actions: actions,
+            requireInteraction: requireInteraction
           })
         );
         gonderilen++;
