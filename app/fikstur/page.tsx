@@ -89,137 +89,116 @@ export default function FiksturPage() {
   }
 
   function formatDate(mac: Mac) {
-    if (!mac.tarih && !mac.saat) return null;
-    const parts = [];
-    if (mac.tarih) {
-      const d = new Date(mac.tarih);
-      parts.push(d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" }));
+    if (!mac.tarih) return null;
+    const parts = mac.tarih.includes('/') ? mac.tarih.split('/') : mac.tarih.includes('.') ? mac.tarih.split('.') : null;
+    if (parts && parts.length === 3) {
+      const d = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+      if (!isNaN(d.getTime())) {
+        return d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" });
+      }
     }
-    if (mac.saat) parts.push(mac.saat);
-    return parts.join(" ");
+    return mac.tarih;
   }
 
   return (
-    <div className="w-full flex flex-col fade-in">
+    <div className="w-full flex flex-col font-sans fade-in">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-xl border border-red-100">
-        <div className="w-10 h-10 bg-[#e60000] rounded-lg flex items-center justify-center text-white shadow-sm">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
+      <div className="flex items-center gap-4 mb-6 bg-white h-[76px] rounded-2xl border border-gray-100 shadow-sm px-5">
+        <div className="w-12 h-12 bg-gradient-to-br from-[#e60000] to-[#b30000] rounded-xl flex items-center justify-center text-white shadow-[0_4px_10px_rgba(230,0,0,0.3)] shrink-0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <div>
-          <h1 className="text-[20px] font-black text-[#1a1a2e]">Maç Programı ve Fikstür</h1>
-          <p className="text-[12px] text-gray-500 font-bold">Tüm haftaların maç programı ve sonuçları</p>
+        <div className="flex flex-col justify-center">
+          <h1 className="text-[16px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">Maç Programı ve Fikstür</h1>
+          <p className="text-[11px] md:text-[13px] text-gray-500 font-medium leading-none">Tüm haftaların maç programı ve sonuçları</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-[100px] bg-gray-50 rounded-xl animate-pulse" />
-          ))}
-        </div>
-      ) : haftalar.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-4 opacity-40">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          <p className="font-bold text-[15px]">Henüz fikstür oluşturulmamış</p>
-          <p className="text-[13px] mt-1">Admin panelinden maçları ekleyebilirsiniz.</p>
-        </div>
+        <div className="w-full py-20 flex justify-center"><div className="w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full animate-spin"></div></div>
+      ) : groupedMaclar.length === 0 ? (
+        <div className="w-full py-20 text-center text-gray-500 font-bold bg-white rounded-2xl border border-gray-100">Fikstür verisi bulunamadı.</div>
       ) : (
-        <>
-          {/* Hafta Tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-3 mb-5" style={{ scrollbarWidth: "none" }}>
-            {haftalar.map((h) => {
-              const hasPlayed = h.maclar.some((m) => m.oynandi);
-              const hasLive = h.maclar.some((m) => m.canli);
-              return (
-                <button
-                  key={h.hafta}
-                  onClick={() => setAktifHafta(h.hafta)}
-                  className={`shrink-0 px-4 py-2 rounded-lg text-[13px] font-bold transition-all border flex items-center gap-1.5 ${
-                    aktifHafta === h.hafta
-                      ? "bg-[#e60000] text-white border-[#e60000] shadow-sm"
-                      : hasPlayed
-                      ? "bg-gray-50 text-gray-600 border-gray-200"
-                      : "bg-white text-gray-500 border-gray-200 hover:bg-gray-50"
-                  }`}
-                >
-                  {hasLive && <span className="w-2 h-2 rounded-full bg-white animate-pulse" />}
-                  {h.hafta}. Hafta
-                  {hasPlayed && !hasLive && (
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <polyline points="20 6 9 17 4 12"/>
-                    </svg>
-                  )}
-                </button>
-              );
-            })}
+        <div className="flex flex-col">
+          {/* Week Selector */}
+          <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-4 mb-2">
+            {haftalar.map((h) => (
+              <button
+                key={h.hafta}
+                onClick={() => setAktifHafta(h.hafta)}
+                className={`shrink-0 px-4 py-2 rounded-full font-black text-[14px] transition-all ${
+                  aktifHafta === h.hafta
+                    ? "bg-[#e60000] text-white shadow-md scale-105"
+                    : "bg-white text-gray-500 border border-gray-200 hover:bg-gray-50 hover:text-gray-800"
+                }`}
+              >
+                {h.hafta}. Hafta
+              </button>
+            ))}
           </div>
 
-          {/* Matches */}
           {aktifGroup && (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {aktifGroup.maclar.map((mac) => {
                 const status = getStatusBadge(mac);
-                const dateStr = formatDate(mac);
+                const dateStr = formatDate(mac) || mac.tarih;
                 return (
                   <div
                     key={mac.id}
-                    className={`bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all ${
-                      mac.canli ? "border-[#e60000]/30 ring-1 ring-[#e60000]/20" : "border-gray-100"
+                    className={`bg-white border rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-md transition-all ${
+                      mac.canli ? "border-[#e60000]/40 ring-1 ring-[#e60000]/20" : "border-gray-100"
                     }`}
                   >
                     {/* Top Bar */}
-                    <div className="flex items-center justify-between px-4 py-2 bg-gray-50 border-b border-gray-100">
-                      <span className={`text-[10px] font-black px-2 py-0.5 rounded ${status.cls}`}>
+                    <div className="flex items-center justify-between px-5 py-2.5 bg-gray-50 border-b border-gray-100">
+                      <span className={`text-[10px] md:text-[11px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider ${status.cls}`}>
                         {status.label}
                       </span>
-                      <span className="text-[11px] text-gray-400 font-medium">
-                        {dateStr || `${aktifHafta}. Hafta`}
-                        {mac.saha && <span className="ml-2 text-gray-300">• {mac.saha}</span>}
+                      <span className="text-[12px] font-bold text-gray-500">
+                        {aktifHafta}. Hafta
                       </span>
                     </div>
 
                     {/* Match Row */}
-                    <div className="flex items-center px-4 py-4">
+                    <div className="flex items-center px-4 py-5 md:py-6">
                       {/* Home Team */}
                       <div className="flex-1 flex flex-col items-center gap-2 min-w-0">
-                        <TeamLogo name={mac.ev_sahibi} logoMap={logoMap} size={48} />
-                        <span className="text-[12px] md:text-[14px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2">
+                        <TeamLogo name={mac.ev_sahibi} logoMap={logoMap} size={56} />
+                        <span className="text-[13px] md:text-[15px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2 mt-1">
                           {mac.ev_sahibi}
                         </span>
                       </div>
 
-                      {/* Score / VS */}
-                      <div className="flex flex-col items-center justify-center px-4 shrink-0">
+                      {/* Score / Time Info */}
+                      <div className="flex flex-col items-center justify-center px-2 shrink-0">
                         {mac.oynandi || mac.canli ? (
                           <div className="flex items-center gap-3">
-                            <span className={`text-[32px] font-black leading-none ${mac.canli ? "text-[#e60000] animate-pulse" : "text-[#e60000]"}`}>
+                            <span className={`text-[36px] font-black tracking-tighter leading-none ${mac.canli ? "text-[#e60000] animate-pulse" : "text-[#1a1a2e]"}`}>
                               {mac.ev_skor ?? 0}
                             </span>
-                            <span className="text-gray-300 font-black text-lg">–</span>
-                            <span className="text-[32px] font-black text-gray-800 leading-none">
+                            <span className="text-gray-300 font-black text-xl mb-1">-</span>
+                            <span className={`text-[36px] font-black tracking-tighter leading-none ${mac.canli ? "text-[#e60000] animate-pulse" : "text-[#1a1a2e]"}`}>
                               {mac.dep_skor ?? 0}
                             </span>
                           </div>
                         ) : (
-                          <span className="text-[#e60000] font-black text-[18px] bg-red-50 border border-red-100 px-4 py-1.5 rounded-lg">
-                            VS
-                          </span>
+                          <div className="flex flex-col items-center gap-1.5 w-full max-w-[140px]">
+                            {mac.saha && (
+                              <span className="text-[10px] text-[#e60000] font-black uppercase tracking-wider text-center bg-red-50 px-2 py-0.5 rounded w-full line-clamp-1">
+                                {mac.saha}
+                              </span>
+                            )}
+                            <div className="flex flex-col items-center justify-center bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-200 w-full">
+                              <span className="text-[#1a1a2e] font-black text-[16px] tracking-tight">{mac.saat || "-:-"}</span>
+                              <span className="text-gray-500 font-bold text-[10px] tracking-wide uppercase">{dateStr || "-"}</span>
+                            </div>
+                          </div>
                         )}
                       </div>
 
                       {/* Away Team */}
                       <div className="flex-1 flex flex-col items-center gap-2 min-w-0">
-                        <TeamLogo name={mac.deplasman} logoMap={logoMap} size={48} />
-                        <span className="text-[12px] md:text-[14px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2">
+                        <TeamLogo name={mac.deplasman} logoMap={logoMap} size={56} />
+                        <span className="text-[13px] md:text-[15px] font-black text-[#1a1a2e] text-center leading-tight line-clamp-2 mt-1">
                           {mac.deplasman}
                         </span>
                       </div>
@@ -229,7 +208,7 @@ export default function FiksturPage() {
               })}
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
