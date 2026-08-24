@@ -188,7 +188,7 @@ export default function FiksturPage() {
                               </span>
                             )}
                             <div className="flex flex-col items-center justify-center bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-200 w-full">
-                              <span className="text-[#1a1a2e] font-black text-[16px] tracking-tight">{mac.saat || "-:-"}</span>
+                              <span className="text-[#1a1a2e] font-black text-[16px] tracking-tight">{mac.saat ? mac.saat.slice(0, 5) : "-:-"}</span>
                               <span className="text-gray-500 font-bold text-[10px] tracking-wide uppercase">{dateStr || "-"}</span>
                             </div>
                           </div>

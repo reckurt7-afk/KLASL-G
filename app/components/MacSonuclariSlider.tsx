@@ -95,7 +95,19 @@ export default function MacSonuclariSlider() {
           style={{ scrollbarWidth: "none" }}
         >
           {maclar.map((match) => {
-            const dateStr = match.tarih ? new Date(match.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" }) : "";
+            let dateStr = "";
+            if (match.tarih) {
+              const parts = match.tarih.includes('/') ? match.tarih.split('/') : match.tarih.includes('.') ? match.tarih.split('.') : null;
+              if (parts && parts.length === 3) {
+                const d = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+                if (!isNaN(d.getTime())) {
+                  dateStr = d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" });
+                  if (match.saat) dateStr += ' ' + match.saat.slice(0, 5);
+                }
+              } else {
+                dateStr = match.tarih;
+              }
+            }
             return (
               <div
                 key={match.id}
