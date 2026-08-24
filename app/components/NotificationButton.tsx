@@ -1,16 +1,9 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
-
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
-
-  const base64 = (base64String + padding)
-    .replace(/-/g, "+")
-    .replace(/_/g, "/");
-
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
   const rawData = window.atob(base64);
-
   return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
 }
 
@@ -21,75 +14,67 @@ export default function NotificationButton() {
         alert("Bu cihaz web bildirimlerini desteklemiyor.");
         return;
       }
-
       if (!("serviceWorker" in navigator)) {
         alert("Service Worker desteklenmiyor.");
         return;
       }
-
       if (!("PushManager" in window)) {
-        alert(
-          "iPhone kullanıyorsanız uygulamayı Ana Ekrana ekleyip oradan açın."
-        );
+        alert("iPhone kullanıyorsanız uygulamayı Ana Ekrana ekleyip oradan açın.");
         return;
       }
 
       const permission = await Notification.requestPermission();
-
       if (permission !== "granted") {
-        alert("Bildirim izni verilmedi.");
+        alert("Bildirim izni verilmedi. Tarayıcı ayarlarından izin verin.");
         return;
       }
 
+      // Service Worker'ın hazır olmasını bekle
       const registration = await navigator.serviceWorker.ready;
 
-     let subscription = await registration.pushManager.getSubscription();
+      // Eski aboneliği tarayıcıdan kaldır
+      const mevcutAbonelik = await registration.pushManager.getSubscription();
+      if (mevcutAbonelik) {
+        await mevcutAbonelik.unsubscribe();
+      }
 
-// Eski abonelik varsa sil
-if (subscription) {
-  await subscription.unsubscribe();
-}
-
-// Yeni abonelik oluştur
-subscription = await registration.pushManager.subscribe({
-  userVisibleOnly: true,
-  applicationServerKey: urlBase64ToUint8Array(
-    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-  ),
-});
-      const payload = {
-        endpoint: subscription.endpoint,
-        p256dh: btoa(
-          String.fromCharCode(
-            ...new Uint8Array(subscription.getKey("p256dh")!)
-          )
+      // Yeni abonelik oluştur
+      const yeniAbonelik = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
         ),
-        auth: btoa(
-          String.fromCharCode(
-            ...new Uint8Array(subscription.getKey("auth")!)
-          )
-        ),
-      };
+      });
 
-      const { error } = await supabase
-        .from("bildirim_aboneleri")
-        .insert([payload]);
+      // Sunucuya gönder - /api/subscribe endpoint upsert yapıyor
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(yeniAbonelik),
+      });
 
-      if (error) {
-        console.error(error);
-        alert("Supabase Hatası:\n" + error.message);
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        alert("Kayıt hatası: " + (data.error || "Bilinmeyen hata"));
         return;
       }
 
-      new Notification("KLAS LİG", {
-        body: "🔔 Bildirimler başarıyla açıldı.",
-        icon: "/icons/logo.png",
+      // Hoş geldin bildirimi gönder
+      await fetch("/api/send-notification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baslik: "KLAS LIG BURSA",
+          mesaj: "Bildirimler aktif! Artık gol, haber ve tüm gelişmeleri anında öğreneceksin.",
+          url: "/",
+        }),
       });
 
-      alert("🎉 Bildirimler başarıyla aktif edildi.");
+      alert("Bildirimler basariyla aktif edildi! Test bildirimi gonderildi.");
     } catch (err: any) {
       console.error(err);
-      alert("Hata:\n" + (err?.message || JSON.stringify(err)));
+      alert("Hata: " + (err?.message || JSON.stringify(err)));
     }
   };
 
@@ -110,7 +95,7 @@ subscription = await registration.pushManager.subscribe({
         cursor: "pointer",
       }}
     >
-      🔔 BİLDİRİMLERİ AÇ
+      BILDIRIMLERI AC
     </button>
   );
 }
