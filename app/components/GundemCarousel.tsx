@@ -66,10 +66,10 @@ export default function GundemCarousel() {
   const formatDate = (s: string) => new Date(s).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div className="w-full bg-white pt-8 pb-8">
+    <div className="w-full bg-white pt-6 pb-4">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-[20px] font-black text-gray-900">Gündem</h2>
           <div className="flex items-center gap-1.5">
             {haberler.map((_, i) => (
@@ -90,39 +90,39 @@ export default function GundemCarousel() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-0 pb-4"
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-2 pb-4"
             style={{ scrollbarWidth: "none" }}
           >
             {haberler.map((haber) => (
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className="relative w-[85vw] sm:min-w-[320px] md:min-w-[360px] lg:min-w-[400px] h-[220px] md:h-[280px] rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
               >
                 {/* Background */}
                 {haber.resim ? (
                   <div
-                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
+                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                     style={{ backgroundImage: `url(${haber.resim})` }}
                   />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] to-[#e60000]/80" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-2 mb-3 flex-wrap">
-                    <span className="bg-[#e60000] text-white text-[11px] font-black px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse inline-block"></span>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="bg-[#e60000] text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-white inline-block"></span>
                       {formatDate(haber.created_at)}
                     </span>
-                    <span className="text-white text-[11px] font-bold bg-white/20 px-2.5 py-1 rounded-md backdrop-blur-md">
-                      • {haber.kategori}
+                    <span className="text-white text-[10px] font-bold bg-white/20 px-2 py-1 rounded backdrop-blur-sm">
+                      ★ {haber.kategori}
                     </span>
                   </div>
-                  <h3 className="text-white font-black text-[18px] md:text-[20px] leading-tight mb-1.5 line-clamp-2 drop-shadow-md">{haber.baslik}</h3>
-                  {haber.ozet && <p className="text-gray-300 text-[13px] md:text-[14px] line-clamp-1 drop-shadow-sm">{haber.ozet}</p>}
+                  <h3 className="text-white font-black text-[15px] md:text-[18px] leading-snug mb-1 line-clamp-2">{haber.baslik}</h3>
+                  {haber.ozet && <p className="text-gray-300 text-[12px] line-clamp-1">{haber.ozet}</p>}
                 </div>
               </Link>
             ))}

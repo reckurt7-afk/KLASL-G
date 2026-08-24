@@ -31,7 +31,7 @@ export default function CityStoryBar() {
   };
 
   return (
-    <div className="w-full bg-white border-b border-gray-100 py-6 relative">
+    <div className="w-full bg-white border-b border-gray-100 py-4 relative">
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
@@ -57,7 +57,7 @@ export default function CityStoryBar() {
       {/* Scrollable Row */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-10"
+        className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-10"
         style={{ scrollbarWidth: "none" }}
       >
         {cities.map((city) => {
@@ -65,31 +65,33 @@ export default function CityStoryBar() {
           return (
             <div
               key={city.id}
-              className="flex flex-col items-center gap-1.5 snap-start shrink-0 cursor-pointer group"
+              className="flex flex-col items-center gap-1.5 snap-start shrink-0 cursor-pointer"
               onClick={() => setSelectedCityId(city.id)}
             >
-              {/* Card - Pill Design */}
+              {/* Card */}
               <div
-                className={`flex items-center gap-3 px-5 py-3 rounded-full transition-all duration-300 border-2 ${
+                className={`w-[100px] h-[80px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
-                    ? "border-[#e60000] bg-gradient-to-r from-red-50 to-white shadow-[0_4px_12px_rgba(230,0,0,0.12)] scale-[1.02]"
-                    : "border-gray-100 bg-white hover:bg-gray-50 hover:border-gray-200"
+                    ? "border-[#e60000] bg-red-50 shadow-md"
+                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
                 }`}
               >
-                <div className={`w-7 h-7 relative shrink-0 ${isSelected ? "scale-110" : "grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100"} transition-all duration-300`}>
+                <div className="w-8 h-8 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="object-contain" />
                 </div>
-                <div className="flex flex-col justify-center">
-                  <span className={`text-[13px] md:text-[14px] font-black leading-none tracking-tight ${isSelected ? "text-[#e60000]" : "text-gray-700"}`}>
-                    {city.name}
-                  </span>
-                  {isSelected && (
-                    <span className="text-[9px] text-[#e60000]/70 font-bold mt-1 tracking-wider uppercase">
-                      {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
-                    </span>
-                  )}
-                </div>
+                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#e60000]" : "text-gray-700"}`}>
+                  {city.name}
+                </span>
+                <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
+                  {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
+                </span>
               </div>
+              {/* Heart */}
+              <button className="text-gray-300 hover:text-red-500 transition-colors" aria-label="Favori">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
             </div>
           );
         })}
