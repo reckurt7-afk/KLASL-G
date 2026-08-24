@@ -72,17 +72,17 @@ export default function LandingPage() {
             <Image src="/icons/logo.png" width={44} height={44} alt="Klas Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
             <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS <span className="text-[#e60000]">LİG</span></span>
           </Link>
-          <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
             <div className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Klas Lig TV
             </div>
             <div className="flex items-center gap-2 md:gap-3">
-              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[13px] md:text-[14px] px-4 py-2.5 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
+              <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[13px] md:text-[14px] px-4 py-2.5 md:px-6 md:py-2.5 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
@@ -169,13 +169,15 @@ export default function LandingPage() {
             
             <Link 
               href="/giris" 
-              className="bg-white hover:bg-gray-100 text-[#e60000] font-black text-[15px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.1)] hover:-translate-y-0.5"
+              style={{ color: "#e60000" }}
+              className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Giriş Yap
             </Link>
             <Link 
               href="/lig" 
-              className="bg-white hover:bg-gray-100 text-[#e60000] font-black text-[15px] h-[48px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.1)] hover:-translate-y-0.5"
+              style={{ color: "#e60000" }}
+              className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Misafir Girişi
             </Link>
