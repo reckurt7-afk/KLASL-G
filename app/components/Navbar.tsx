@@ -27,6 +27,7 @@ export default function Navbar() {
     { href: "/puan-durumu", label: "Puan Durumu", icon: Trophy },
     { href: "/esame-listesi", label: "Esame Listesi", icon: ClipboardList },
     { href: "/takimlar", label: "Takımlar", icon: Shield },
+    { href: "/takim-kur", label: "Takım Kur", icon: Shield },
     { href: "/galeri", label: "Galeri", icon: Camera },
     { href: "/video-arsivi", label: "Videolar", icon: Video },
     { href: "/duyurular", label: "Duyurular", icon: Megaphone },
