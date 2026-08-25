@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function CalismaEkibiPage() {
@@ -29,46 +28,45 @@ export default function CalismaEkibiPage() {
 
   const PersonCard = ({ person, delay }: { person: any, delay: number }) => (
     <motion.div 
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay }}
-      className="flex flex-col items-center group relative z-10 mx-2 md:mx-4 mb-8"
+      transition={{ duration: 0.5, delay }}
+      className="flex flex-col items-center w-[160px] md:w-[220px] mx-3 md:mx-4 mb-10 group"
     >
-      {/* Cutout Photo Area */}
+      {/* NİZAMİ RESİM KUTUSU */}
       <div 
-        className="w-32 h-40 md:w-48 md:h-56 relative flex items-end justify-center mb-2 overflow-visible cursor-pointer"
+        className="w-full aspect-[3/4] bg-gray-100 rounded-2xl overflow-hidden shadow-md border border-gray-200 mb-4 cursor-pointer relative group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300"
         onClick={() => person?.foto_url && setSelectedImage(person.foto_url)}
       >
         {person?.foto_url ? (
           <img 
             src={person.foto_url} 
             alt={person.ad_soyad} 
-            className="max-w-full max-h-full object-contain object-bottom drop-shadow-[0_10px_15px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform duration-500" 
+            className="w-full h-full object-cover object-top" 
           />
         ) : (
-          <div className="w-24 h-24 rounded-full bg-black/20 flex items-center justify-center text-white/50 mb-4 border border-white/10">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div className="w-full h-full flex items-center justify-center text-gray-300">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
         )}
+        
+        {/* Büyütme İkonu */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+        </div>
       </div>
 
-      {/* Name and Role */}
-      <div className="text-center flex flex-col items-center">
-        <h3 className="text-white font-black text-sm md:text-base uppercase tracking-wider mb-0.5" style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.8)" }}>
+      {/* İSİM VE GÖREV */}
+      <div className="text-center w-full px-2">
+        <h3 className="text-gray-900 font-black text-sm md:text-base uppercase tracking-tight truncate">
           {person?.ad_soyad}
         </h3>
-        <div 
-          className="text-[#2563eb] font-black italic text-lg md:text-xl tracking-tight uppercase"
-          style={{ 
-            textShadow: "2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0px 3px 10px rgba(0,0,0,0.8)",
-            fontFamily: "'Impact', 'Arial Black', sans-serif"
-          }}
-        >
+        <div className="text-[#ff3131] font-bold text-xs md:text-sm tracking-wider uppercase mt-1">
           {person?.gorev}
         </div>
         
         {person?.instagram && (
-          <a href={`https://instagram.com/${person.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="mt-2 text-white/70 hover:text-white text-[10px] md:text-xs flex items-center gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-sm transition-colors">
+          <a href={`https://instagram.com/${person.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-medium transition-colors border border-gray-200">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             {person.instagram}
           </a>
@@ -78,7 +76,7 @@ export default function CalismaEkibiPage() {
   );
 
   return (
-    <div className="min-h-screen pt-12 pb-20 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-[#f8f9fa] pt-12 pb-20 font-sans">
       
       {/* IMAGE MODAL */}
       <AnimatePresence>
@@ -109,36 +107,30 @@ export default function CalismaEkibiPage() {
         )}
       </AnimatePresence>
 
-      {/* DEEP RED GRADIENT BACKGROUND */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#c80000] via-[#990000] to-[#590000] z-0"></div>
-      
-      {/* SUBTLE WAVE OVERLAY */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent z-0 mix-blend-overlay"></div>
-      
-      <div className="max-w-[1200px] mx-auto px-4 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4">
         
-        {/* HEADER SECTION */}
+        {/* HEADER SECTION (Profesyonel Site Stili) */}
         <div className="text-center mb-16 pt-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-wider drop-shadow-lg mb-2">
-            KLAS LİG BURSA
-          </h1>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white/90 uppercase tracking-widest drop-shadow-md">
-            TEKNİK EKİP
+          <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
+            💼 ÇALIŞMA EKİBİ
           </h2>
+          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#ff3131] uppercase">
+            KLAS LİG ORGANİZASYON KADROSU
+          </p>
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div></div>
+          <div className="flex justify-center py-20"><div className="w-10 h-10 border-4 border-[#ff3131]/20 border-t-[#ff3131] rounded-full animate-spin"></div></div>
         ) : ekip.length === 0 ? (
-          <div className="text-center text-white/70 py-12 bg-black/20 backdrop-blur-md rounded-2xl border border-white/10 max-w-xl mx-auto">
+          <div className="text-center text-gray-500 py-12 bg-white rounded-2xl shadow-sm border border-gray-100 max-w-xl mx-auto">
             Henüz teknik ekip üyesi eklenmemiş.
           </div>
         ) : (
-          <div className="flex flex-col items-center w-full mt-4">
+          <div className="flex flex-col items-center w-full">
             {Object.keys(groupedEkip).sort((a, b) => Number(a) - Number(b)).map((siraKey: string, rowIdx: number) => (
-              <div key={siraKey} className="flex flex-wrap justify-center w-full mb-6">
+              <div key={siraKey} className="flex flex-wrap justify-center w-full mb-2">
                 {groupedEkip[Number(siraKey)].map((kisi: any, idx: number) => (
-                  <PersonCard key={kisi.id} person={kisi} delay={(rowIdx * 0.2) + (idx * 0.1)} />
+                  <PersonCard key={kisi.id} person={kisi} delay={(rowIdx * 0.1) + (idx * 0.1)} />
                 ))}
               </div>
             ))}
