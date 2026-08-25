@@ -109,14 +109,15 @@ export default function CalismaEkibiPage() {
 
       <div className="max-w-[1200px] mx-auto px-4">
         
-        {/* HEADER SECTION (Profesyonel Site Stili) */}
-        <div className="text-center mb-16 pt-8">
-          <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
+        {/* HEADER SECTION */}
+        <div className="text-center mb-20 pt-16 md:pt-24">
+          <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-black to-gray-800 uppercase tracking-tighter drop-shadow-lg mb-4">
             KLAS LİG BURSA
           </h2>
-          <p className="section-sub mt-2 tracking-[0.2em] font-black text-[#ff3131] uppercase text-xl md:text-2xl drop-shadow-sm">
+          <p className="text-2xl md:text-4xl tracking-[0.3em] font-black text-[#ff3131] uppercase drop-shadow-md">
             ÇALIŞMA EKİBİ
           </p>
+          <div className="w-24 h-2 bg-[#ff3131] mx-auto mt-8 rounded-full shadow-[0_0_15px_rgba(255,49,49,0.5)]"></div>
         </div>
 
         {loading ? (
