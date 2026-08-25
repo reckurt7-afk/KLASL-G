@@ -73,10 +73,10 @@ export default function LandingPage() {
             <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS <span className="text-[#e60000]">LİG</span></span>
           </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
-            <div className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
+            <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Klas Lig TV
-            </div>
+            </Link>
             <div className="flex items-center gap-2 md:gap-3">
               <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
