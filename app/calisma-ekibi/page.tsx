@@ -149,9 +149,9 @@ export default function CalismaEkibiPage() {
           </div>
         ) : (
           <div className="flex flex-col items-center w-full mt-4">
-            {Object.keys(groupedEkip).sort((a, b) => Number(a) - Number(b)).map((siraKey, rowIdx) => (
+            {Object.keys(groupedEkip).sort((a, b) => Number(a) - Number(b)).map((siraKey: string, rowIdx: number) => (
               <div key={siraKey} className="flex flex-wrap justify-center w-full mb-4">
-                {groupedEkip[Number(siraKey)].map((kisi, idx) => (
+                {groupedEkip[Number(siraKey)].map((kisi: any, idx: number) => (
                   <PersonCard key={kisi.id} person={kisi} delay={(rowIdx * 0.2) + (idx * 0.1)} />
                 ))}
               </div>
