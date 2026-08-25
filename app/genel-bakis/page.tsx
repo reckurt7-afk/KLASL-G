@@ -1,10 +1,46 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useCityStore } from "../store/cityStore";
+import { supabase } from "@/lib/supabase";
+
+const DEFAULT_PLAYERS = [
+  { id: "p1", name: "Ahmet Yılmaz", team: "Gravyer FC", pos: "KL", rating: 92, top: "88%", left: "50%" },
+  { id: "p2", name: "Burak Demir", team: "Krokodilla", pos: "SĞB", rating: 89, top: "68%", left: "22%" },
+  { id: "p3", name: "Can Kaya", team: "PS 5", pos: "ST", rating: 88, top: "72%", left: "50%" },
+  { id: "p4", name: "Hasan Can", team: "Yediyol", pos: "SLB", rating: 87, top: "68%", left: "78%" },
+  { id: "p5", name: "Ali Vefa", team: "Yeşil Bursa", pos: "SĞA", rating: 94, top: "42%", left: "22%" },
+  { id: "p6", name: "Kemal Sun", team: "Gravyer FC", pos: "MO", rating: 95, top: "46%", left: "50%" },
+  { id: "p7", name: "Emre Can", team: "Biskrem M.", pos: "SLA", rating: 90, top: "42%", left: "78%" },
+  { id: "p8", name: "Mustafa S.", team: "Krokodilla", pos: "SNT", rating: 97, top: "16%", left: "50%" }
+];
 
 export default function GenelBakis() {
   const { selectedCityId } = useCityStore();
+  const [players, setPlayers] = useState<any[]>(DEFAULT_PLAYERS);
   const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { data } = await supabase
+          .from("ayarlar")
+          .select("deger")
+          .eq("anahtar", "altin_sekiz_oyuncular")
+          .single();
+
+        if (data && data.deger) {
+          const parsed = JSON.parse(data.deger);
+          if (Array.isArray(parsed) && parsed.length === 8) {
+            setPlayers(parsed);
+          }
+        }
+      } catch (err) {
+        // Fallback to default
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <div className="w-full flex flex-col fade-in pb-10">
@@ -57,21 +93,9 @@ export default function GenelBakis() {
 
           {/* Players Overlay */}
           <div className="absolute inset-0 z-10">
-             {/* GK */}
-             <PlayerCard name="Ahmet Yılmaz" team="Gravyer FC" pos="KL" rating={92} top="88%" left="50%" />
-             
-             {/* DEF */}
-             <PlayerCard name="Burak Demir" team="Krokodilla" pos="SĞB" rating={89} top="68%" left="22%" />
-             <PlayerCard name="Can Kaya" team="PS 5" pos="ST" rating={88} top="72%" left="50%" />
-             <PlayerCard name="Hasan Can" team="Yediyol" pos="SLB" rating={87} top="68%" left="78%" />
-             
-             {/* MID */}
-             <PlayerCard name="Ali Vefa" team="Yeşil Bursa" pos="SĞA" rating={94} top="42%" left="22%" />
-             <PlayerCard name="Kemal Sun" team="Gravyer FC" pos="MO" rating={95} top="46%" left="50%" />
-             <PlayerCard name="Emre Can" team="Biskrem M." pos="SLA" rating={90} top="42%" left="78%" />
-             
-             {/* FWD */}
-             <PlayerCard name="Mustafa S." team="Krokodilla" pos="SNT" rating={97} top="16%" left="50%" />
+             {players.map((p) => (
+               <PlayerCard key={p.id} name={p.name} team={p.team} pos={p.pos} rating={p.rating} top={p.top} left={p.left} />
+             ))}
           </div>
       </div>
     </div>
