@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CalismaEkibiPage() {
   const [ekip, setEkip] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     async function getir() {
@@ -34,7 +35,10 @@ export default function CalismaEkibiPage() {
       className="flex flex-col items-center group relative z-10 mx-2 md:mx-4 mb-8"
     >
       {/* Cutout Photo Area */}
-      <div className="w-32 h-40 md:w-48 md:h-56 relative flex items-end justify-center mb-2 overflow-visible">
+      <div 
+        className="w-32 h-40 md:w-48 md:h-56 relative flex items-end justify-center mb-2 overflow-visible cursor-pointer"
+        onClick={() => person?.foto_url && setSelectedImage(person.foto_url)}
+      >
         {person?.foto_url ? (
           <img 
             src={person.foto_url} 
@@ -76,6 +80,35 @@ export default function CalismaEkibiPage() {
   return (
     <div className="min-h-screen pt-20 pb-20 relative overflow-hidden font-sans">
       
+      {/* IMAGE MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-pointer backdrop-blur-sm"
+          >
+            <button 
+              className="absolute top-6 right-6 text-white hover:text-[#ff3131] transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <motion.img 
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              src={selectedImage} 
+              alt="Büyük Görsel" 
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()} // Resme tıklayınca kapanmayı engellemek için
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* DEEP RED GRADIENT BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#d40000] via-[#990000] to-[#4d0000] z-0"></div>
       
