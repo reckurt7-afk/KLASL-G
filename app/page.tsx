@@ -94,12 +94,17 @@ export default function LandingPage() {
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black pt-[90px] pb-16 overflow-hidden">
         {/* Background MP4 Video */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
             autoPlay 
             loop 
             muted 
-            playsInline 
+            playsInline
+            preload="auto"
+            onEnded={(e) => {
+              e.currentTarget.currentTime = 0;
+              e.currentTarget.play().catch(() => {});
+            }}
             className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2"
           >
             <source src="/hero-bg.mp4" type="video/mp4" />
