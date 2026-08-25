@@ -112,10 +112,10 @@ export default function CalismaEkibiPage() {
         {/* HEADER SECTION (Profesyonel Site Stili) */}
         <div className="text-center mb-16 pt-8">
           <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
-            💼 ÇALIŞMA EKİBİ
+            KLAS LİG BURSA
           </h2>
-          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#ff3131] uppercase">
-            KLAS LİG ORGANİZASYON KADROSU
+          <p className="section-sub mt-2 tracking-[0.2em] font-black text-[#ff3131] uppercase text-xl md:text-2xl drop-shadow-sm">
+            ÇALIŞMA EKİBİ
           </p>
         </div>
 
