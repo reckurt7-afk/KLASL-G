@@ -97,7 +97,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <iframe
             className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-[0.25] mix-blend-luminosity"
-            src="https://www.youtube.com/embed/Ko6NF27yHgQ?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=Ko6NF27yHgQ&playsinline=1"
+            src="https://www.youtube.com/embed/L3374C3OyrY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=L3374C3OyrY&playsinline=1"
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
