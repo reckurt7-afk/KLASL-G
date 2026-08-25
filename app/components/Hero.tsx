@@ -149,9 +149,19 @@ export default function Hero({
   }
 
   return (
-    <section className="relative min-h-screen bg-[url('/images/stadium.png')] bg-cover bg-center bg-no-repeat overflow-hidden flex justify-center items-center px-4 pt-28 pb-12">
+    <section className="relative min-h-screen overflow-hidden flex justify-center items-center px-4 pt-28 pb-12">
+      {/* ARKA PLAN VİDEOSU */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+        src="https://assets.mixkit.co/videos/preview/mixkit-football-stadium-at-night-with-flashing-lights-43960-large.mp4"
+      />
+      
       {/* KARARTMA GÖLGESİ */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070707]/70 via-[#070707]/85 to-[#070707]/98" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070707]/60 via-[#070707]/80 to-[#070707]/98 z-0" />
 
       <div className="flex flex-col xl:flex-row justify-center w-full max-w-[1600px] mx-auto gap-8 md:gap-12 relative z-10 items-center xl:items-start pt-4 xl:pt-0">
         
