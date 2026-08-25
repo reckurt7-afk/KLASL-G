@@ -5,75 +5,152 @@ import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const ORTAKLAR = [
+  "Ortak 1",
+  "Ortak 2"
+];
+
+const ROLLER = [
+  "Genel Koordinatör",
+  "Operasyon Sorumlusu",
+  "Maç Günü Sorumlusu",
+  "Lig & İstatistik Sorumlusu",
+  "Takım İlişkileri Sorumlusu",
+  "Medya Sorumlusu",
+  "Sosyal Medya Sorumlusu",
+  "Grafik Tasarımcı",
+  "Video & Yayın Sorumlusu",
+  "Fotoğrafçı",
+  "Hakem Koordinatörü",
+  "Disiplin Kurulu Temsilcisi",
+  "Finans Sorumlusu",
+  "Teknik & Sistem Sorumlusu",
+  "Saha & Tesis Sorumlusu"
+];
+
 export default function CalismaEkibiPage() {
   const [ekip, setEkip] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getir() {
-      const { data } = await supabase.from("calisma_ekibi").select("*").order("sira", { ascending: true });
+      const { data } = await supabase.from("calisma_ekibi").select("*");
       setEkip(data || []);
       setLoading(false);
     }
     getir();
   }, []);
 
+  // Yardımcı fonksiyon: Belli bir göreve sahip kişiyi bul
+  const getPerson = (roleName: string, index: number = 0) => {
+    // Ortaklar için özel durum (birden fazla ortak olabilir)
+    if (roleName.startsWith("Ortak")) {
+      const ortaklar = ekip.filter(p => p.gorev.toLowerCase().includes("ortak"));
+      return ortaklar[index] || null;
+    }
+    return ekip.find(p => p.gorev.toLowerCase() === roleName.toLowerCase()) || null;
+  };
+
+  const GoldCard = ({ role, person, delay }: { role: string, person: any, delay: number }) => (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      className="flex flex-col items-center p-4 border border-[#d4af37] rounded-xl bg-gradient-to-b from-[#1a1505] to-[#050505] shadow-[0_0_15px_rgba(212,175,55,0.1)] relative"
+    >
+      <div className="text-[#d4af37] text-[10px] md:text-xs font-black text-center mb-4 min-h-[32px] flex items-center justify-center uppercase tracking-widest leading-tight">
+        {role.replace(" 1", "").replace(" 2", "")}
+      </div>
+      
+      <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#d4af37] p-1 mb-4 relative overflow-hidden bg-[#0a0a0a]">
+        <div className="w-full h-full rounded-full overflow-hidden relative bg-[#151515] flex items-center justify-center">
+          {person?.foto_url ? (
+            <Image src={person.foto_url} alt={person.ad_soyad} fill className="object-cover" />
+          ) : (
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#d4af37" opacity="0.3"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          )}
+        </div>
+      </div>
+
+      <div className="w-full h-8 border border-[#d4af37] rounded-lg bg-black/50 flex items-center justify-center px-2">
+        <span className="text-[#d4af37] text-[10px] md:text-xs font-bold truncate">
+          {person?.ad_soyad || ""}
+        </span>
+      </div>
+    </motion.div>
+  );
+
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white pt-28 pb-20 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-[#050505] text-white pt-24 pb-20 relative overflow-hidden font-sans">
+      
+      {/* BACKGROUND EFFECTS */}
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#d4af37]/10 to-transparent pointer-events-none"></div>
+      
+      <div className="max-w-[1200px] mx-auto px-2 md:px-6 relative z-10">
         
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-black text-[#ff3131] uppercase tracking-tighter mb-4" style={{ textShadow: "0 0 40px rgba(255,49,49,0.3)" }}>
-            ÇALIŞMA EKİBİ
+        {/* HEADER */}
+        <div className="text-center mb-12">
+          <svg className="w-12 h-12 md:w-16 md:h-16 mx-auto text-[#d4af37] mb-2 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+          </svg>
+          <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#b38728] uppercase tracking-widest drop-shadow-lg mb-2">
+            KLAS LİG
           </h1>
-          <p className="text-gray-400 font-medium text-lg max-w-2xl mx-auto">
-            Klas Lig'in kusursuz işlemesini sağlayan, sahanın içi ve dışındaki profesyonel ekibimiz.
-          </p>
+          <h2 className="text-xl md:text-2xl font-medium text-white tracking-[0.3em] uppercase">
+            Çalışma Ekibi
+          </h2>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center"><div className="w-12 h-12 border-4 border-[#ff3131]/20 border-t-[#ff3131] rounded-full animate-spin"></div></div>
-        ) : ekip.length === 0 ? (
-          <div className="text-center text-gray-500 py-12 bg-[#121212] rounded-2xl border border-white/5">
-            Ekip bilgileri yakında eklenecektir.
+        {/* ORTAKLAR SECTION */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-[#d4af37] text-black px-8 py-1 rounded-full font-black text-sm tracking-widest z-10 relative">
+            ORTAKLAR
           </div>
+        </div>
+        
+        <div className="flex justify-center mb-12 relative">
+          {/* Bağlantı Çizgileri */}
+          <div className="absolute top-[-32px] bottom-[-24px] w-px bg-[#d4af37]"></div>
+          <div className="absolute bottom-[-24px] w-[50%] md:w-[60%] h-px bg-[#d4af37]"></div>
+          <div className="absolute bottom-[-48px] w-px h-[24px] bg-[#d4af37]"></div>
+          
+          <div className="border border-[#d4af37] rounded-3xl p-6 md:p-8 flex gap-4 md:gap-16 bg-black/40 backdrop-blur-sm z-10">
+            {ORTAKLAR.map((role, idx) => (
+              <div key={role} className="w-[120px] md:w-[160px]">
+                <GoldCard role={role} person={getPerson(role, idx)} delay={0.1 * idx} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ÇALIŞMA EKİBİ TITLE */}
+        <div className="flex justify-center mb-8 relative pt-6">
+          <div className="bg-[#d4af37] text-black px-8 py-1 rounded-full font-black text-sm tracking-widest z-10">
+            ÇALIŞMA EKİBİ
+          </div>
+        </div>
+
+        {/* ROLES GRID */}
+        {loading ? (
+          <div className="flex justify-center py-20"><div className="w-12 h-12 border-4 border-[#d4af37]/20 border-t-[#d4af37] rounded-full animate-spin"></div></div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-            {ekip.map((kisi, index) => (
-              <motion.div 
-                key={kisi.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#121212] border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center group hover:border-[#ff3131]/50 hover:shadow-[0_10px_30px_rgba(255,49,49,0.15)] transition-all duration-300 relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[#1a1a1a] group-hover:border-[#ff3131]/30 overflow-hidden relative mb-5 shadow-2xl transition-colors duration-300 bg-black">
-                  {kisi.foto_url ? (
-                    <Image src={kisi.foto_url} alt={kisi.ad_soyad} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-900 text-gray-600">
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    </div>
-                  )}
-                </div>
-
-                <h3 className="text-xl font-black text-white mb-1 group-hover:text-[#ff3131] transition-colors">{kisi.ad_soyad}</h3>
-                <div className="text-sm font-bold text-gray-400 bg-white/5 px-4 py-1.5 rounded-full mb-4">
-                  {kisi.gorev}
-                </div>
-
-                {kisi.instagram && (
-                  <a href={`https://instagram.com/${kisi.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="mt-auto text-[#ff3131] hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                    {kisi.instagram}
-                  </a>
-                )}
-              </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 relative z-10">
+            {ROLLER.map((role, idx) => (
+              <GoldCard key={role} role={role} person={getPerson(role)} delay={0.2 + (idx * 0.05)} />
             ))}
           </div>
         )}
+
+        {/* FOOTER BADGE */}
+        <div className="mt-16 flex flex-col items-center opacity-80">
+          <div className="w-16 h-20 border border-[#d4af37] rounded-lg p-2 mb-4 flex items-center justify-center flex-col">
+            <span className="text-[#d4af37] text-[10px] font-black uppercase">Klas Lig</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+          </div>
+          <div className="text-[#d4af37] text-xs font-black tracking-[0.4em] uppercase">
+            Birlikte Daha Güçlüyüz!
+          </div>
+        </div>
 
       </div>
     </div>
