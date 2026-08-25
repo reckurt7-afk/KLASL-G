@@ -65,18 +65,15 @@ export default function CalismaEkibiPage() {
 
   return (
     <div className="min-h-screen bg-[#f8f9fa] pt-8 pb-20 relative overflow-hidden font-sans">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 relative z-10 pt-8">
         
         {/* HEADER */}
-        <div className="text-center mb-12 bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-          <svg className="w-12 h-12 md:w-14 md:h-14 mx-auto text-[#ff3131] mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <h1 className="text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight mb-2">
-            KLAS LİG <span className="text-[#ff3131]">EKİBİ</span>
-          </h1>
-          <p className="text-gray-500 font-medium text-sm md:text-base max-w-2xl mx-auto">
-            Klas Lig'in arkasındaki profesyonel organizasyon kadrosu
+        <div className="text-center mb-12">
+          <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
+            💼 ÇALIŞMA EKİBİ
+          </h2>
+          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#ff3131] uppercase">
+            KLAS LİG ORGANİZASYON KADROSU
           </p>
         </div>
 
