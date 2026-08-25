@@ -2,36 +2,30 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function TakimKurPage() {
-  const router = useRouter();
   const [leagues, setLeagues] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-
+  
   const [formData, setFormData] = useState({
+    leagueId: "",
     name: "",
-    league_id: "",
     logoFile: null as File | null,
     logoPreview: "",
   });
 
   useEffect(() => {
-    async function fetchLeagues() {
-      const { data } = await supabase
-        .from("cities")
-        .select("*")
-        .eq("status", "AKTIF")
-        .order("id", { ascending: true });
-      if (data && data.length > 0) {
+    async function getLeagues() {
+      const { data } = await supabase.from("leagues").select("*").eq("is_active", true);
+      if (data) {
         setLeagues(data);
-        setFormData((prev) => ({ ...prev, league_id: data[0].id.toString() }));
+        if (data.length > 0) {
+          setFormData(prev => ({ ...prev, leagueId: data[0].id.toString() }));
+        }
       }
     }
-    fetchLeagues();
+    getLeagues();
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,172 +41,148 @@ export default function TakimKurPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.name || !formData.leagueId) return alert("Takım adı ve lig seçimi zorunludur!");
+    
     setLoading(true);
-    setMessage("");
-    setError("");
-
-    if (!formData.name.trim()) {
-      setError("Lütfen takım adını girin.");
-      setLoading(false);
-      return;
-    }
-    if (!formData.logoFile) {
-      setError("Lütfen takımınız için bir logo seçin.");
-      setLoading(false);
-      return;
-    }
-
     try {
-      // 1. Logoyu Supabase Storage'a yükle (team-logos bucket'ı)
-      const fileExt = formData.logoFile.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-      const filePath = `public/${fileName}`;
+      let logoUrl = null;
 
-      const { error: uploadError, data: uploadData } = await supabase.storage
-        .from("team-logos")
-        .upload(filePath, formData.logoFile);
+      if (formData.logoFile) {
+        const fileExt = formData.logoFile.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const filePath = `public/${fileName}`;
 
-      if (uploadError) {
-        throw new Error("Logo yüklenirken hata oluştu. 'team-logos' adında public bir bucket olduğundan emin olun.");
+        const { error: uploadError } = await supabase.storage
+          .from("team-logos")
+          .upload(filePath, formData.logoFile);
+
+        if (uploadError) throw new Error("Logo yüklenemedi: " + uploadError.message);
+
+        const { data: publicUrlData } = supabase.storage
+          .from("team-logos")
+          .getPublicUrl(filePath);
+
+        logoUrl = publicUrlData.publicUrl;
       }
 
-      // Logonun public URL'ini al
-      const { data: publicUrlData } = supabase.storage
-        .from("team-logos")
-        .getPublicUrl(filePath);
-
-      const logoUrl = publicUrlData.publicUrl;
-
-      // 2. Takımı teams tablosuna kaydet
-      const { error: insertError } = await supabase.from("teams").insert([
-        {
-          name: formData.name.trim(),
-          league_id: parseInt(formData.league_id),
-          logo: logoUrl,
-          played: 0,
-          won: 0,
-          drawn: 0,
-          lost: 0,
-          goals_for: 0,
-          goals_against: 0,
-          goal_difference: 0,
-          points: 0
-        },
-      ]);
+      const { error: insertError } = await supabase.from("teams").insert([{
+        name: formData.name,
+        league_id: parseInt(formData.leagueId),
+        logo_url: logoUrl,
+        points: 0,
+        played: 0,
+        won: 0,
+        drawn: 0,
+        lost: 0,
+        goals_for: 0,
+        goals_against: 0
+      }]);
 
       if (insertError) throw insertError;
 
-      setMessage("Takım başarıyla kuruldu! Lige hoş geldiniz.");
-      setTimeout(() => {
-        router.push("/takimlar");
-      }, 3000);
+      alert("Harika! Takımınız başarıyla kuruldu. Artık istatistiklerde yerinizi aldınız!");
+      setFormData({ leagueId: leagues[0]?.id.toString() || "", name: "", logoFile: null, logoPreview: "" });
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Bilinmeyen bir hata oluştu.");
+      alert("Hata: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white pt-24 pb-12 px-4 md:px-8">
-      <div className="max-w-xl mx-auto">
-        <div className="text-center mb-8 border-b border-white/10 pb-6">
-          <h1 className="text-3xl md:text-4xl font-black text-[#ff3131] tracking-tight uppercase">
-            Takımını Kur
-          </h1>
-          <p className="text-gray-400 text-sm mt-2 font-medium">
-            Yeni sezonda efsane olmaya hazır mısın? Takımının adını belirle, logonu yükle ve lige katıl!
+    <div className="min-h-screen bg-[#f8f9fa] pt-8 pb-20 font-sans">
+      <div className="max-w-[800px] mx-auto px-4 md:px-6">
+        
+        <div className="text-center mb-12">
+          <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
+            🛡️ TAKIM KUR
+          </h2>
+          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#ff3131] uppercase">
+            YENİ SEZON KAYITLARI BAŞLADI
           </p>
         </div>
 
-        {message && (
-          <div className="mb-6 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold text-center animate-pulse">
-            {message}
-          </div>
-        )}
-        {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-400 font-bold text-center">
-            {error}
-          </div>
-        )}
-
-        <div className="bg-[#151515] border border-white/10 rounded-2xl p-6 shadow-2xl">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <div className="bg-white rounded-3xl p-6 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8">
             
             {/* LİG SEÇİMİ */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">
-                1. Hangi Lige Katılacaksın?
+            <div>
+              <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#ff3131] text-white flex items-center justify-center text-xs">1</span>
+                Hangi Lige Katılacaksın?
               </label>
-              <select
-                value={formData.league_id}
-                onChange={(e) => setFormData((prev) => ({ ...prev, league_id: e.target.value }))}
-                className="w-full bg-[#0b0b0b] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:border-[#ff3131] focus:outline-none transition-colors appearance-none cursor-pointer"
+              <select 
+                value={formData.leagueId} 
+                onChange={e => setFormData({...formData, leagueId: e.target.value})} 
+                className="w-full bg-gray-50 border border-gray-200 focus:border-[#ff3131] focus:ring-1 focus:ring-[#ff3131] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all cursor-pointer appearance-none"
               >
-                {leagues.map((l) => (
-                  <option key={l.id} value={l.id}>
-                    {l.name}
-                  </option>
+                {leagues.map(l => (
+                  <option key={l.id} value={l.id}>{l.name} {l.season && `(Sezon ${l.season})`}</option>
                 ))}
               </select>
             </div>
 
             {/* TAKIM ADI */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">
-                2. Takım Adı
+            <div>
+              <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#ff3131] text-white flex items-center justify-center text-xs">2</span>
+                Takım Adı
               </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                placeholder="Örn: Klas FC"
-                className="w-full bg-[#0b0b0b] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:border-[#ff3131] focus:outline-none transition-colors"
-                autoComplete="off"
+              <input 
+                type="text" 
+                required 
+                value={formData.name} 
+                onChange={e => setFormData({...formData, name: e.target.value})} 
+                className="w-full bg-gray-50 border border-gray-200 focus:border-[#ff3131] focus:ring-1 focus:ring-[#ff3131] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all placeholder-gray-400" 
+                placeholder="Örn: Klas FC" 
               />
             </div>
 
-            {/* LOGO YÜKLEME */}
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-bold text-gray-400 uppercase tracking-wider">
-                3. Takım Logosu
+            {/* LOGO SEÇİMİ */}
+            <div>
+              <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-[#ff3131] text-white flex items-center justify-center text-xs">3</span>
+                Takım Logosu
               </label>
-              <div className="flex items-center gap-4">
-                <div className="w-24 h-24 shrink-0 rounded-xl bg-[#0b0b0b] border border-dashed border-white/20 flex items-center justify-center overflow-hidden relative">
+              
+              <div className="flex flex-col sm:flex-row items-center gap-6 mt-4">
+                <div className="w-32 h-32 rounded-2xl bg-gray-50 border-2 border-dashed border-gray-300 flex items-center justify-center overflow-hidden relative shadow-inner">
                   {formData.logoPreview ? (
-                    <Image src={formData.logoPreview} alt="Logo Preview" fill className="object-contain p-2" />
+                    <Image src={formData.logoPreview} alt="Preview" fill className="object-cover p-2" />
                   ) : (
-                    <span className="text-gray-600 text-xs text-center font-bold px-2">Logo Seçilmedi</span>
+                    <div className="text-center p-2 text-gray-400">
+                      <svg className="w-8 h-8 mx-auto mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                      <span className="text-xs font-bold uppercase">Logo Yok</span>
+                    </div>
                   )}
                 </div>
-                <div className="flex-1">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    id="logo-upload"
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="logo-upload"
-                    className="inline-block px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold cursor-pointer transition-colors w-full text-center"
+                
+                <div className="flex-1 w-full sm:w-auto">
+                  <input type="file" accept="image/*" onChange={handleFileChange} id="logo-upload" className="hidden" />
+                  <label 
+                    htmlFor="logo-upload" 
+                    className="w-full sm:w-auto block text-center bg-gray-900 hover:bg-black text-white font-bold py-3 px-6 rounded-xl cursor-pointer transition-colors shadow-md"
                   >
                     Bilgisayardan / Telefondan Logo Seç
                   </label>
+                  <p className="text-xs text-gray-500 mt-3 font-medium text-center sm:text-left">
+                    Sadece JPG, PNG veya WebP. Max 5MB önerilir.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="mt-4 w-full py-4 bg-gradient-to-r from-[#ff3131] to-[#cc0000] hover:from-[#cc0000] hover:to-[#990000] text-white font-black rounded-xl text-lg transition-all shadow-[0_0_20px_rgba(255,49,49,0.3)] hover:shadow-[0_0_30px_rgba(255,49,49,0.5)] disabled:opacity-50 cursor-pointer uppercase tracking-wider"
+            {/* GÖNDER */}
+            <button 
+              type="submit" 
+              disabled={loading} 
+              className="mt-6 w-full bg-gradient-to-r from-[#ff3131] to-[#d62020] text-white font-black text-lg py-5 rounded-xl hover:shadow-[0_10px_20px_rgba(255,49,49,0.3)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {loading ? "TAKIM KURULUYOR..." : "SAVAŞA HAZIRIM! (TAKIMI KUR)"}
             </button>
           </form>
         </div>
+
       </div>
     </div>
   );
