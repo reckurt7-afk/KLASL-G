@@ -78,7 +78,7 @@ export default function CalismaEkibiPage() {
   );
 
   return (
-    <div className="min-h-screen pt-20 pb-20 relative overflow-hidden font-sans">
+    <div className="min-h-screen pt-12 pb-20 relative overflow-hidden font-sans">
       
       {/* IMAGE MODAL */}
       <AnimatePresence>
@@ -88,7 +88,7 @@ export default function CalismaEkibiPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-pointer backdrop-blur-sm"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 cursor-pointer"
           >
             <button 
               className="absolute top-6 right-6 text-white hover:text-[#ff3131] transition-colors"
@@ -97,48 +97,34 @@ export default function CalismaEkibiPage() {
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <motion.img 
-              initial={{ scale: 0.8 }}
+              initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
+              exit={{ scale: 0.9 }}
               src={selectedImage} 
               alt="Büyük Görsel" 
-              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()} // Resme tıklayınca kapanmayı engellemek için
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+              onClick={(e) => e.stopPropagation()} 
             />
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* DEEP RED GRADIENT BACKGROUND */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#d40000] via-[#990000] to-[#4d0000] z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#c80000] via-[#990000] to-[#590000] z-0"></div>
       
-      {/* SUBTLE WAVE OVERLAY (Optional texturing) */}
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent z-0 mix-blend-overlay"></div>
+      {/* SUBTLE WAVE OVERLAY */}
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent z-0 mix-blend-overlay"></div>
       
       <div className="max-w-[1200px] mx-auto px-4 relative z-10">
         
         {/* HEADER SECTION */}
-        <div className="text-center mb-16 pt-8 relative">
-          <h1 
-            className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter"
-            style={{ fontFamily: "'Impact', 'Arial Black', sans-serif", transform: "scaleY(1.2)" }}
-          >
+        <div className="text-center mb-16 pt-8">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-wider drop-shadow-lg mb-2">
             KLAS LİG BURSA
           </h1>
-          <h2 
-            className="text-2xl md:text-4xl font-black text-white uppercase mt-2"
-            style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
-          >
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white/90 uppercase tracking-widest drop-shadow-md">
             TEKNİK EKİP
           </h2>
-          
-          {/* Decorative Logos (Hidden on mobile for better spacing) */}
-          <div className="hidden md:block absolute top-4 left-10 w-32 h-32 opacity-80">
-            <Image src="/logo.png" alt="Klas Lig Logo" fill className="object-contain drop-shadow-2xl" />
-          </div>
-          <div className="hidden md:block absolute top-4 right-10 w-32 h-32 opacity-80">
-            <Image src="/logo.png" alt="Klas Lig Logo" fill className="object-contain drop-shadow-2xl" />
-          </div>
         </div>
 
         {loading ? (
@@ -150,7 +136,7 @@ export default function CalismaEkibiPage() {
         ) : (
           <div className="flex flex-col items-center w-full mt-4">
             {Object.keys(groupedEkip).sort((a, b) => Number(a) - Number(b)).map((siraKey: string, rowIdx: number) => (
-              <div key={siraKey} className="flex flex-wrap justify-center w-full mb-4">
+              <div key={siraKey} className="flex flex-wrap justify-center w-full mb-6">
                 {groupedEkip[Number(siraKey)].map((kisi: any, idx: number) => (
                   <PersonCard key={kisi.id} person={kisi} delay={(rowIdx * 0.2) + (idx * 0.1)} />
                 ))}
