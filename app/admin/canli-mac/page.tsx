@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useRef } from "react";
 import { supabase, publicFetch } from "@/lib/supabase";
@@ -45,12 +45,12 @@ export default function CanliMacPage() {
       let baslik = "";
       let mesaj = "";
       switch (olayTipi) {
-        case "GOL": baslik = "⚽ GOOOL!"; mesaj = `${takim} adına ${olayOyuncu} ${seciliMac.dakika}. dakikada topu ağlara gönderdi! Skor: ${seciliMac.ev_skor}-${seciliMac.dep_skor}`; golSesiCal(); break;
-        case "ASIST": baslik = "👟 ASİST"; mesaj = `${takim} takımından ${olayOyuncu} şık bir asiste imza attı!`; break;
-        case "SARI_KART": baslik = "🟨 SARI KART"; mesaj = `${takim} takımından ${olayOyuncu} sarı kart gördü.`; break;
-        case "KIRMIZI_KART": baslik = "🟥 KIRMIZI KART"; mesaj = `${takim} takımından ${olayOyuncu} kırmızı kart gördü!`; break;
-        case "DEGISIKLIK": baslik = "🔄 OYUNCU DEĞİŞİKLİĞİ"; mesaj = `${takim} takımında ${olayOyuncu} oyuna dahil oldu.`; break;
-        default: baslik = "⚡ MAÇ OLAYI"; mesaj = `${takim} takımından ${olayOyuncu} ile ilgili yeni bir gelişme var.`;
+        case "GOL": baslik = "âš½ GOOOL!"; mesaj = `${takim} adÄ±na ${olayOyuncu} ${seciliMac.dakika}. dakikada topu aÄŸlara gÃ¶nderdi! Skor: ${seciliMac.ev_skor}-${seciliMac.dep_skor}`; golSesiCal(); break;
+        case "ASIST": baslik = "ğŸ‘Ÿ ASÄ°ST"; mesaj = `${takim} takÄ±mÄ±ndan ${olayOyuncu} ÅŸÄ±k bir asiste imza attÄ±!`; break;
+        case "SARI_KART": baslik = "ğŸŸ¨ SARI KART"; mesaj = `${takim} takÄ±mÄ±ndan ${olayOyuncu} sarÄ± kart gÃ¶rdÃ¼.`; break;
+        case "KIRMIZI_KART": baslik = "ğŸŸ¥ KIRMIZI KART"; mesaj = `${takim} takÄ±mÄ±ndan ${olayOyuncu} kÄ±rmÄ±zÄ± kart gÃ¶rdÃ¼!`; break;
+        case "DEGISIKLIK": baslik = "ğŸ”„ OYUNCU DEÄÄ°ÅÄ°KLÄ°ÄÄ°"; mesaj = `${takim} takÄ±mÄ±nda ${olayOyuncu} oyuna dahil oldu.`; break;
+        default: baslik = "âš¡ MAÃ‡ OLAYI"; mesaj = `${takim} takÄ±mÄ±ndan ${olayOyuncu} ile ilgili yeni bir geliÅŸme var.`;
       }
       await fetch("/api/send-notification", { 
         method: "POST", 
@@ -62,17 +62,17 @@ export default function CanliMacPage() {
           youtube_link: seciliMac.youtube_link,
           requireInteraction: true,
           actions: [
-            { action: "canli", title: "🟢 Canlı Skor" },
-            ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+            { action: "canli", title: "ğŸŸ¢ CanlÄ± Skor" },
+            ...(seciliMac.youtube_link ? [{ action: "youtube", title: "ğŸ“º MaÃ§Ä± Ä°zle" }] : [])
           ]
         }) 
       });
-      alert("Olay başarıyla eklendi!");
+      alert("Olay baÅŸarÄ±yla eklendi!");
       setOlayOyuncu("");
     }
   }
 
-  // 🔊 GOL SESİ - Maçkolik tarzı: kalabalık + korna + yükselen tiz + GOOOL anons
+  // ğŸ”Š GOL SESÄ° - MaÃ§kolik tarzÄ±: kalabalÄ±k + korna + yÃ¼kselen tiz + GOOOL anons
   function golSesiCal() {
     try {
       const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext;
@@ -80,7 +80,7 @@ export default function CanliMacPage() {
       const ctx = new AudioCtx();
       const now = ctx.currentTime;
 
-      // 1) KALABALIK GÜRÜLTÜsü (beyaz gürültü - stadyum efekti)
+      // 1) KALABALIK GÃœRÃœLTÃœsÃ¼ (beyaz gÃ¼rÃ¼ltÃ¼ - stadyum efekti)
       const bufferSize = ctx.sampleRate * 2;
       const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const data = buffer.getChannelData(0);
@@ -104,7 +104,7 @@ export default function CanliMacPage() {
       noise.start(now);
       noise.stop(now + 2);
 
-      // 2) KORNA SESİ (Maçkolik'in o uzun yükselen tonu)
+      // 2) KORNA SESÄ° (MaÃ§kolik'in o uzun yÃ¼kselen tonu)
       const korna = ctx.createOscillator();
       const kornaGain = ctx.createGain();
       korna.type = "sawtooth";
@@ -120,7 +120,7 @@ export default function CanliMacPage() {
       korna.start(now);
       korna.stop(now + 1.4);
 
-      // 3) TİZ GOL SESİ (ikinci korna - Maçkolik tarzı çift ton)
+      // 3) TÄ°Z GOL SESÄ° (ikinci korna - MaÃ§kolik tarzÄ± Ã§ift ton)
       const tiz = ctx.createOscillator();
       const tizGain = ctx.createGain();
       tiz.type = "square";
@@ -139,13 +139,13 @@ export default function CanliMacPage() {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance("GOOOOOL!");
         utterance.lang = "tr-TR";
-        utterance.rate = 0.5;   // Yavaş ve uzun "GOOOL"
-        utterance.pitch = 1.4;  // Tiz ve heyecanlı
+        utterance.rate = 0.5;   // YavaÅŸ ve uzun "GOOOL"
+        utterance.pitch = 1.4;  // Tiz ve heyecanlÄ±
         utterance.volume = 1;
         setTimeout(() => window.speechSynthesis.speak(utterance), 600);
       }
     } catch (e) {
-      console.log("Ses çalınamadı:", e);
+      console.log("Ses Ã§alÄ±namadÄ±:", e);
     }
   }
 
@@ -153,7 +153,7 @@ export default function CanliMacPage() {
     maclariGetir();
   }, []);
 
-  // Süre otomatik sayacı
+  // SÃ¼re otomatik sayacÄ±
   useEffect(() => {
     if (sureCalisiyor && seciliMac) {
       intervalRef.current = setInterval(async () => {
@@ -161,7 +161,7 @@ export default function CanliMacPage() {
           if (!prev) return prev;
           const yeniDakika = prev.dakika + 1;
 
-          // Veritabanını güncelle (arka planda)
+          // VeritabanÄ±nÄ± gÃ¼ncelle (arka planda)
           supabase
             .from("maclar")
             .update({ dakika: yeniDakika })
@@ -183,7 +183,7 @@ export default function CanliMacPage() {
 
   async function maclariGetir() {
     const data = await publicFetch("maclar", "select=*&order=hafta.asc");
-    // null olan skorları 0'a çevir
+    // null olan skorlarÄ± 0'a Ã§evir
     const normalize = (data || []).map((m: any) => ({
       ...m,
       ev_skor: m.ev_skor ?? 0,
@@ -217,13 +217,13 @@ export default function CanliMacPage() {
     if (canli) {
       await supabase
         .from("maclar")
-        .update({ canli: false, durum: "Bekliyor" })
+        .update({ oynandi: false, canli: false, durum: "Bekliyor" })
         .neq("id", 0);
     }
 
     const { error } = await supabase
       .from("maclar")
-      .update({ canli, durum: canli ? "Canlı" : "Bekliyor" })
+      .update({ canli, durum: canli ? "CanlÄ±" : "Bekliyor" })
       .eq("id", seciliMac.id);
 
     if (error) {
@@ -236,13 +236,13 @@ export default function CanliMacPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          baslik: "▶️ MAÇ BAŞLADI!",
-          mesaj: `${seciliMac.ev_sahibi} ile ${seciliMac.deplasman} arasındaki zorlu mücadele başladı!`,
+          baslik: "â–¶ï¸ MAÃ‡ BAÅLADI!",
+          mesaj: `${seciliMac.ev_sahibi} ile ${seciliMac.deplasman} arasÄ±ndaki zorlu mÃ¼cadele baÅŸladÄ±!`,
         }),
       });
     }
 
-    setSeciliMac({ ...seciliMac, canli, durum: canli ? "Canlı" : "Bekliyor" });
+    setSeciliMac({ ...seciliMac, canli, durum: canli ? "CanlÄ±" : "Bekliyor" });
     maclariGetir();
   }
 
@@ -272,7 +272,7 @@ export default function CanliMacPage() {
   return (
     <div style={{ minHeight: "100vh", background: "#0b0b0b", color: "#fff", padding: "90px 20px" }}>
       <h1 style={{ textAlign: "center", color: "#ff3131", marginBottom: 30, fontWeight: 900, fontSize: 28 }}>
-        🔴 CANLI MAÇ YÖNETİMİ
+        ğŸ”´ CANLI MAÃ‡ YÃ–NETÄ°MÄ°
       </h1>
 
       <div style={{ maxWidth: 700, margin: "0 auto", background: "#151515", borderRadius: 20, padding: 24, border: "1px solid rgba(255,49,49,0.15)" }}>
@@ -294,7 +294,7 @@ export default function CanliMacPage() {
             border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <option value="">Maç Seçiniz</option>
+          <option value="">MaÃ§ SeÃ§iniz</option>
           {maclar.map((m) => (
             <option key={m.id} value={m.id}>
               {m.hafta}. Hafta | {m.ev_sahibi || "Ev Sahibi"} - {m.deplasman || "Deplasman"}
@@ -304,13 +304,13 @@ export default function CanliMacPage() {
 
         {seciliMac && (
           <>
-            {/* Maç Başlığı */}
+            {/* MaÃ§ BaÅŸlÄ±ÄŸÄ± */}
             <div style={{ textAlign: "center", marginTop: 30, marginBottom: 10 }}>
               <div style={{ fontSize: 13, color: "#ff3131", fontWeight: 700, letterSpacing: 3, marginBottom: 8 }}>
                 {seciliMac.hafta}. HAFTA
               </div>
               <h2 style={{ fontSize: 22, fontWeight: 900, margin: 0 }}>
-                {seciliMac.ev_sahibi || "Ev Sahibi"} 🆚 {seciliMac.deplasman || "Deplasman"}
+                {seciliMac.ev_sahibi || "Ev Sahibi"} ğŸ†š {seciliMac.deplasman || "Deplasman"}
               </h2>
               {seciliMac.canli && (
                 <div style={{
@@ -325,7 +325,7 @@ export default function CanliMacPage() {
                   marginTop: 10,
                   animation: "pulse 1.5s infinite",
                 }}>
-                  🔴 CANLI
+                  ğŸ”´ CANLI
                 </div>
               )}
             </div>
@@ -354,24 +354,24 @@ export default function CanliMacPage() {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.ev_sahibi} golü iptal edildi! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
+                          baslik: "âŒ GOL Ä°PTAL",
+                          mesaj: `${seciliMac.ev_sahibi} golÃ¼ iptal edildi! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
                         }),
                       });
                     }
-                  }} style={skorBtnStyle}>➖</button>
+                  }} style={skorBtnStyle}>â–</button>
 
                   <h1 style={{ fontSize: 48, margin: 0, fontWeight: 900, color: "#fff" }}>{seciliMac.ev_skor}</h1>
 
                   <button onClick={async () => {
                     
                     const yeniSkor = seciliMac.ev_skor + 1;
-                    golSesiCal(); // 🔊 GOOOL sesi (sadece adminde de çalar)
+                    golSesiCal(); // ğŸ”Š GOOOL sesi (sadece adminde de Ã§alar)
                     
-                    // İki alanı aynı anda güncelle (İsim bilgisini durum sütununa gizliyoruz)
+                    // Ä°ki alanÄ± aynÄ± anda gÃ¼ncelle (Ä°sim bilgisini durum sÃ¼tununa gizliyoruz)
                     const { error } = await supabase
                       .from("maclar")
-                      .update({ ev_skor: yeniSkor, durum: "Canlı" })
+                      .update({ ev_skor: yeniSkor, durum: "CanlÄ±" })
                       .eq("id", seciliMac.id);
                       
                     if (!error) {
@@ -380,19 +380,19 @@ export default function CanliMacPage() {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({
-                            baslik: `⚽ GOOOL! | ${seciliMac.ev_sahibi}`,
-                            mesaj: `${seciliMac.ev_sahibi} ağları havalandırdı!\nMevcut Skor: ${yeniSkor} - ${seciliMac.dep_skor}`,
+                            baslik: `âš½ GOOOL! | ${seciliMac.ev_sahibi}`,
+                            mesaj: `${seciliMac.ev_sahibi} aÄŸlarÄ± havalandÄ±rdÄ±!\nMevcut Skor: ${yeniSkor} - ${seciliMac.dep_skor}`,
                             url: "/",
                             youtube_link: seciliMac.youtube_link,
                             requireInteraction: true,
                             actions: [
-                              { action: "canli", title: "🟢 Canlı Skor" },
-                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+                              { action: "canli", title: "ğŸŸ¢ CanlÄ± Skor" },
+                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "ğŸ“º MaÃ§Ä± Ä°zle" }] : [])
                             ]
                           }),
                         });
                     }
-                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
+                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>âš½</button>
                 </div>
               </div>
 
@@ -409,23 +409,23 @@ export default function CanliMacPage() {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.deplasman} golü iptal edildi! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
+                          baslik: "âŒ GOL Ä°PTAL",
+                          mesaj: `${seciliMac.deplasman} golÃ¼ iptal edildi! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
                         }),
                       });
                     }
-                  }} style={skorBtnStyle}>➖</button>
+                  }} style={skorBtnStyle}>â–</button>
 
                   <h1 style={{ fontSize: 48, margin: 0, fontWeight: 900, color: "#fff" }}>{seciliMac.dep_skor}</h1>
 
                   <button onClick={async () => {
                     
                     const yeniSkor = seciliMac.dep_skor + 1;
-                    golSesiCal(); // 🔊 GOOOL sesi!
+                    golSesiCal(); // ğŸ”Š GOOOL sesi!
                     
                     const { error } = await supabase
                       .from("maclar")
-                      .update({ dep_skor: yeniSkor, durum: "Canlı" })
+                      .update({ dep_skor: yeniSkor, durum: "CanlÄ±" })
                       .eq("id", seciliMac.id);
                       
                     if (!error) {
@@ -434,30 +434,30 @@ export default function CanliMacPage() {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({
-                            baslik: `⚽ GOOOL! | ${seciliMac.deplasman}`,
-                            mesaj: `${seciliMac.deplasman} ağları havalandırdı!\nMevcut Skor: ${seciliMac.ev_skor} - ${yeniSkor}`,
+                            baslik: `âš½ GOOOL! | ${seciliMac.deplasman}`,
+                            mesaj: `${seciliMac.deplasman} aÄŸlarÄ± havalandÄ±rdÄ±!\nMevcut Skor: ${seciliMac.ev_skor} - ${yeniSkor}`,
                             url: "/",
                             youtube_link: seciliMac.youtube_link,
                             requireInteraction: true,
                             actions: [
-                              { action: "canli", title: "🟢 Canlı Skor" },
-                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "📺 Maçı İzle" }] : [])
+                              { action: "canli", title: "ğŸŸ¢ CanlÄ± Skor" },
+                              ...(seciliMac.youtube_link ? [{ action: "youtube", title: "ğŸ“º MaÃ§Ä± Ä°zle" }] : [])
                             ]
                           }),
                         });
                     }
-                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>⚽</button>
+                  }} style={{ ...skorBtnStyle, background: "#16a34a", border: "none" }}>âš½</button>
                 </div>
               </div>
             </div>
 
-            {/* DAKİKA + SÜRE BAŞLAT */}
+            {/* DAKÄ°KA + SÃœRE BAÅLAT */}
             <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 style={{ textAlign: "center", color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, margin: "0 0 12px" }}>DAKİKA</h3>
+              <h3 style={{ textAlign: "center", color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, margin: "0 0 12px" }}>DAKÄ°KA</h3>
               <div style={{ display: "flex", justifyContent: "center", gap: 12, alignItems: "center" }}>
-                <button onClick={() => macGuncelle("dakika", Math.max(0, seciliMac.dakika - 1))} style={skorBtnStyle}>➖</button>
+                <button onClick={() => macGuncelle("dakika", Math.max(0, seciliMac.dakika - 1))} style={skorBtnStyle}>â–</button>
                 <h2 style={{ fontSize: 40, margin: 0, fontWeight: 900, minWidth: 80, textAlign: "center" }}>{seciliMac.dakika}&apos;</h2>
-                <button onClick={() => macGuncelle("dakika", seciliMac.dakika + 1)} style={skorBtnStyle}>➕</button>
+                <button onClick={() => macGuncelle("dakika", seciliMac.dakika + 1)} style={skorBtnStyle}>â•</button>
               </div>
 
               <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 16 }}>
@@ -485,7 +485,7 @@ export default function CanliMacPage() {
                       : "0 4px 15px rgba(22,163,74,0.4)",
                   }}
                 >
-                  {sureCalisiyor ? "⏸️ Süreyi Durdur" : "⏱️ Süreyi Başlat"}
+                  {sureCalisiyor ? "â¸ï¸ SÃ¼reyi Durdur" : "â±ï¸ SÃ¼reyi BaÅŸlat"}
                 </button>
 
                 <button
@@ -504,13 +504,13 @@ export default function CanliMacPage() {
                     cursor: "pointer",
                   }}
                 >
-                  🔄 Sıfırla
+                  ğŸ”„ SÄ±fÄ±rla
                 </button>
               </div>
 
               {sureCalisiyor && (
                 <div style={{ textAlign: "center", marginTop: 10, color: "#16a34a", fontSize: 12, fontWeight: 700 }}>
-                  ✅ Süre otomatik olarak ilerliyor (dakikada 1 artıyor)
+                  âœ… SÃ¼re otomatik olarak ilerliyor (dakikada 1 artÄ±yor)
                 </div>
               )}
             </div>
@@ -521,7 +521,7 @@ export default function CanliMacPage() {
               <input
                 value={seciliMac.hakem || ""}
                 onChange={(e) => macGuncelle("hakem", e.target.value)}
-                placeholder="Hakem adı"
+                placeholder="Hakem adÄ±"
                 style={{
                   width: "100%",
                   height: 48,
@@ -538,7 +538,7 @@ export default function CanliMacPage() {
 
             {/* YOUTUBE */}
             <div style={{ marginTop: 16 }}>
-              <h3 style={{ color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 8 }}>YOUTUBE YAYIN LİNKİ</h3>
+              <h3 style={{ color: "#888", fontSize: 13, fontWeight: 700, letterSpacing: 2, marginBottom: 8 }}>YOUTUBE YAYIN LÄ°NKÄ°</h3>
               <input
                 value={seciliMac.youtube_link || ""}
                 onChange={(e) => macGuncelle("youtube_link", e.target.value)}
@@ -556,9 +556,9 @@ export default function CanliMacPage() {
                 }}
               />
             </div>
-            {/* OLAY EKLEME (ZAMAN TÜNELİ) */}
+            {/* OLAY EKLEME (ZAMAN TÃœNELÄ°) */}
             <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(255,49,49,0.3)" }}>
-              <h3 style={{ color: "#ff3131", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>⚡ ZAMAN TÜNELİNE OLAY EKLE</h3>
+              <h3 style={{ color: "#ff3131", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>âš¡ ZAMAN TÃœNELÄ°NE OLAY EKLE</h3>
               
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
                 <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
@@ -567,10 +567,10 @@ export default function CanliMacPage() {
                 </select>
                 
                 <select value={olayTipi} onChange={e => setOlayTipi(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
-                  <option value="gol">⚽ Gol</option>
-                  <option value="sari_kart">🟨 Sarı Kart</option>
-                  <option value="kirmizi_kart">🟥 Kırmızı Kart</option>
-                  <option value="degisiklik">🔄 Oyuncu Değişikliği</option>
+                  <option value="gol">âš½ Gol</option>
+                  <option value="sari_kart">ğŸŸ¨ SarÄ± Kart</option>
+                  <option value="kirmizi_kart">ğŸŸ¥ KÄ±rmÄ±zÄ± Kart</option>
+                  <option value="degisiklik">ğŸ”„ Oyuncu DeÄŸiÅŸikliÄŸi</option>
                 </select>
               </div>
               
@@ -578,7 +578,7 @@ export default function CanliMacPage() {
                 <input 
                   value={olayOyuncu} 
                   onChange={e => setOlayOyuncu(e.target.value)} 
-                  placeholder="Oyuncu adı..."
+                  placeholder="Oyuncu adÄ±..."
                   style={{ flex: 1, padding: "10px 15px", background: "#222", color: "#fff", borderRadius: 8, border: "none" }}
                 />
                 <button onClick={olayEkle} style={{ padding: "10px 20px", background: "#ff3131", color: "#fff", borderRadius: 8, fontWeight: "bold", border: "none", cursor: "pointer" }}>
@@ -596,7 +596,7 @@ export default function CanliMacPage() {
                 }}
                 style={btnStyle("#16a34a")}
               >
-                ▶️ Başlat
+                â–¶ï¸ BaÅŸlat
               </button>
 
               <button
@@ -605,23 +605,23 @@ export default function CanliMacPage() {
                   setSureCalisiyor(false);
                   const { error } = await supabase
                     .from("maclar")
-                    .update({ canli: false, durum: "Devre Arası" })
+                    .update({ oynandi: true, canli: false, durum: "Devre ArasÄ±" })
                     .eq("id", seciliMac.id);
                   if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: false, durum: "Devre Arası" });
+                    setSeciliMac({ ...seciliMac, oynandi: true, canli: false, durum: "Devre ArasÄ±" });
                     await fetch("/api/send-notification", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "⏸️ DEVRE ARASI",
-                        mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+                        baslik: "â¸ï¸ DEVRE ARASI",
+                        mesaj: `Ä°lk yarÄ± sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
                       }),
                     });
                   }
                 }}
                 style={btnStyle("#f59e0b")}
               >
-                ⏸️ Devre
+                â¸ï¸ Devre
               </button>
 
               <button
@@ -629,24 +629,24 @@ export default function CanliMacPage() {
                   if (!seciliMac) return;
                   const { error } = await supabase
                     .from("maclar")
-                    .update({ canli: true, durum: "Canlı" })
+                    .update({ canli: true, durum: "CanlÄ±" })
                     .eq("id", seciliMac.id);
                   if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: true, durum: "Canlı" });
+                    setSeciliMac({ ...seciliMac, canli: true, durum: "CanlÄ±" });
                     setSureCalisiyor(true);
                     await fetch("/api/send-notification", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "▶️ İKİNCİ YARI",
-                        mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı başladı!`,
+                        baslik: "â–¶ï¸ Ä°KÄ°NCÄ° YARI",
+                        mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maÃ§Ä±nda ikinci yarÄ± baÅŸladÄ±!`,
                       }),
                     });
                   }
                 }}
                 style={btnStyle("#2563eb")}
               >
-                ▶️ 2.Yarı
+                â–¶ï¸ 2.YarÄ±
               </button>
 
               <button
@@ -655,15 +655,15 @@ export default function CanliMacPage() {
                   setSureCalisiyor(false);
                   const { error } = await supabase
                     .from("maclar")
-                    .update({ canli: false, durum: "Maç Sona Erdi" })
+                    .update({ oynandi: true, canli: false, durum: "MaÃ§ Sona Erdi" })
                     .eq("id", seciliMac.id);
                   if (!error) {
-                    setSeciliMac({ ...seciliMac, canli: false, durum: "Maç Sona Erdi" });
+                    setSeciliMac({ ...seciliMac, oynandi: true, canli: false, durum: "MaÃ§ Sona Erdi" });
                     await fetch("/api/send-notification", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "🏁 MAÇ SONA ERDİ!",
+                        baslik: "ğŸ MAÃ‡ SONA ERDÄ°!",
                         mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
                       }),
                     });
@@ -671,7 +671,7 @@ export default function CanliMacPage() {
                 }}
                 style={btnStyle("#dc2626")}
               >
-                🏁 Bitir
+                ğŸ Bitir
               </button>
             </div>
           </>
@@ -687,3 +687,7 @@ export default function CanliMacPage() {
     </div>
   );
 }
+
+
+
+
