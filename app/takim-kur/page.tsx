@@ -17,7 +17,12 @@ export default function TakimKurPage() {
 
   useEffect(() => {
     async function getLeagues() {
-      const { data } = await supabase.from("leagues").select("*").eq("is_active", true);
+      const { data } = await supabase
+        .from("cities")
+        .select("*")
+        .eq("status", "AKTIF")
+        .order("id", { ascending: true });
+        
       if (data) {
         setLeagues(data);
         if (data.length > 0) {
