@@ -96,8 +96,8 @@ export default function LandingPage() {
         {/* Background YouTube Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <iframe
-            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-100"
-            src="https://www.youtube.com/embed/L3374C3OyrY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=L3374C3OyrY&playsinline=1"
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-100 pointer-events-none scale-125 md:scale-150"
+            src="https://www.youtube.com/embed/L3374C3OyrY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=L3374C3OyrY&playsinline=1&modestbranding=1&iv_load_policy=3&disablekb=1"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
