@@ -76,7 +76,7 @@ export default function CalismaEkibiPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] pt-12 pb-20 font-sans">
+    <div className="w-full font-sans pb-10">
       
       {/* IMAGE MODAL */}
       <AnimatePresence>
@@ -107,17 +107,17 @@ export default function CalismaEkibiPage() {
         )}
       </AnimatePresence>
 
-      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="w-full">
         
         {/* HEADER SECTION */}
-        <div className="text-center mb-20 pt-16 md:pt-24">
-          <h2 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-black to-gray-800 uppercase tracking-tighter drop-shadow-lg mb-4">
+        <div className="text-center mb-16 pt-8 md:pt-12">
+          <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-black to-gray-800 uppercase tracking-tighter drop-shadow-lg mb-3">
             KLAS LİG BURSA
           </h2>
-          <p className="text-2xl md:text-4xl tracking-[0.3em] font-black text-[#ff3131] uppercase drop-shadow-md">
+          <p className="text-xl md:text-3xl tracking-[0.3em] font-black text-[#ff3131] uppercase drop-shadow-md">
             ÇALIŞMA EKİBİ
           </p>
-          <div className="w-24 h-2 bg-[#ff3131] mx-auto mt-8 rounded-full shadow-[0_0_15px_rgba(255,49,49,0.5)]"></div>
+          <div className="w-16 md:w-24 h-1.5 md:h-2 bg-[#ff3131] mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(255,49,49,0.5)]"></div>
         </div>
 
         {loading ? (
