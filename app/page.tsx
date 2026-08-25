@@ -92,18 +92,20 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-[#070b14] pt-[90px] pb-16 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black pt-[90px] pb-16 overflow-hidden">
         {/* Background YouTube Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <iframe
-            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-[0.25] mix-blend-luminosity"
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] min-w-[1920px] min-h-[1080px] -translate-x-1/2 -translate-y-1/2 opacity-100"
             src="https://www.youtube.com/embed/L3374C3OyrY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=L3374C3OyrY&playsinline=1"
             frameBorder="0"
-            allow="autoplay; encrypted-media"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#070b14]/95 via-[#070b14]/75 to-[#070b14]"></div>
+        
+        {/* Hafif Karartma (Sadece yazıların okunabilmesi için çok ince bir siyah katman) */}
+        <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1000px] mx-auto px-5 gap-6">
           
