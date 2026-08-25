@@ -117,7 +117,6 @@ export default function CalismaEkibiPage() {
           <p className="text-xl md:text-3xl tracking-[0.3em] font-black text-[#ff3131] uppercase drop-shadow-md">
             ÇALIŞMA EKİBİ
           </p>
-          <div className="w-16 md:w-24 h-1.5 md:h-2 bg-[#ff3131] mx-auto mt-6 rounded-full shadow-[0_0_15px_rgba(255,49,49,0.5)]"></div>
         </div>
 
         {loading ? (
