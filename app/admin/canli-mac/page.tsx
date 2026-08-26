@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useRef } from "react";
 import { supabase, publicFetch } from "@/lib/supabase";
@@ -13,6 +13,7 @@ type Mac = {
   dakika: number;
   durum: string;
   canli: boolean;
+  oynandi?: boolean;
   hakem: string;
   youtube_link: string;
 };
