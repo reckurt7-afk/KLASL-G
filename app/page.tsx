@@ -1,10 +1,25 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import InstallButton from "./components/InstallButton";
 
 export default function LandingPage() {
+  const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play().catch(() => {});
+      } else {
+        audioRef.current.pause();
+      }
+      setIsMuted(!isMuted);
+    }
+  };
+
   const subscribeUser = async () => {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
       alert("Tarayıcınız bildirimleri desteklemiyor.");
@@ -193,16 +208,35 @@ export default function LandingPage() {
           </div>
 
           {/* Notifications Button */}
-          <div className="w-full max-w-[360px] md:max-w-[440px] mt-1">
-             <button 
-                onClick={subscribeUser}
-                className="group relative overflow-hidden w-full bg-gradient-to-r from-[#0077b5] to-[#1da1f2] text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_5px_15px_rgba(29,161,242,0.3)] hover:-translate-y-1"
-             >
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                BİLDİRİMLERİ AÇ
-             </button>
-          </div>
+            <div className="w-full max-w-[360px] md:max-w-[440px] mt-1 flex gap-2">
+               <button 
+                  onClick={subscribeUser}
+                  className="flex-1 group relative overflow-hidden bg-gradient-to-r from-[#0077b5] to-[#1da1f2] text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_5px_15px_rgba(29,161,242,0.3)] hover:-translate-y-1"
+               >
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                  BİLDİRİMLERİ AÇ
+               </button>
+
+               <button 
+                  onClick={toggleMute}
+                  className="flex-1 group relative overflow-hidden bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1"
+               >
+                  {isMuted ? (
+                    <>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                      MÜZİĞİ AÇ
+                    </>
+                  ) : (
+                    <>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                      MÜZİĞİ KAPAT
+                    </>
+                  )}
+               </button>
+            </div>
+            
+            <audio ref={audioRef} loop src="/bg-music.mp3" />
         </div>
       </section>
 
