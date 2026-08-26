@@ -105,7 +105,7 @@ export default function LandingPage() {
               e.currentTarget.currentTime = 0;
               e.currentTarget.play().catch(() => {});
             }}
-            className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 contrast-125 saturate-110"
+            className="absolute top-1/2 left-1/2 w-full h-full object-cover md:object-contain -translate-x-1/2 -translate-y-1/2 contrast-125 saturate-[1.4]"
           >
             <source src="/hero-bg-yt.mp4" type="video/mp4" />
           </video>
