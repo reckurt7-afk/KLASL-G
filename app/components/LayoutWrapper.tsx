@@ -150,34 +150,45 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </aside>
 
         {/* Mobile: Sidebar as collapsible menu above content */}
-        <div className="lg:hidden w-full">
-          <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.03)] mb-6 mt-4">
-            <nav className="flex flex-col">
-              {SIDEBAR_ITEMS.map((item, idx) => {
+        <div className="lg:hidden w-full mb-6 mt-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[11px] font-black text-gray-400 tracking-[0.2em] uppercase mb-1 px-2">Lig Menüsü</h3>
+            <nav className="flex flex-col gap-2.5">
+              {SIDEBAR_ITEMS.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group flex items-center justify-between px-6 py-5 transition-colors ${
+                    className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-red-50/50"
-                        : "hover:bg-gray-50"
-                    } ${idx !== SIDEBAR_ITEMS.length - 1 ? 'border-b border-gray-50' : ''}`}
+                        ? "bg-gradient-to-r from-[#e60000] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
+                        : "bg-white border-gray-100 text-gray-700 hover:border-[#e60000]/20 hover:shadow-md hover:-translate-y-0.5"
+                    }`}
                   >
-                    <div className="flex items-center gap-3.5">
-                      <div className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${
-                        isActive ? "bg-[#e60000] text-white shadow-sm" : "bg-gray-100 text-gray-500 group-hover:bg-[#e60000] group-hover:text-white"
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <span className={`text-[14px] font-black tracking-tight ${isActive ? "text-[#e60000]" : "text-gray-700 group-hover:text-[#e60000]"}`}>
-                        {item.label}
-                      </span>
+                    {!isActive && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    )}
+                    
+                    <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
+                      isActive 
+                        ? "bg-white/20 text-white" 
+                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#e60000] group-hover:shadow-sm"
+                    }`}>
+                      {item.icon}
                     </div>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${isActive ? "text-[#e60000] translate-x-1" : "text-gray-300 group-hover:text-[#e60000] group-hover:translate-x-1"}`}>
-                      <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
+
+                    <span className="relative z-10 text-[13px] font-black tracking-tight leading-tight pt-0.5 flex-1">{item.label}</span>
+                    
+                    {isActive ? (
+                      <div className="relative z-10 text-white/50 shrink-0">
+                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                      </div>
+                    ) : (
+                      <div className="relative z-10 text-gray-300 group-hover:text-[#e60000] group-hover:translate-x-1 transition-transform shrink-0">
+                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                      </div>
+                    )}
                   </Link>
                 );
               })}
