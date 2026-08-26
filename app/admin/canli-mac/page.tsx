@@ -46,11 +46,11 @@ export default function CanliMacPage() {
       let baslik = "";
       let mesaj = "";
       switch (olayTipi) {
-        case "GOL": baslik = "⚽ GOOOL!"; mesaj = `${takim} adına ${olayOyuncu} ${seciliMac.dakika}. dakikada topu ağlara gönderdi! Skor: ${seciliMac.ev_skor}-${seciliMac.dep_skor}`; golSesiCal(); break;
-        case "ASIST": baslik = "👟 ASİST"; mesaj = `${takim} takımından ${olayOyuncu} şık bir asiste imza attı!`; break;
-        case "SARI_KART": baslik = "🟨 SARI KART"; mesaj = `${takim} takımından ${olayOyuncu} sarı kart gördü.`; break;
-        case "KIRMIZI_KART": baslik = "🟥 KIRMIZI KART"; mesaj = `${takim} takımından ${olayOyuncu} kırmızı kart gördü!`; break;
-        case "DEGISIKLIK": baslik = "🔄 OYUNCU DEĞİŞİKLİĞİ"; mesaj = `${takim} takımında ${olayOyuncu} oyuna dahil oldu.`; break;
+        case "GOL": baslik = "⚽ GOL SESİ!"; mesaj = `${takim} formasıyla ${olayOyuncu}, ${seciliMac.dakika}. dakikada klas bir vuruşla topu ağlara gönderdi!`; golSesiCal(); break;
+        case "ASIST": baslik = "🎯 ASİST"; mesaj = `Golün mimarı! ${takim} takımından ${olayOyuncu} akıl dolu bir asist yaptı!`; break;
+        case "SARI_KART": baslik = "🟨 SARI KART"; mesaj = `Hakemin eli cebine gitti! ${takim} cephesinden ${olayOyuncu} sarı kart gördü.`; break;
+        case "KIRMIZI_KART": baslik = "🟥 KIRMIZI KART! TAKIM EKSİK KALDI"; mesaj = `Şok karar! ${takim} oyuncusu ${olayOyuncu} kırmızı kartla oyundan ihraç edildi!`; break;
+        case "DEGISIKLIK": baslik = "🔄 OYUNCU DEĞİŞİKLİĞİ"; mesaj = `Taktiksel hamle: ${takim} takımında ${olayOyuncu} oyuna dahil oluyor.`; break;
         default: baslik = "⚡ MAÇ OLAYI"; mesaj = `${takim} takımından ${olayOyuncu} ile ilgili yeni bir gelişme var.`;
       }
       await fetch("/api/send-notification", { 
@@ -237,8 +237,8 @@ export default function CanliMacPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          baslik: "▶️ MAÇ BAŞLADI!",
-          mesaj: `${seciliMac.ev_sahibi} ile ${seciliMac.deplasman} arasındaki zorlu mücadele başladı!`,
+          baslik: "🏟️ HAKEMİN DÜDÜĞÜYLE MAÇ BAŞLADI!",
+            mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} mücadelesinde heyecan fırtınası başladı. Başarılar!`,
         }),
       });
     }
@@ -355,8 +355,8 @@ export default function CanliMacPage() {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.ev_sahibi} golü iptal edildi! Skor: ${yeniSkor}-${seciliMac.dep_skor}`,
+                          baslik: "❌ VAR KARARI: GOL İPTAL",
+                          mesaj: `${seciliMac.ev_sahibi} ağlarına giden top gol değeri kazanmadı. \n👉 Güncel Skor: ${seciliMac.ev_sahibi} ${yeniSkor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
                         }),
                       });
                     }
@@ -382,8 +382,8 @@ export default function CanliMacPage() {
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({
                             baslik: `⚽ GOOOL! | ${seciliMac.ev_sahibi}`,
-                            mesaj: `${seciliMac.ev_sahibi} ağları havalandırdı!\nMevcut Skor: ${yeniSkor} - ${seciliMac.dep_skor}`,
-                            url: "/",
+                              mesaj: `${seciliMac.ev_sahibi} aradığı golü buldu! \n👉 Skor: ${seciliMac.ev_sahibi} ${yeniSkor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+                              url: "/",
                             youtube_link: seciliMac.youtube_link,
                             requireInteraction: true,
                             actions: [
@@ -410,8 +410,8 @@ export default function CanliMacPage() {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          baslik: "❌ GOL İPTAL",
-                          mesaj: `${seciliMac.deplasman} golü iptal edildi! Skor: ${seciliMac.ev_skor}-${yeniSkor}`,
+                          baslik: "❌ VAR KARARI: GOL İPTAL",
+                          mesaj: `${seciliMac.deplasman} ağlarına giden top gol değeri kazanmadı. \n👉 Güncel Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${yeniSkor} ${seciliMac.deplasman}`,
                         }),
                       });
                     }
@@ -436,8 +436,8 @@ export default function CanliMacPage() {
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({
                             baslik: `⚽ GOOOL! | ${seciliMac.deplasman}`,
-                            mesaj: `${seciliMac.deplasman} ağları havalandırdı!\nMevcut Skor: ${seciliMac.ev_skor} - ${yeniSkor}`,
-                            url: "/",
+                              mesaj: `${seciliMac.deplasman} aradığı golü buldu! \n👉 Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${yeniSkor} ${seciliMac.deplasman}`,
+                              url: "/",
                             youtube_link: seciliMac.youtube_link,
                             requireInteraction: true,
                             actions: [
@@ -614,8 +614,8 @@ export default function CanliMacPage() {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "⏸️ DEVRE ARASI",
-                        mesaj: `İlk yarı sona erdi. Skor: ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+                        baslik: "⏱️ İLK YARI SONUCU",
+                        mesaj: `Hakem ilk yarıyı bitiren düdüğü çaldı. Takımlar soyunma odasına gidiyor. \n👉 ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
                       }),
                     });
                   }
@@ -639,8 +639,8 @@ export default function CanliMacPage() {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "▶️ İKİNCİ YARI",
-                        mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci yarı başladı!`,
+                        baslik: "🏟️ İKİNCİ YARI BAŞLADI!",
+                        mesaj: `${seciliMac.ev_sahibi} - ${seciliMac.deplasman} maçında ikinci 45 dakika nefesleri kesecek. Top yeniden oyunda!`,
                       }),
                     });
                   }
@@ -664,8 +664,8 @@ export default function CanliMacPage() {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        baslik: "🏁 MAÇ SONA ERDİ!",
-                        mesaj: `${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
+                        baslik: "🏁 MAÇ SONUCU | 90 DAKİKA TAMAMLANDI",
+                        mesaj: `Sahada kıyasıya mücadele sona erdi! \n👉 ${seciliMac.ev_sahibi} ${seciliMac.ev_skor}-${seciliMac.dep_skor} ${seciliMac.deplasman}`,
                       }),
                     });
                   }
