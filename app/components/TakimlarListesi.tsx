@@ -15,7 +15,7 @@ export default function TakimlarListesi() {
   useEffect(() => {
     async function getir() {
       setLoading(true);
-      const data = await publicFetch("takimlar", `select=id,ad,logo&city_id=eq.${selectedCityId}&order=ad.asc`);
+      let data = await publicFetch("takimlar", `select=id,ad,logo&city_id=eq.${selectedCityId}&order=ad.asc`);
         if (!data || data.length === 0) {
           data = await publicFetch("takimlar", `select=id,ad,logo&order=ad.asc`);
         }
