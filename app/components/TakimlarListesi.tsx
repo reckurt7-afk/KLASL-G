@@ -15,7 +15,10 @@ export default function TakimlarListesi() {
   useEffect(() => {
     async function getir() {
       setLoading(true);
-      const data = await publicFetch("teams", `select=id,name,logo&league_id=eq.${selectedCityId}&order=name.asc`);
+      const data = await publicFetch("takimlar", `select=id,ad,logo&city_id=eq.${selectedCityId}&order=ad.asc`);
+        if (!data || data.length === 0) {
+          data = await publicFetch("takimlar", `select=id,ad,logo&order=ad.asc`);
+        }
       setTakimlar(data || []);
       setLoading(false);
     }
@@ -59,7 +62,7 @@ export default function TakimlarListesi() {
           animate="show"
         >
           {takimlar.map((takim) => {
-            const slug = takim.name
+            const slug = takim.ad
               .toLowerCase()
               .replace(/ğ/g, "g")
               .replace(/ü/g, "u")
@@ -76,11 +79,11 @@ export default function TakimlarListesi() {
                     <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                     <div className="relative w-[60px] h-[60px] md:w-[100px] md:h-[100px] mb-4 group-hover:scale-110 transition-transform duration-500">
-                      <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]" />
+                      <Image src={takim.logo || '/logos/default.png'} alt={takim.ad} fill className="object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]" />
                     </div>
 
                     <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#ff3131] transition-colors mt-2 line-clamp-2">
-                      {takim.name}
+                      {takim.ad}
                     </div>
                     
                     <div className="w-8 h-1 bg-gradient-to-r from-transparent via-[#ff3131]/50 to-transparent my-3"></div>

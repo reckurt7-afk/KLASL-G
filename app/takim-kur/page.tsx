@@ -70,18 +70,19 @@ export default function TakimKurPage() {
         logoUrl = publicUrlData.publicUrl;
       }
 
-      const { error: insertError } = await supabase.from("teams").insert([{
-        name: formData.name,
-        league_id: parseInt(formData.leagueId),
-        logo_url: logoUrl,
-        points: 0,
-        played: 0,
-        won: 0,
-        drawn: 0,
-        lost: 0,
-        goals_for: 0,
-        goals_against: 0
-      }]);
+      const { error: insertError } = await supabase.from("takimlar").insert([{
+          ad: formData.name,
+          city_id: parseInt(formData.leagueId),
+          logo: logoUrl,
+          puan: 0,
+          oynanan: 0,
+          galibiyet: 0,
+          beraberlik: 0,
+          maglubiyet: 0,
+          atilan_gol: 0,
+          yenilen_gol: 0,
+          averaj: 0
+        }]);
 
       if (insertError) throw insertError;
 
