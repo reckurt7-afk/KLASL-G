@@ -8,15 +8,14 @@ import { motion } from "framer-motion";
 
 type Takim = {
   id: number;
-  ad: string;
+  name: string;
   logo: string;
-  oynanan: number;
-  galibiyet: number;
-  beraberlik: number;
-  maglubiyet: number;
-  averaj: number;
-  puan: number;
-  city_id?: number;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goal_difference: number;
+  points: number;
 };
 
 export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) {
@@ -27,19 +26,11 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
   useEffect(() => {
     setLoading(true);
     async function takimlariGetir() {
-      // Filter by city_id if applicable, but fallback to all
-      let query = "select=*&order=puan.desc,averaj.desc";
-      if (selectedCityId) {
-        query += `&city_id=eq.${selectedCityId}`;
-      }
-      const data = await publicFetch("takimlar", query);
-      if (data && data.length > 0) {
-        setTakimlar(data);
-      } else {
-        // Fallback fetch if city_id filter returns empty (e.g. legacy data)
-        const allData = await publicFetch("takimlar", "select=*&order=puan.desc,averaj.desc");
-        if (allData) setTakimlar(allData);
-      }
+      const data = await publicFetch(
+        "teams",
+        "select=*&order=points.desc,goal_difference.desc"
+      );
+      if (data.length > 0) setTakimlar(data);
       setLoading(false);
     }
     takimlariGetir();
@@ -140,16 +131,16 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
                         <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-gray-100 border border-[rgba(255,255,255,0.1)] group-hover:border-[#ff3131]/70 transition-colors flex items-center justify-center shadow-lg">
-                          <Image src={t.logo} alt={t.ad} fill className="object-contain p-[2px] sm:p-1" />
+                          <Image src={t.logo} alt={t.name} fill className="object-contain p-[2px] sm:p-1" />
                         </div>
-                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#ff3131] transition-colors">{t.ad}</span>
+                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#ff3131] transition-colors">{t.name}</span>
                       </div>
-                      <div className="text-center text-gray-500">{t.oynanan}</div>
-                      <div className="text-center font-medium text-green-500 drop-shadow-md">{t.galibiyet}</div>
-                      <div className="text-center font-medium text-gray-500 drop-shadow-md">{t.beraberlik}</div>
-                      <div className="text-center font-medium text-red-500 drop-shadow-md">{t.maglubiyet}</div>
-                      <div className="text-center font-bold text-gray-600">{t.averaj > 0 ? `+${t.averaj}` : t.averaj}</div>
-                      <div className="text-center font-black text-[12px] sm:text-base text-gray-900 bg-gradient-to-br from-[#ff3131] to-[#a11212] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(255,49,49,0.3)]">{t.puan}</div>
+                      <div className="text-center text-gray-500">{t.played}</div>
+                      <div className="text-center font-medium text-green-500 drop-shadow-md">{t.won}</div>
+                      <div className="text-center font-medium text-gray-500 drop-shadow-md">{t.drawn}</div>
+                      <div className="text-center font-medium text-red-500 drop-shadow-md">{t.lost}</div>
+                      <div className="text-center font-bold text-gray-600">{t.goal_difference > 0 ? `+${t.goal_difference}` : t.goal_difference}</div>
+                      <div className="text-center font-black text-[12px] sm:text-base text-gray-900 bg-gradient-to-br from-[#ff3131] to-[#a11212] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(255,49,49,0.3)]">{t.points}</div>
                     </motion.div>
                   );
                 })
