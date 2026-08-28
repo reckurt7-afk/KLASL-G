@@ -73,7 +73,7 @@ export default function TakimKurPage() {
       const { error: insertError } = await supabase.from("teams").insert([{
         name: formData.name,
         league_id: parseInt(formData.leagueId),
-        logo_url: logoUrl,
+        logo: logoUrl,
         points: 0,
         played: 0,
         won: 0,
