@@ -33,7 +33,7 @@ export default function TakimKurPage() {
         
         setLeagues(sorted);
         if (sorted.length > 0) {
-          setFormData(prev => ({ ...prev, leagueId: sorted[0].id.toString() }));
+          
         }
       }
     }
@@ -147,6 +147,7 @@ export default function TakimKurPage() {
                 onChange={e => setFormData({...formData, leagueId: e.target.value})} 
                 className="w-full bg-gray-50 border border-gray-200 focus:border-[#ff3131] focus:ring-1 focus:ring-[#ff3131] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all cursor-pointer appearance-none"
               >
+                <option value="" disabled>Lütfen Katılacağınız Ligi Seçiniz</option>
                 {leagues.map(l => (
                   <option key={l.id} value={l.id}>{l.name} {l.season && `(Sezon ${l.season})`}</option>
                 ))}
