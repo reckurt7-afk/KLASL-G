@@ -101,7 +101,7 @@ export default function TakimKurPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "🔥 SAVAŞA YENİ BİR TAKIM KATILDI!",
+            baslik: "🔥 KLAS LİG'E YENİ BİR TAKIM KATILDI!",
             mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Klas Lig ailesine hoş geldiniz. 🏆`,
             url: "/genel-bakis"
           })
