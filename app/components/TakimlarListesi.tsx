@@ -75,8 +75,8 @@ export default function TakimlarListesi() {
                   <div className="card h-full p-4 md:p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:border-[#ff3131]/50 hover:shadow-[0_15px_30px_rgba(255,49,49,0.15)] relative overflow-hidden bg-white border border-gray-100">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-                    <div className="relative w-[60px] h-[60px] md:w-[100px] md:h-[100px] mb-4 group-hover:scale-110 transition-transform duration-500">
-                      <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]" />
+                    <div className="relative w-[70px] h-[70px] md:w-[110px] md:h-[110px] mb-4 rounded-full bg-[#050505] border border-gray-800 shadow-[0_10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff3131]/50 transition-all duration-500 overflow-hidden">
+                      <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain p-2" />
                     </div>
 
                     <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#ff3131] transition-colors mt-2 line-clamp-2">
