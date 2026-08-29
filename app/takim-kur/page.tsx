@@ -103,7 +103,8 @@ export default function TakimKurPage() {
           body: JSON.stringify({
             baslik: "🔥 KLAS LİG'E YENİ BİR TAKIM KATILDI!",
             mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Klas Lig ailesine hoş geldiniz. 🏆`,
-            icon: logoUrl || "https://klaslig.vercel.app/icons/icon-192x192.png",
+            icon: "https://klaslig.vercel.app/icons/icon-192x192.png",
+            image: logoUrl || undefined,
             url: "/genel-bakis"
           })
         });
