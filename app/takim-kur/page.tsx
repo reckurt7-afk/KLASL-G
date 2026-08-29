@@ -24,9 +24,16 @@ export default function TakimKurPage() {
         .order("id", { ascending: true });
         
       if (data) {
-        setLeagues(data);
-        if (data.length > 0) {
-          setFormData(prev => ({ ...prev, leagueId: data[0].id.toString() }));
+        const sorted = [...data];
+        const index8 = sorted.findIndex(c => c.id === 8);
+        if (index8 > -1) {
+           const item8 = sorted.splice(index8, 1)[0];
+           sorted.splice(1, 0, item8);
+        }
+        
+        setLeagues(sorted);
+        if (sorted.length > 0) {
+          setFormData(prev => ({ ...prev, leagueId: sorted[0].id.toString() }));
         }
       }
     }

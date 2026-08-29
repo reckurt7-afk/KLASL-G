@@ -14,12 +14,19 @@ export default function CityStoryBar() {
     async function fetchCities() {
       const { data } = await supabase.from("cities").select("*").order("id", { ascending: true });
       if (data) {
-        setCities(data);
-        // Eğer seçili şehir yoksa veya listede yoksa, varsayılan olarak Bursa'yı (1) veya ilk şehri seç
-        if (!selectedCityId && data.length > 0) {
-          setSelectedCityId(data[0].id);
+          // Özel Sıralama: ID 8'i (4. Sezon) ikinci sıraya (index 1) al
+          const sorted = [...data];
+          const index8 = sorted.findIndex(c => c.id === 8);
+          if (index8 > -1) {
+             const item8 = sorted.splice(index8, 1)[0];
+             sorted.splice(1, 0, item8); // 1. indexe (yani 2. sıraya) yerleştir
+          }
+          
+          setCities(sorted);
+          if (!selectedCityId && sorted.length > 0) {
+            setSelectedCityId(sorted[0].id);
+          }
         }
-      }
     }
     fetchCities();
   }, []);
