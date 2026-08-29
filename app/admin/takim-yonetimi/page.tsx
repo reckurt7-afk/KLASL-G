@@ -23,7 +23,7 @@ export default function TakimYonetimiPage() {
   }
 
   async function takimSil(id: number, name: string) {
-    if (!window.confirm(DİKKAT:  takımını silmek istediğinize emin misiniz? Bu işlem geri alınamaz!)) return;
+    if (!window.confirm('DİKKAT: ' + name + ' takımını silmek istediğinize emin misiniz? Bu işlem geri alınamaz!')) return;
 
     const { error } = await supabase.from("teams").delete().eq("id", id);
     if (error) {
