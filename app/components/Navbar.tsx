@@ -46,7 +46,7 @@ export default function Navbar() {
                 <Image src="/icons/logo.png" alt="Logo" fill className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-[#0f172a] tracking-widest leading-none group-hover:text-[#d4af37] transition-colors duration-300">PRO LİG</span>
+                <span className="text-2xl font-black text-[#cc0000] tracking-widest leading-none group-hover:text-[#d4af37] transition-colors duration-300">PRO <span className="text-black">LİG</span></span>
                 <span className="text-[11px] text-[#d4af37] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
