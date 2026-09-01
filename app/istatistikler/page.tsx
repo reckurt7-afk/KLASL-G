@@ -65,10 +65,10 @@ export default function IstatistiklerPage() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-[#070707] text-white pt-24 pb-20 px-4 font-sans selection:bg-red-500/30 relative overflow-hidden">
+    <div className="min-h-screen bg-[#070707] text-white pt-24 pb-20 px-4 font-sans selection:bg-[#eab308]/30 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-[#ff3131]/10 via-[#ff3131]/5 to-transparent pointer-events-none" />
-      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#ff3131] rounded-full blur-[150px] opacity-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-[#d4af37]/10 via-[#d4af37]/5 to-transparent pointer-events-none" />
+      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#d4af37] rounded-full blur-[150px] opacity-10 pointer-events-none" />
 
       <div className="max-w-[1200px] mx-auto relative z-10">
         
@@ -77,7 +77,7 @@ export default function IstatistiklerPage() {
           <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-16 h-16 bg-gradient-to-br from-[#ff3131] to-[#991b1b] rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(255,49,49,0.4)]"
+            className="w-16 h-16 bg-gradient-to-br from-[#d4af37] to-[#991b1b] rounded-2xl flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(212,175,55,0.4)]"
           >
             <Trophy className="w-8 h-8 text-white" />
           </motion.div>
@@ -133,7 +133,7 @@ export default function IstatistiklerPage() {
         {/* Loading */}
         {loading && (
           <div className="flex justify-center items-center py-20">
-            <div className="w-12 h-12 border-4 border-[#ff3131]/20 border-t-[#ff3131] rounded-full animate-spin" />
+            <div className="w-12 h-12 border-4 border-[#d4af37]/20 border-t-[#d4af37] rounded-full animate-spin" />
           </div>
         )}
 
@@ -183,7 +183,7 @@ export default function IstatistiklerPage() {
                       <div className="flex items-center gap-6">
                         <span className="w-8 text-center font-black text-gray-600 text-lg">{idx + 4}</span>
                         <div>
-                          <h4 className="font-bold text-white text-[15px] group-hover:text-[#ff3131] transition-colors">{stat.isim}</h4>
+                          <h4 className="font-bold text-white text-[15px] group-hover:text-[#d4af37] transition-colors">{stat.isim}</h4>
                           <span className="text-xs text-gray-500 font-medium">{stat.takim}</span>
                         </div>
                       </div>

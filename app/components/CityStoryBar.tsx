@@ -53,7 +53,7 @@ export default function CityStoryBar() {
       {/* Right Arrow */}
       <button
         onClick={() => scroll("right")}
-        className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-[#e60000] rounded-full shadow-md flex items-center justify-center text-white hover:bg-[#cc0000] transition-colors"
+        className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-[#1e3a8a] rounded-full shadow-md flex items-center justify-center text-white hover:bg-[#cc0000] transition-colors"
         aria-label="Sağa kaydır"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -79,14 +79,14 @@ export default function CityStoryBar() {
               <div
                 className={`w-[100px] h-[80px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
-                    ? "border-[#e60000] bg-red-50 shadow-md"
+                    ? "border-[#1e3a8a] bg-red-50 shadow-md"
                     : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
                 }`}
               >
                 <div className="w-8 h-8 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="object-contain" />
                 </div>
-                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#e60000]" : "text-gray-700"}`}>
+                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
                 <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
@@ -94,7 +94,7 @@ export default function CityStoryBar() {
                 </span>
               </div>
               {/* Heart */}
-              <button className="text-gray-300 hover:text-red-500 transition-colors" aria-label="Favori">
+              <button className="text-gray-300 hover:text-[#eab308] transition-colors" aria-label="Favori">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>

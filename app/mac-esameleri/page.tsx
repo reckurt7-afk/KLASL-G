@@ -117,7 +117,7 @@ export default function MacEsameleriPage() {
       <h1
         style={{
           textAlign: "center",
-          color: "#ff3131",
+          color: "#d4af37",
           fontWeight: 900,
           marginBottom: 25,
         }}
@@ -253,7 +253,7 @@ export default function MacEsameleriPage() {
             padding: 15,
             border: "none",
             borderRadius: 12,
-            background: "#ff3131",
+            background: "#d4af37",
             color: "#fff",
             fontWeight: 800,
             cursor: "pointer",
@@ -265,7 +265,7 @@ export default function MacEsameleriPage() {
         <h2
           style={{
             marginTop: 30,
-            color: "#ff3131",
+            color: "#d4af37",
           }}
         >
           📋 Eklenen Oyuncular

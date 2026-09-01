@@ -233,8 +233,8 @@ export default function MacSonucuPage() {
         {/* Mesaj */}
         {mesaj && (
           <div style={{
-            background: mesaj.tip === "ok" ? "rgba(16,185,129,0.1)" : "rgba(255,49,49,0.1)",
-            border: `1px solid ${mesaj.tip === "ok" ? "rgba(16,185,129,0.4)" : "rgba(255,49,49,0.4)"}`,
+            background: mesaj.tip === "ok" ? "rgba(16,185,129,0.1)" : "rgba(212,175,55,0.1)",
+            border: `1px solid ${mesaj.tip === "ok" ? "rgba(16,185,129,0.4)" : "rgba(212,175,55,0.4)"}`,
             borderRadius: 12,
             padding: "14px 18px",
             color: mesaj.tip === "ok" ? "#10b981" : "#ff6b6b",
@@ -249,7 +249,7 @@ export default function MacSonucuPage() {
         {/* Form Kartı */}
         <div style={{
           background: "#151515",
-          border: "1px solid rgba(255,49,49,0.2)",
+          border: "1px solid rgba(212,175,55,0.2)",
           borderRadius: 20,
           padding: 28,
         }}>
@@ -287,14 +287,14 @@ export default function MacSonucuPage() {
           {/* Seçili maç bilgisi */}
           {seciliMac && (
             <div style={{
-              background: "rgba(255,49,49,0.06)",
-              border: "1px solid rgba(255,49,49,0.2)",
+              background: "rgba(212,175,55,0.06)",
+              border: "1px solid rgba(212,175,55,0.2)",
               borderRadius: 12,
               padding: "12px 16px",
               marginBottom: 20,
               textAlign: "center",
             }}>
-              <div style={{ color: "#ff3131", fontSize: 11, fontWeight: 700, letterSpacing: 2, marginBottom: 4 }}>
+              <div style={{ color: "#d4af37", fontSize: 11, fontWeight: 700, letterSpacing: 2, marginBottom: 4 }}>
                 {seciliMac.hafta}. HAFTA
               </div>
               <div style={{ color: "#fff", fontWeight: 800, fontSize: 16 }}>
@@ -348,12 +348,12 @@ export default function MacSonucuPage() {
               height: 56,
               border: "none",
               borderRadius: 14,
-              background: isSaving ? "#333" : "linear-gradient(135deg, #ff3131, #a11212)",
+              background: isSaving ? "#333" : "linear-gradient(135deg, #d4af37, #8c7324)",
               color: "#fff",
               fontWeight: 900,
               fontSize: 17,
               cursor: isSaving ? "not-allowed" : "pointer",
-              boxShadow: isSaving ? "none" : "0 8px 20px rgba(255,49,49,0.35)",
+              boxShadow: isSaving ? "none" : "0 8px 20px rgba(212,175,55,0.35)",
               letterSpacing: 1,
             }}
           >
@@ -367,7 +367,7 @@ export default function MacSonucuPage() {
           {haftalar.map((hafta) => (
             <div key={hafta} style={{ marginBottom: 20 }}>
               <div style={{
-                color: "#ff3131",
+                color: "#d4af37",
                 fontSize: 11,
                 fontWeight: 800,
                 letterSpacing: 3,
@@ -389,8 +389,8 @@ export default function MacSonucuPage() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    background: secilenMacId === m.id.toString() ? "rgba(255,49,49,0.1)" : "#151515",
-                    border: secilenMacId === m.id.toString() ? "1px solid rgba(255,49,49,0.4)" : "1px solid rgba(255,255,255,0.05)",
+                    background: secilenMacId === m.id.toString() ? "rgba(212,175,55,0.1)" : "#151515",
+                    border: secilenMacId === m.id.toString() ? "1px solid rgba(212,175,55,0.4)" : "1px solid rgba(255,255,255,0.05)",
                     borderRadius: 12,
                     padding: "12px 16px",
                     marginBottom: 6,

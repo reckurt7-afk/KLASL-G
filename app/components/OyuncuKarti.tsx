@@ -53,10 +53,10 @@ export default function OyuncuKarti({
       : kartTipi === "hero"
       ? {
           cardBg: "from-[#2b0808] via-[#160303] to-[#080101]",
-          borderColor: "border-[#ff3131]/60",
-          glowColor: "shadow-[0_0_30px_rgba(255,49,49,0.4)]",
-          accentText: "text-[#ff3131]",
-          badgeBg: "bg-[#ff3131]/10 border-[#ff3131]/30",
+          borderColor: "border-[#d4af37]/60",
+          glowColor: "shadow-[0_0_30px_rgba(212,175,55,0.4)]",
+          accentText: "text-[#d4af37]",
+          badgeBg: "bg-[#d4af37]/10 border-[#d4af37]/30",
         }
       : {
           cardBg: "from-[#292211] via-[#141008] to-[#0a0804]",

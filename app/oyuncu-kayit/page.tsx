@@ -81,7 +81,7 @@ export default function OyuncuKayitPage() {
           </p>
           <Link
             href="/takimlar"
-            className="inline-block w-full py-4 bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white font-black rounded-xl shadow-[0_8px_20px_rgba(255,49,49,0.3)] hover:shadow-[0_8px_30px_rgba(255,49,49,0.5)] transition-all text-center"
+            className="inline-block w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-white font-black rounded-xl shadow-[0_8px_20px_rgba(212,175,55,0.3)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.5)] transition-all text-center"
           >
             TAKIMLARA DÖN
           </Link>
@@ -100,7 +100,7 @@ export default function OyuncuKayitPage() {
 
         <div className="card p-8">
           {hata && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm font-medium mb-6">
+            <div className="bg-[#eab308]/10 border border-[#eab308]/30 rounded-xl px-4 py-3 text-red-400 text-sm font-medium mb-6">
               ⚠️ {hata}
             </div>
           )}
@@ -115,7 +115,7 @@ export default function OyuncuKayitPage() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => e.target.files?.length && setFoto(e.target.files[0])}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-gray-400 text-sm file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#ff3131] file:text-white file:text-xs file:font-bold file:cursor-pointer"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3 text-gray-400 text-sm file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-[#d4af37] file:text-white file:text-xs file:font-bold file:cursor-pointer"
               />
             </div>
 
@@ -130,7 +130,7 @@ export default function OyuncuKayitPage() {
                 placeholder="Adınız Soyadınız"
                 value={adSoyad}
                 onChange={(e) => setAdSoyad(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#d4af37] transition-colors text-sm"
               />
             </div>
 
@@ -144,7 +144,7 @@ export default function OyuncuKayitPage() {
                 placeholder="05XXXXXXXXX"
                 value={telefon}
                 onChange={(e) => setTelefon(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#d4af37] transition-colors text-sm"
               />
             </div>
 
@@ -161,7 +161,7 @@ export default function OyuncuKayitPage() {
                 placeholder="10"
                 value={formaNo}
                 onChange={(e) => setFormaNo(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-[#d4af37] transition-colors text-sm"
               />
             </div>
 
@@ -173,7 +173,7 @@ export default function OyuncuKayitPage() {
               <select
                 value={mevki}
                 onChange={(e) => setMevki(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#d4af37] transition-colors text-sm"
               >
                 <option value="">Mevki Seçiniz</option>
                 <option value="Kaleci">Kaleci</option>
@@ -192,7 +192,7 @@ export default function OyuncuKayitPage() {
                 required
                 value={takim}
                 onChange={(e) => setTakim(e.target.value)}
-                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#ff3131] transition-colors text-sm"
+                className="w-full bg-[#0d0d0d] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#d4af37] transition-colors text-sm"
               >
                 <option value="">Takım Seçiniz</option>
                 {takimlar.map((t) => (
@@ -204,7 +204,7 @@ export default function OyuncuKayitPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white font-black rounded-xl text-base shadow-[0_8px_20px_rgba(255,49,49,0.3)] hover:shadow-[0_8px_30px_rgba(255,49,49,0.5)] hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 mt-2"
+              className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-white font-black rounded-xl text-base shadow-[0_8px_20px_rgba(212,175,55,0.3)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 mt-2"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

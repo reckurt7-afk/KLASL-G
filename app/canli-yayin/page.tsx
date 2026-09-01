@@ -63,7 +63,7 @@ export default function CanliYayinPage() {
     return (
       <div className="page flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#ff3131] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-400 font-bold">Yükleniyor...</p>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function CanliYayinPage() {
     return (
       <div className="page flex flex-col items-center justify-center gap-4">
         <div className="text-6xl">⚠️</div>
-        <div className="text-[#ff3131] font-bold text-lg">Bir hata oluştu</div>
+        <div className="text-[#d4af37] font-bold text-lg">Bir hata oluştu</div>
         <div className="text-gray-400 text-sm bg-[#111] border border-white/10 rounded-xl px-6 py-3">{hata}</div>
       </div>
     );
@@ -89,8 +89,8 @@ export default function CanliYayinPage() {
           <div className="flex items-center justify-center gap-3 mb-3">
             {videoId ? (
               <span className="relative flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#ff3131]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4af37] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#d4af37]"></span>
               </span>
             ) : (
               <span className="w-4 h-4 rounded-full bg-gray-600 inline-block" />
@@ -105,7 +105,7 @@ export default function CanliYayinPage() {
         {videoId ? (
           <div className="flex flex-wrap gap-5">
             {/* YouTube Player */}
-            <div className="flex-1 min-w-[300px] bg-[#111] rounded-2xl overflow-hidden border border-[rgba(255,49,49,0.2)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+            <div className="flex-1 min-w-[300px] bg-[#111] rounded-2xl overflow-hidden border border-[rgba(212,175,55,0.2)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
               <div className="relative" style={{ paddingBottom: "56.25%" }}>
                 <iframe
                   key={videoId}
@@ -138,7 +138,7 @@ export default function CanliYayinPage() {
             <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
               Admin paneli → Ayarlar'dan bir YouTube linki ekleyerek canlı yayını başlatabilirsiniz.
             </p>
-            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[rgba(255,49,49,0.1)] border border-[rgba(255,49,49,0.2)] rounded-xl text-[#ff3131] font-bold text-sm">
+            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)] rounded-xl text-[#d4af37] font-bold text-sm">
               🔴 Bir sonraki maç için takipte kalın!
             </div>
           </div>

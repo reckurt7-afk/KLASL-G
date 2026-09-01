@@ -149,7 +149,7 @@ export default function GolSesiDinleyici() {
   return (
     <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden pointer-events-none">
       {/* Kırmızı Flaşör Arka Plan */}
-      <div className="absolute inset-0 bg-red-600/90 animate-gol-flash backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-[#d4af37]/90 animate-gol-flash backdrop-blur-sm" />
       
       {/* Dev GOOOOL Yazısı */}
       <div className="relative z-10 flex flex-col items-center animate-gol-zoom">

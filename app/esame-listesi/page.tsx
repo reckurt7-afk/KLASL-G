@@ -245,11 +245,11 @@ export default function EsameListesiPage() {
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto pt-[40px] px-4 pb-24">
         
-        <div className="bg-[#151515]/60 backdrop-blur-xl border border-[#ff3131]/20 rounded-3xl p-6 mb-8 text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-          <h1 className="text-white text-3xl md:text-4xl font-black m-0 drop-shadow-[0_0_15px_rgba(255,49,49,0.4)]">
+        <div className="bg-[#151515]/60 backdrop-blur-xl border border-[#d4af37]/20 rounded-3xl p-6 mb-8 text-center shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <h1 className="text-white text-3xl md:text-4xl font-black m-0 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
             📋 ESAME LİSTESİ
           </h1>
-          <div className="text-[#ff3131] mt-2 text-xs md:text-sm tracking-[0.4em] font-black uppercase">
+          <div className="text-[#d4af37] mt-2 text-xs md:text-sm tracking-[0.4em] font-black uppercase">
             Kaptan Kadro Seçimi
           </div>
         </div>
@@ -261,7 +261,7 @@ export default function EsameListesiPage() {
               onClick={() => setAktifHafta(i)}
               className={`flex-shrink-0 w-12 h-12 rounded-full font-black text-lg transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.3)]
                 ${aktifHafta === i 
-                  ? "bg-gradient-to-br from-[#ff3131] to-[#a11212] text-white scale-110 shadow-[0_0_15px_rgba(255,49,49,0.6)]" 
+                  ? "bg-gradient-to-br from-[#d4af37] to-[#8c7324] text-white scale-110 shadow-[0_0_15px_rgba(212,175,55,0.6)]" 
                   : "bg-[#1c1c1c] text-gray-400 hover:bg-[#252525] hover:text-white"
                 }`}
             >
@@ -271,33 +271,33 @@ export default function EsameListesiPage() {
         </div>
 
         <div className="flex items-center gap-4 mb-8">
-          <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent to-[#ff3131]/50"></div>
-          <h2 className="text-white text-2xl md:text-3xl font-black italic drop-shadow-[0_0_10px_rgba(255,49,49,0.5)] text-center">
+          <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent to-[#d4af37]/50"></div>
+          <h2 className="text-white text-2xl md:text-3xl font-black italic drop-shadow-[0_0_10px_rgba(212,175,55,0.5)] text-center">
             {haftalar[aktifHafta].hafta}
           </h2>
-          <div className="h-[2px] flex-1 bg-gradient-to-l from-transparent to-[#ff3131]/50"></div>
+          <div className="h-[2px] flex-1 bg-gradient-to-l from-transparent to-[#d4af37]/50"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {haftalar[aktifHafta].maclar.map((mac, index) => (
             <div
               key={index}
-              className="group relative bg-[#151515]/70 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-[#ff3131]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(255,49,49,0.15)] flex flex-col"
+              className="group relative bg-[#151515]/70 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-[#d4af37]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)] flex flex-col"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-[#d4af37]/0 to-[#d4af37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
 
               <div className="flex justify-between items-center w-full mb-6">
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                     <Image src={logolar[mac[0]] || "/icons/logo.png"} alt={mac[0]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[0]}</span>
                 </div>
 
-                <span className="text-[#ff3131] font-black text-2xl italic drop-shadow-[0_0_10px_rgba(255,49,49,0.8)] w-[20%] text-center">VS</span>
+                <span className="text-[#d4af37] font-black text-2xl italic drop-shadow-[0_0_10px_rgba(212,175,55,0.8)] w-[20%] text-center">VS</span>
 
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
-                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,49,49,0.3)]">
+                  <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                     <Image src={logolar[mac[1]] || "/icons/logo.png"} alt={mac[1]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[1]}</span>
@@ -306,7 +306,7 @@ export default function EsameListesiPage() {
 
               <button
                 onClick={() => macSec(mac[0], mac[1])}
-                className="w-full py-3 bg-[#222] hover:bg-gradient-to-r hover:from-[#ff3131] hover:to-[#a11212] border border-white/10 hover:border-transparent text-gray-300 hover:text-white rounded-xl font-black shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#222] hover:bg-gradient-to-r hover:from-[#d4af37] hover:to-[#8c7324] border border-white/10 hover:border-transparent text-gray-300 hover:text-white rounded-xl font-black shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
               >
                 📝 KADRO OLUŞTUR
               </button>
@@ -316,13 +316,13 @@ export default function EsameListesiPage() {
 
         {authAcik && secilenMac && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-start md:items-center justify-center z-[99999] p-4 overflow-y-auto">
-            <div className="w-full max-w-2xl bg-[#111] border border-[#ff3131]/30 rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-8">
+            <div className="w-full max-w-2xl bg-[#111] border border-[#d4af37]/30 rounded-3xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-8">
               
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-white text-xl md:text-2xl font-black drop-shadow-[0_0_10px_rgba(255,49,49,0.4)]">
+                <h2 className="text-white text-xl md:text-2xl font-black drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]">
                   {isAuth ? "KADRO SEÇİMİ" : "KAPTAN GİRİŞİ"}
                 </h2>
-                <button onClick={() => setAuthAcik(false)} className="text-gray-400 hover:text-[#ff3131] text-2xl font-black transition-colors">&times;</button>
+                <button onClick={() => setAuthAcik(false)} className="text-gray-400 hover:text-[#d4af37] text-2xl font-black transition-colors">&times;</button>
               </div>
 
               {!isAuth ? (
@@ -330,11 +330,11 @@ export default function EsameListesiPage() {
                   <p className="text-gray-400 text-sm">Maç kadrosunu oluşturmak için takımınızı seçin ve kaptan şifresini girin.</p>
                   
                   <div>
-                    <label className="text-[#ff3131] font-bold text-sm mb-2 block">Takımınız</label>
+                    <label className="text-[#d4af37] font-bold text-sm mb-2 block">Takımınız</label>
                     <select
                       value={secilenTakim}
                       onChange={(e) => setSecilenTakim(e.target.value)}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:outline-none focus:border-[#ff3131]/50"
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:outline-none focus:border-[#d4af37]/50"
                     >
                       <option value="">Takım Seçin...</option>
                       <option value={secilenMac.ev}>{secilenMac.ev}</option>
@@ -343,28 +343,28 @@ export default function EsameListesiPage() {
                   </div>
 
                   <div>
-                    <label className="text-[#ff3131] font-bold text-sm mb-2 block">Kaptan Şifresi</label>
+                    <label className="text-[#d4af37] font-bold text-sm mb-2 block">Kaptan Şifresi</label>
                     <input
                       type="password"
                       placeholder="Şifreyi giriniz"
                       value={sifre}
                       onChange={(e) => setSifre(e.target.value)}
-                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:outline-none focus:border-[#ff3131]/50"
+                      className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl px-4 py-3 text-white font-bold focus:outline-none focus:border-[#d4af37]/50"
                     />
                   </div>
 
                   <button
                     onClick={sifreKontrolEt}
-                    className="w-full py-4 bg-gradient-to-r from-[#ff3131] to-[#a11212] text-white rounded-xl font-black shadow-[0_5px_15px_rgba(255,49,49,0.3)] hover:shadow-[0_5px_20px_rgba(255,49,49,0.6)] transition-all"
+                    className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-white rounded-xl font-black shadow-[0_5px_15px_rgba(212,175,55,0.3)] hover:shadow-[0_5px_20px_rgba(212,175,55,0.6)] transition-all"
                   >
                     GİRİŞ YAP VE KADROYU KUR
                   </button>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <div className="bg-[#1a1a1a] p-4 rounded-xl border border-[#ff3131]/20 flex items-center justify-between">
+                  <div className="bg-[#1a1a1a] p-4 rounded-xl border border-[#d4af37]/20 flex items-center justify-between">
                     <div>
-                      <div className="text-[#ff3131] font-black text-xs tracking-widest">{secilenMac.hafta}</div>
+                      <div className="text-[#d4af37] font-black text-xs tracking-widest">{secilenMac.hafta}</div>
                       <div className="text-white font-bold text-sm md:text-base mt-1">{secilenMac.ev} 🆚 {secilenMac.dep}</div>
                     </div>
                     <div className="text-right">
@@ -378,7 +378,7 @@ export default function EsameListesiPage() {
                   {loading ? (
                     <div className="text-center text-gray-400 py-10">Oyuncular Yükleniyor...</div>
                   ) : oyuncular.length === 0 ? (
-                    <div className="text-center text-red-400 py-10 font-bold border border-red-500/20 rounded-xl bg-red-500/10">
+                    <div className="text-center text-red-400 py-10 font-bold border border-[#eab308]/20 rounded-xl bg-[#eab308]/10">
                       Takımınıza ait kayıtlı oyuncu bulunamadı. Lütfen önce 'Oyuncular' sayfasından kayıt oluşturun.
                     </div>
                   ) : (
@@ -394,7 +394,7 @@ export default function EsameListesiPage() {
                           const isKaptan = kaptanId === o.id;
 
                           return (
-                            <div key={o.id} className={`p-3 rounded-xl border transition-colors ${asilMi ? 'bg-[#ff3131]/10 border-[#ff3131]/30' : yedekMi ? 'bg-white/5 border-white/20' : 'bg-[#1a1a1a] border-white/5'}`}>
+                            <div key={o.id} className={`p-3 rounded-xl border transition-colors ${asilMi ? 'bg-[#d4af37]/10 border-[#d4af37]/30' : yedekMi ? 'bg-white/5 border-white/20' : 'bg-[#1a1a1a] border-white/5'}`}>
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <div className="flex items-center gap-3 overflow-hidden">
                                   <div className="w-8 h-8 flex-shrink-0 rounded-full bg-black/50 border border-white/10 flex items-center justify-center font-black text-gray-300 text-xs">
@@ -409,7 +409,7 @@ export default function EsameListesiPage() {
                                 <div className="grid grid-cols-3 gap-2 mt-1 sm:mt-0 sm:flex sm:flex-wrap sm:justify-end">
                                   <button
                                     onClick={() => oyuncuToggle(o.id, "ilk7")}
-                                    className={`w-full sm:w-auto px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${asilMi ? 'bg-[#ff3131] text-white shadow-lg' : 'bg-[#222] text-gray-400 hover:bg-[#333]'}`}
+                                    className={`w-full sm:w-auto px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold transition-colors ${asilMi ? 'bg-[#d4af37] text-white shadow-lg' : 'bg-[#222] text-gray-400 hover:bg-[#333]'}`}
                                   >
                                     İlk 7
                                   </button>

@@ -72,7 +72,7 @@ export default function AdminGaleriPage() {
 
       {/* Yükleme Alanı */}
       <div style={{ maxWidth: 700, margin: "0 auto 40px", background: "#151515", borderRadius: 16, padding: 25, border: "1px solid rgba(255,255,255,0.1)" }}>
-        <h3 style={{ color: "#ff3131", marginBottom: 15 }}>Yeni Fotoğraf Yükle</h3>
+        <h3 style={{ color: "#d4af37", marginBottom: 15 }}>Yeni Fotoğraf Yükle</h3>
         
         <input
           value={baslik}
@@ -82,12 +82,12 @@ export default function AdminGaleriPage() {
         />
 
         <label style={{
-          display: "block", border: "2px dashed rgba(255,49,49,0.4)", borderRadius: 12,
+          display: "block", border: "2px dashed rgba(212,175,55,0.4)", borderRadius: 12,
           padding: 30, textAlign: "center", cursor: "pointer",
-          background: "rgba(255,49,49,0.05)", transition: "all 0.2s"
+          background: "rgba(212,175,55,0.05)", transition: "all 0.2s"
         }}>
           <div style={{ fontSize: 40, marginBottom: 10 }}>📁</div>
-          <div style={{ fontWeight: 700, color: "#ff3131" }}>{yukleniyor ? "Yükleniyor..." : "Fotoğraf Seç (Birden fazla seçebilirsin)"}</div>
+          <div style={{ fontWeight: 700, color: "#d4af37" }}>{yukleniyor ? "Yükleniyor..." : "Fotoğraf Seç (Birden fazla seçebilirsin)"}</div>
           <div style={{ color: "#aaa", fontSize: 13, marginTop: 5 }}>JPG, PNG, WEBP desteklenir</div>
           <input
             ref={inputRef}

@@ -156,7 +156,7 @@ export default function KapBildirimleriAdminPage() {
             <h2 className="text-lg font-bold text-gray-900 mb-6">{editId ? "KAP Düzenle" : "Yeni KAP Ekle"}</h2>
 
             {msg && (
-              <div className={`p-4 rounded-xl mb-6 text-[13px] font-bold border ${msg.tip === "ok" ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-red-600 border-red-200"}`}>
+              <div className={`p-4 rounded-xl mb-6 text-[13px] font-bold border ${msg.tip === "ok" ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-[#d4af37] border-red-200"}`}>
                 {msg.yazi}
               </div>
             )}
@@ -164,23 +164,23 @@ export default function KapBildirimleriAdminPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Başlık *</label>
-                <input value={baslik} onChange={e => setBaslik(e.target.value)} type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all" placeholder="Örn: Hafta Sonu Derbisi" />
+                <input value={baslik} onChange={e => setBaslik(e.target.value)} type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]/20 focus:border-[#1e3a8a] transition-all" placeholder="Örn: Hafta Sonu Derbisi" />
               </div>
 
               <div>
                 <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Kısa Özet</label>
-                <textarea value={ozet} onChange={e => setOzet(e.target.value)} rows={2} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all resize-none" placeholder="Kısa liste özeti..." />
+                <textarea value={ozet} onChange={e => setOzet(e.target.value)} rows={2} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]/20 focus:border-[#1e3a8a] transition-all resize-none" placeholder="Kısa liste özeti..." />
               </div>
 
               <div>
                 <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Haber Detayı (İçerik)</label>
-                <textarea value={detay} onChange={e => setDetay(e.target.value)} rows={6} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000] transition-all" placeholder="Tüm haber detayları..." />
+                <textarea value={detay} onChange={e => setDetay(e.target.value)} rows={6} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]/20 focus:border-[#1e3a8a] transition-all" placeholder="Tüm haber detayları..." />
               </div>
 
               <div>
                 <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Kapak Görseli (Görsel URL veya Yükle)</label>
                 <div className="flex gap-2">
-                  <input type="text" value={resimUrl} onChange={e => setResimUrl(e.target.value)} placeholder="https://..." className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#e60000]/20 focus:border-[#e60000]" />
+                  <input type="text" value={resimUrl} onChange={e => setResimUrl(e.target.value)} placeholder="https://..." className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 text-[13px] focus:outline-none focus:ring-2 focus:ring-[#1e3a8a]/20 focus:border-[#1e3a8a]" />
                   <input type="file" accept="image/*" ref={fileRef} className="hidden" onChange={async (e) => {
                     const f = e.target.files?.[0];
                     if (f) {
@@ -195,7 +195,7 @@ export default function KapBildirimleriAdminPage() {
               </div>
 
               <div className="pt-4 flex gap-2">
-                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#e60000] hover:bg-[#cc0000] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-[14px]">
+                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-[14px]">
                   {saving ? "Kaydediliyor..." : (editId ? "Güncelle" : "Yayınla")}
                 </button>
                 {editId && (
@@ -234,7 +234,7 @@ export default function KapBildirimleriAdminPage() {
                   <button onClick={() => duzle(h)} className="text-[#2563eb] bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg text-[12px] font-bold transition-colors">
                     Düzenle
                   </button>
-                  <button onClick={() => sil(h.id)} className="text-[#e60000] bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg text-[12px] font-bold transition-colors">
+                  <button onClick={() => sil(h.id)} className="text-[#1e3a8a] bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg text-[12px] font-bold transition-colors">
                     Sil
                   </button>
                 </div>

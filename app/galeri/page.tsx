@@ -100,7 +100,7 @@ export default function GaleriPage() {
                     </div>
                   )}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-14 h-14 rounded-full bg-[#ff3131]/80 backdrop-blur-sm flex items-center justify-center text-white text-2xl shadow-[0_0_20px_rgba(255,49,49,0.5)]">
+                    <div className="w-14 h-14 rounded-full bg-[#d4af37]/80 backdrop-blur-sm flex items-center justify-center text-white text-2xl shadow-[0_0_20px_rgba(212,175,55,0.5)]">
                       🔍
                     </div>
                   </div>
@@ -123,7 +123,7 @@ export default function GaleriPage() {
               e.stopPropagation();
               onceki();
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white text-2xl flex items-center justify-center hover:bg-[#ff3131]/60 transition-colors z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white text-2xl flex items-center justify-center hover:bg-[#d4af37]/60 transition-colors z-10"
           >
             ←
           </button>
@@ -135,7 +135,7 @@ export default function GaleriPage() {
             {/* Kapat */}
             <button
               onClick={() => setSecili(null)}
-              className="absolute -top-12 right-0 text-white text-3xl hover:text-[#ff3131] transition-colors font-black"
+              className="absolute -top-12 right-0 text-white text-3xl hover:text-[#d4af37] transition-colors font-black"
             >
               ✕
             </button>
@@ -162,7 +162,7 @@ export default function GaleriPage() {
               e.stopPropagation();
               sonraki();
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white text-2xl flex items-center justify-center hover:bg-[#ff3131]/60 transition-colors z-10"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white text-2xl flex items-center justify-center hover:bg-[#d4af37]/60 transition-colors z-10"
           >
             →
           </button>

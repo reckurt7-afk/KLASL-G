@@ -67,15 +67,15 @@ export default function HakemPaneli() {
 
   return (
     <div className="min-h-screen bg-[#070707] text-white p-4 font-montserrat">
-      <h1 className="text-3xl font-black text-center mb-6 text-[#ff3131] font-oswald uppercase">HAKEM PANELI</h1>
+      <h1 className="text-3xl font-black text-center mb-6 text-[#d4af37] font-oswald uppercase">HAKEM PANELI</h1>
 
       {!selectedMatch ? (
         <div className="max-w-xl mx-auto space-y-4">
           <h2 className="text-xl font-bold text-gray-400">Yonetilecek Maci Secin</h2>
           {matches.map(m => (
-            <div key={m.id} onClick={() => setSelectedMatch(m)} className="card p-4 flex justify-between items-center cursor-pointer hover:border-[#ff3131]">
+            <div key={m.id} onClick={() => setSelectedMatch(m)} className="card p-4 flex justify-between items-center cursor-pointer hover:border-[#d4af37]">
               <div className="flex-1 text-right font-bold">{m.home_team?.name}</div>
-              <div className="px-4 font-black text-2xl text-[#ff3131]">{m.home_score} - {m.away_score}</div>
+              <div className="px-4 font-black text-2xl text-[#d4af37]">{m.home_score} - {m.away_score}</div>
               <div className="flex-1 text-left font-bold">{m.away_team?.name}</div>
             </div>
           ))}
@@ -83,7 +83,7 @@ export default function HakemPaneli() {
       ) : (
         <div className="max-w-2xl mx-auto space-y-6">
           <div className="card p-6 flex flex-col items-center">
-            <div className="text-sm font-bold text-red-500 mb-2">{selectedMatch.status} - {selectedMatch.current_minute}'</div>
+            <div className="text-sm font-bold text-[#eab308] mb-2">{selectedMatch.status} - {selectedMatch.current_minute}'</div>
             <div className="flex justify-between items-center w-full">
               <div className="flex-1 text-center font-black text-xl">{selectedMatch.home_team?.name}</div>
               <div className="px-6 font-black text-5xl tracking-widest">{selectedMatch.home_score}-{selectedMatch.away_score}</div>
@@ -94,7 +94,7 @@ export default function HakemPaneli() {
           <div className="grid grid-cols-3 gap-2">
             <button onClick={() => setLiveStatus('Canli', true)} className="bg-green-600/20 text-green-500 border border-green-600 p-3 rounded-lg font-bold">BASLAT</button>
             <button onClick={() => setLiveStatus('Devre Arasi', false)} className="bg-yellow-600/20 text-yellow-500 border border-yellow-600 p-3 rounded-lg font-bold">DEVRE ARASI</button>
-            <button onClick={() => setLiveStatus('Bitti', false)} className="bg-red-600/20 text-red-500 border border-red-600 p-3 rounded-lg font-bold">BITIR</button>
+            <button onClick={() => setLiveStatus('Bitti', false)} className="bg-[#d4af37]/20 text-[#eab308] border border-[#d4af37] p-3 rounded-lg font-bold">BITIR</button>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -103,7 +103,7 @@ export default function HakemPaneli() {
               <button onClick={() => { setEventTeamId(selectedMatch.home_team_id); setEventType("GOL"); setShowEventModal(true); }} className="w-full bg-blue-600/20 text-blue-400 border border-blue-600 p-4 rounded-xl font-black text-xl uppercase tracking-widest">+ GOL</button>
               <div className="flex gap-2">
                 <button onClick={() => { setEventTeamId(selectedMatch.home_team_id); setEventType("SARI_KART"); setShowEventModal(true); }} className="flex-1 bg-yellow-500/20 border border-yellow-500 p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-yellow-500 rounded-sm"></div></button>
-                <button onClick={() => { setEventTeamId(selectedMatch.home_team_id); setEventType("KIRMIZI_KART"); setShowEventModal(true); }} className="flex-1 bg-red-600/20 border border-red-600 p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-red-600 rounded-sm"></div></button>
+                <button onClick={() => { setEventTeamId(selectedMatch.home_team_id); setEventType("KIRMIZI_KART"); setShowEventModal(true); }} className="flex-1 bg-[#d4af37]/20 border border-[#d4af37] p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-[#d4af37] rounded-sm"></div></button>
               </div>
             </div>
 
@@ -112,7 +112,7 @@ export default function HakemPaneli() {
               <button onClick={() => { setEventTeamId(selectedMatch.away_team_id); setEventType("GOL"); setShowEventModal(true); }} className="w-full bg-blue-600/20 text-blue-400 border border-blue-600 p-4 rounded-xl font-black text-xl uppercase tracking-widest">+ GOL</button>
               <div className="flex gap-2">
                 <button onClick={() => { setEventTeamId(selectedMatch.away_team_id); setEventType("SARI_KART"); setShowEventModal(true); }} className="flex-1 bg-yellow-500/20 border border-yellow-500 p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-yellow-500 rounded-sm"></div></button>
-                <button onClick={() => { setEventTeamId(selectedMatch.away_team_id); setEventType("KIRMIZI_KART"); setShowEventModal(true); }} className="flex-1 bg-red-600/20 border border-red-600 p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-red-600 rounded-sm"></div></button>
+                <button onClick={() => { setEventTeamId(selectedMatch.away_team_id); setEventType("KIRMIZI_KART"); setShowEventModal(true); }} className="flex-1 bg-[#d4af37]/20 border border-[#d4af37] p-3 rounded-xl flex justify-center"><div className="w-6 h-8 bg-[#d4af37] rounded-sm"></div></button>
               </div>
             </div>
           </div>
@@ -137,14 +137,14 @@ export default function HakemPaneli() {
                 <button 
                   key={tp.id} 
                   onClick={() => handleAddEvent(tp.players?.id)}
-                  className="w-full p-3 bg-gray-900 border border-gray-800 hover:border-[#ff3131] rounded-lg text-left font-bold text-white transition-colors"
+                  className="w-full p-3 bg-gray-900 border border-gray-800 hover:border-[#d4af37] rounded-lg text-left font-bold text-white transition-colors"
                 >
                   <span className="text-gray-500 w-6 inline-block">{tp.jersey_number || '-'}</span> {tp.players?.first_name} {tp.players?.last_name}
                 </button>
               ))}
             </div>
             
-            <button onClick={() => setShowEventModal(false)} className="w-full mt-4 p-3 bg-red-600 text-white rounded-lg font-bold">Iptal</button>
+            <button onClick={() => setShowEventModal(false)} className="w-full mt-4 p-3 bg-[#d4af37] text-white rounded-lg font-bold">Iptal</button>
           </div>
         </div>
       )}

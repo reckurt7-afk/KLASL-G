@@ -36,7 +36,7 @@ export default function AdminGirisPage() {
           background: "#151515",
           padding: 30,
           borderRadius: 20,
-          border: "1px solid rgba(255,49,49,.3)",
+          border: "1px solid rgba(212,175,55,.3)",
         }}
       >
         <h1
@@ -76,7 +76,7 @@ export default function AdminGirisPage() {
             marginTop: 20,
             border: "none",
             borderRadius: 14,
-            background: "#ff3131",
+            background: "#d4af37",
             color: "#fff",
             fontWeight: 900,
             fontSize: 17,

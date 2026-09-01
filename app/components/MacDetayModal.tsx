@@ -53,18 +53,18 @@ export default function MacDetayModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-in fade-in duration-300">
       {/* MODAL CONTAINER */}
-      <div className="relative w-full max-w-2xl bg-[#0d0d0d] border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(255,49,49,0.2)] overflow-hidden">
+      <div className="relative w-full max-w-2xl bg-[#0d0d0d] border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(212,175,55,0.2)] overflow-hidden">
         {/* CLOSE BUTTON */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#ff3131] text-white flex items-center justify-center font-bold text-xl transition-all duration-300 z-20"
+          className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#d4af37] text-white flex items-center justify-center font-bold text-xl transition-all duration-300 z-20"
         >
           ✕
         </button>
 
         {/* MATCH HEADER / TEAMS DISPLAY */}
         <div className="text-center mb-6">
-          <span className="bg-[#ff3131]/10 text-[#ff3131] text-xs font-black px-4 py-1 rounded-full border border-[#ff3131]/30 tracking-widest uppercase">
+          <span className="bg-[#d4af37]/10 text-[#d4af37] text-xs font-black px-4 py-1 rounded-full border border-[#d4af37]/30 tracking-widest uppercase">
             {mac.hafta ? `${mac.hafta}. HAFTA MAÇI` : "PRO LİG MAÇ DETAYI"}
           </span>
         </div>
@@ -84,17 +84,17 @@ export default function MacDetayModal({
           <div className="flex flex-col items-center justify-center">
             {mac.oynandi || mac.canli || mac.ev_skor !== undefined ? (
               <div className="flex items-center gap-3 text-3xl sm:text-5xl font-black text-white tracking-tighter">
-                <span className="text-[#ff3131]">{mac.ev_skor ?? 0}</span>
+                <span className="text-[#d4af37]">{mac.ev_skor ?? 0}</span>
                 <span className="text-gray-600">-</span>
-                <span className="text-[#ff3131]">{mac.dep_skor ?? 0}</span>
+                <span className="text-[#d4af37]">{mac.dep_skor ?? 0}</span>
               </div>
             ) : (
-              <div className="text-2xl sm:text-3xl font-black text-[#ff3131]">VS</div>
+              <div className="text-2xl sm:text-3xl font-black text-[#d4af37]">VS</div>
             )}
 
             <div className="mt-2 text-xs font-bold text-gray-400">
               {mac.canli ? (
-                <span className="text-red-500 animate-pulse font-black">● CANLI</span>
+                <span className="text-[#eab308] animate-pulse font-black">● CANLI</span>
               ) : (
                 mac.durum || mac.saat || "Maç Sona Erdi"
               )}
@@ -124,11 +124,11 @@ export default function MacDetayModal({
                 key={i}
                 className={`flex items-center gap-3 p-3 rounded-xl border ${
                   g.takim === "ev"
-                    ? "bg-[#ff3131]/5 border-[#ff3131]/20 flex-row"
+                    ? "bg-[#d4af37]/5 border-[#d4af37]/20 flex-row"
                     : "bg-blue-500/5 border-blue-500/20 flex-row-reverse text-right"
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-xs text-[#ff3131] shrink-0">
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-xs text-[#d4af37] shrink-0">
                   {g.dk}'
                 </div>
                 <div className="flex items-center gap-2 font-bold text-sm text-white">

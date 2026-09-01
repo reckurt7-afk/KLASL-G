@@ -99,7 +99,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       {/* The red separator line like the screenshot */}
       <div className="w-full bg-[#f4f6f8] pt-2">
          <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6">
-            <div className="w-full h-[2px] bg-[#e60000] rounded-full opacity-20"></div>
+            <div className="w-full h-[2px] bg-[#1e3a8a] rounded-full opacity-20"></div>
          </div>
       </div>
       
@@ -119,8 +119,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#e60000] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#e60000]/20 hover:shadow-md hover:-translate-y-0.5"
+                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
+                        : "bg-white border-gray-100 text-gray-700 hover:border-[#1e3a8a]/20 hover:shadow-md hover:-translate-y-0.5"
                     }`}
                   >
                     {!isActive && (
@@ -130,7 +130,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
                         ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#e60000] group-hover:shadow-sm"
+                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#1e3a8a] group-hover:shadow-sm"
                     }`}>
                       {item.icon}
                     </div>
@@ -162,8 +162,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#e60000] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#e60000]/20 hover:shadow-md hover:-translate-y-0.5"
+                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
+                        : "bg-white border-gray-100 text-gray-700 hover:border-[#1e3a8a]/20 hover:shadow-md hover:-translate-y-0.5"
                     }`}
                   >
                     {!isActive && (
@@ -173,7 +173,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
                         ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#e60000] group-hover:shadow-sm"
+                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#1e3a8a] group-hover:shadow-sm"
                     }`}>
                       {item.icon}
                     </div>
@@ -185,7 +185,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                       </div>
                     ) : (
-                      <div className="relative z-10 text-gray-300 group-hover:text-[#e60000] group-hover:translate-x-1 transition-transform shrink-0">
+                      <div className="relative z-10 text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-1 transition-transform shrink-0">
                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                       </div>
                     )}

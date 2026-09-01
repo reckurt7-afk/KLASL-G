@@ -104,7 +104,7 @@ export default function AdminTransferPage() {
             </h2>
             <div
               className={`text-3xl font-black tracking-widest uppercase ${
-                isOpen ? "text-emerald-400" : "text-red-500"
+                isOpen ? "text-emerald-400" : "text-[#eab308]"
               }`}
             >
               {isOpen ? "AÇIK" : "KAPALI"}

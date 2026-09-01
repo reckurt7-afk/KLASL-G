@@ -42,7 +42,7 @@ export default function AdminVideoArsivPage() {
 
       {/* Ekleme Formu */}
       <div style={{ maxWidth: 700, margin: "0 auto 40px", background: "#151515", borderRadius: 16, padding: 25, border: "1px solid rgba(255,255,255,0.1)" }}>
-        <h3 style={{ color: "#ff3131", marginBottom: 20 }}>Yeni Video Ekle</h3>
+        <h3 style={{ color: "#d4af37", marginBottom: 20 }}>Yeni Video Ekle</h3>
 
         {[
           { label: "Başlık *", val: baslik, set: setBaslik, ph: "Maç adı veya video başlığı" },
@@ -75,7 +75,7 @@ export default function AdminVideoArsivPage() {
           disabled={kaydediliyor}
           style={{
             width: "100%", height: 50,
-            background: "linear-gradient(135deg, #ff3131, #a11212)",
+            background: "linear-gradient(135deg, #d4af37, #8c7324)",
             color: "#fff", border: "none", borderRadius: 12,
             fontWeight: 800, fontSize: 16, cursor: "pointer"
           }}
@@ -96,7 +96,7 @@ export default function AdminVideoArsivPage() {
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 800, color: "#fff" }}>{video.baslik}</div>
               <div style={{ color: "#aaa", fontSize: 13, marginTop: 4 }}>{video.youtube_link}</div>
-              <div style={{ color: "#ff3131", fontSize: 12, marginTop: 4 }}>📅 {new Date(video.tarih).toLocaleDateString("tr-TR")}</div>
+              <div style={{ color: "#d4af37", fontSize: 12, marginTop: 4 }}>📅 {new Date(video.tarih).toLocaleDateString("tr-TR")}</div>
             </div>
             <button
               onClick={() => sil(video.id)}

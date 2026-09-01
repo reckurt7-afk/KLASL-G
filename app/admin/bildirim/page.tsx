@@ -63,8 +63,8 @@ export default function BildirimPage() {
         {/* Sonuç mesajı */}
         {sonuc && (
           <div style={{
-            background: sonuc.tip === "ok" ? "rgba(16,185,129,0.1)" : "rgba(255,49,49,0.1)",
-            border: `1px solid ${sonuc.tip === "ok" ? "rgba(16,185,129,0.4)" : "rgba(255,49,49,0.4)"}`,
+            background: sonuc.tip === "ok" ? "rgba(16,185,129,0.1)" : "rgba(212,175,55,0.1)",
+            border: `1px solid ${sonuc.tip === "ok" ? "rgba(16,185,129,0.4)" : "rgba(212,175,55,0.4)"}`,
             borderRadius: 12,
             padding: "14px 18px",
             color: sonuc.tip === "ok" ? "#10b981" : "#ff6b6b",
@@ -107,7 +107,7 @@ export default function BildirimPage() {
         {/* Form */}
         <div style={{
           background: "#151515",
-          border: "1px solid rgba(255,49,49,0.2)",
+          border: "1px solid rgba(212,175,55,0.2)",
           borderRadius: 20,
           padding: 24,
         }}>
@@ -166,12 +166,12 @@ export default function BildirimPage() {
               height: 56,
               border: "none",
               borderRadius: 14,
-              background: loading ? "#333" : "linear-gradient(135deg, #ff3131, #a11212)",
+              background: loading ? "#333" : "linear-gradient(135deg, #d4af37, #8c7324)",
               color: "#fff",
               fontSize: 17,
               fontWeight: 900,
               cursor: loading ? "not-allowed" : "pointer",
-              boxShadow: loading ? "none" : "0 8px 20px rgba(255,49,49,0.35)",
+              boxShadow: loading ? "none" : "0 8px 20px rgba(212,175,55,0.35)",
               letterSpacing: 1,
             }}
           >

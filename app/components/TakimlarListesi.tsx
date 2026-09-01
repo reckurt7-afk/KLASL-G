@@ -39,7 +39,7 @@ export default function TakimlarListesi() {
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="section-title">👥 TAKIMLAR</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">PRO LİG MÜCADELECİLERİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#d4af37]">PRO LİG MÜCADELECİLERİ</p>
       </div>
 
       {loading ? (
@@ -72,20 +72,20 @@ export default function TakimlarListesi() {
             return (
               <motion.div variants={itemVariants} key={takim.id}>
                 <Link href={`/takim/${slug}`} className="group block h-full">
-                  <div className="card h-full p-4 md:p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:border-[#ff3131]/50 hover:shadow-[0_15px_30px_rgba(255,49,49,0.15)] relative overflow-hidden bg-white border border-gray-100">
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                  <div className="card h-full p-4 md:p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37]/50 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)] relative overflow-hidden bg-white border border-gray-100">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#d4af37]/0 to-[#d4af37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-                    <div className="relative w-[70px] h-[70px] md:w-[110px] md:h-[110px] mb-4 rounded-full bg-[#050505] border border-gray-800 shadow-[0_10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover:scale-110 group-hover:border-[#ff3131]/50 transition-all duration-500 overflow-hidden">
+                    <div className="relative w-[70px] h-[70px] md:w-[110px] md:h-[110px] mb-4 rounded-full bg-[#050505] border border-gray-800 shadow-[0_10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover:scale-110 group-hover:border-[#d4af37]/50 transition-all duration-500 overflow-hidden">
                       <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain p-2" />
                     </div>
 
-                    <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#ff3131] transition-colors mt-2 line-clamp-2">
+                    <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#d4af37] transition-colors mt-2 line-clamp-2">
                       {takim.name}
                     </div>
                     
-                    <div className="w-8 h-1 bg-gradient-to-r from-transparent via-[#ff3131]/50 to-transparent my-3"></div>
+                    <div className="w-8 h-1 bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent my-3"></div>
                     
-                    <div className="mt-auto w-full bg-gray-100 rounded-xl py-2 flex items-center justify-center border border-gray-200 group-hover:border-[#ff3131]/20">
+                    <div className="mt-auto w-full bg-gray-100 rounded-xl py-2 flex items-center justify-center border border-gray-200 group-hover:border-[#d4af37]/20">
                       <span className="text-gray-500 text-[10px] font-bold uppercase tracking-wider group-hover:text-gray-900 transition-colors">Kadroyu Gör ➔</span>
                     </div>
                   </div>

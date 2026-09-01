@@ -109,7 +109,7 @@ export default function OyuncuEklePage() {
           </div>
         )}
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-500/20 border border-red-500/50 text-red-400 font-bold text-center">
+          <div className="mb-6 p-4 rounded-xl bg-[#eab308]/20 border border-[#eab308]/50 text-red-400 font-bold text-center">
             {error}
           </div>
         )}

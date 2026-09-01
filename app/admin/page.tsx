@@ -17,7 +17,7 @@ const ADMIN_CARDS = [
     desc: "Maç skoru, gol, asist ve kartları yönet",
     link: "/admin/canli-mac",
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2">
         <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
       </svg>
     ),
@@ -178,17 +178,17 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-[#050505] pt-12 pb-24 font-sans relative overflow-hidden">
       {/* Background Glow Effects */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#e60000] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#1e3a8a] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#1e3a8a] opacity-[0.03] blur-[150px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-[1250px] mx-auto px-5 md:px-8 relative z-10">
         
         {/* Admin Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between bg-[#0a0a0a]/80 backdrop-blur-xl border border-gray-800/60 rounded-3xl p-8 shadow-2xl mb-12 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#e60000]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
           
           <div className="flex items-center gap-6 mb-6 md:mb-0 relative z-10">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#e60000] to-[#990000] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(230,0,0,0.3)] border border-[#ff3333]/30">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#1e3a8a] to-[#990000] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(230,0,0,0.3)] border border-[#ff3333]/30">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/>
               </svg>
@@ -217,11 +217,11 @@ export default function AdminPage() {
             <Link
               key={i}
               href={kart.link}
-              className="group relative bg-[#0a0a0a]/60 backdrop-blur-md border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 flex flex-col hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(230,0,0,0.15)] hover:border-[#e60000]/50 overflow-hidden"
+              className="group relative bg-[#0a0a0a]/60 backdrop-blur-md border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 flex flex-col hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(230,0,0,0.15)] hover:border-[#1e3a8a]/50 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#e60000]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               
-              <div className="w-14 h-14 bg-[#141414] group-hover:bg-[#e60000] text-gray-400 group-hover:text-white rounded-xl flex items-center justify-center mb-5 transition-all duration-300 border border-gray-800 group-hover:border-[#ff3333] shadow-inner relative z-10">
+              <div className="w-14 h-14 bg-[#141414] group-hover:bg-[#1e3a8a] text-gray-400 group-hover:text-white rounded-xl flex items-center justify-center mb-5 transition-all duration-300 border border-gray-800 group-hover:border-[#ff3333] shadow-inner relative z-10">
                 {kart.icon}
               </div>
               <h2 className="text-[17px] font-black text-gray-200 mb-2 group-hover:text-white transition-colors tracking-wide relative z-10">
@@ -232,7 +232,7 @@ export default function AdminPage() {
               </p>
               
               {/* Decorative Arrow */}
-              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#e60000]">
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-[#1e3a8a]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
             </Link>

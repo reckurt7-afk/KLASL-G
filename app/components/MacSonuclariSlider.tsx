@@ -94,12 +94,12 @@ export default function MacSonuclariSlider() {
                 className={`min-w-[240px] bg-white rounded-xl p-3 shrink-0 snap-start shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 hover:-translate-y-0.5 transition-all cursor-pointer relative overflow-hidden`}
               >
                 {/* Dynamic Top Border like the screenshot */}
-                <div className={`absolute top-0 left-0 right-0 h-[3px] ${["bg-red-500", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][match.id % 5]}`}></div>
+                <div className={`absolute top-0 left-0 right-0 h-[3px] ${["bg-[#eab308]", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][match.id % 5]}`}></div>
                 
                 {/* Status & Date */}
                 <div className="flex items-center justify-between mb-2">
                   {match.canli ? (
-                    <span className="text-[10px] font-bold text-white bg-red-600 px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
+                    <span className="text-[10px] font-bold text-white bg-[#d4af37] px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
                       CANLI {match.dakika ? `${match.dakika}'` : ''}
                     </span>
                   ) : match.durum === "Devre Arası" ? (
@@ -126,9 +126,9 @@ export default function MacSonuclariSlider() {
 
                   {/* Score */}
                   <div className="flex items-center gap-1.5 px-2 shrink-0">
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-[#e60000]'}`}>{match.ev_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#d4af37]' : 'text-[#1e3a8a]'}`}>{match.ev_skor ?? 0}</span>
                     <span className="text-gray-300 font-bold">-</span>
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-red-600' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#d4af37]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
                   </div>
 
                   {/* Away */}
@@ -142,8 +142,8 @@ export default function MacSonuclariSlider() {
 
                 {/* Footer */}
                 <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
-                  {match.canli && <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>}
-                  <span className={match.canli ? "text-red-500" : "text-gray-400"}>Pro Lig • {match.hafta}. HAFTA</span>
+                  {match.canli && <div className="w-1.5 h-1.5 bg-[#eab308] rounded-full animate-ping"></div>}
+                  <span className={match.canli ? "text-[#eab308]" : "text-gray-400"}>Pro Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );

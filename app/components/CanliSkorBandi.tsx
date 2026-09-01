@@ -59,7 +59,7 @@ export default function CanliSkorBandi() {
   if (!canliMac) return null;
 
   return (
-    <div className="w-full bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white shadow-[0_4px_20px_rgba(220,38,38,0.4)] border-b-2 border-red-500 overflow-hidden relative z-40">
+    <div className="w-full bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white shadow-[0_4px_20px_rgba(220,38,38,0.4)] border-b-2 border-[#eab308] overflow-hidden relative z-40">
       {/* Yanıp Sönen Flaşör Efekti Arka Plan İçin */}
       <div className="absolute inset-0 bg-white/10 animate-pulse mix-blend-overlay pointer-events-none" />
       

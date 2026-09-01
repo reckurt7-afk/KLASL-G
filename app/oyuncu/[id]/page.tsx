@@ -79,7 +79,7 @@ export default function OyuncuProfilPage() {
         
         {/* HEADER */}
         <div className="text-center mb-8">
-          <span className="text-[#ff3131] font-black tracking-[0.3em] text-xs md:text-sm uppercase bg-[#ff3131]/10 px-4 py-1 rounded-full border border-[#ff3131]/30">
+          <span className="text-[#d4af37] font-black tracking-[0.3em] text-xs md:text-sm uppercase bg-[#d4af37]/10 px-4 py-1 rounded-full border border-[#d4af37]/30">
             PRO LİG OYUNCU KARTI
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-white mt-3 tracking-tight">
@@ -117,7 +117,7 @@ export default function OyuncuProfilPage() {
         {/* BACK LINK */}
         <Link
           href="/takimlar"
-          className="mt-8 text-[#ff3131] hover:text-white font-black text-sm tracking-wider transition-colors flex items-center gap-2"
+          className="mt-8 text-[#d4af37] hover:text-white font-black text-sm tracking-wider transition-colors flex items-center gap-2"
         >
           ← TAKIMLARA DÖN
         </Link>

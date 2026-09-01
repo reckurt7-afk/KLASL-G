@@ -123,7 +123,7 @@ async function tahminSil(id: number) {
     marginTop: 15,
     width: "100%",
     padding: 10,
-    background: "#ff3131",
+    background: "#d4af37",
     color: "#fff",
     border: "none",
     borderRadius: 8,

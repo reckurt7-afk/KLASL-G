@@ -7,7 +7,7 @@ const REKLAMLAR = [
     logo: "🏪",
     firma: "ÖRNEK MARKET",
     slogan: "Her gün taze ürünler",
-    renk: "#ff3131",
+    renk: "#d4af37",
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const REKLAMLAR = [
     logo: "📞",
     firma: "REKLAM: 0501 012 0016",
     slogan: "Buraya reklam vermek için arayın!",
-    renk: "#ff3131",
+    renk: "#d4af37",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function ReklamBandi() {
         right: 0,
         zIndex: 9998, // Navbar'ın altında ama içeriğin üstünde
         background: "rgba(7,7,7,0.97)",
-        borderTop: "1px solid rgba(255,49,49,0.25)",
+        borderTop: "1px solid rgba(212,175,55,0.25)",
         overflow: "hidden",
         height: 44,
         display: "flex",

@@ -61,7 +61,7 @@ return (
         key={item.label}
         style={{
           background: "rgba(20,20,20,.75)",
-          border: "1px solid rgba(255,49,49,.35)",
+          border: "1px solid rgba(212,175,55,.35)",
           borderRadius: 16,
           padding: "14px 8px",
           textAlign: "center",
@@ -80,7 +80,7 @@ return (
 
         <div
           style={{
-            color: "#ff3131",
+            color: "#d4af37",
             fontSize: 12,
             fontWeight: 700,
             marginTop: 6,

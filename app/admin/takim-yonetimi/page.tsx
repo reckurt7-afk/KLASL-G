@@ -38,7 +38,7 @@ export default function TakimYonetimiPage() {
     <div className="min-h-screen bg-[#050505] text-white p-6 md:p-10 font-sans">
       <div className="max-w-[1000px] mx-auto">
         
-        <h1 className="text-3xl font-black uppercase tracking-wider mb-8 text-[#ff3131]">
+        <h1 className="text-3xl font-black uppercase tracking-wider mb-8 text-[#d4af37]">
           TAKIM YÖNETİMİ
         </h1>
 
@@ -86,7 +86,7 @@ export default function TakimYonetimiPage() {
                       <td className="p-4 text-right">
                         <button 
                           onClick={() => takimSil(t.id, t.name)}
-                          className="bg-red-900/40 text-red-400 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded text-sm font-semibold transition-colors"
+                          className="bg-red-900/40 text-red-400 hover:bg-[#d4af37] hover:text-white px-3 py-1.5 rounded text-sm font-semibold transition-colors"
                         >
                           SİL
                         </button>

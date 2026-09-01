@@ -43,7 +43,7 @@ export default function AdminEsamelerPage() {
   return (
     <div className="min-h-screen bg-[#070707] text-white p-6 pt-24">
       <div className="max-w-[1200px] mx-auto">
-        <h1 className="text-3xl font-black text-[#ff3131] mb-8 border-b border-[#ff3131]/20 pb-4">
+        <h1 className="text-3xl font-black text-[#d4af37] mb-8 border-b border-[#d4af37]/20 pb-4">
           🛡️ GELEN ESAME LİSTELERİ
         </h1>
 
@@ -145,9 +145,9 @@ export default function AdminEsamelerPage() {
               return (
                 <div key={macId} className="bg-[#111] rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
                   {/* Maç Başlığı */}
-                  <div className="bg-[#1a1a1a] p-4 border-b border-[#ff3131]/20 flex justify-between items-center">
+                  <div className="bg-[#1a1a1a] p-4 border-b border-[#d4af37]/20 flex justify-between items-center">
                     <h2 className="text-sm md:text-xl font-black text-white truncate pr-2">{macId}</h2>
-                    <span className="shrink-0 bg-[#ff3131]/10 text-[#ff3131] px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-bold border border-[#ff3131]/20">
+                    <span className="shrink-0 bg-[#d4af37]/10 text-[#d4af37] px-2 md:px-3 py-1 rounded-full text-[10px] md:text-xs font-bold border border-[#d4af37]/20">
                       {macOyunculari.length} Oyuncu
                     </span>
                   </div>

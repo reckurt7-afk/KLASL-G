@@ -185,36 +185,36 @@ export default function Hero({
         >
           
           <div className="relative group">
-            <div className="absolute -inset-3 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-3 bg-gradient-to-r from-[#d4af37] to-[#8c7324] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
             <Image
               src="/icons/logo.png"
               alt="PRO LİG"
               width={140}
               height={140}
               priority
-              className="relative rounded-full drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] transform transition-transform duration-500 hover:scale-105"
+              className="relative rounded-full drop-shadow-[0_0_20px_rgba(212,175,55,0.6)] transform transition-transform duration-500 hover:scale-105"
             />
           </div>
 
           <h1 className="text-4xl md:text-6xl font-black mt-3 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             PRO LİG
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.5)]">{cityName}</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#8c7324] drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]">{cityName}</span>
           </h1>
 
-          <div className="mt-1.5 font-black text-xs md:text-sm tracking-[0.3em] text-[#ff3131] bg-[#ff3131]/15 px-4 py-1 rounded-full border border-[#ff3131]/40 shadow-[0_0_15px_rgba(255,49,49,0.2)]">
+          <div className="mt-1.5 font-black text-xs md:text-sm tracking-[0.3em] text-[#d4af37] bg-[#d4af37]/15 px-4 py-1 rounded-full border border-[#d4af37]/40 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
             3. SEZON
           </div>
 
           {/* ULTRA ŞIK CANLI MAÇ KUTUSU */}
-          <div className="w-full mt-6 bg-gradient-to-b from-[#0e0e0e]/95 via-[#090909]/90 to-[#050505]/95 border-2 border-[#ff3131]/40 hover:border-[#ff3131]/70 rounded-3xl p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden group transition-all duration-500">
+          <div className="w-full mt-6 bg-gradient-to-b from-[#0e0e0e]/95 via-[#090909]/90 to-[#050505]/95 border-2 border-[#d4af37]/40 hover:border-[#d4af37]/70 rounded-3xl p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden group transition-all duration-500">
             {/* Şık Arkaplan Işığı */}
-            <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#ff3131]/20 rounded-full blur-3xl group-hover:bg-[#ff3131]/35 transition-all duration-500 pointer-events-none"></div>
+            <div className="absolute -top-24 -right-24 w-56 h-56 bg-[#d4af37]/20 rounded-full blur-3xl group-hover:bg-[#d4af37]/35 transition-all duration-500 pointer-events-none"></div>
 
-            <div className="flex items-center justify-center gap-2.5 text-[#ff3131] font-black text-xl md:text-2xl mb-6 tracking-wider">
+            <div className="flex items-center justify-center gap-2.5 text-[#d4af37] font-black text-xl md:text-2xl mb-6 tracking-wider">
               <span className="relative flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3131] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#ff3131]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4af37] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#d4af37]"></span>
               </span>
               CANLI MAÇ
             </div>
@@ -224,7 +224,7 @@ export default function Hero({
                 <div className="flex flex-col items-center gap-2">
                   <div className="w-full truncate px-2 text-gray-100 font-extrabold">{mac.home_team?.name}</div>
 
-                  <div className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#ff3131] via-[#e61c1c] to-[#a11212] drop-shadow-[0_0_25px_rgba(255,49,49,0.7)] my-4 tracking-tighter">
+                  <div className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-[#d4af37] via-[#e61c1c] to-[#8c7324] drop-shadow-[0_0_25px_rgba(212,175,55,0.7)] my-4 tracking-tighter">
                     {mac.home_score} - {mac.away_score}
                   </div>
 
@@ -239,15 +239,15 @@ export default function Hero({
               {mac ? (
                 <div className="flex justify-around items-center">
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-xl">⏱️</span>
+                    <span className="text-[#d4af37] text-xl">⏱️</span>
                     <span className="font-black text-gray-900">{mac.current_minute}'</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-xl">📍</span>
+                    <span className="text-[#d4af37] text-xl">📍</span>
                     <span className="font-black text-gray-900">{mac.saha || "Saha"}</span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <span className="text-[#ff3131] text-xl">🧑‍⚖️</span>
+                    <span className="text-[#d4af37] text-xl">🧑‍⚖️</span>
                     <span className="font-black text-gray-900">{mac.hakem || "Hakem"}</span>
                   </div>
                 </div>
@@ -262,7 +262,7 @@ export default function Hero({
               rel="noopener noreferrer"
               className={`inline-block mt-6 w-full py-4 rounded-2xl text-center font-black text-lg transition-all duration-300 ${
                 mac?.youtube_link
-                  ? "bg-gradient-to-r from-[#ff3131] to-[#a11212] text-gray-900 shadow-[0_8px_25px_rgba(255,49,49,0.4)] hover:shadow-[0_10px_35px_rgba(255,49,49,0.7)] hover:scale-[1.02]"
+                  ? "bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-gray-900 shadow-[0_8px_25px_rgba(212,175,55,0.4)] hover:shadow-[0_10px_35px_rgba(212,175,55,0.7)] hover:scale-[1.02]"
                   : "bg-gray-900 text-gray-500 cursor-not-allowed border border-gray-800"
               }`}
             >
@@ -273,13 +273,13 @@ export default function Hero({
             {mac && olaylar.length > 0 && (
               <div className="mt-6 text-left">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-[#ff3131]">⚡</span>
+                  <span className="text-[#d4af37]">⚡</span>
                   <span className="text-gray-900 font-black text-sm tracking-widest">MAÇ OLAYLARI</span>
                 </div>
                 <div className="max-h-[160px] overflow-y-auto pr-2 flex flex-col gap-2 custom-scrollbar">
                   {olaylar.map((olay, i) => (
                     <div key={i} className="flex items-center gap-3 bg-black/40 border border-gray-100 p-2.5 rounded-xl">
-                      <div className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#ff3131]/10 rounded-lg text-sm font-black text-[#ff3131]">
+                      <div className="w-8 h-8 shrink-0 flex items-center justify-center bg-[#d4af37]/10 rounded-lg text-sm font-black text-[#d4af37]">
                         {olay.minute}'
                       </div>
                       <div className="text-xl">
@@ -302,8 +302,8 @@ export default function Hero({
           {golAnimasyon && sonGolOlay && (
             <div className="fixed inset-0 z-[9999] pointer-events-none flex items-center justify-center bg-white/80 backdrop-blur-sm animate-in fade-in duration-300">
               <div className="relative text-center scale-150 animate-bounce">
-                <div className="absolute -inset-10 bg-gradient-to-r from-[#ff3131] to-[#ff9000] blur-[100px] opacity-60"></div>
-                <h1 className="text-7xl md:text-9xl font-black text-gray-900 italic drop-shadow-[0_0_40px_rgba(255,49,49,1)] transform -rotate-6 tracking-tighter" style={{ textShadow: "4px 4px 0 #000, 8px 8px 0 #ff3131" }}>
+                <div className="absolute -inset-10 bg-gradient-to-r from-[#d4af37] to-[#ff9000] blur-[100px] opacity-60"></div>
+                <h1 className="text-7xl md:text-9xl font-black text-gray-900 italic drop-shadow-[0_0_40px_rgba(212,175,55,1)] transform -rotate-6 tracking-tighter" style={{ textShadow: "4px 4px 0 #000, 8px 8px 0 #d4af37" }}>
                   GOOOOOL!
                 </h1>
                 <div className="text-2xl md:text-4xl text-yellow-300 font-black mt-4 drop-shadow-[0_0_10px_rgba(0,0,0,1)] uppercase">
@@ -316,7 +316,7 @@ export default function Hero({
           
           {/* OYUNCU İSTATİSTİKLERİ BUTONU */}
           <Link href="/oyunculari" className="w-full mt-6 block">
-            <button className="w-full h-14 rounded-2xl bg-[#0c0c0c]/90 border border-white/15 hover:border-[#ff3131]/60 text-gray-900 text-base md:text-lg font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(255,49,49,0.3)] hover:bg-[#151515] cursor-pointer">
+            <button className="w-full h-14 rounded-2xl bg-[#0c0c0c]/90 border border-white/15 hover:border-[#d4af37]/60 text-gray-900 text-base md:text-lg font-black flex items-center justify-center gap-3 transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(212,175,55,0.3)] hover:bg-[#151515] cursor-pointer">
               👥 OYUNCU İSTATİSTİKLERİ VE KARTLARI
             </button>
           </Link>
@@ -336,10 +336,10 @@ export default function Hero({
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-[#0b0b0b]/80 border border-gray-200 hover:border-[#ff3131]/50 rounded-2xl p-5 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#121212] shadow-lg"
+                className="bg-[#0b0b0b]/80 border border-gray-200 hover:border-[#d4af37]/50 rounded-2xl p-5 backdrop-blur-md flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#121212] shadow-lg"
               >
                 <div className="text-3xl mb-1.5 drop-shadow-md">{item.icon}</div>
-                <div className="text-[#ff3131] text-3xl font-black drop-shadow-[0_0_12px_rgba(255,49,49,0.4)]">{item.value}</div>
+                <div className="text-[#d4af37] text-3xl font-black drop-shadow-[0_0_12px_rgba(212,175,55,0.4)]">{item.value}</div>
                 <div className="text-gray-500 text-[11px] font-extrabold mt-1 tracking-widest uppercase">{item.text}</div>
               </div>
             ))}
@@ -363,26 +363,26 @@ export default function Hero({
 
 function SponsorBox({ side }: { side: "left" | "right" }) {
   return (
-    <div className="bg-[#0c0c0c]/90 border border-[#ff3131]/30 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl group hover:border-[#ff3131]/60 transition-all duration-500">
-      <div className="bg-gradient-to-r from-[#ff3131] to-[#a11212] text-gray-900 py-2 px-4 font-black text-xs tracking-widest uppercase">
+    <div className="bg-[#0c0c0c]/90 border border-[#d4af37]/30 rounded-2xl overflow-hidden text-center flex flex-col shadow-[0_10px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl group hover:border-[#d4af37]/60 transition-all duration-500">
+      <div className="bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-gray-900 py-2 px-4 font-black text-xs tracking-widest uppercase">
         REKLAM ALANI
       </div>
       
       <div className="p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#ff3131]/0 to-[#ff3131]/5 pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#d4af37]/0 to-[#d4af37]/5 pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
         
-        <div className="w-20 h-20 md:w-24 md:h-24 mb-4 bg-black rounded-full flex items-center justify-center border-2 border-dashed border-[#ff3131]/50 text-3xl md:text-4xl group-hover:scale-110 group-hover:border-solid group-hover:border-[#ff3131] transition-all duration-500 shadow-[0_0_15px_rgba(255,49,49,0.2)]">
+        <div className="w-20 h-20 md:w-24 md:h-24 mb-4 bg-black rounded-full flex items-center justify-center border-2 border-dashed border-[#d4af37]/50 text-3xl md:text-4xl group-hover:scale-110 group-hover:border-solid group-hover:border-[#d4af37] transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
           📢
         </div>
 
-        <h3 className="m-0 mb-2 text-xl font-black text-gray-900 group-hover:text-[#ff3131] transition-colors">
+        <h3 className="m-0 mb-2 text-xl font-black text-gray-900 group-hover:text-[#d4af37] transition-colors">
           BURAYA REKLAM VERİN
         </h3>
         <p className="m-0 mb-6 text-gray-500 text-xs md:text-sm leading-relaxed font-semibold">
           Siz de markanızı binlerce sporsevere ulaştırın.
         </p>
 
-        <a href="https://wa.me/905010120016" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-black text-sm hover:bg-[#ff3131] hover:text-gray-900 hover:shadow-[0_5px_20px_rgba(255,49,49,0.5)] transition-all duration-300">
+        <a href="https://wa.me/905010120016" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-black text-sm hover:bg-[#d4af37] hover:text-gray-900 hover:shadow-[0_5px_20px_rgba(212,175,55,0.5)] transition-all duration-300">
           <span className="text-lg">📞</span> 
           <span>0501 012 0016</span>
         </a>

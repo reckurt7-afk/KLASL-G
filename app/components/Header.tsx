@@ -24,15 +24,15 @@ export default function Header() {
     <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-between">
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/icons/logo.png" width={40} height={40} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
-          <span className="font-black text-xl tracking-tight text-gray-900">PRO <span className="text-[#e60000]">LİG</span></span>
+        <Link href="/" className="flex items-center gap-5">
+          <Image src="/icons/logo.png" width={60} height={60} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
+          <span className="font-black text-xl tracking-tight text-[#0f172a] text-3xl tracking-tighter">PRO <span className="text-[#d4af37]">LİG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
         <div className="flex items-center gap-6">
-          <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-red-600 font-bold text-sm cursor-pointer hover:text-red-700 transition-colors">
-            <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+          <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#d4af37] font-bold text-sm cursor-pointer hover:text-[#b5952f] transition-colors">
+            <span className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse"></span>
             Pro Lig TV
           </Link>
           
@@ -41,7 +41,7 @@ export default function Header() {
           </button>
 
           {loading ? (
-            <div className="w-10 h-10 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-10 h-10 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div>
           ) : user ? (
             <div className="relative" ref={dropdownRef}>
               <button 
@@ -51,7 +51,7 @@ export default function Header() {
                 {profil?.avatar_url ? (
                   <img src={profil.avatar_url} alt={profil.ad_soyad} className="w-10 h-10 rounded-full object-cover shadow-md" />
                 ) : (
-                  <div className="w-10 h-10 bg-[#e60000] text-white rounded-full flex items-center justify-center font-bold shadow-md uppercase">
+                  <div className="w-10 h-10 bg-[#1e3a8a] text-white rounded-full flex items-center justify-center font-bold shadow-md uppercase">
                     {(profil?.ad_soyad || user.email || "K")[0]}
                   </div>
                 )}
@@ -63,8 +63,8 @@ export default function Header() {
 
               {/* Dropdown Menu */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-56 bg-[#e60000] text-white rounded-xl shadow-xl overflow-hidden py-2 flex flex-col z-50">
-                  <div className="px-4 pb-3 pt-2 mb-2 border-b border-red-500/50 flex items-center gap-3">
+                <div className="absolute right-0 mt-3 w-56 bg-[#1e3a8a] text-white rounded-xl shadow-xl overflow-hidden py-2 flex flex-col z-50">
+                  <div className="px-4 pb-3 pt-2 mb-2 border-b border-[#eab308]/50 flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-bold uppercase shrink-0">
                       {(profil?.ad_soyad || user.email || "K")[0]}
                     </div>

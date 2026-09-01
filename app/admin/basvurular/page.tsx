@@ -149,7 +149,7 @@ export default function BasvurularPage() {
             borderRadius: 18,
             padding: 18,
             marginBottom: 15,
-            border: "1px solid rgba(255,49,49,.25)",
+            border: "1px solid rgba(212,175,55,.25)",
           }}
         >
           <h2
@@ -172,7 +172,7 @@ export default function BasvurularPage() {
                 b.durum === "onaylandi"
                   ? "#00ff88"
                   : b.durum === "reddedildi"
-                  ? "#ff3131"
+                  ? "#d4af37"
                   : "#ffc107",
               fontWeight: 800,
             }}
@@ -230,7 +230,7 @@ const red = {
   height: 45,
   border: "none",
   borderRadius: 10,
-  background: "#ff3131",
+  background: "#d4af37",
   color: "#fff",
   fontWeight: 900,
   cursor: "pointer",

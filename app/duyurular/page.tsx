@@ -64,17 +64,17 @@ export default function DuyurularPage() {
               <div
                 key={duyuru.id}
                 className="card p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-white/10"
-                style={{ borderLeft: `4px solid ${duyuru.renk || "#ff3131"}` }}
+                style={{ borderLeft: `4px solid ${duyuru.renk || "#d4af37"}` }}
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                  <span className="text-6xl text-[#ff3131]">”</span>
+                  <span className="text-6xl text-[#d4af37]">”</span>
                 </div>
                 
                 <h2 className="text-white text-xl font-bold mb-2 pr-8 relative z-10">
                   {duyuru.baslik}
                 </h2>
                 
-                <div className="text-[#ff3131] text-xs font-bold tracking-widest uppercase mb-4">
+                <div className="text-[#d4af37] text-xs font-bold tracking-widest uppercase mb-4">
                   {new Date(duyuru.created_at).toLocaleDateString("tr-TR", {
                     day: "numeric",
                     month: "long",

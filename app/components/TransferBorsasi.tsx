@@ -89,11 +89,11 @@ export default function TransferBorsasi() {
   if (!isOpen) {
     return (
       <div className="w-full flex flex-col items-center justify-center min-h-[50vh] text-center p-8 bg-black/40 rounded-3xl border border-white/5 shadow-2xl">
-        <div className="text-8xl mb-6 drop-shadow-[0_0_30px_rgba(255,49,49,0.5)] animate-bounce">
+        <div className="text-8xl mb-6 drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] animate-bounce">
           🔒
         </div>
         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
-          TRANSFER DÖNEMİ <span className="text-[#ff3131]">KAPALI</span>
+          TRANSFER DÖNEMİ <span className="text-[#d4af37]">KAPALI</span>
         </h2>
         <p className="text-gray-400 text-base md:text-lg max-w-lg font-medium">
           Pro Lig Bursa'da transfer dönemi şu an itibariyle kapalıdır. Pazar tekrar açıldığında yeni rekor bonservis bedelleriyle görüşmek üzere!
