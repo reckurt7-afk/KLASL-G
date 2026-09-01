@@ -86,7 +86,7 @@ export default function CityStoryBar() {
                 <div className="w-10 h-10 md:w-11 md:h-11 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
-                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
+                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#cc0000]" : "text-[#cc0000]"}`}>
                   {city.name}
                 </span>
                 <span className="text-[9px] md:text-[10px] tracking-widest text-gray-400 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
