@@ -77,7 +77,7 @@ export default function CityStoryBar() {
             >
               {/* Card */}
               <div
-                className={`w-[100px] h-[80px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
+                className={`w-[120px] h-[90px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
                     ? "border-[#1e3a8a] bg-red-50 shadow-md"
                     : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
@@ -86,8 +86,8 @@ export default function CityStoryBar() {
                 <div className="w-8 h-8 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
-                <span className={`text-[10px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
-                  {city.name.replace(/^PRO LİG /i, "")}
+                <span className={`text-[10px] font-bold leading-tight text-center break-words w-full px-1 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
+                  {city.name}
                 </span>
                 <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
                   {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
