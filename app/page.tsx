@@ -90,8 +90,8 @@ export default function LandingPage() {
           <Link href="/" className="flex items-center shrink-0 pl-2 md:pl-4 z-10">
               <Image src="/icons/logo.png" width={64} height={64} alt="Pro Lig Logo" className="rounded-full object-contain md:w-[70px] md:h-[70px]" />
             </Link>
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center z-0">
-              <span className="font-black text-[#0f172a] text-[26px] md:text-[30px] tracking-tighter">PRO <span className="text-[#d4af37]">LİG</span></span>
+            <Link href="/" className="flex-1 flex justify-center pr-10 sm:pr-0 z-0">
+              <span className="font-black text-[#0f172a] text-[24px] md:text-[30px] tracking-tighter">PRO <span className="text-[#d4af37]">LİG</span></span>
             </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
             <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#1e3a8a] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
@@ -113,7 +113,7 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black pt-[160px] pb-16 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pt-[180px] sm:pt-[200px] pb-16 overflow-hidden">
         {/* Background MP4 Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
