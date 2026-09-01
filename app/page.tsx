@@ -113,7 +113,7 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-[calc(100vh-70px)] mt-[70px] flex flex-col items-center justify-start bg-black pt-4 md:pt-8 pb-6 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pb-6 overflow-hidden">
         {/* Background MP4 Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
@@ -137,6 +137,9 @@ export default function LandingPage() {
 
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1000px] mx-auto px-5 gap-6">
           
+          {/* SAFARI SPACER */}
+          <div className="w-full h-[95px] md:h-[110px] shrink-0 relative z-10"></div>
+
           {/* Top Badge */}
           <div className="border border-[#1e3a8a]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
             <span className="w-2 h-2 rounded-full bg-[#1e3a8a] animate-pulse"></span>
