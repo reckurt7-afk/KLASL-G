@@ -144,7 +144,7 @@ export default function LandingPage() {
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
-          <div className="relative flex items-center justify-center mb-6 mt-6 md:mt-8">
+          <div className="relative flex items-center justify-center mb-12 mt-4 md:mt-6">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
             <Image 
               src="/icons/logo.png" 
@@ -164,7 +164,7 @@ export default function LandingPage() {
           </h1>
 
           {/* Install PWA */}
-          <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px] mt-6">
+          <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px] mt-12">
             <InstallButton />
             <p className="text-white/70 text-[13px] md:text-[15px] font-medium text-center mt-4 leading-relaxed">
               Maç sonuçları, puan durumları, takımlar ve özel haberlere telefonundan anında ulaş.
@@ -188,7 +188,7 @@ export default function LandingPage() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-16">
             <Link 
               href="/lig" 
               className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#1e3a8a] to-[#b30000] hover:from-[#d4af37] hover:to-[#cc0000] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
