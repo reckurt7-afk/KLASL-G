@@ -80,7 +80,7 @@ export default function OyuncuProfilPage() {
         {/* HEADER */}
         <div className="text-center mb-8">
           <span className="text-[#ff3131] font-black tracking-[0.3em] text-xs md:text-sm uppercase bg-[#ff3131]/10 px-4 py-1 rounded-full border border-[#ff3131]/30">
-            KLAS LİG OYUNCU KARTI
+            PRO LİG OYUNCU KARTI
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-white mt-3 tracking-tight">
             {oyuncu.ad_soyad}

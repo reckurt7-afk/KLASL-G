@@ -58,7 +58,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-black text-white">⏱️ MAÇ SAATLERİ</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG TAKVİMİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">PRO LİG TAKVİMİ</p>
       </div>
 
       {loading ? (

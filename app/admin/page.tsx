@@ -198,7 +198,7 @@ export default function AdminPage() {
                 YÖNETİM PANELİ
               </h1>
               <p className="text-[14px] md:text-[15px] text-gray-400 font-medium tracking-wide">
-                Klas Lig Komuta Merkezi
+                Pro Lig Komuta Merkezi
               </p>
             </div>
           </div>

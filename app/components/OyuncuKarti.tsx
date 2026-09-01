@@ -31,7 +31,7 @@ export default function OyuncuKarti({
   soyad = "",
   fotograf,
   mevki = "OS",
-  takimAd = "Klas Lig",
+  takimAd = "Pro Lig",
   takimLogo,
   rating = 85,
   golSayisi = 0,

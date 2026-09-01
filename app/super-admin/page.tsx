@@ -184,8 +184,8 @@ export default function SuperAdminDashboard() {
             
             <form onSubmit={handleCreateCity} className="space-y-4">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Şehir Adı (Örn: KLAS LİG İSTANBUL)</label>
-                <input type="text" value={newCity.name} onChange={(e) => setNewCity({...newCity, name: e.target.value})} className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#e60000] focus:border-transparent outline-none" placeholder="KLAS LİG İSTANBUL" required />
+                <label className="block text-sm font-bold text-gray-700 mb-1">Şehir Adı (Örn: PRO LİG İSTANBUL)</label>
+                <input type="text" value={newCity.name} onChange={(e) => setNewCity({...newCity, name: e.target.value})} className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#e60000] focus:border-transparent outline-none" placeholder="PRO LİG İSTANBUL" required />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">Slug (URL için, Örn: istanbul)</label>
@@ -221,7 +221,7 @@ export default function SuperAdminDashboard() {
                   type="email"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  placeholder="temsilci@klaslig.com"
+                  placeholder="temsilci@prolig.com"
                   className="flex-1 border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#e60000] focus:border-transparent outline-none"
                 />
                 <button 

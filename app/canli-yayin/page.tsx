@@ -99,7 +99,7 @@ export default function CanliYayinPage() {
               {videoId ? "CANLI YAYIN" : "ŞU AN CANLI YAYIN YOK"}
             </h1>
           </div>
-          <p className="section-sub">KLAS LİG BURSA</p>
+          <p className="section-sub">PRO LİG BURSA</p>
         </div>
 
         {videoId ? (
@@ -110,7 +110,7 @@ export default function CanliYayinPage() {
                 <iframe
                   key={videoId}
                   src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-                  title="Klas Lig Canlı Yayın"
+                  title="Pro Lig Canlı Yayın"
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

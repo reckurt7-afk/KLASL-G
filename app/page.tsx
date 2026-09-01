@@ -66,7 +66,7 @@ export default function LandingPage() {
 
       if (response.ok) {
         // Show immediate welcome notification
-        await reg.showNotification("KLAS LİG", {
+        await reg.showNotification("PRO LİG", {
           body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",
           icon: "/icons/logo.png",
           vibrate: [200, 100, 200]
@@ -88,13 +88,13 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
         <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0">
-            <Image src="/icons/logo.png" width={44} height={44} alt="Klas Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
-            <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">KLAS <span className="text-[#e60000]">LİG</span></span>
+            <Image src="/icons/logo.png" width={44} height={44} alt="Pro Lig Logo" className="object-contain md:w-[48px] md:h-[48px]" />
+            <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
           </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
             <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
               <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
-              Klas Lig TV
+              Pro Lig TV
             </Link>
             <div className="flex items-center gap-2 md:gap-3">
               <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
@@ -148,7 +148,7 @@ export default function LandingPage() {
               src="/icons/logo.png" 
               width={180} 
               height={180} 
-              alt="Klas Lig" 
+              alt="Pro Lig" 
               className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[170px] md:w-[210px]" 
             />
           </div>
@@ -239,7 +239,7 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center mb-10">
-            <h3 className="text-[14px] font-medium text-gray-500 mb-1">Klas Lig Avantajları</h3>
+            <h3 className="text-[14px] font-medium text-gray-500 mb-1">Pro Lig Avantajları</h3>
             <p className="text-[12px] text-gray-400">Profesyonel futbol deneyiminin en iyisini sunuyoruz</p>
           </div>
 
@@ -422,7 +422,7 @@ export default function LandingPage() {
         </div>
         
         <div className="text-gray-400 text-[11px] mb-4 text-center">
-          © 2026 KLAS LİG. Tüm Hakları Saklıdır
+          © 2026 PRO LİG. Tüm Hakları Saklıdır
           <br/>
           <span className="inline-block mt-2">Halı saha futbolunun Türkiye'deki en büyük platformu</span>
         </div>

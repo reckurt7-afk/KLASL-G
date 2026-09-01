@@ -119,7 +119,7 @@ export default function EsameListesiPage() {
 
   const sifreKontrolEt = async () => {
     if (!secilenTakim) return alert("Lütfen takımınızı seçin!");
-    if (sifre !== "klas2026") return alert("Kaptan şifresi hatalı!");
+    if (sifre !== "pro2026") return alert("Kaptan şifresi hatalı!");
     
     setIsAuth(true);
     setLoading(true);

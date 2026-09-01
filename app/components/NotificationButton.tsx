@@ -65,7 +65,7 @@ export default function NotificationButton() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          baslik: "KLAS LIG BURSA",
+          baslik: "PRO LIG BURSA",
           mesaj: "Bildirimler aktif! Artık gol, haber ve tüm gelişmeleri anında öğreneceksin.",
           url: "/",
         }),

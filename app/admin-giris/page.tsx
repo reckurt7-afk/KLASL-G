@@ -10,7 +10,7 @@ export default function AdminGirisPage() {
   const [sifre, setSifre] = useState("");
 
   function girisYap() {
-    if (kullanici === "admin" && sifre === "KlasLig2026!") {
+    if (kullanici === "admin" && sifre === "ProLig2026!") {
       localStorage.setItem("adminGiris", "true");
       router.push("/admin");
     } else {
@@ -47,7 +47,7 @@ export default function AdminGirisPage() {
             marginBottom: 25,
           }}
         >
-          🔐 KLAS LİG ADMIN
+          🔐 PRO LİG ADMIN
         </h1>
 
         <input

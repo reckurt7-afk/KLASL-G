@@ -95,7 +95,7 @@ export default function AdminGundemPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "KLAS LİG BURSA BİR YENİ HABER VAR",
+            baslik: "PRO LİG BURSA BİR YENİ HABER VAR",
             mesaj: baslik.trim(),
             url: newId ? `/duyuru/${newId}` : "/duyurular"
           }),

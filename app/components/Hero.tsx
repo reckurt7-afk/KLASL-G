@@ -188,7 +188,7 @@ export default function Hero({
             <div className="absolute -inset-3 bg-gradient-to-r from-[#ff3131] to-[#a11212] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
             <Image
               src="/icons/logo.png"
-              alt="KLAS LİG"
+              alt="PRO LİG"
               width={140}
               height={140}
               priority
@@ -197,7 +197,7 @@ export default function Hero({
           </div>
 
           <h1 className="text-4xl md:text-6xl font-black mt-3 leading-tight tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-            KLAS LİG
+            PRO LİG
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a11212] drop-shadow-[0_0_20px_rgba(255,49,49,0.5)]">{cityName}</span>
           </h1>

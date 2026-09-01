@@ -25,15 +25,15 @@ export default function Header() {
       <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/icons/logo.png" width={40} height={40} alt="Klas Lig" className="object-contain drop-shadow-sm" />
-          <span className="font-black text-xl tracking-tight text-gray-900">KLAS <span className="text-[#e60000]">LİG</span></span>
+          <Image src="/icons/logo.png" width={40} height={40} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
+          <span className="font-black text-xl tracking-tight text-gray-900">PRO <span className="text-[#e60000]">LİG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
         <div className="flex items-center gap-6">
           <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-red-600 font-bold text-sm cursor-pointer hover:text-red-700 transition-colors">
             <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-            Klas Lig TV
+            Pro Lig TV
           </Link>
           
           <button className="text-gray-500 hover:text-gray-900 text-xl">

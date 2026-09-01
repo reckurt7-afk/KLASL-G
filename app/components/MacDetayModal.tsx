@@ -65,7 +65,7 @@ export default function MacDetayModal({
         {/* MATCH HEADER / TEAMS DISPLAY */}
         <div className="text-center mb-6">
           <span className="bg-[#ff3131]/10 text-[#ff3131] text-xs font-black px-4 py-1 rounded-full border border-[#ff3131]/30 tracking-widest uppercase">
-            {mac.hafta ? `${mac.hafta}. HAFTA MAÇI` : "KLAS LİG MAÇ DETAYI"}
+            {mac.hafta ? `${mac.hafta}. HAFTA MAÇI` : "PRO LİG MAÇ DETAYI"}
           </span>
         </div>
 
@@ -142,7 +142,7 @@ export default function MacDetayModal({
 
         {/* FOOTER INFO */}
         <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-gray-400 font-semibold">
-          <span>📍 Saha: {mac.saha || "Klas Saha 1"}</span>
+          <span>📍 Saha: {mac.saha || "Pro Saha 1"}</span>
           <span>📅 {mac.tarih || "Sezon Maçı"}</span>
         </div>
       </div>

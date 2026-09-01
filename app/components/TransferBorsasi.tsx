@@ -96,7 +96,7 @@ export default function TransferBorsasi() {
           TRANSFER DÖNEMİ <span className="text-[#ff3131]">KAPALI</span>
         </h2>
         <p className="text-gray-400 text-base md:text-lg max-w-lg font-medium">
-          Klas Lig Bursa'da transfer dönemi şu an itibariyle kapalıdır. Pazar tekrar açıldığında yeni rekor bonservis bedelleriyle görüşmek üzere!
+          Pro Lig Bursa'da transfer dönemi şu an itibariyle kapalıdır. Pazar tekrar açıldığında yeni rekor bonservis bedelleriyle görüşmek üzere!
         </p>
       </div>
     );

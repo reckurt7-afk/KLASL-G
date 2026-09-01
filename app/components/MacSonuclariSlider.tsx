@@ -143,7 +143,7 @@ export default function MacSonuclariSlider() {
                 {/* Footer */}
                 <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
                   {match.canli && <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>}
-                  <span className={match.canli ? "text-red-500" : "text-gray-400"}>Klas Lig • {match.hafta}. HAFTA</span>
+                  <span className={match.canli ? "text-red-500" : "text-gray-400"}>Pro Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );

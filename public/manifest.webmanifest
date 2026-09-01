@@ -1,7 +1,7 @@
 {
-  "name": "KLAS LİG BURSA",
-  "short_name": "KLAS LİG",
-  "description": "KLAS LİG BURSA Resmi Mobil Uygulaması",
+  "name": "PRO LİG BURSA",
+  "short_name": "PRO LİG",
+  "description": "PRO LİG BURSA Resmi Mobil Uygulaması",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

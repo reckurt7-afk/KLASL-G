@@ -95,15 +95,15 @@ export default function TakimKurPage() {
 
       try {
         const selectedLeague = leagues.find(l => l.id.toString() === formData.leagueId);
-        const leagueName = selectedLeague ? selectedLeague.name.toUpperCase() : "KLAS LİG";
+        const leagueName = selectedLeague ? selectedLeague.name.toUpperCase() : "PRO LİG";
         
         await fetch("/api/send-notification", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "🔥 KLAS LİG'E YENİ BİR TAKIM KATILDI!",
-            mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Klas Lig ailesine hoş geldiniz. 🏆`,
-            icon: "https://klaslig.vercel.app/icons/icon-192x192.png",
+            baslik: "🔥 PRO LİG'E YENİ BİR TAKIM KATILDI!",
+            mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Pro Lig ailesine hoş geldiniz. 🏆`,
+            icon: "https://klaslig.vercel.app/icons/logo.png",
             image: logoUrl || undefined,
             url: "/genel-bakis"
           })
@@ -168,7 +168,7 @@ export default function TakimKurPage() {
                 value={formData.name} 
                 onChange={e => setFormData({...formData, name: e.target.value})} 
                 className="w-full bg-gray-50 border border-gray-200 focus:border-[#ff3131] focus:ring-1 focus:ring-[#ff3131] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all placeholder-gray-400" 
-                placeholder="Örn: Klas FC" 
+                placeholder="Örn: Pro FC" 
               />
             </div>
 

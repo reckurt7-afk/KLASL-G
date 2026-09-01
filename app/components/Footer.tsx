@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Footer() {
   const { selectedCityId } = useCityStore();
-  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "�stanbul" : selectedCityId === 3 ? "�zmir" : "T�rkiye";
+  const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "�stanbul" : selectedCityId === 3 ? "�zmir" : "T�rkiye";
   return (
     <footer className="bg-[#070707] border-t border-[rgba(255,49,49,0.15)] pb-24 lg:pb-0">
       <div className="max-w-[1200px] mx-auto px-5 pt-12 pb-8">
@@ -20,10 +20,10 @@ export default function Footer() {
           <div className="flex-1 min-w-[200px] max-w-[260px]">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[rgba(255,49,49,0.3)]">
-                <Image src="/icons/logo.png" alt="Klas Lig" fill className="object-cover" />
+                <Image src="/icons/logo.png" alt="Pro Lig" fill className="object-cover" />
               </div>
               <div>
-                <div className="text-white font-black text-lg tracking-widest leading-none">KLAS LİG</div>
+                <div className="text-white font-black text-lg tracking-widest leading-none">PRO LİG</div>
                 <div className="text-[#ff3131] text-[10px] font-black tracking-[0.3em]">{cityName.toUpperCase()}</div>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function Footer() {
         {/* Alt Bölüm */}
         <div className="border-t border-[rgba(255,255,255,0.06)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} Klas Lig {cityName}. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Pro Lig {cityName}. Tüm hakları saklıdır.
           </div>
           <div className="text-gray-700 text-xs">
             ⚽ 3. Sezon

@@ -95,7 +95,7 @@ export default function OyuncuKayitPage() {
       <div className="container max-w-xl">
         <div className="text-center mb-10">
           <h1 className="section-title">👤 OYUNCU KAYDI</h1>
-          <p className="section-sub">KLAS LİG BURSA</p>
+          <p className="section-sub">PRO LİG BURSA</p>
         </div>
 
         <div className="card p-8">

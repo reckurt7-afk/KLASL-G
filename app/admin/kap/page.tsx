@@ -98,7 +98,7 @@ export default function KapBildirimleriAdminPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "KLAS LİG BURSA KAP BİLDİRİMİ",
+            baslik: "PRO LİG BURSA KAP BİLDİRİMİ",
             mesaj: baslik.trim(),
             url: newId ? `/duyuru/${newId}` : "/lig"
           }),

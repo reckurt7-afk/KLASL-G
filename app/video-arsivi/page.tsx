@@ -46,7 +46,7 @@ export default function VideoArsivPage() {
       <div className="container">
         <div className="text-center mb-12">
           <h1 className="section-title">🎬 Video Arşivi</h1>
-          <p className="section-sub">KLAS LİG BURSA</p>
+          <p className="section-sub">PRO LİG BURSA</p>
         </div>
 
         {yukleniyor ? (

@@ -94,7 +94,7 @@ export default function IstatistiklerPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-400 text-center max-w-lg mx-auto"
           >
-            Klas Lig Bursa'nın en iyileri. Sahada parlayan yıldızlar, golcüler, asist kralları ve hırçınlar.
+            Pro Lig Bursa'nın en iyileri. Sahada parlayan yıldızlar, golcüler, asist kralları ve hırçınlar.
           </motion.p>
         </div>
 

@@ -48,7 +48,7 @@ export default function ProfilPage() {
       <div className="container max-w-2xl">
         <div className="text-center mb-10">
           <h1 className="section-title">👤 PROFİLİM</h1>
-          <p className="section-sub">KLAS LİG BURSA</p>
+          <p className="section-sub">PRO LİG BURSA</p>
         </div>
 
         {/* Profil Kartı */}
@@ -67,7 +67,7 @@ export default function ProfilPage() {
                     👑 KURUCU
                   </p>
                 ) : (
-                  <p className="text-[#ff3131] text-xs font-bold tracking-widest uppercase">Klas Lig Üyesi</p>
+                  <p className="text-[#ff3131] text-xs font-bold tracking-widest uppercase">Pro Lig Üyesi</p>
                 )}
                 {(profil as any).takim && user.email !== "reckurt7@gmail.com" && (
                   <span className="text-[10px] bg-[#111] text-yellow-500 border border-yellow-500/30 px-2 py-0.5 rounded uppercase font-bold">
@@ -98,7 +98,7 @@ export default function ProfilPage() {
                 <div style={{ position: "absolute", top: 15, left: 15, textAlign: "center", zIndex: 2 }}>
                   <div style={{ fontSize: 26, fontWeight: 900, color: "#4a3300", lineHeight: 1 }}>{(profil as any).genel_puan || "75"}</div>
                   <div style={{ fontSize: 13, fontWeight: 800, color: "#4a3300", marginTop: 2 }}>{(profil as any).mevki ? (profil as any).mevki.substring(0,3).toUpperCase() : "OYT"}</div>
-                  <div style={{ fontSize: 10, fontWeight: 900, color: "#4a3300", marginTop: 5, borderTop: "1px solid #855c0b", paddingTop: 3 }}>KLAS</div>
+                  <div style={{ fontSize: 10, fontWeight: 900, color: "#4a3300", marginTop: 5, borderTop: "1px solid #855c0b", paddingTop: 3 }}>PRO</div>
                 </div>
                 
                 <div style={{ width: 140, height: 140, marginTop: 30, position: "relative", zIndex: 1 }}>

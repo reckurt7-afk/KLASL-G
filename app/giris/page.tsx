@@ -79,7 +79,7 @@ export default function GirisPage() {
           <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px" }}>
             <Image
               src="/icons/logo.png"
-              alt="KLAS LİG"
+              alt="PRO LİG"
               fill
               style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
             />
@@ -91,7 +91,7 @@ export default function GirisPage() {
             letterSpacing: 6,
             margin: 0,
             lineHeight: 1,
-          }}>KLAS LİG</h1>
+          }}>PRO LİG</h1>
         </div>
 
         {/* Kart */}

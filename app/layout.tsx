@@ -9,9 +9,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KLAS LİG BURSA",
-  description: "KLAS LİG BURSA Resmi Web Sitesi",
-  applicationName: "KLAS LİG BURSA",
+  title: "PRO LİG BURSA",
+  description: "PRO LİG BURSA Resmi Web Sitesi",
+  applicationName: "PRO LİG BURSA",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "KLAS LİG BURSA",
+    title: "PRO LİG BURSA",
   },
 };
 

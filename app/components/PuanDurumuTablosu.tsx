@@ -59,7 +59,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
       {!mini && (
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="section-title">LİG PUAN DURUMU</h2>
-          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">KLAS LİG {cityName}</p>
+          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">PRO LİG {cityName}</p>
         </div>
       )}
 

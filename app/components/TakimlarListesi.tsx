@@ -39,7 +39,7 @@ export default function TakimlarListesi() {
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="section-title">👥 TAKIMLAR</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">KLAS LİG MÜCADELECİLERİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ff3131]">PRO LİG MÜCADELECİLERİ</p>
       </div>
 
       {loading ? (

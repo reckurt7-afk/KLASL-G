@@ -163,7 +163,7 @@ function PlayerCard({ oyuncu }: { oyuncu: Oyuncu }) {
       <div style={{ position: "absolute", top: 15, left: 15, textAlign: "center", zIndex: 2 }}>
         <div style={{ fontSize: 26, fontWeight: 900, color: textColor, lineHeight: 1 }}>{oyuncu.genel_puan || "0"}</div>
         <div style={{ fontSize: 13, fontWeight: 800, color: textColor, marginTop: 2 }}>{oyuncu.mevki ? oyuncu.mevki.substring(0,3).toUpperCase() : "OYT"}</div>
-        <div style={{ fontSize: 10, fontWeight: 900, color: textColor, marginTop: 5, borderTop: `1px solid ${statsColor}`, paddingTop: 3 }}>KLAS</div>
+        <div style={{ fontSize: 10, fontWeight: 900, color: textColor, marginTop: 5, borderTop: `1px solid ${statsColor}`, paddingTop: 3 }}>PRO</div>
       </div>
       <div style={{ width: 140, height: 140, marginTop: 30, position: "relative", zIndex: 1 }}>
         {oyuncu.foto_url ? (
