@@ -77,19 +77,19 @@ export default function CityStoryBar() {
             >
               {/* Card */}
               <div
-                className={`w-[120px] h-[90px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
+                className={`w-[135px] h-[105px] md:w-[145px] md:h-[110px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
                     ? "border-[#1e3a8a] bg-red-50 shadow-md"
                     : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
                 }`}
               >
-                <div className="w-8 h-8 relative">
+                <div className="w-10 h-10 md:w-11 md:h-11 relative">
                   <Image src="/icons/logo.png" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
-                <span className={`text-[10px] font-bold leading-tight text-center break-words w-full px-1 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
+                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
-                <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
+                <span className="text-[9px] md:text-[10px] tracking-widest text-gray-400 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
                   {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
                 </span>
               </div>
