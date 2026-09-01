@@ -113,7 +113,7 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pt-[180px] sm:pt-[200px] pb-16 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pt-48 pb-16 overflow-hidden">
         {/* Background MP4 Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
@@ -144,7 +144,7 @@ export default function LandingPage() {
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
-          <div className="relative flex items-center justify-center mb-12 mt-4 md:mt-6">
+          <div className="relative flex items-center justify-center mb-12 mt-20 md:mt-8">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
             <Image 
               src="/icons/logo.png" 
