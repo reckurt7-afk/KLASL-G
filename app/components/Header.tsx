@@ -26,7 +26,7 @@ export default function Header() {
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-5">
           <Image src="/icons/logo.png" width={60} height={60} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
-          <span className="font-black text-xl tracking-tight text-[#cc0000] text-3xl tracking-tighter">PRO <span className="text-black">LİG</span></span>
+          <span className="font-black text-xl tracking-tight text-[#0f172a] text-3xl tracking-tighter">PRO <span className="text-[#d4af37]">LİG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}

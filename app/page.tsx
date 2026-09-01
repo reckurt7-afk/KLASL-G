@@ -91,7 +91,7 @@ export default function LandingPage() {
               <Image src="/icons/logo.png" width={64} height={64} alt="Pro Lig Logo" className="rounded-full object-contain md:w-[70px] md:h-[70px]" />
             </Link>
             <Link href="/" className="flex-1 flex justify-center pr-10 sm:pr-0 z-0">
-              <span className="font-black text-[#cc0000] text-[24px] md:text-[30px] tracking-tighter">PRO <span className="text-black">LİG</span></span>
+              <span className="font-black text-[#0f172a] text-[24px] md:text-[30px] tracking-tighter">PRO <span className="text-[#d4af37]">LİG</span></span>
             </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
             <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#1e3a8a] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
