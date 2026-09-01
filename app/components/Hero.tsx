@@ -192,7 +192,7 @@ export default function Hero({
               width={140}
               height={140}
               priority
-              className="relative drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] transform transition-transform duration-500 hover:scale-105"
+              className="relative rounded-full drop-shadow-[0_0_20px_rgba(255,49,49,0.6)] transform transition-transform duration-500 hover:scale-105"
             />
           </div>
 
