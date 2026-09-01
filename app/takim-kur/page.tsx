@@ -103,7 +103,7 @@ export default function TakimKurPage() {
           body: JSON.stringify({
             baslik: "🔥 PRO LİG'E YENİ BİR TAKIM KATILDI!",
             mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Pro Lig ailesine hoş geldiniz. 🏆`,
-            icon: "https://klaslig.vercel.app/icons/logo.png",
+            icon: "https://prolig.vercel.app/icons/logo.png",
             image: logoUrl || undefined,
             url: "/genel-bakis"
           })
