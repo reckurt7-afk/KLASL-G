@@ -113,7 +113,7 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pt-[95px] pb-6 overflow-hidden">
+      <section className="relative w-full min-h-[calc(100vh-70px)] mt-[70px] flex flex-col items-center justify-start bg-black pt-4 md:pt-8 pb-6 overflow-hidden">
         {/* Background MP4 Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
