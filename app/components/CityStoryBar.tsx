@@ -84,10 +84,10 @@ export default function CityStoryBar() {
                 }`}
               >
                 <div className="w-8 h-8 relative">
-                  <Image src="/icons/logo.png" alt={city.name} fill className="object-contain" />
+                  <Image src="/icons/logo.png" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
-                <span className={`text-[11px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
-                  {city.name}
+                <span className={`text-[10px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
+                  {city.name.replace(/^PRO LİG /i, "")}
                 </span>
                 <span className="text-[8px] text-gray-500 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
                   {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
