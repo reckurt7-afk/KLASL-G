@@ -84,7 +84,7 @@ export default function CityStoryBar() {
                 }`}
               >
                 <div className="w-10 h-10 md:w-11 md:h-11 relative">
-                  <Image src="/icons/prolig-logo-yeni.jpg" alt={city.name} fill className="rounded-full object-contain" />
+                  <Image src="/icons/prolig-logo-final.jpg" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
                 <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
                   {city.name}

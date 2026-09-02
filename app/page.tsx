@@ -68,7 +68,7 @@ export default function LandingPage() {
         // Show immediate welcome notification
         await reg.showNotification("PRO LİG", {
           body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",
-          icon: "/icons/prolig-logo-yeni.jpg",
+          icon: "/icons/prolig-logo-final.jpg",
           vibrate: [200, 100, 200]
         } as any);
         // alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
@@ -88,7 +88,7 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
         <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-between">
           <Link href="/" className="flex items-center shrink-0 pl-2 md:pl-4 z-10">
-              <Image src="/icons/prolig-logo-yeni.jpg" width={64} height={64} alt="Pro Lig Logo" className="rounded-full object-contain md:w-[70px] md:h-[70px]" />
+              <Image src="/icons/prolig-logo-final.jpg" width={64} height={64} alt="Pro Lig Logo" className="rounded-full object-contain md:w-[70px] md:h-[70px]" />
             </Link>
             <Link href="/" className="flex-1 flex justify-center pr-10 sm:pr-0 z-0">
               <span className="font-black text-[#cc0000] text-[24px] md:text-[30px] tracking-tighter">PRO <span className="text-black">LİG</span></span>
@@ -150,7 +150,7 @@ export default function LandingPage() {
           <div className="relative flex items-center justify-center mb-3 mt-4 md:mt-6">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
             <Image 
-              src="/icons/prolig-logo-yeni.jpg" 
+              src="/icons/prolig-logo-final.jpg" 
               width={180} 
               height={180} 
               alt="Pro Lig" 

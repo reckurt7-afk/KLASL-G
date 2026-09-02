@@ -24,7 +24,7 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: data.body || "Yeni bildirim var!",
-    icon: data.icon || "/icons/prolig-logo-yeni.jpg",
+    icon: data.icon || "/icons/prolig-logo-final.jpg",
     image: data.image,
     badge: data.badge,
     requireInteraction: data.requireInteraction,

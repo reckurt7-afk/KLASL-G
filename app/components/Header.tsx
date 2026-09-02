@@ -25,7 +25,7 @@ export default function Header() {
       <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-5">
-          <Image src="/icons/prolig-logo-yeni.jpg" width={60} height={60} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
+          <Image src="/icons/prolig-logo-final.jpg" width={60} height={60} alt="Pro Lig" className="object-contain drop-shadow-sm rounded-full" />
           <span className="font-black text-xl tracking-tight text-[#cc0000] text-3xl tracking-tighter">PRO <span className="text-black">LİG</span></span>
         </Link>
 
