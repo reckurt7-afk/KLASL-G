@@ -196,7 +196,27 @@ export default function MacSonucuPage() {
       });
     } catch {}
 
-    setMesaj({ tip: "ok", yazi: `✅ Kaydedildi! ${ev_sahibi} ${evGol} - ${depGol} ${deplasman} | Puan tablosu güncellendi.` });
+    
+    // MVP Oylamasi Bildirimi Gonder
+    try {
+      await fetch("/api/send-notification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baslik: "🏆 MAÇ BİTTİ! SENCE YILDIZ KİMDİ?",
+          mesaj: `${ev_sahibi} ${evGol} - ${depGol} ${deplasman} maçı sona erdi. Hemen tıkla, kendi takımından sahanın yıldızını oyla!`,
+          url: `/mvp-oylama/${seciliMac.id}`,
+          requireInteraction: true,
+          actions: [
+            { action: "canli", title: "⭐ MVP OYUNU KULLAN" }
+          ]
+        })
+      });
+    } catch(err) {
+      console.error("Bildirim gonderilemedi", err);
+    }
+
+    setMesaj({ tip: "ok", yazi: "Maç kaydedildi, puan durumu güncellendi ve MVP oylama bildirimleri gönderildi!" });
     setSecilenMacId("");
     setEvSkor("");
     setDepSkor("");
