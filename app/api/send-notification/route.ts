@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     }
 
     // VAPID key kontrolü
-    const vapidEmail = process.env.VAPID_EMAIL;
+    const vapidEmail = process.env.VAPID_EMAIL || "mailto:info@prolig.com";
     const vapidPublic = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
     const vapidPrivate = process.env.VAPID_PRIVATE_KEY;
 
