@@ -167,7 +167,7 @@ export default function KayitPage() {
         <div style={{ textAlign: "center", marginBottom: 30 }}>
           <div style={{ position: "relative", width: 90, height: 90, margin: "0 auto 15px" }}>
             <Image
-              src="/icons/logo.png"
+              src="/icons/prolig-logo-yeni.jpg"
               alt="PRO LİG"
               fill
               style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}

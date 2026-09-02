@@ -41,8 +41,8 @@ export default function MacDetayModal({
 }) {
   if (!mac) return null;
 
-  const evLogo = mac.ev_logo || TEAM_LOGOS[mac.ev_sahibi.toUpperCase()] || TEAM_LOGOS[mac.ev_sahibi] || "/icons/logo.png";
-  const depLogo = mac.dep_logo || TEAM_LOGOS[mac.deplasman.toUpperCase()] || TEAM_LOGOS[mac.deplasman] || "/icons/logo.png";
+  const evLogo = mac.ev_logo || TEAM_LOGOS[mac.ev_sahibi.toUpperCase()] || TEAM_LOGOS[mac.ev_sahibi] || "/icons/prolig-logo-yeni.jpg";
+  const depLogo = mac.dep_logo || TEAM_LOGOS[mac.deplasman.toUpperCase()] || TEAM_LOGOS[mac.deplasman] || "/icons/prolig-logo-yeni.jpg";
 
   const goller = mac.goller || [
     { dk: 14, oyuncu: "Ahmet Yılmaz", takim: "ev" },

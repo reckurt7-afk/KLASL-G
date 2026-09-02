@@ -78,7 +78,7 @@ export default function GirisPage() {
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px" }}>
             <Image
-              src="/icons/logo.png"
+              src="/icons/prolig-logo-yeni.jpg"
               alt="PRO LİG"
               fill
               style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}

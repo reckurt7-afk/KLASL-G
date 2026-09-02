@@ -187,7 +187,7 @@ export default function Hero({
           <div className="relative group">
             <div className="absolute -inset-3 bg-gradient-to-r from-[#d4af37] to-[#8c7324] rounded-full blur-2xl opacity-40 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
             <Image
-              src="/icons/logo.png"
+              src="/icons/prolig-logo-yeni.jpg"
               alt="PRO LİG"
               width={140}
               height={140}

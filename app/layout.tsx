@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/icons/logo.png", sizes: "192x192", type: "image/png" },
-      { url: "/icons/logo.png", sizes: "512x512", type: "image/png" },
+      { url: "/icons/prolig-logo-yeni.jpg", sizes: "192x192", type: "image/png" },
+      { url: "/icons/prolig-logo-yeni.jpg", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/icons/logo.png", sizes: "180x180" },
+      { url: "/icons/prolig-logo-yeni.jpg", sizes: "180x180" },
     ],
   },
   appleWebApp: {

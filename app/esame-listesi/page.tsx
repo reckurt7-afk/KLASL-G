@@ -289,7 +289,7 @@ export default function EsameListesiPage() {
               <div className="flex justify-between items-center w-full mb-6">
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
                   <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                    <Image src={logolar[mac[0]] || "/icons/logo.png"} alt={mac[0]} fill className="object-contain" />
+                    <Image src={logolar[mac[0]] || "/icons/prolig-logo-yeni.jpg"} alt={mac[0]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[0]}</span>
                 </div>
@@ -298,7 +298,7 @@ export default function EsameListesiPage() {
 
                 <div className="flex flex-col items-center gap-2 w-[40%] text-center">
                   <div className="relative w-[50px] h-[50px] md:w-[70px] md:h-[70px] group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                    <Image src={logolar[mac[1]] || "/icons/logo.png"} alt={mac[1]} fill className="object-contain" />
+                    <Image src={logolar[mac[1]] || "/icons/prolig-logo-yeni.jpg"} alt={mac[1]} fill className="object-contain" />
                   </div>
                   <span className="text-white font-bold text-sm md:text-base">{mac[1]}</span>
                 </div>
