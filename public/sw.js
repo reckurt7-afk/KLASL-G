@@ -14,13 +14,13 @@ self.addEventListener("push", (event) => {
       data = event.data.json();
     } catch {
       data = {
-        title: "KLAS LİG",
+        title: "PRO LİG",
         body: event.data.text(),
       };
     }
   }
 
-  const title = data.title || "KLAS LİG";
+  const title = data.title || "PRO LİG";
 
   const options = {
     body: data.body || "Yeni bildirim var!",
