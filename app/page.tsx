@@ -103,7 +103,7 @@ export default function LandingPage() {
             ref={videoRef}
             autoPlay 
             loop 
-            muted={isMuted}
+            muted={isMuted} defaultMuted
             playsInline
             preload="auto"
             onEnded={(e) => {
