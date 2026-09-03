@@ -19,8 +19,8 @@ export async function POST(req: Request) {
     const anahtar = `mvp_vote_${macId}_${userId}`;
     const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/ayarlar?anahtar=eq.${anahtar}`, {
       headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
+        'apikey': SUPABASE_KEY || "",
+        'Authorization': `Bearer ${SUPABASE_KEY || ""}`
       }
     });
     const checkData = await checkRes.json();
@@ -33,8 +33,8 @@ export async function POST(req: Request) {
     const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/ayarlar`, {
       method: "POST",
       headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'apikey': SUPABASE_KEY || "",
+        'Authorization': `Bearer ${SUPABASE_KEY || ""}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -70,8 +70,8 @@ export async function GET(req: Request) {
     // Tüm oyları getir
     const res = await fetch(`${SUPABASE_URL}/rest/v1/ayarlar?anahtar=like.mvp_vote_${macId}_%`, {
       headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
+        'apikey': SUPABASE_KEY || "",
+        'Authorization': `Bearer ${SUPABASE_KEY || ""}`
       }
     });
     

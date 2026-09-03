@@ -3,11 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import InstallButton from "./components/InstallButton";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function LandingPage() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => { if (videoRef.current) { videoRef.current.defaultMuted = true; } }, []);
 
   const subscribeUser = async () => {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
@@ -103,7 +104,7 @@ export default function LandingPage() {
             ref={videoRef}
             autoPlay 
             loop 
-            muted={isMuted} defaultMuted
+            muted={isMuted}
             playsInline
             preload="auto"
             onEnded={(e) => {
