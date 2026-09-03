@@ -146,13 +146,15 @@ export default function LandingPage() {
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
           <div className="relative flex items-center justify-center my-2 mt-4">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
-            <Image 
-              src="/icons/prolig-logo-final.jpg" 
-              width={180} 
-              height={180} 
-              alt="Pro Lig" 
-              className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[170px] md:w-[210px]" 
-            />
+            <div className="w-[170px] h-[170px] md:w-[210px] md:h-[210px] rounded-full overflow-hidden border-[3px] border-[#d4af37] shadow-[0_0_40px_rgba(212,175,55,0.8)] z-10 flex items-center justify-center bg-black relative">
+              <Image 
+                src="/icons/prolig-logo-final.jpg" 
+                width={210} 
+                height={210} 
+                alt="Pro Lig" 
+                className="w-full h-full object-cover scale-[1.03]" 
+              />
+            </div>
           </div>
 
           {/* Title */}
