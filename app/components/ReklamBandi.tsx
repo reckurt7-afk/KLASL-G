@@ -7,7 +7,7 @@ const REKLAMLAR = [
     logo: "🏪",
     firma: "ÖRNEK MARKET",
     slogan: "Her gün taze ürünler",
-    renk: "#d4af37",
+    renk: "#ceaa52",
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const REKLAMLAR = [
     logo: "📞",
     firma: "REKLAM: 0501 012 0016",
     slogan: "Buraya reklam vermek için arayın!",
-    renk: "#d4af37",
+    renk: "#ceaa52",
   },
 ];
 

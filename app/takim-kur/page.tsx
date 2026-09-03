@@ -95,15 +95,15 @@ export default function TakimKurPage() {
 
       try {
         const selectedLeague = leagues.find(l => l.id.toString() === formData.leagueId);
-        const leagueName = selectedLeague ? selectedLeague.name.toUpperCase() : "PRO LİG";
+        const leagueName = selectedLeague ? selectedLeague.name.toUpperCase() : "PRİME LİG";
         
         await fetch("/api/send-notification", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "🔥 PRO LİG'E YENİ BİR TAKIM KATILDI!",
-            mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Pro Lig ailesine hoş geldiniz. 🏆`,
-            icon: "https://prolig.vercel.app/icons/prolig-logo-final.jpg",
+            baslik: "🔥 PRİME LİG'E YENİ BİR TAKIM KATILDI!",
+            mesaj: `${formData.name.toUpperCase()}, resmen ${leagueName} arenasında! Prime Lig ailesine hoş geldiniz. 🏆`,
+            icon: "https://prolig.vercel.app/icons/prime-logo.jpg",
             image: logoUrl || undefined,
             url: "/genel-bakis"
           })
@@ -130,7 +130,7 @@ export default function TakimKurPage() {
           <h2 className="section-title text-3xl md:text-5xl font-black text-gray-900 uppercase tracking-tight">
             🛡️ TAKIM KUR
           </h2>
-          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#d4af37] uppercase">
+          <p className="section-sub mt-2 tracking-[0.2em] font-bold text-[#ceaa52] uppercase">
             YENİ SEZON KAYITLARI BAŞLADI
           </p>
         </div>
@@ -141,13 +141,13 @@ export default function TakimKurPage() {
             {/* LİG SEÇİMİ */}
             <div>
               <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#d4af37] text-white flex items-center justify-center text-xs">1</span>
+                <span className="w-6 h-6 rounded-full bg-[#ceaa52] text-white flex items-center justify-center text-xs">1</span>
                 Hangi Lige Katılacaksın?
               </label>
               <select 
                 value={formData.leagueId} 
                 onChange={e => setFormData({...formData, leagueId: e.target.value})} 
-                className="w-full bg-gray-50 border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all cursor-pointer appearance-none"
+                className="w-full bg-gray-50 border border-gray-200 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all cursor-pointer appearance-none"
               >
                 <option value="" disabled>Lütfen Katılacağınız Ligi Seçiniz</option>
                 {leagues.map(l => (
@@ -159,7 +159,7 @@ export default function TakimKurPage() {
             {/* TAKIM ADI */}
             <div>
               <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#d4af37] text-white flex items-center justify-center text-xs">2</span>
+                <span className="w-6 h-6 rounded-full bg-[#ceaa52] text-white flex items-center justify-center text-xs">2</span>
                 Takım Adı
               </label>
               <input 
@@ -167,7 +167,7 @@ export default function TakimKurPage() {
                 required 
                 value={formData.name} 
                 onChange={e => setFormData({...formData, name: e.target.value})} 
-                className="w-full bg-gray-50 border border-gray-200 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all placeholder-gray-400" 
+                className="w-full bg-gray-50 border border-gray-200 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-4 text-gray-900 font-bold outline-none transition-all placeholder-gray-400" 
                 placeholder="Örn: Pro FC" 
               />
             </div>
@@ -175,7 +175,7 @@ export default function TakimKurPage() {
             {/* LOGO SEÇİMİ */}
             <div>
               <label className="text-sm font-black text-gray-900 uppercase tracking-wider mb-2 block flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#d4af37] text-white flex items-center justify-center text-xs">3</span>
+                <span className="w-6 h-6 rounded-full bg-[#ceaa52] text-white flex items-center justify-center text-xs">3</span>
                 Takım Logosu
               </label>
               
@@ -210,7 +210,7 @@ export default function TakimKurPage() {
             <button 
               type="submit" 
               disabled={loading} 
-              className="mt-6 w-full bg-gradient-to-r from-[#d4af37] to-[#d62020] text-white font-black text-lg py-5 rounded-xl hover:shadow-[0_10px_20px_rgba(212,175,55,0.3)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="mt-6 w-full bg-gradient-to-r from-[#ceaa52] to-[#d62020] text-white font-black text-lg py-5 rounded-xl hover:shadow-[0_10px_20px_rgba(212,175,55,0.3)] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {loading ? "TAKIM KURULUYOR..." : "SAVAŞA HAZIRIM! (TAKIMI KUR)"}
             </button>

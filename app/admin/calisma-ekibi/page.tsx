@@ -104,7 +104,7 @@ export default function AdminCalismaEkibi() {
             <p className="text-gray-500 font-medium mt-1">Personelleri, yöneticileri ve hakemleri buradan kolayca ekleyin.</p>
           </div>
           <div className="flex gap-2">
-            <span className="bg-[#d4af37]/10 text-[#d4af37] px-4 py-2 rounded-lg font-bold text-sm">
+            <span className="bg-[#ceaa52]/10 text-[#ceaa52] px-4 py-2 rounded-lg font-bold text-sm">
               Toplam {ekip.length} Kişi
             </span>
           </div>
@@ -123,12 +123,12 @@ export default function AdminCalismaEkibi() {
                   
                   {/* Fotoğraf Yükleme */}
                   <div className="flex flex-col items-center gap-3 mb-2">
-                    <div className="w-28 h-28 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center overflow-hidden relative group hover:border-[#d4af37] transition-colors cursor-pointer" onClick={() => document.getElementById('foto-upload')?.click()}>
+                    <div className="w-28 h-28 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center overflow-hidden relative group hover:border-[#ceaa52] transition-colors cursor-pointer" onClick={() => document.getElementById('foto-upload')?.click()}>
                       {formData.fotoPreview ? (
                         <Image src={formData.fotoPreview} alt="Preview" fill className="object-cover" />
                       ) : (
                         <>
-                          <svg className="w-8 h-8 text-gray-400 group-hover:text-[#d4af37] transition-colors mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-8 h-8 text-gray-400 group-hover:text-[#ceaa52] transition-colors mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                           </svg>
@@ -145,27 +145,27 @@ export default function AdminCalismaEkibi() {
                   {/* Inputlar */}
                   <div>
                     <label className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1.5 block">Ad Soyad</label>
-                    <input type="text" required value={formData.ad_soyad} onChange={e => setFormData({...formData, ad_soyad: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: Recep Şentürk" />
+                    <input type="text" required value={formData.ad_soyad} onChange={e => setFormData({...formData, ad_soyad: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: Recep Şentürk" />
                   </div>
 
                   <div>
                     <label className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1.5 block">Görev / Unvan</label>
-                    <input type="text" required value={formData.gorev} onChange={e => setFormData({...formData, gorev: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: Kurucu Başkan" />
+                    <input type="text" required value={formData.gorev} onChange={e => setFormData({...formData, gorev: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: Kurucu Başkan" />
                     <p className="text-[10px] text-gray-400 mt-1">İçinde "Ortak" veya "Başkan" geçerse en tepeye yerleşir.</p>
                   </div>
 
                   <div>
                     <label className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1.5 block">Instagram (İsteğe Bağlı)</label>
-                    <input type="text" value={formData.instagram} onChange={e => setFormData({...formData, instagram: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: @klaslig" />
+                    <input type="text" value={formData.instagram} onChange={e => setFormData({...formData, instagram: e.target.value})} className="w-full bg-white border border-gray-300 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" placeholder="Örn: @klaslig" />
                   </div>
 
                   <div>
                     <label className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1.5 block">Sıralama (Opsiyonel)</label>
-                    <input type="number" value={formData.sira} onChange={e => setFormData({...formData, sira: parseInt(e.target.value)})} className="w-full bg-white border border-gray-300 focus:border-[#d4af37] focus:ring-1 focus:ring-[#d4af37] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" />
+                    <input type="number" value={formData.sira} onChange={e => setFormData({...formData, sira: parseInt(e.target.value)})} className="w-full bg-white border border-gray-300 focus:border-[#ceaa52] focus:ring-1 focus:ring-[#ceaa52] rounded-xl p-3 text-gray-900 transition-all outline-none font-medium placeholder-gray-400" />
                     <p className="text-[10px] text-gray-400 mt-1">1 en üstte çıkar, 99 en altta.</p>
                   </div>
 
-                  <button type="submit" disabled={saving} className="mt-2 w-full bg-[#d4af37] text-white font-black py-3.5 rounded-xl hover:bg-[#d62020] transition-colors shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                  <button type="submit" disabled={saving} className="mt-2 w-full bg-[#ceaa52] text-white font-black py-3.5 rounded-xl hover:bg-[#d62020] transition-colors shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                     {saving ? (
                       <>
                         <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -194,7 +194,7 @@ export default function AdminCalismaEkibi() {
               <div className="p-6 flex-1 bg-gray-50/50">
                 {loading ? (
                   <div className="flex flex-col items-center justify-center py-20">
-                    <div className="w-10 h-10 border-4 border-[#d4af37]/20 border-t-[#d4af37] rounded-full animate-spin"></div>
+                    <div className="w-10 h-10 border-4 border-[#ceaa52]/20 border-t-[#ceaa52] rounded-full animate-spin"></div>
                     <p className="mt-4 text-gray-500 font-medium">Ekip yükleniyor...</p>
                   </div>
                 ) : ekip.length === 0 ? (
@@ -224,7 +224,7 @@ export default function AdminCalismaEkibi() {
                         {/* Detaylar */}
                         <div className="flex-1 min-w-0">
                           <div className="font-black text-gray-900 truncate">{kisi.ad_soyad}</div>
-                          <div className="text-[11px] uppercase font-bold text-[#d4af37] truncate mb-0.5">{kisi.gorev}</div>
+                          <div className="text-[11px] uppercase font-bold text-[#ceaa52] truncate mb-0.5">{kisi.gorev}</div>
                           {kisi.instagram && (
                             <div className="text-xs text-gray-500 truncate flex items-center gap-1">
                               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>

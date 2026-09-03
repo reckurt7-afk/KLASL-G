@@ -66,7 +66,7 @@ export default function AdminIstatistiklerPage() {
               👑 GOL & ASİST KRALLIĞI (OTOMATİK)
             </h1>
             <p className="text-gray-400 text-sm mt-2 max-w-2xl">
-              Bu tablo, <strong className="text-[#d4af37]">Maç Sonucu</strong> ve <strong className="text-[#d4af37]">Canlı Maç</strong> ekranlarından girilen maç olaylarına (Gol/Asist) göre <strong className="text-white">otomatik</strong> olarak hesaplanır. Manuel müdahale kapalıdır.
+              Bu tablo, <strong className="text-[#ceaa52]">Maç Sonucu</strong> ve <strong className="text-[#ceaa52]">Canlı Maç</strong> ekranlarından girilen maç olaylarına (Gol/Asist) göre <strong className="text-white">otomatik</strong> olarak hesaplanır. Manuel müdahale kapalıdır.
             </p>
           </div>
 
@@ -117,7 +117,7 @@ export default function AdminIstatistiklerPage() {
                         {o.ad_soyad}
                       </td>
                       <td className="p-4 text-gray-400 font-semibold">{o.takim}</td>
-                      <td className="p-4 text-center font-black text-[#d4af37] text-lg">
+                      <td className="p-4 text-center font-black text-[#ceaa52] text-lg">
                         {o.gol}
                       </td>
                       <td className="p-4 text-center font-black text-blue-400 text-lg">

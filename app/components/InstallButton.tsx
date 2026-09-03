@@ -75,7 +75,7 @@ export default function InstallButton() {
           className="bg-green-500/10 text-green-500 border border-green-500/30 rounded-xl px-6 h-[56px] flex items-center justify-center gap-3 w-full font-black text-[15px] shadow-sm cursor-default"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          PRO LİG YÜKLÜ
+          PRİME LİG YÜKLÜ
         </button>
       </div>
     );
@@ -86,7 +86,7 @@ export default function InstallButton() {
       <button
         onClick={installApp}
         disabled={loading}
-        className="group relative overflow-hidden bg-[#1e3a8a] hover:bg-[#cc0000] text-white rounded-xl px-6 h-[56px] flex items-center justify-center gap-3 w-full font-black text-[15px] shadow-[0_4px_20px_rgba(230,0,0,0.4)] hover:shadow-[0_6px_25px_rgba(230,0,0,0.5)] transition-all hover:-translate-y-0.5"
+        className="group relative overflow-hidden bg-[#1e3a8a] hover:bg-[#9e1b22] text-white rounded-xl px-6 h-[56px] flex items-center justify-center gap-3 w-full font-black text-[15px] shadow-[0_4px_20px_rgba(230,0,0,0.4)] hover:shadow-[0_6px_25px_rgba(230,0,0,0.5)] transition-all hover:-translate-y-0.5"
       >
         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out"></div>
         {loading ? (
@@ -94,7 +94,7 @@ export default function InstallButton() {
         ) : (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         )}
-        PRO LİG'İ TELEFONA YÜKLE
+        PRİME LİG'İ TELEFONA YÜKLE
       </button>
       
       {showIOSPrompt && (

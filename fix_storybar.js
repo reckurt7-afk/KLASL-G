@@ -5,8 +5,8 @@ let content = fs.readFileSync('app/components/CityStoryBar.tsx', 'utf8');
 // Add rounded-full to the logo
 content = content.replace(/className="object-contain"/, 'className="rounded-full object-contain"');
 
-// Shorten city.name by removing PRO LİG
-content = content.replace(/{city\.name}/, "{city.name.replace(/^PRO LİG /i, '')}");
+// Shorten city.name by removing PRİME LİG
+content = content.replace(/{city\.name}/, "{city.name.replace(/^PRİME LİG /i, '')}");
 
 // Make the text slightly smaller just in case
 content = content.replace(/text-\[11px\]/, 'text-[10px]');

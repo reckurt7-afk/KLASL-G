@@ -98,7 +98,7 @@ export default function KapBildirimleriAdminPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "PRO LİG BURSA KAP BİLDİRİMİ",
+            baslik: "PRİME LİG BURSA KAP BİLDİRİMİ",
             mesaj: baslik.trim(),
             url: newId ? `/duyuru/${newId}` : "/lig"
           }),
@@ -156,7 +156,7 @@ export default function KapBildirimleriAdminPage() {
             <h2 className="text-lg font-bold text-gray-900 mb-6">{editId ? "KAP Düzenle" : "Yeni KAP Ekle"}</h2>
 
             {msg && (
-              <div className={`p-4 rounded-xl mb-6 text-[13px] font-bold border ${msg.tip === "ok" ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-[#d4af37] border-red-200"}`}>
+              <div className={`p-4 rounded-xl mb-6 text-[13px] font-bold border ${msg.tip === "ok" ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-[#ceaa52] border-red-200"}`}>
                 {msg.yazi}
               </div>
             )}
@@ -195,7 +195,7 @@ export default function KapBildirimleriAdminPage() {
               </div>
 
               <div className="pt-4 flex gap-2">
-                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-[14px]">
+                <button onClick={kaydet} disabled={saving} className="flex-1 bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-bold py-3 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 text-[14px]">
                   {saving ? "Kaydediliyor..." : (editId ? "Güncelle" : "Yayınla")}
                 </button>
                 {editId && (

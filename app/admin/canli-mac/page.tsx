@@ -272,7 +272,7 @@ export default function CanliMacPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0b0b0b", color: "#fff", padding: "90px 20px" }}>
-      <h1 style={{ textAlign: "center", color: "#d4af37", marginBottom: 30, fontWeight: 900, fontSize: 28 }}>
+      <h1 style={{ textAlign: "center", color: "#ceaa52", marginBottom: 30, fontWeight: 900, fontSize: 28 }}>
         🔴 CANLI MAÇ YÖNETİMİ
       </h1>
 
@@ -307,7 +307,7 @@ export default function CanliMacPage() {
           <>
             {/* Maç Başlığı */}
             <div style={{ textAlign: "center", marginTop: 30, marginBottom: 10 }}>
-              <div style={{ fontSize: 13, color: "#d4af37", fontWeight: 700, letterSpacing: 3, marginBottom: 8 }}>
+              <div style={{ fontSize: 13, color: "#ceaa52", fontWeight: 700, letterSpacing: 3, marginBottom: 8 }}>
                 {seciliMac.hafta}. HAFTA
               </div>
               <h2 style={{ fontSize: 22, fontWeight: 900, margin: 0 }}>
@@ -318,7 +318,7 @@ export default function CanliMacPage() {
                   display: "inline-block",
                   background: "rgba(212,175,55,0.15)",
                   border: "1px solid rgba(212,175,55,0.4)",
-                  color: "#d4af37",
+                  color: "#ceaa52",
                   padding: "4px 14px",
                   borderRadius: 20,
                   fontSize: 12,
@@ -559,7 +559,7 @@ export default function CanliMacPage() {
             </div>
             {/* OLAY EKLEME (ZAMAN TÜNELİ) */}
             <div style={{ marginTop: 24, background: "#0d0d0d", borderRadius: 16, padding: "20px", border: "1px solid rgba(212,175,55,0.3)" }}>
-              <h3 style={{ color: "#d4af37", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>⚡ ZAMAN TÜNELİNE OLAY EKLE</h3>
+              <h3 style={{ color: "#ceaa52", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>⚡ ZAMAN TÜNELİNE OLAY EKLE</h3>
               
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 10 }}>
                 <select value={olayTakimYonu} onChange={e => setOlayTakimYonu(e.target.value)} style={{ padding: 10, background: "#222", color: "#fff", borderRadius: 8, border: "none" }}>
@@ -583,7 +583,7 @@ export default function CanliMacPage() {
                   placeholder="Oyuncu adı..."
                   style={{ flex: 1, padding: "10px 15px", background: "#222", color: "#fff", borderRadius: 8, border: "none" }}
                 />
-                <button onClick={olayEkle} style={{ padding: "10px 20px", background: "#d4af37", color: "#fff", borderRadius: 8, fontWeight: "bold", border: "none", cursor: "pointer" }}>
+                <button onClick={olayEkle} style={{ padding: "10px 20px", background: "#ceaa52", color: "#fff", borderRadius: 8, fontWeight: "bold", border: "none", cursor: "pointer" }}>
                   Ekle ({seciliMac.dakika}')
                 </button>
               </div>

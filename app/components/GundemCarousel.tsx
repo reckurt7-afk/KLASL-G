@@ -137,7 +137,7 @@ export default function GundemCarousel() {
           </button>
           <button
             onClick={() => scroll("right")}
-            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-[#1e3a8a] rounded-full shadow-md items-center justify-center text-white hover:bg-[#cc0000]"
+            className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-[#1e3a8a] rounded-full shadow-md items-center justify-center text-white hover:bg-[#9e1b22]"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
           </button>

@@ -31,7 +31,7 @@ export default function ProfilPage() {
   if (loading || !user || !profil) {
     return (
       <div className="page flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -48,13 +48,13 @@ export default function ProfilPage() {
       <div className="container max-w-2xl">
         <div className="text-center mb-10">
           <h1 className="section-title">👤 PROFİLİM</h1>
-          <p className="section-sub">PRO LİG BURSA</p>
+          <p className="section-sub">PRİME LİG BURSA</p>
         </div>
 
         {/* Profil Kartı */}
         <div className="card p-8 mb-6">
           <div className="flex items-center gap-6 mb-8">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37] to-[#8c7324] flex items-center justify-center text-white text-3xl font-black shadow-[0_0_20px_rgba(212,175,55,0.3)] shrink-0 overflow-hidden">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#ceaa52] to-[#8c7324] flex items-center justify-center text-white text-3xl font-black shadow-[0_0_20px_rgba(212,175,55,0.3)] shrink-0 overflow-hidden">
               {profil.avatar_url ? (
                 <Image src={profil.avatar_url} alt={profil.ad_soyad} width={80} height={80} className="object-cover w-full h-full" />
               ) : initials}
@@ -67,7 +67,7 @@ export default function ProfilPage() {
                     👑 KURUCU
                   </p>
                 ) : (
-                  <p className="text-[#d4af37] text-xs font-bold tracking-widest uppercase">Pro Lig Üyesi</p>
+                  <p className="text-[#ceaa52] text-xs font-bold tracking-widest uppercase">Prime Lig Üyesi</p>
                 )}
                 {(profil as any).takim && user.email !== "reckurt7@gmail.com" && (
                   <span className="text-[10px] bg-[#111] text-yellow-500 border border-yellow-500/30 px-2 py-0.5 rounded uppercase font-bold">

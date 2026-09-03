@@ -99,7 +99,7 @@ export default function MacSonuclariSlider() {
                 {/* Status & Date */}
                 <div className="flex items-center justify-between mb-2">
                   {match.canli ? (
-                    <span className="text-[10px] font-bold text-white bg-[#d4af37] px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
+                    <span className="text-[10px] font-bold text-white bg-[#ceaa52] px-2 py-0.5 rounded animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.6)]">
                       CANLI {match.dakika ? `${match.dakika}'` : ''}
                     </span>
                   ) : match.durum === "Devre Arası" ? (
@@ -126,9 +126,9 @@ export default function MacSonuclariSlider() {
 
                   {/* Score */}
                   <div className="flex items-center gap-1.5 px-2 shrink-0">
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#d4af37]' : 'text-[#1e3a8a]'}`}>{match.ev_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#ceaa52]' : 'text-[#1e3a8a]'}`}>{match.ev_skor ?? 0}</span>
                     <span className="text-gray-300 font-bold">-</span>
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#d4af37]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#ceaa52]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
                   </div>
 
                   {/* Away */}
@@ -143,7 +143,7 @@ export default function MacSonuclariSlider() {
                 {/* Footer */}
                 <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
                   {match.canli && <div className="w-1.5 h-1.5 bg-[#eab308] rounded-full animate-ping"></div>}
-                  <span className={match.canli ? "text-[#eab308]" : "text-gray-400"}>Pro Lig • {match.hafta}. HAFTA</span>
+                  <span className={match.canli ? "text-[#eab308]" : "text-gray-400"}>Prime Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );

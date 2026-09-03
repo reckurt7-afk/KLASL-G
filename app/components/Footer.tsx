@@ -20,11 +20,11 @@ export default function Footer() {
           <div className="flex-1 min-w-[200px] max-w-[260px]">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[rgba(212,175,55,0.3)]">
-                <Image src="/icons/prolig-logo-final.jpg" alt="Pro Lig" fill className="object-cover" />
+                <Image src="/icons/prime-logo.jpg" alt="Prime Lig" fill className="object-cover" />
               </div>
               <div>
-                <div className="text-white font-black text-lg tracking-widest leading-none">PRO LİG</div>
-                <div className="text-[#d4af37] text-[10px] font-black tracking-[0.3em]">{cityName.toUpperCase()}</div>
+                <div className="text-white font-black text-lg tracking-widest leading-none">PRİME LİG</div>
+                <div className="text-[#ceaa52] text-[10px] font-black tracking-[0.3em]">{cityName.toUpperCase()}</div>
               </div>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed mb-5">
@@ -46,7 +46,7 @@ export default function Footer() {
         {/* Alt Bölüm */}
         <div className="border-t border-[rgba(255,255,255,0.06)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} Pro Lig {cityName}. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Prime Lig {cityName}. Tüm hakları saklıdır.
           </div>
           <div className="text-gray-700 text-xs">
             ⚽ 3. Sezon

@@ -74,7 +74,7 @@ export default function IstatistikTablosu() {
         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
           ⚡ İSTATİSTİK LİDERLERİ
         </h2>
-        <p className="text-[#d4af37] font-bold tracking-[0.3em] text-xs md:text-sm mt-2 uppercase">
+        <p className="text-[#ceaa52] font-bold tracking-[0.3em] text-xs md:text-sm mt-2 uppercase">
           SEZONUN EN İYİLERİ
         </p>
       </div>
@@ -85,7 +85,7 @@ export default function IstatistikTablosu() {
           onClick={() => setTab("gol")}
           className={`flex-1 py-3 px-4 rounded-xl font-black text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
             tab === "gol"
-              ? "bg-[#d4af37] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
+              ? "bg-[#ceaa52] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
               : "text-gray-400 hover:text-white hover:bg-white/5"
           }`}
         >
@@ -95,7 +95,7 @@ export default function IstatistikTablosu() {
           onClick={() => setTab("asist")}
           className={`flex-1 py-3 px-4 rounded-xl font-black text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
             tab === "asist"
-              ? "bg-[#d4af37] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
+              ? "bg-[#ceaa52] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
               : "text-gray-400 hover:text-white hover:bg-white/5"
           }`}
         >
@@ -105,7 +105,7 @@ export default function IstatistikTablosu() {
           onClick={() => setTab("kaleci")}
           className={`flex-1 py-3 px-4 rounded-xl font-black text-xs md:text-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
             tab === "kaleci"
-              ? "bg-[#d4af37] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
+              ? "bg-[#ceaa52] text-white shadow-[0_0_15px_rgba(212,175,55,0.5)] scale-[1.02]"
               : "text-gray-400 hover:text-white hover:bg-white/5"
           }`}
         >
@@ -168,7 +168,7 @@ export default function IstatistikTablosu() {
               <Link
                 key={o.id || idx}
                 href={`/oyuncu/${o.id}`}
-                className="group relative bg-[#0f0f0f]/80 hover:bg-[#151515] border border-white/10 hover:border-[#d4af37]/40 rounded-2xl p-4 transition-all duration-300 flex items-center justify-between backdrop-blur-md shadow-lg"
+                className="group relative bg-[#0f0f0f]/80 hover:bg-[#151515] border border-white/10 hover:border-[#ceaa52]/40 rounded-2xl p-4 transition-all duration-300 flex items-center justify-between backdrop-blur-md shadow-lg"
               >
                 {/* LEFT: RANK & PLAYER INFO */}
                 <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
@@ -197,7 +197,7 @@ export default function IstatistikTablosu() {
 
                   {/* Names */}
                   <div className="min-w-0">
-                    <h4 className="text-white font-black text-base md:text-lg group-hover:text-[#d4af37] transition-colors truncate">
+                    <h4 className="text-white font-black text-base md:text-lg group-hover:text-[#ceaa52] transition-colors truncate">
                       {o.ad_soyad}
                     </h4>
                     <div className="flex items-center gap-2 mt-0.5">
@@ -215,7 +215,7 @@ export default function IstatistikTablosu() {
 
                 {/* RIGHT: STAT COUNT */}
                 <div className="flex flex-col items-end shrink-0 pl-3">
-                  <span className="text-2xl md:text-3xl font-black text-white group-hover:text-[#d4af37] transition-colors leading-none">
+                  <span className="text-2xl md:text-3xl font-black text-white group-hover:text-[#ceaa52] transition-colors leading-none">
                     {statValue}
                   </span>
                   <span className="text-[10px] font-extrabold text-gray-500 uppercase tracking-wider mt-1">

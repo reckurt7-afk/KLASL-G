@@ -130,7 +130,7 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
       </div>
 
       {/* Geri Dön Butonu */}
-      <Link href="/" className="inline-flex items-center gap-2 bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-black px-5 py-2.5 rounded-lg transition-all shadow-md text-[13px]">
+      <Link href="/" className="inline-flex items-center gap-2 bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-black px-5 py-2.5 rounded-lg transition-all shadow-md text-[13px]">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         Anasayfa
       </Link>

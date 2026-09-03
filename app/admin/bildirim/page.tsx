@@ -166,7 +166,7 @@ export default function BildirimPage() {
               height: 56,
               border: "none",
               borderRadius: 14,
-              background: loading ? "#333" : "linear-gradient(135deg, #d4af37, #8c7324)",
+              background: loading ? "#333" : "linear-gradient(135deg, #ceaa52, #8c7324)",
               color: "#fff",
               fontSize: 17,
               fontWeight: 900,

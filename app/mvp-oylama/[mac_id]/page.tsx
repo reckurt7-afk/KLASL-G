@@ -105,7 +105,7 @@ export default function MVPOylamaPage() {
   }
 
   if (authLoading || loading) {
-    return <div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div></div>;
+    return <div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin"></div></div>;
   }
 
   return (
@@ -116,11 +116,11 @@ export default function MVPOylamaPage() {
           Ana Sayfaya Dön
         </Link>
         
-        <div className="bg-[#121212] border border-[#d4af37]/30 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-[#d4af37]/10 blur-[50px] pointer-events-none"></div>
+        <div className="bg-[#121212] border border-[#ceaa52]/30 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-[#ceaa52]/10 blur-[50px] pointer-events-none"></div>
           
           <div className="relative z-10">
-            <h1 className="text-3xl font-black text-center text-white mb-2 tracking-tight">🏆 MAÇIN <span className="text-[#d4af37]">ADAMI</span></h1>
+            <h1 className="text-3xl font-black text-center text-white mb-2 tracking-tight">🏆 MAÇIN <span className="text-[#ceaa52]">ADAMI</span></h1>
             
             {mac && (
               <div className="text-center mb-8 bg-black/40 py-3 rounded-2xl border border-white/5">
@@ -146,9 +146,9 @@ export default function MVPOylamaPage() {
                     <div 
                       key={o.id} 
                       onClick={() => setSecilenOyuncu(o.ad_soyad)}
-                      className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center gap-4 ${secilenOyuncu === o.ad_soyad ? 'border-[#d4af37] bg-[#d4af37]/10 shadow-[0_0_15px_rgba(212,175,55,0.2)]' : 'border-white/10 bg-black/40 hover:border-white/30'}`}
+                      className={`p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center gap-4 ${secilenOyuncu === o.ad_soyad ? 'border-[#ceaa52] bg-[#ceaa52]/10 shadow-[0_0_15px_rgba(212,175,55,0.2)]' : 'border-white/10 bg-black/40 hover:border-white/30'}`}
                     >
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${secilenOyuncu === o.ad_soyad ? 'border-[#d4af37] bg-[#d4af37]' : 'border-gray-500'}`}>
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${secilenOyuncu === o.ad_soyad ? 'border-[#ceaa52] bg-[#ceaa52]' : 'border-gray-500'}`}>
                         {secilenOyuncu === o.ad_soyad && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
                       </div>
                       <div>
@@ -162,7 +162,7 @@ export default function MVPOylamaPage() {
                 <button 
                   onClick={oyGonder} 
                   disabled={isSubmitting || !secilenOyuncu}
-                  className="w-full py-4 bg-gradient-to-r from-[#d4af37] to-[#b39024] hover:from-[#e3bd3f] hover:to-[#c29c27] text-black font-black text-lg rounded-2xl transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-gradient-to-r from-[#ceaa52] to-[#b39024] hover:from-[#e3bd3f] hover:to-[#c29c27] text-black font-black text-lg rounded-2xl transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <div className="w-6 h-6 border-3 border-black border-t-transparent rounded-full animate-spin"></div>

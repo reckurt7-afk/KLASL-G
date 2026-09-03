@@ -9,23 +9,23 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PRO LİG BURSA",
-  description: "PRO LİG BURSA Resmi Web Sitesi",
-  applicationName: "PRO LİG BURSA",
+  title: "PRİME LİG BURSA",
+  description: "PRİME LİG BURSA Resmi Web Sitesi",
+  applicationName: "PRİME LİG BURSA",
   manifest: "/manifest.json",
   icons: {
     icon: [
-      { url: "/icons/prolig-logo-final.jpg", sizes: "192x192", type: "image/png" },
-      { url: "/icons/prolig-logo-final.jpg", sizes: "512x512", type: "image/png" },
+      { url: "/icons/prime-logo.jpg", sizes: "192x192", type: "image/png" },
+      { url: "/icons/prime-logo.jpg", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/icons/prolig-logo-final.jpg", sizes: "180x180" },
+      { url: "/icons/prime-logo.jpg", sizes: "180x180" },
     ],
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "PRO LİG BURSA",
+    title: "PRİME LİG BURSA",
   },
 };
 

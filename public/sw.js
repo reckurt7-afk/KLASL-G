@@ -14,17 +14,17 @@ self.addEventListener("push", (event) => {
       data = event.data.json();
     } catch {
       data = {
-        title: "PRO LİG",
+        title: "PRİME LİG",
         body: event.data.text(),
       };
     }
   }
 
-  const title = data.title || "PRO LİG";
+  const title = data.title || "PRİME LİG";
 
   const options = {
     body: data.body || "Yeni bildirim var!",
-    icon: data.icon || "/icons/prolig-logo-final.jpg",
+    icon: data.icon || "/icons/prime-logo.jpg",
     image: data.image,
     badge: data.badge,
     requireInteraction: data.requireInteraction,

@@ -6,7 +6,7 @@ content = content.replace(/className="object-contain"/, 'className="rounded-full
 
 // Replace the text inside the span
 content = content.replace(/<span className=\{`text-\[11px\] font-bold leading-tight text-center \$\{isSelected \? "text-\[#1e3a8a\]" : "text-gray-700"\}`\}>\s*\{city\.name\}\s*<\/span>/, 
-  '<span className={`text-[10px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>\n                  {city.name.replace(/^PRO LİG /i, "")}\n                </span>');
+  '<span className={`text-[10px] font-bold leading-tight text-center ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>\n                  {city.name.replace(/^PRİME LİG /i, "")}\n                </span>');
 
 fs.writeFileSync('app/components/CityStoryBar.tsx', content, 'utf8');
 console.log("Fixed carefully!");

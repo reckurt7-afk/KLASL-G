@@ -31,7 +31,7 @@ export default function PuanDurumuAdminPage() {
     <div className="min-h-screen bg-[#0b0b0b] text-white p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
-          <h1 className="text-3xl font-black text-[#d4af37]">Puan Durumu Yönetimi (Manuel Müdahale)</h1>
+          <h1 className="text-3xl font-black text-[#ceaa52]">Puan Durumu Yönetimi (Manuel Müdahale)</h1>
           <Link href="/admin" className="px-4 py-2 bg-white/10 rounded-xl">Geri Dön</Link>
         </div>
         <div className="bg-[#121212] rounded-xl overflow-hidden border border-white/10">
@@ -58,7 +58,7 @@ export default function PuanDurumuAdminPage() {
                   <td className="p-3"><input type="number" defaultValue={t.lost} onBlur={(e) => handleUpdate(t.id, 'lost', e.target.value)} className="w-16 bg-[#1a1a1a] p-1 rounded border border-white/20 text-center" /></td>
                   <td className="p-3"><input type="number" defaultValue={t.goals_for} onBlur={(e) => handleUpdate(t.id, 'goals_for', e.target.value)} className="w-16 bg-[#1a1a1a] p-1 rounded border border-white/20 text-center" /></td>
                   <td className="p-3"><input type="number" defaultValue={t.goals_against} onBlur={(e) => handleUpdate(t.id, 'goals_against', e.target.value)} className="w-16 bg-[#1a1a1a] p-1 rounded border border-white/20 text-center" /></td>
-                  <td className="p-3"><input type="number" defaultValue={t.points} onBlur={(e) => handleUpdate(t.id, 'points', e.target.value)} className="w-16 bg-[#1a1a1a] p-1 rounded border border-white/20 text-center font-bold text-[#d4af37]" /></td>
+                  <td className="p-3"><input type="number" defaultValue={t.points} onBlur={(e) => handleUpdate(t.id, 'points', e.target.value)} className="w-16 bg-[#1a1a1a] p-1 rounded border border-white/20 text-center font-bold text-[#ceaa52]" /></td>
                 </tr>
               ))}
             </tbody>

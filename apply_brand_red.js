@@ -7,16 +7,16 @@ files.forEach(file => {
   let changed = false;
 
   // Header and page.tsx
-  const brandRegex = /text-\[\#0f172a\]([^>]*)>PRO <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
+  const brandRegex = /text-\[\#0f172a\]([^>]*)>PRİME <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
   if (brandRegex.test(content)) {
-    content = content.replace(brandRegex, 'text-[#cc0000]$1>PRO <span className="text-black">LİG</span>');
+    content = content.replace(brandRegex, 'text-[#cc0000]$1>PRİME <span className="text-black">LİG</span>');
     changed = true;
   }
 
   // Navbar.tsx
   const navbarRegex = /text-\[\#0f172a\]([^>]*)>PRO L(İ|I|)G<\/span>/g;
   if (navbarRegex.test(content)) {
-    content = content.replace(navbarRegex, 'text-[#cc0000]$1>PRO <span className="text-black">LİG</span></span>');
+    content = content.replace(navbarRegex, 'text-[#cc0000]$1>PRİME <span className="text-black">LİG</span></span>');
     changed = true;
   }
 

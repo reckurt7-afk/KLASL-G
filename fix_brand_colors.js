@@ -22,23 +22,23 @@ files.forEach(file => {
   let changed = false;
 
   // Replace Header/Navbar Brand text
-  // Looking for: text-[#0f172a] (or similar) followed by PRO <span className="text-[#d4af37]">LİG</span>
-  const brandRegex = /text-\[\#0f172a\]([^>]*)>PRO <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
+  // Looking for: text-[#0f172a] (or similar) followed by PRİME <span className="text-[#d4af37]">LİG</span>
+  const brandRegex = /text-\[\#0f172a\]([^>]*)>PRİME <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
   if (brandRegex.test(content)) {
-    content = content.replace(brandRegex, 'text-[#cc0000]$1>PRO <span className="text-black">LİG</span>');
+    content = content.replace(brandRegex, 'text-[#cc0000]$1>PRİME <span className="text-black">LİG</span>');
     changed = true;
   }
   
-  const brandRegex2 = /text-\[\#0f172a\]([^>]*)>PRO <span className="text-\[\#d4af37\]">L&Iuml;G<\/span>/g;
+  const brandRegex2 = /text-\[\#0f172a\]([^>]*)>PRİME <span className="text-\[\#d4af37\]">L&Iuml;G<\/span>/g;
   if (brandRegex2.test(content)) {
-    content = content.replace(brandRegex2, 'text-[#cc0000]$1>PRO <span className="text-black">LİG</span>');
+    content = content.replace(brandRegex2, 'text-[#cc0000]$1>PRİME <span className="text-black">LİG</span>');
     changed = true;
   }
 
   // Same for white text versions (if any)
-  const brandRegexWhite = /text-white([^>]*)>PRO <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
+  const brandRegexWhite = /text-white([^>]*)>PRİME <span className="text-\[\#d4af37\]">L(İ|I|)G<\/span>/g;
   if (brandRegexWhite.test(content)) {
-    content = content.replace(brandRegexWhite, 'text-[#cc0000]$1>PRO <span className="text-black">LİG</span>');
+    content = content.replace(brandRegexWhite, 'text-[#cc0000]$1>PRİME <span className="text-black">LİG</span>');
     changed = true;
   }
 

@@ -61,7 +61,7 @@ export default function CalismaEkibiPage() {
         <h3 className="text-gray-900 font-black text-sm md:text-base uppercase tracking-tight truncate">
           {person?.ad_soyad}
         </h3>
-        <div className="text-[#d4af37] font-bold text-xs md:text-sm tracking-wider uppercase mt-1">
+        <div className="text-[#ceaa52] font-bold text-xs md:text-sm tracking-wider uppercase mt-1">
           {person?.gorev}
         </div>
         
@@ -89,7 +89,7 @@ export default function CalismaEkibiPage() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 cursor-pointer"
           >
             <button 
-              className="absolute top-6 right-6 text-white hover:text-[#d4af37] transition-colors"
+              className="absolute top-6 right-6 text-white hover:text-[#ceaa52] transition-colors"
               onClick={() => setSelectedImage(null)}
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -112,15 +112,15 @@ export default function CalismaEkibiPage() {
         {/* HEADER SECTION */}
         <div className="text-center mb-16 pt-8 md:pt-12">
           <h2 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-black to-gray-800 uppercase tracking-tighter drop-shadow-lg mb-3">
-            PRO LİG BURSA
+            PRİME LİG BURSA
           </h2>
-          <p className="text-xl md:text-3xl tracking-[0.3em] font-black text-[#d4af37] uppercase drop-shadow-md">
+          <p className="text-xl md:text-3xl tracking-[0.3em] font-black text-[#ceaa52] uppercase drop-shadow-md">
             ÇALIŞMA EKİBİ
           </p>
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-20"><div className="w-10 h-10 border-4 border-[#d4af37]/20 border-t-[#d4af37] rounded-full animate-spin"></div></div>
+          <div className="flex justify-center py-20"><div className="w-10 h-10 border-4 border-[#ceaa52]/20 border-t-[#ceaa52] rounded-full animate-spin"></div></div>
         ) : ekip.length === 0 ? (
           <div className="text-center text-gray-500 py-12 bg-white rounded-2xl shadow-sm border border-gray-100 max-w-xl mx-auto">
             Henüz teknik ekip üyesi eklenmemiş.

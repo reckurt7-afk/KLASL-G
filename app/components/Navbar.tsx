@@ -37,17 +37,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-[32px] left-0 right-0 z-[9999] bg-[#070707]/85 backdrop-blur-2xl border-b border-[#d4af37]/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+      <header className="fixed top-[32px] left-0 right-0 z-[9999] bg-[#070707]/85 backdrop-blur-2xl border-b border-[#ceaa52]/20 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
         <div className="max-w-[1600px] mx-auto px-4">
           <div className="flex items-center justify-between h-[75px]">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-5 group">
-              <div className="relative w-[70px] h-[70px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#d4af37] transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0)] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]">
-                <Image src="/icons/prolig-logo-final.jpg" alt="Logo" fill className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500 aspect-square" />
+              <div className="relative w-[70px] h-[70px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#ceaa52] transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0)] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                <Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500 aspect-square" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-[#cc0000] tracking-widest leading-none group-hover:text-[#d4af37] transition-colors duration-300">PRO <span className="text-black">LİG</span></span>
-                <span className="text-[11px] text-[#d4af37] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
+                <span className="text-2xl font-black text-[#9e1b22] tracking-widest leading-none group-hover:text-[#ceaa52] transition-colors duration-300">PRİME <span className="text-black">LİG</span></span>
+                <span className="text-[11px] text-[#ceaa52] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
 
@@ -63,11 +63,11 @@ export default function Navbar() {
                       whileTap={{ scale: 0.95 }}
                       className={`px-3 py-2 rounded-xl text-[13px] font-bold transition-all duration-300 flex items-center gap-1.5
                         ${isActive
-                          ? "bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-gray-900 shadow-[0_4px_15px_rgba(212,175,55,0.4)]"
+                          ? "bg-gradient-to-r from-[#ceaa52] to-[#8c7324] text-gray-900 shadow-[0_4px_15px_rgba(212,175,55,0.4)]"
                           : "text-gray-300 hover:bg-gray-100 hover:text-gray-900"
                       }`}
                     >
-                      <Icon size={16} className={isActive ? "text-gray-900" : "text-[#d4af37]"} />
+                      <Icon size={16} className={isActive ? "text-gray-900" : "text-[#ceaa52]"} />
                       <span>{link.label}</span>
                     </motion.div>
                   </Link>
@@ -79,7 +79,7 @@ export default function Navbar() {
       </header>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-[44px] left-0 right-0 bg-[#070707]/90 backdrop-blur-2xl border-t border-[#d4af37]/20 pb-safe z-[9999] shadow-[0_-10px_40px_rgba(0,0,0,0.9)]">
+      <nav className="lg:hidden fixed bottom-[44px] left-0 right-0 bg-[#070707]/90 backdrop-blur-2xl border-t border-[#ceaa52]/20 pb-safe z-[9999] shadow-[0_-10px_40px_rgba(0,0,0,0.9)]">
         <div className="flex overflow-x-auto gap-2 p-2 hide-scrollbar snap-x snap-mandatory">
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -90,14 +90,14 @@ export default function Navbar() {
                   whileTap={{ scale: 0.9 }}
                   className={`flex-shrink-0 flex flex-col items-center justify-center w-[72px] h-[72px] rounded-2xl text-[10px] font-bold transition-all duration-300
                     ${isActive
-                      ? "bg-[#d4af37]/10 border border-[#d4af37]/50 text-gray-900 shadow-[inset_0_4px_10px_rgba(212,175,55,0.2)]"
+                      ? "bg-[#ceaa52]/10 border border-[#ceaa52]/50 text-gray-900 shadow-[inset_0_4px_10px_rgba(212,175,55,0.2)]"
                       : "text-gray-500 border border-transparent hover:bg-white/5 hover:text-gray-900"
                   }`}
                 >
                   <Icon 
                     size={24} 
                     strokeWidth={isActive ? 2.5 : 2} 
-                    className={`mb-1 transition-colors ${isActive ? "text-[#d4af37] drop-shadow-[0_2px_5px_rgba(212,175,55,0.8)]" : "text-gray-500"}`} 
+                    className={`mb-1 transition-colors ${isActive ? "text-[#ceaa52] drop-shadow-[0_2px_5px_rgba(212,175,55,0.8)]" : "text-gray-500"}`} 
                   />
                   <span className="truncate w-full text-center px-0.5">
                     {link.label}

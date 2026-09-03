@@ -80,7 +80,7 @@ return (
 
         <div
           style={{
-            color: "#d4af37",
+            color: "#ceaa52",
             fontSize: 12,
             fontWeight: 700,
             marginTop: 6,

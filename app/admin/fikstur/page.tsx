@@ -72,7 +72,7 @@ export default function FiksturAdminPage() {
       <h1
         style={{
           textAlign: "center",
-          color: "#d4af37",
+          color: "#ceaa52",
           fontWeight: 900,
           marginBottom: 30,
         }}
@@ -258,7 +258,7 @@ export default function FiksturAdminPage() {
             style={{
               width: "100%",
               padding: 12,
-              background: "#d4af37",
+              background: "#ceaa52",
               color: "#fff",
               border: "none",
               borderRadius: 10,

@@ -3,7 +3,7 @@
 let content = fs.readFileSync('app/components/CityStoryBar.tsx', 'utf8');
 
 // Put the full name back
-content = content.replace(/\{city\.name\.replace\(\/\^PRO LİG \/i, ""\)\}/, '{city.name}');
+content = content.replace(/\{city\.name\.replace\(\/\^PRİME LİG \/i, ""\)\}/, '{city.name}');
 
 // Increase the width of the container so the text fits beautifully
 content = content.replace(/min-w-\[90px\]/g, 'min-w-[110px] px-1');

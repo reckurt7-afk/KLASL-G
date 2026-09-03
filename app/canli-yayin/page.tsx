@@ -63,7 +63,7 @@ export default function CanliYayinPage() {
     return (
       <div className="page flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#d4af37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-16 h-16 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-400 font-bold">Yükleniyor...</p>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function CanliYayinPage() {
     return (
       <div className="page flex flex-col items-center justify-center gap-4">
         <div className="text-6xl">⚠️</div>
-        <div className="text-[#d4af37] font-bold text-lg">Bir hata oluştu</div>
+        <div className="text-[#ceaa52] font-bold text-lg">Bir hata oluştu</div>
         <div className="text-gray-400 text-sm bg-[#111] border border-white/10 rounded-xl px-6 py-3">{hata}</div>
       </div>
     );
@@ -89,8 +89,8 @@ export default function CanliYayinPage() {
           <div className="flex items-center justify-center gap-3 mb-3">
             {videoId ? (
               <span className="relative flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d4af37] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#d4af37]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ceaa52] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#ceaa52]"></span>
               </span>
             ) : (
               <span className="w-4 h-4 rounded-full bg-gray-600 inline-block" />
@@ -99,7 +99,7 @@ export default function CanliYayinPage() {
               {videoId ? "CANLI YAYIN" : "ŞU AN CANLI YAYIN YOK"}
             </h1>
           </div>
-          <p className="section-sub">PRO LİG BURSA</p>
+          <p className="section-sub">PRİME LİG BURSA</p>
         </div>
 
         {videoId ? (
@@ -110,7 +110,7 @@ export default function CanliYayinPage() {
                 <iframe
                   key={videoId}
                   src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
-                  title="Pro Lig Canlı Yayın"
+                  title="Prime Lig Canlı Yayın"
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -138,7 +138,7 @@ export default function CanliYayinPage() {
             <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
               Admin paneli → Ayarlar'dan bir YouTube linki ekleyerek canlı yayını başlatabilirsiniz.
             </p>
-            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)] rounded-xl text-[#d4af37] font-bold text-sm">
+            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)] rounded-xl text-[#ceaa52] font-bold text-sm">
               🔴 Bir sonraki maç için takipte kalın!
             </div>
           </div>

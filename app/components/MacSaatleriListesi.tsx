@@ -58,12 +58,12 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-black text-white">⏱️ MAÇ SAATLERİ</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#d4af37]">PRO LİG TAKVİMİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ceaa52]">PRİME LİG TAKVİMİ</p>
       </div>
 
       {loading ? (
         <div className="flex justify-center items-center py-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#d4af37]"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ceaa52]"></div>
         </div>
       ) : (
         haftalar.map((hafta) => {
@@ -84,7 +84,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                 {haftaninMaclari.map((mac) => (
                   <div
                     key={mac.id}
-                    className="card bg-[#111] border border-[rgba(255,255,255,0.07)] hover:border-[#d4af37]/50 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col"
+                    className="card bg-[#111] border border-[rgba(255,255,255,0.07)] hover:border-[#ceaa52]/50 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col"
                   >
                     <div className="flex justify-between items-center mb-4 pb-3 border-b border-[rgba(255,255,255,0.05)]">
                       <div className="flex items-center gap-2 text-gray-400 text-[10px] md:text-xs font-medium">
@@ -116,7 +116,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                         <div className="bg-[#070707] border border-[rgba(255,255,255,0.07)] rounded-xl px-2 md:px-4 py-1.5 md:py-2">
                           <span className="text-white font-black text-lg md:text-2xl">
                             {mac.durum === "ERTELENDİ" ? (
-                              <span className="text-[#d4af37] text-sm md:text-base">ERTELENDİ</span>
+                              <span className="text-[#ceaa52] text-sm md:text-base">ERTELENDİ</span>
                             ) : mac.saat ? (
                               mac.saat.substring(0, 5)
                             ) : (

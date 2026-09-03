@@ -69,7 +69,7 @@ export default function AyarlarPage() {
 
       <div style={{ maxWidth: 700, margin: "0 auto", background: "#151515", borderRadius: 16, padding: 30, border: "1px solid rgba(255,255,255,0.1)" }}>
 
-        <h3 style={{ marginBottom: 10, color: "#d4af37" }}>📺 Canlı Yayın / Tanıtım Video Linki</h3>
+        <h3 style={{ marginBottom: 10, color: "#ceaa52" }}>📺 Canlı Yayın / Tanıtım Video Linki</h3>
         <p style={{ color: "#aaa", fontSize: 13, marginBottom: 20 }}>
           Buraya YouTube linki yapıştır. Canlı yayın sayfasında bu video gösterilecek.<br />
           Maç başlatırsan maçın yayını öncelikli gösterilir, maç bitince bu videoya döner.
@@ -95,7 +95,7 @@ export default function AyarlarPage() {
             marginTop: 20,
             width: "100%",
             height: 55,
-            background: (kaydediliyor || !youtubeLink.trim()) ? "#555" : "linear-gradient(135deg, #d4af37, #8c7324)",
+            background: (kaydediliyor || !youtubeLink.trim()) ? "#555" : "linear-gradient(135deg, #ceaa52, #8c7324)",
             color: "#fff",
             border: "none",
             borderRadius: 12,

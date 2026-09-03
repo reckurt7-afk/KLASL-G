@@ -59,7 +59,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
       {!mini && (
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="section-title">LİG PUAN DURUMU</h2>
-          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">PRO LİG {cityName}</p>
+          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">PRİME LİG {cityName}</p>
         </div>
       )}
 
@@ -130,17 +130,17 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                         {medal}
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
-                        <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-gray-100 border border-[rgba(255,255,255,0.1)] group-hover:border-[#d4af37]/70 transition-colors flex items-center justify-center shadow-lg">
+                        <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-gray-100 border border-[rgba(255,255,255,0.1)] group-hover:border-[#ceaa52]/70 transition-colors flex items-center justify-center shadow-lg">
                           <Image src={t.logo} alt={t.name} fill className="object-contain p-[2px] sm:p-1" />
                         </div>
-                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#d4af37] transition-colors">{t.name}</span>
+                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#ceaa52] transition-colors">{t.name}</span>
                       </div>
                       <div className="text-center text-gray-500">{t.played}</div>
                       <div className="text-center font-medium text-green-500 drop-shadow-md">{t.won}</div>
                       <div className="text-center font-medium text-gray-500 drop-shadow-md">{t.drawn}</div>
                       <div className="text-center font-medium text-[#eab308] drop-shadow-md">{t.lost}</div>
                       <div className="text-center font-bold text-gray-600">{t.goal_difference > 0 ? `+${t.goal_difference}` : t.goal_difference}</div>
-                      <div className="text-center font-black text-[12px] sm:text-base text-gray-900 bg-gradient-to-br from-[#d4af37] to-[#8c7324] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(212,175,55,0.3)]">{t.points}</div>
+                      <div className="text-center font-black text-[12px] sm:text-base text-gray-900 bg-gradient-to-br from-[#ceaa52] to-[#8c7324] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(212,175,55,0.3)]">{t.points}</div>
                     </motion.div>
                   );
                 })

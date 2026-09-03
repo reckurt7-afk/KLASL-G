@@ -40,7 +40,7 @@ export default function HesabimPage() {
   if (loading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#070707] text-white">
-        <div className="animate-spin text-[#d4af37] text-4xl">⚽</div>
+        <div className="animate-spin text-[#ceaa52] text-4xl">⚽</div>
       </div>
     );
   }
@@ -49,16 +49,16 @@ export default function HesabimPage() {
 
   return (
     <main className="min-h-screen bg-[#070707] text-white pt-24 pb-24 px-4 overflow-hidden relative">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#d4af37]/10 via-[#070707]/90 to-[#070707]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#ceaa52]/10 via-[#070707]/90 to-[#070707]" />
       
       <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-            OYUNCU <span className="text-[#d4af37]">PORTALI</span>
+            OYUNCU <span className="text-[#ceaa52]">PORTALI</span>
           </h1>
           <button 
             onClick={cikisYap}
-            className="flex items-center gap-2 bg-white/10 hover:bg-[#d4af37]/80 text-white px-4 py-2 rounded-xl transition-colors font-bold text-sm"
+            className="flex items-center gap-2 bg-white/10 hover:bg-[#ceaa52]/80 text-white px-4 py-2 rounded-xl transition-colors font-bold text-sm"
           >
             <LogOut size={16} />
             <span className="hidden sm:inline">Çıkış Yap</span>
@@ -76,7 +76,7 @@ export default function HesabimPage() {
           >
             {/* 3D Hologram wrapper for the card */}
             <div className="relative group perspective-[1000px]">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#d4af37] to-[#ffd700] blur-[40px] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#ceaa52] to-[#ffd700] blur-[40px] opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
               <div className="transform-gpu transition-transform duration-500 group-hover:rotate-y-12 group-hover:rotate-x-12 cursor-pointer">
                 <OyuncuKarti 
                   id={1}
@@ -95,7 +95,7 @@ export default function HesabimPage() {
             </div>
 
             <div className="flex gap-4 w-full">
-              <button className="flex-1 bg-gradient-to-r from-[#d4af37] to-[#8c7324] text-white py-3 rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
+              <button className="flex-1 bg-gradient-to-r from-[#ceaa52] to-[#8c7324] text-white py-3 rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
                 <Share2 size={18} /> Paylaş
               </button>
               <button className="flex-1 bg-[#1a1c29] border border-white/20 text-white py-3 rounded-xl font-black text-sm flex items-center justify-center gap-2 hover:bg-white/10 hover:scale-105 transition-transform">
@@ -113,7 +113,7 @@ export default function HesabimPage() {
           >
             {/* Radar Chart (Yetenek Altıgeni) */}
             <div className="bg-[#0c0c0c]/90 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#d4af37]/10 blur-[50px] rounded-full" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#ceaa52]/10 blur-[50px] rounded-full" />
               <h2 className="text-xl font-black text-white mb-6 flex items-center gap-2">
                 <Trophy className="text-[#ffd700]" />
                 YETENEK ANALİZİ
@@ -128,9 +128,9 @@ export default function HesabimPage() {
                     <Radar
                       name="Yetenek"
                       dataKey="A"
-                      stroke="#d4af37"
+                      stroke="#ceaa52"
                       strokeWidth={3}
-                      fill="#d4af37"
+                      fill="#ceaa52"
                       fillOpacity={0.4}
                     />
                   </RadarChart>

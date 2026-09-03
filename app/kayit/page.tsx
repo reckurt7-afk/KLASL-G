@@ -167,8 +167,8 @@ export default function KayitPage() {
         <div style={{ textAlign: "center", marginBottom: 30 }}>
           <div style={{ position: "relative", width: 90, height: 90, margin: "0 auto 15px" }}>
             <Image
-              src="/icons/prolig-logo-final.jpg"
-              alt="PRO LİG"
+              src="/icons/prime-logo.jpg"
+              alt="PRİME LİG"
               fill
               style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
             />
@@ -180,7 +180,7 @@ export default function KayitPage() {
             letterSpacing: 4,
             margin: 0,
             lineHeight: 1,
-          }}>PRO LİG</h1>
+          }}>PRİME LİG</h1>
         </div>
 
         {/* Kart */}
@@ -403,8 +403,8 @@ export default function KayitPage() {
                 
                 <h4 className="font-black text-gray-900 mt-5 mb-2 uppercase tracking-wide">TANIMLAR:</h4>
                 <p className="mb-2"><strong>Şirket:</strong> TOPMOND EVENTS Organizasyon isimli firma işbu sözleşme kapsamında bu isim ile anılacaktır.</p>
-                <p className="mb-2"><strong>Üye:</strong> Pro Lig'e kayıt formu doldurarak kayıt olan kişiler işbu sözleşme kapsamında bu isimle anılacaktır.</p>
-                <p className="mb-2"><strong>Lig:</strong> İşbu sözleşme kapsamında Pro Lig bu isim ile anılacaktır.</p>
+                <p className="mb-2"><strong>Üye:</strong> Prime Lig'e kayıt formu doldurarak kayıt olan kişiler işbu sözleşme kapsamında bu isimle anılacaktır.</p>
+                <p className="mb-2"><strong>Lig:</strong> İşbu sözleşme kapsamında Prime Lig bu isim ile anılacaktır.</p>
                 <p className="mb-2"><strong>Hizmet:</strong> İşbu sözleşme kapsamında sağlanacak; bir spor tesisinin bir bölümünün tahsis edilmesi, fotoğraf/video çekimi, istatistiksel verilerin toplanması ve yayımlanması.</p>
                 
                 <h4 className="font-black text-gray-900 mt-5 mb-2 uppercase tracking-wide">1. GENEL HÜKÜMLER</h4>

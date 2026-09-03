@@ -314,7 +314,7 @@ export default function MacSonucuPage() {
               marginBottom: 20,
               textAlign: "center",
             }}>
-              <div style={{ color: "#d4af37", fontSize: 11, fontWeight: 700, letterSpacing: 2, marginBottom: 4 }}>
+              <div style={{ color: "#ceaa52", fontSize: 11, fontWeight: 700, letterSpacing: 2, marginBottom: 4 }}>
                 {seciliMac.hafta}. HAFTA
               </div>
               <div style={{ color: "#fff", fontWeight: 800, fontSize: 16 }}>
@@ -368,7 +368,7 @@ export default function MacSonucuPage() {
               height: 56,
               border: "none",
               borderRadius: 14,
-              background: isSaving ? "#333" : "linear-gradient(135deg, #d4af37, #8c7324)",
+              background: isSaving ? "#333" : "linear-gradient(135deg, #ceaa52, #8c7324)",
               color: "#fff",
               fontWeight: 900,
               fontSize: 17,
@@ -387,7 +387,7 @@ export default function MacSonucuPage() {
           {haftalar.map((hafta) => (
             <div key={hafta} style={{ marginBottom: 20 }}>
               <div style={{
-                color: "#d4af37",
+                color: "#ceaa52",
                 fontSize: 11,
                 fontWeight: 800,
                 letterSpacing: 3,

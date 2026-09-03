@@ -52,9 +52,9 @@ export default function LandingPage() {
 
       if (response.ok) {
         // Show immediate welcome notification
-        await reg.showNotification("PRO LİG", {
+        await reg.showNotification("PRİME LİG", {
           body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",
-          icon: "/icons/prolig-logo-final.jpg",
+          icon: "/icons/prime-logo.jpg",
           vibrate: [200, 100, 200]
         } as any);
         // alert("Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.");
@@ -78,21 +78,21 @@ export default function LandingPage() {
           {/* Orta Kısım - Logo (Tam Merkeze Sabitlendi) */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center shrink-0 z-10 -ml-2 md:-ml-4">
             
-            <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
+            <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#ceaa52]">PRIME <span className="text-[#9e1b22]">LiG</span></span>
           </Link>
 
           {/* Sağ Kısım - Butonlar */}
           <div className="flex items-center justify-end gap-2 md:gap-6 w-full md:w-auto relative z-20">
-            <Link href="/canli-yayin" className="hidden lg:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
-              Pro Lig TV
+            <Link href="/canli-yayin" className="hidden lg:flex items-center gap-2 text-[#9e1b22] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
+              <span className="w-2.5 h-2.5 bg-[#9e1b22] rounded-full animate-pulse"></span>
+              Prime Lig TV
             </Link>
             <div className="flex items-center gap-2 md:gap-3">
               <Link href="/giris" className="group relative overflow-hidden bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 hover:text-gray-900 font-black text-[12px] md:text-[15px] px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-sm whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[12px] md:text-[15px] px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#9e1b22] to-[#b82029] hover:from-[#9e1b22] hover:to-[#9e1b22] text-white font-black text-[12px] md:text-[15px] px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
@@ -141,21 +141,21 @@ export default function LandingPage() {
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1000px] mx-auto px-5 gap-6">
           
           {/* Top Badge */}
-          <div className="border border-[#e60000]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse"></span>
+          <div className="border border-[#9e1b22]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-[#9e1b22] animate-pulse"></span>
             <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye&apos;nin #1 Platformu</span>
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
           <div className="relative flex items-center justify-center my-2 mt-4">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
-            <div className="w-[170px] h-[170px] md:w-[210px] md:h-[210px] rounded-full overflow-hidden border-[3px] border-[#d4af37] shadow-[0_0_40px_rgba(212,175,55,0.8)] z-10 flex items-center justify-center bg-black relative">
+            <div className="w-[180px] h-[180px] md:w-[220px] md:h-[220px] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(206,170,82,0.5)] z-10 flex items-center justify-center bg-white border-4 border-[#ceaa52] relative p-2 transition-transform hover:scale-105">
               <Image 
-                src="/icons/prolig-logo-final.jpg" 
-                width={210} 
-                height={210} 
-                alt="Pro Lig" 
-                className="w-full h-full object-cover scale-[1.03]" 
+                src="/icons/prime-logo.jpg" 
+                width={220} 
+                height={220} 
+                alt="Prime Lig" 
+                className="w-full h-full object-contain" 
               />
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-6">
             <Link 
               href="/lig" 
-              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#e60000] to-[#b30000] hover:from-[#ff3131] hover:to-[#cc0000] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
+              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#9e1b22] to-[#b30000] hover:from-[#ff3131] hover:to-[#9e1b22] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
             >
               Platformu Keşfet
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -204,14 +204,14 @@ export default function LandingPage() {
             
             <Link 
               href="/giris" 
-              style={{ color: "#e60000" }}
+              style={{ color: "#9e1b22" }}
               className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Giriş Yap
             </Link>
             <Link 
               href="/lig" 
-              style={{ color: "#e60000" }}
+              style={{ color: "#9e1b22" }}
               className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Misafir Girişi
@@ -244,7 +244,7 @@ export default function LandingPage() {
           </div>
 
           <div className="text-center mb-10">
-            <h3 className="text-[14px] font-medium text-gray-500 mb-1">Pro Lig Avantajları</h3>
+            <h3 className="text-[14px] font-medium text-gray-500 mb-1">Prime Lig Avantajları</h3>
             <p className="text-[12px] text-gray-400">Profesyonel futbol deneyiminin en iyisini sunuyoruz</p>
           </div>
 
@@ -266,7 +266,7 @@ export default function LandingPage() {
             </div>
 
             <div className="bg-[#ffe5e5] border border-[#ffcccc] rounded-xl p-8 text-center flex flex-col items-center">
-              <div className="w-12 h-12 bg-[#e60000] rounded-full flex items-center justify-center text-white mb-5 shadow-sm">
+              <div className="w-12 h-12 bg-[#9e1b22] rounded-full flex items-center justify-center text-white mb-5 shadow-sm">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
               </div>
               <h4 className="font-bold text-[13px] text-[#1a1a2e] mb-3 uppercase tracking-wide">CANLI MAÇ YAYINI</h4>
@@ -293,7 +293,7 @@ export default function LandingPage() {
                 <div className="w-16 h-16 bg-[#f8f9fa] rounded-2xl flex items-center justify-center mb-6">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
-                <div className="text-[54px] font-black text-[#e60000] leading-none mb-2 tracking-tighter">40</div>
+                <div className="text-[54px] font-black text-[#9e1b22] leading-none mb-2 tracking-tighter">40</div>
                 <div className="text-[14px] font-bold text-[#1a1a2e]">İl</div>
               </div>
 
@@ -301,7 +301,7 @@ export default function LandingPage() {
                 <div className="w-16 h-16 bg-[#fff0f0] rounded-2xl flex items-center justify-center mb-6">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <div className="text-[54px] font-black text-[#e60000] leading-none mb-2 tracking-tighter">1.395</div>
+                <div className="text-[54px] font-black text-[#9e1b22] leading-none mb-2 tracking-tighter">1.395</div>
                 <div className="text-[14px] font-bold text-[#1a1a2e]">Takım</div>
               </div>
 
@@ -336,7 +336,7 @@ export default function LandingPage() {
             {/* Box 1 */}
             <div className="bg-[#f0f9f4] rounded-xl p-8 flex flex-col border border-[#e2f2e9]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9e1b22" strokeWidth="2"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Lig Takibi</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">40 şehirde aktif ligleri takip et, puan durumunu incele</p>
@@ -345,7 +345,7 @@ export default function LandingPage() {
             {/* Box 2 */}
             <div className="bg-[#fff9f5] rounded-xl p-8 flex flex-col border border-[#faefe8]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9e1b22" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Takım Profilleri</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">Takımları keşfet, istatistiklerini incele, kadroları gör</p>
@@ -354,7 +354,7 @@ export default function LandingPage() {
             {/* Box 3 */}
             <div className="bg-[#fff5f5] rounded-xl p-8 flex flex-col border border-[#fce8e8]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9e1b22" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Maç Sonuçları</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">Canlı skorları takip et, maç detaylarını incele</p>
@@ -427,13 +427,13 @@ export default function LandingPage() {
         </div>
         
         <div className="text-gray-400 text-[11px] mb-4 text-center">
-          © 2026 PRO LİG. Tüm Hakları Saklıdır
+          © 2026 PRİME LİG. Tüm Hakları Saklıdır
           <br/>
           <span className="inline-block mt-2">Halı saha futbolunun Türkiye'deki en büyük platformu</span>
         </div>
         
         <div className="text-gray-400 text-[10px] mt-6 pt-6 border-t border-gray-100 w-full max-w-sm text-center">
-          Bu site <a href="https://www.agx-labs.com/" className="text-gray-500 font-bold hover:text-[#e60000]">AGX Labs</a> tarafından geliştirilmiştir
+          Bu site <a href="https://www.agx-labs.com/" className="text-gray-500 font-bold hover:text-[#9e1b22]">AGX Labs</a> tarafından geliştirilmiştir
         </div>
       </footer>
 

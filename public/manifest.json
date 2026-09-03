@@ -1,11 +1,11 @@
 {
-  "name": "PRO LİG BURSA",
-  "short_name": "PRO LİG",
-  "description": "Bursa'nın en prestijli amatör futbol ligi",
+  "name": "PRÄ°ME LÄ°G BURSA",
+  "short_name": "PRÄ°ME LÄ°G",
+  "description": "Bursa'nÄ±n en prestijli amatÃ¶r futbol ligi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0b0b",
-  "theme_color": "#ff3131",
+  "theme_color": "#9e1b22",
   "orientation": "portrait-primary",
   "icons": [
     {

@@ -172,7 +172,7 @@ export default function BasvurularPage() {
                 b.durum === "onaylandi"
                   ? "#00ff88"
                   : b.durum === "reddedildi"
-                  ? "#d4af37"
+                  ? "#ceaa52"
                   : "#ffc107",
               fontWeight: 800,
             }}
@@ -230,7 +230,7 @@ const red = {
   height: 45,
   border: "none",
   borderRadius: 10,
-  background: "#d4af37",
+  background: "#ceaa52",
   color: "#fff",
   fontWeight: 900,
   cursor: "pointer",

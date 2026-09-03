@@ -119,7 +119,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
+                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
                         : "bg-white border-gray-100 text-gray-700 hover:border-[#1e3a8a]/20 hover:shadow-md hover:-translate-y-0.5"
                     }`}
                   >
@@ -162,7 +162,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#ff3333] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
+                        ? "bg-gradient-to-r from-[#1e3a8a] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(230,0,0,0.2)]"
                         : "bg-white border-gray-100 text-gray-700 hover:border-[#1e3a8a]/20 hover:shadow-md hover:-translate-y-0.5"
                     }`}
                   >

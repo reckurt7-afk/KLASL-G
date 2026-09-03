@@ -46,7 +46,7 @@ export default function VideoArsivPage() {
       <div className="container">
         <div className="text-center mb-12">
           <h1 className="section-title">🎬 Video Arşivi</h1>
-          <p className="section-sub">PRO LİG BURSA</p>
+          <p className="section-sub">PRİME LİG BURSA</p>
         </div>
 
         {yukleniyor ? (
@@ -93,7 +93,7 @@ export default function VideoArsivPage() {
                     )}
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-[#d4af37]/90 flex items-center justify-center text-white text-2xl pl-1 shadow-[0_0_24px_rgba(212,175,55,0.6)] group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-14 h-14 rounded-full bg-[#ceaa52]/90 flex items-center justify-center text-white text-2xl pl-1 shadow-[0_0_24px_rgba(212,175,55,0.6)] group-hover:scale-110 transition-transform duration-300">
                         ▶
                       </div>
                     </div>
@@ -110,7 +110,7 @@ export default function VideoArsivPage() {
                       </p>
                     )}
                     {video.tarih && (
-                      <p className="text-[#d4af37] text-xs font-bold">
+                      <p className="text-[#ceaa52] text-xs font-bold">
                         📅{" "}
                         {new Date(video.tarih).toLocaleDateString("tr-TR", {
                           day: "numeric",
@@ -139,7 +139,7 @@ export default function VideoArsivPage() {
           >
             <button
               onClick={() => setSecili(null)}
-              className="absolute -top-12 right-0 text-white text-3xl hover:text-[#d4af37] transition-colors font-black"
+              className="absolute -top-12 right-0 text-white text-3xl hover:text-[#ceaa52] transition-colors font-black"
             >
               ✕
             </button>

@@ -26,14 +26,14 @@ export default function Header() {
         {/* Left: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center z-10 -ml-2 md:-ml-4">
           
-          <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
+          <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#ceaa52]">PRIME <span className="text-[#9e1b22]">LiG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
         <div className="flex items-center gap-6">
-          <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#d4af37] font-bold text-sm cursor-pointer hover:text-[#b5952f] transition-colors">
-            <span className="w-2 h-2 bg-[#d4af37] rounded-full animate-pulse"></span>
-            Pro Lig TV
+          <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#ceaa52] font-bold text-sm cursor-pointer hover:text-[#b5952f] transition-colors">
+            <span className="w-2 h-2 bg-[#ceaa52] rounded-full animate-pulse"></span>
+            Prime Lig TV
           </Link>
           
           <button className="text-gray-500 hover:text-gray-900 text-xl">
@@ -41,7 +41,7 @@ export default function Header() {
           </button>
 
           {loading ? (
-            <div className="w-10 h-10 border-2 border-[#d4af37] border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-10 h-10 border-2 border-[#ceaa52] border-t-transparent rounded-full animate-spin"></div>
           ) : user ? (
             <div className="relative" ref={dropdownRef}>
               <button 

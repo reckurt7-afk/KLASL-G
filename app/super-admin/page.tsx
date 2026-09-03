@@ -143,7 +143,7 @@ export default function SuperAdminDashboard() {
           <h2 className="text-xl font-bold text-gray-800">Şehir Temsilcilikleri</h2>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-[#1e3a8a] hover:bg-[#cc0000] text-white px-5 py-2 rounded-lg font-bold transition-colors"
+            className="bg-[#1e3a8a] hover:bg-[#9e1b22] text-white px-5 py-2 rounded-lg font-bold transition-colors"
           >
             + Yeni Şehir Ekle
           </button>
@@ -164,7 +164,7 @@ export default function SuperAdminDashboard() {
                 <p className="text-sm text-gray-500 mb-4">/{city.slug} - Kod: {city.code}</p>
                 <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
                   <span className="text-xs font-semibold text-gray-400">Tenant ID: {city.id}</span>
-                  <button onClick={() => setManageCity(city)} className="text-[#1e3a8a] hover:text-[#cc0000] text-sm font-bold">
+                  <button onClick={() => setManageCity(city)} className="text-[#1e3a8a] hover:text-[#9e1b22] text-sm font-bold">
                     Yönet -&gt;
                   </button>
                 </div>
@@ -184,8 +184,8 @@ export default function SuperAdminDashboard() {
             
             <form onSubmit={handleCreateCity} className="space-y-4">
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-1">Şehir Adı (Örn: PRO LİG İSTANBUL)</label>
-                <input type="text" value={newCity.name} onChange={(e) => setNewCity({...newCity, name: e.target.value})} className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent outline-none" placeholder="PRO LİG İSTANBUL" required />
+                <label className="block text-sm font-bold text-gray-700 mb-1">Şehir Adı (Örn: PRİME LİG İSTANBUL)</label>
+                <input type="text" value={newCity.name} onChange={(e) => setNewCity({...newCity, name: e.target.value})} className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent outline-none" placeholder="PRİME LİG İSTANBUL" required />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">Slug (URL için, Örn: istanbul)</label>
@@ -195,7 +195,7 @@ export default function SuperAdminDashboard() {
                 <label className="block text-sm font-bold text-gray-700 mb-1">Plaka / Şehir Kodu (Örn: 34)</label>
                 <input type="text" value={newCity.code} onChange={(e) => setNewCity({...newCity, code: e.target.value})} className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#1e3a8a] focus:border-transparent outline-none" placeholder="34" required />
               </div>
-              <button type="submit" disabled={isSubmitting} className="w-full bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-bold py-3 rounded-lg transition-colors mt-4">
+              <button type="submit" disabled={isSubmitting} className="w-full bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-bold py-3 rounded-lg transition-colors mt-4">
                 {isSubmitting ? "Ekleniyor..." : "Şehri Oluştur ve Sistemi Başlat"}
               </button>
             </form>
@@ -234,7 +234,7 @@ export default function SuperAdminDashboard() {
                     if(error) alert('Hata: ' + error.message);
                     else { alert(data); setAdminEmail(''); }
                   }}
-                  className="bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-bold px-4 py-2 rounded-lg transition-colors"
+                  className="bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-bold px-4 py-2 rounded-lg transition-colors"
                 >
                   Yetki Ver
                 </button>

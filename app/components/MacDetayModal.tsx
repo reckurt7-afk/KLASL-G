@@ -41,8 +41,8 @@ export default function MacDetayModal({
 }) {
   if (!mac) return null;
 
-  const evLogo = mac.ev_logo || TEAM_LOGOS[mac.ev_sahibi.toUpperCase()] || TEAM_LOGOS[mac.ev_sahibi] || "/icons/prolig-logo-final.jpg";
-  const depLogo = mac.dep_logo || TEAM_LOGOS[mac.deplasman.toUpperCase()] || TEAM_LOGOS[mac.deplasman] || "/icons/prolig-logo-final.jpg";
+  const evLogo = mac.ev_logo || TEAM_LOGOS[mac.ev_sahibi.toUpperCase()] || TEAM_LOGOS[mac.ev_sahibi] || "/icons/prime-logo.jpg";
+  const depLogo = mac.dep_logo || TEAM_LOGOS[mac.deplasman.toUpperCase()] || TEAM_LOGOS[mac.deplasman] || "/icons/prime-logo.jpg";
 
   const goller = mac.goller || [
     { dk: 14, oyuncu: "Ahmet Yılmaz", takim: "ev" },
@@ -57,15 +57,15 @@ export default function MacDetayModal({
         {/* CLOSE BUTTON */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#d4af37] text-white flex items-center justify-center font-bold text-xl transition-all duration-300 z-20"
+          className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-[#ceaa52] text-white flex items-center justify-center font-bold text-xl transition-all duration-300 z-20"
         >
           ✕
         </button>
 
         {/* MATCH HEADER / TEAMS DISPLAY */}
         <div className="text-center mb-6">
-          <span className="bg-[#d4af37]/10 text-[#d4af37] text-xs font-black px-4 py-1 rounded-full border border-[#d4af37]/30 tracking-widest uppercase">
-            {mac.hafta ? `${mac.hafta}. HAFTA MAÇI` : "PRO LİG MAÇ DETAYI"}
+          <span className="bg-[#ceaa52]/10 text-[#ceaa52] text-xs font-black px-4 py-1 rounded-full border border-[#ceaa52]/30 tracking-widest uppercase">
+            {mac.hafta ? `${mac.hafta}. HAFTA MAÇI` : "PRİME LİG MAÇ DETAYI"}
           </span>
         </div>
 
@@ -84,12 +84,12 @@ export default function MacDetayModal({
           <div className="flex flex-col items-center justify-center">
             {mac.oynandi || mac.canli || mac.ev_skor !== undefined ? (
               <div className="flex items-center gap-3 text-3xl sm:text-5xl font-black text-white tracking-tighter">
-                <span className="text-[#d4af37]">{mac.ev_skor ?? 0}</span>
+                <span className="text-[#ceaa52]">{mac.ev_skor ?? 0}</span>
                 <span className="text-gray-600">-</span>
-                <span className="text-[#d4af37]">{mac.dep_skor ?? 0}</span>
+                <span className="text-[#ceaa52]">{mac.dep_skor ?? 0}</span>
               </div>
             ) : (
-              <div className="text-2xl sm:text-3xl font-black text-[#d4af37]">VS</div>
+              <div className="text-2xl sm:text-3xl font-black text-[#ceaa52]">VS</div>
             )}
 
             <div className="mt-2 text-xs font-bold text-gray-400">
@@ -124,11 +124,11 @@ export default function MacDetayModal({
                 key={i}
                 className={`flex items-center gap-3 p-3 rounded-xl border ${
                   g.takim === "ev"
-                    ? "bg-[#d4af37]/5 border-[#d4af37]/20 flex-row"
+                    ? "bg-[#ceaa52]/5 border-[#ceaa52]/20 flex-row"
                     : "bg-blue-500/5 border-blue-500/20 flex-row-reverse text-right"
                 }`}
               >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-xs text-[#d4af37] shrink-0">
+                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-black text-xs text-[#ceaa52] shrink-0">
                   {g.dk}'
                 </div>
                 <div className="flex items-center gap-2 font-bold text-sm text-white">

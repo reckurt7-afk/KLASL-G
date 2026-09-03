@@ -11,8 +11,8 @@ async function run() {
   const cities = await res.json();
   console.log("Current cities:", cities.map(c => `${c.id}: ${c.name}`));
   
-  // Find "PRO LİG BURSA 4. SEZON"
-  const target = cities.find(c => c.name.includes("PRO LİG BURSA 4. SEZON"));
+  // Find "PRİME LİG BURSA 4. SEZON"
+  const target = cities.find(c => c.name.includes("PRİME LİG BURSA 4. SEZON"));
   if (target) {
     const newName = target.name.replace("4. SEZON", "1. SEZON");
     const updateRes = await fetch(`${URL}/rest/v1/cities?id=eq.${target.id}`, {

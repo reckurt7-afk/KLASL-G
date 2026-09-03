@@ -95,7 +95,7 @@ export default function AdminGundemPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            baslik: "PRO LİG BURSA BİR YENİ HABER VAR",
+            baslik: "PRİME LİG BURSA BİR YENİ HABER VAR",
             mesaj: baslik.trim(),
             url: newId ? `/duyuru/${newId}` : "/duyurular"
           }),
@@ -267,7 +267,7 @@ export default function AdminGundemPage() {
             <button
               onClick={kaydet}
               disabled={saving}
-              className="bg-[#1e3a8a] hover:bg-[#cc0000] text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md disabled:opacity-50 text-[14px]"
+              className="bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md disabled:opacity-50 text-[14px]"
             >
               {saving ? "Kaydediliyor..." : (editId ? "Değişiklikleri Kaydet" : "Haber Yayınla")}
             </button>

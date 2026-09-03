@@ -93,10 +93,10 @@ export default function TransferBorsasi() {
           🔒
         </div>
         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4">
-          TRANSFER DÖNEMİ <span className="text-[#d4af37]">KAPALI</span>
+          TRANSFER DÖNEMİ <span className="text-[#ceaa52]">KAPALI</span>
         </h2>
         <p className="text-gray-400 text-base md:text-lg max-w-lg font-medium">
-          Pro Lig Bursa'da transfer dönemi şu an itibariyle kapalıdır. Pazar tekrar açıldığında yeni rekor bonservis bedelleriyle görüşmek üzere!
+          Prime Lig Bursa'da transfer dönemi şu an itibariyle kapalıdır. Pazar tekrar açıldığında yeni rekor bonservis bedelleriyle görüşmek üzere!
         </p>
       </div>
     );

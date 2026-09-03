@@ -13,14 +13,14 @@ export default function NotFound() {
       padding: "20px",
     }}>
       <div style={{ fontSize: 100, marginBottom: 20 }}>⚽</div>
-      <h1 style={{ color: "#d4af37", fontSize: 80, fontWeight: 900, margin: 0, lineHeight: 1 }}>404</h1>
+      <h1 style={{ color: "#ceaa52", fontSize: 80, fontWeight: 900, margin: 0, lineHeight: 1 }}>404</h1>
       <p style={{ color: "#fff", fontSize: 22, fontWeight: 700, marginTop: 15 }}>Sayfa Bulunamadı</p>
       <p style={{ color: "#aaa", fontSize: 15, marginTop: 10, maxWidth: 400 }}>
         Aradığın sayfa mevcut değil ya da taşınmış olabilir.
       </p>
       <div style={{ display: "flex", gap: 15, marginTop: 35, flexWrap: "wrap", justifyContent: "center" }}>
         <Link href="/" style={{
-          background: "linear-gradient(135deg, #d4af37, #8c7324)",
+          background: "linear-gradient(135deg, #ceaa52, #8c7324)",
           color: "#fff", textDecoration: "none",
           padding: "14px 28px", borderRadius: 12,
           fontWeight: 800, fontSize: 15,

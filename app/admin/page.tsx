@@ -27,7 +27,7 @@ const ADMIN_CARDS = [
     desc: "Maç skoru, gol, asist ve kartları yönet",
     link: "/admin/canli-mac",
     icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ceaa52" strokeWidth="2">
         <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
       </svg>
     ),
@@ -198,7 +198,7 @@ export default function AdminPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
           
           <div className="flex items-center gap-6 mb-6 md:mb-0 relative z-10">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#1e3a8a] to-[#990000] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(230,0,0,0.3)] border border-[#ff3333]/30">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#1e3a8a] to-[#990000] rounded-2xl flex items-center justify-center text-white shadow-[0_0_30px_rgba(230,0,0,0.3)] border border-[#b82029]/30">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/>
               </svg>
@@ -208,7 +208,7 @@ export default function AdminPage() {
                 YÖNETİM PANELİ
               </h1>
               <p className="text-[14px] md:text-[15px] text-gray-400 font-medium tracking-wide">
-                Pro Lig Komuta Merkezi
+                Prime Lig Komuta Merkezi
               </p>
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function AdminPage() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               
-              <div className="w-14 h-14 bg-[#141414] group-hover:bg-[#1e3a8a] text-gray-400 group-hover:text-white rounded-xl flex items-center justify-center mb-5 transition-all duration-300 border border-gray-800 group-hover:border-[#ff3333] shadow-inner relative z-10">
+              <div className="w-14 h-14 bg-[#141414] group-hover:bg-[#1e3a8a] text-gray-400 group-hover:text-white rounded-xl flex items-center justify-center mb-5 transition-all duration-300 border border-gray-800 group-hover:border-[#b82029] shadow-inner relative z-10">
                 {kart.icon}
               </div>
               <h2 className="text-[17px] font-black text-gray-200 mb-2 group-hover:text-white transition-colors tracking-wide relative z-10">

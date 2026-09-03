@@ -15,7 +15,7 @@
   --card2: #fafafa;
   --border: rgba(0, 0, 0, 0.08);
   --border-red: rgba(212, 175, 55, 0.25);
-  --primary: #d4af37;
+  --primary: #ceaa52;
   --primary-dark: #b5952f;
   --primary-glow: rgba(255, 49, 49, 0.2);
   --text: #111111;
@@ -190,7 +190,7 @@ input, select, textarea {
   font-weight: 700;
 }
 
-.badge-red { background: rgba(212,175,55,0.1); color: #d4af37; border: 1px solid rgba(212,175,55,0.2); }
+.badge-red { background: rgba(212,175,55,0.1); color: #ceaa52; border: 1px solid rgba(212,175,55,0.2); }
 .badge-green { background: rgba(22,163,74,0.1); color: #16a34a; border: 1px solid rgba(22,163,74,0.2); }
 .badge-yellow { background: rgba(217,119,6,0.1); color: #d97706; border: 1px solid rgba(217,119,6,0.2); }
 
@@ -243,7 +243,7 @@ input, select, textarea {
 .live-dot {
   width: 10px;
   height: 10px;
-  background: #d4af37;
+  background: #ceaa52;
   border-radius: 50%;
   animation: pulse-red 1.5s infinite;
   display: inline-block;
