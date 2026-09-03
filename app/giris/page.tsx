@@ -117,7 +117,7 @@ export default function GirisPage() {
               border: "1px solid rgba(212,175,55,0.3)",
               borderRadius: 12,
               padding: "14px 18px",
-              color: "#1e3a8a",
+              color: "#9e1b22",
               fontSize: 15,
               fontWeight: 500,
               marginBottom: 24,
@@ -151,7 +151,7 @@ export default function GirisPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#1e3a8a"}
+                onFocus={(e) => e.target.style.borderColor = "#9e1b22"}
                 onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
@@ -165,7 +165,7 @@ export default function GirisPage() {
                 value={sifre}
                 onChange={(e) => setSifre(e.target.value)}
                 style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = "#1e3a8a"}
+                onFocus={(e) => e.target.style.borderColor = "#9e1b22"}
                 onBlur={(e) => e.target.style.borderColor = "#cccccc"}
               />
             </div>
@@ -176,7 +176,7 @@ export default function GirisPage() {
               style={{
                 width: "100%",
                 padding: "18px",
-                background: (loading || basarili) ? "#f87171" : "#1e3a8a",
+                background: (loading || basarili) ? "#f87171" : "#9e1b22",
                 color: "#fff",
                 border: "none",
                 borderRadius: 14,
@@ -201,7 +201,7 @@ export default function GirisPage() {
             <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
               Hesabın yok mu?{" "}
               <Link href="/kayit" style={{
-                color: "#1e3a8a",
+                color: "#9e1b22",
                 fontWeight: 800,
                 textDecoration: "none",
                 fontSize: 15,

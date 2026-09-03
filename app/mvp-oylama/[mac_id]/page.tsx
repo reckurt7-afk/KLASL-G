@@ -130,7 +130,7 @@ export default function MVPOylamaPage() {
             )}
 
             {mesaj && (
-              <div className={`p-4 rounded-xl mb-6 text-sm font-bold text-center animate-fade-in ${mesaj.tip === 'ok' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
+              <div className={`p-4 rounded-xl mb-6 text-sm font-bold text-center animate-fade-in ${mesaj.tip === 'ok' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 'bg-[#b82029]/20 text-red-400 border border-[#b82029]/30'}`}>
                 {mesaj.yazi}
               </div>
             )}

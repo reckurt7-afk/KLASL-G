@@ -92,7 +92,7 @@ export default function LandingPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#9e1b22] to-[#b82029] hover:from-[#9e1b22] hover:to-[#9e1b22] text-white font-black text-[12px] md:text-[15px] px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#9e1b22] to-[#b82029] hover:from-[#9e1b22] hover:to-[#9e1b22] text-white font-black text-[12px] md:text-[15px] px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(158,27,34,0.3)] hover:shadow-[0_6px_16px_rgba(158,27,34,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
@@ -146,16 +146,22 @@ export default function LandingPage() {
             <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye&apos;nin #1 Platformu</span>
           </div>
 
-          {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
-          <div className="relative flex items-center justify-center my-2 mt-4">
-            <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
-            <div className="w-[180px] h-[180px] md:w-[220px] md:h-[220px] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(206,170,82,0.5)] z-10 flex items-center justify-center bg-white border-4 border-[#ceaa52] relative p-2 transition-transform hover:scale-105">
+          {/* Center Logo - Magic Blend Mode to remove white background */}
+          <div className="relative flex items-center justify-center my-4 mt-8 md:mt-12 group">
+            {/* Glowing Orb that preserves the logo colors while fading out the white square */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,1)_35%,rgba(255,255,255,0.7)_50%,rgba(255,255,255,0)_70%)] rounded-full blur-[10px] scale-[1.3] opacity-90 group-hover:scale-[1.4] group-hover:opacity-100 transition-all duration-700"></div>
+            
+            {/* Outer Gold Glow */}
+            <div className="absolute inset-0 bg-[#ceaa52]/30 blur-[40px] rounded-full scale-[1.5] animate-pulse"></div>
+
+            {/* The Image with mix-blend-multiply */}
+            <div className="relative z-10 w-[200px] h-[200px] md:w-[280px] md:h-[280px] flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
               <Image 
                 src="/icons/prime-logo.jpg" 
-                width={220} 
-                height={220} 
+                width={280} 
+                height={280} 
                 alt="Prime Lig" 
-                className="w-full h-full object-contain" 
+                className="w-full h-full object-contain mix-blend-multiply drop-shadow-2xl" 
               />
             </div>
           </div>
@@ -196,7 +202,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-6">
             <Link 
               href="/lig" 
-              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#9e1b22] to-[#b30000] hover:from-[#ff3131] hover:to-[#9e1b22] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
+              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#9e1b22] to-[#b30000] hover:from-[#ff3131] hover:to-[#9e1b22] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(158,27,34,0.3)] hover:-translate-y-1"
             >
               Platformu Keşfet
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -286,7 +292,7 @@ export default function LandingPage() {
           <h2 className="text-[40px] font-black text-[#1a1a2e] mb-2 tracking-tight">Rakamlarla Biz</h2>
           <p className="text-gray-500 text-[15px] mb-14">Türkiye'nin en kapsamlı halı saha futbol platformu</p>
 
-          <div className="w-full bg-white rounded-3xl shadow-[0_20px_50px_rgba(230,0,0,0.06)] border border-[#ffcccc]/30 p-12">
+          <div className="w-full bg-white rounded-3xl shadow-[0_20px_50px_rgba(158,27,34,0.06)] border border-[#ffcccc]/30 p-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 divide-y md:divide-y-0 md:divide-x divide-gray-100">
               
               <div className="flex flex-col items-center justify-center text-center">

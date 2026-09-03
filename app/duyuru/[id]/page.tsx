@@ -74,7 +74,7 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
             className="w-full h-auto block" 
           />
         ) : (
-          <div className="w-full aspect-video bg-gradient-to-br from-[#1a1a2e] to-[#1e3a8a]/80" />
+          <div className="w-full aspect-video bg-gradient-to-br from-[#1a1a2e] to-[#9e1b22]/80" />
         )}
         
         {/* Karartma Overlay Sadece Altta */}
@@ -83,7 +83,7 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
         {/* Yazılar (Görselin Sol Alt Köşesinde) */}
         <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white z-30">
           <div className="flex flex-wrap items-center gap-2 mb-3 text-[11px] font-bold">
-            <span className="bg-[#1e3a8a] text-white px-2 py-0.5 rounded uppercase tracking-wider">
+            <span className="bg-[#ceaa52] text-white px-2 py-0.5 rounded uppercase tracking-wider">
               Ana Haber
             </span>
             <span className="bg-[#1a1a2e]/90 text-white px-2 py-0.5 rounded border border-white/10 uppercase tracking-wider">
@@ -100,7 +100,7 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
       </div>
 
       {/* Özet Kutusu */}
-      <div className="bg-[#f0f4f8] border-l-4 border-[#1e3a8a] rounded-r-2xl p-5 mb-5 mt-6">
+      <div className="bg-[#f0f4f8] border-l-4 border-[#ceaa52] rounded-r-2xl p-5 mb-5 mt-6">
         <h4 className="text-[12px] font-black text-gray-500 uppercase tracking-widest mb-1">Özet</h4>
         <p className="text-[#1a1a2e] font-medium text-[14px] leading-relaxed">
           {haber.ozet}
@@ -109,8 +109,8 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
 
       {/* Haber Detayı */}
       <div className="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm mb-5">
-        <h3 className="text-[14px] font-black text-[#1e3a8a] uppercase tracking-wider mb-4 flex items-center gap-2 border-b border-gray-100 pb-3">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#1e3a8a]"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <h3 className="text-[14px] font-black text-[#ceaa52] uppercase tracking-wider mb-4 flex items-center gap-2 border-b border-gray-100 pb-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#ceaa52]"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           Haber Detayı
         </h3>
         <div className="text-gray-700 text-[14px] leading-relaxed space-y-4 font-medium whitespace-pre-line">
@@ -130,7 +130,7 @@ export default async function DuyuruDetayPage({ params }: PageProps) {
       </div>
 
       {/* Geri Dön Butonu */}
-      <Link href="/" className="inline-flex items-center gap-2 bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-black px-5 py-2.5 rounded-lg transition-all shadow-md text-[13px]">
+      <Link href="/" className="inline-flex items-center gap-2 bg-[#ceaa52] hover:bg-[#9e1b22] text-white font-black px-5 py-2.5 rounded-lg transition-all shadow-md text-[13px]">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         Anasayfa
       </Link>

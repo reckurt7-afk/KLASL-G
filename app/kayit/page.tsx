@@ -203,7 +203,7 @@ export default function KayitPage() {
           {hata && (
             <div style={{
               background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.3)",
-              borderRadius: 12, padding: "14px 18px", color: "#1e3a8a", fontSize: 14, fontWeight: 600, marginBottom: 24,
+              borderRadius: 12, padding: "14px 18px", color: "#9e1b22", fontSize: 14, fontWeight: 600, marginBottom: 24,
             }}>
               🚨 {hata}
             </div>
@@ -392,7 +392,7 @@ export default function KayitPage() {
             {/* SÖZLEŞME ALANI */}
             <div className="mb-6">
               <label style={labelStyle} className="flex items-center gap-2">
-                <ShieldCheck size={16} className="text-[#1e3a8a]" />
+                <ShieldCheck size={16} className="text-[#ceaa52]" />
                 Üyelik Bilgilendirmesi ve Sorumluluk Beyanı
               </label>
               <div className="h-48 overflow-y-auto bg-gray-50 border border-gray-200 rounded-xl p-5 text-[12px] text-gray-700 leading-relaxed font-medium mb-3 shadow-inner">
@@ -431,7 +431,7 @@ export default function KayitPage() {
                   type="checkbox" 
                   checked={sozlesmeOnay} 
                   onChange={(e) => setSozlesmeOnay(e.target.checked)} 
-                  className="mt-1 w-5 h-5 rounded border-gray-300 text-[#1e3a8a] focus:ring-[#1e3a8a]"
+                  className="mt-1 w-5 h-5 rounded border-gray-300 text-[#ceaa52] focus:ring-[#9e1b22]"
                 />
                 <div>
                   <span className="block font-bold text-[13px] text-gray-800 group-hover:text-black">
@@ -450,7 +450,7 @@ export default function KayitPage() {
               style={{
                 width: "100%",
                 padding: "18px",
-                background: (loading || basarili) ? "#f87171" : "#1e3a8a",
+                background: (loading || basarili) ? "#f87171" : "#9e1b22",
                 color: "#fff",
                 border: "none",
                 borderRadius: 14,
@@ -474,7 +474,7 @@ export default function KayitPage() {
             <p style={{ color: "#666666", fontSize: 15, margin: 0 }}>
               Zaten hesabın var mı?{" "}
               <Link href="/giris" style={{
-                color: "#1e3a8a",
+                color: "#9e1b22",
                 fontWeight: 800,
                 textDecoration: "none",
                 fontSize: 15,

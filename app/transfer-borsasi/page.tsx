@@ -5,7 +5,7 @@ export default function TransferBorsasiPage() {
   return (
     <div className="w-full flex flex-col fade-in">
       <div className="flex items-center gap-3 mb-6 bg-red-50 p-4 rounded-xl border border-red-100">
-         <div className="w-10 h-10 bg-[#1e3a8a] rounded-lg flex items-center justify-center text-white shadow-sm">
+         <div className="w-10 h-10 bg-[#ceaa52] rounded-lg flex items-center justify-center text-white shadow-sm">
            <span className="text-lg">🤝</span>
          </div>
          <div>

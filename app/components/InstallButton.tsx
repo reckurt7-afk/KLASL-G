@@ -86,7 +86,7 @@ export default function InstallButton() {
       <button
         onClick={installApp}
         disabled={loading}
-        className="group relative overflow-hidden bg-[#1e3a8a] hover:bg-[#9e1b22] text-white rounded-xl px-6 h-[56px] flex items-center justify-center gap-3 w-full font-black text-[15px] shadow-[0_4px_20px_rgba(230,0,0,0.4)] hover:shadow-[0_6px_25px_rgba(230,0,0,0.5)] transition-all hover:-translate-y-0.5"
+        className="group relative overflow-hidden bg-[#ceaa52] hover:bg-[#9e1b22] text-white rounded-xl px-6 h-[56px] flex items-center justify-center gap-3 w-full font-black text-[15px] shadow-[0_4px_20px_rgba(158,27,34,0.4)] hover:shadow-[0_6px_25px_rgba(158,27,34,0.5)] transition-all hover:-translate-y-0.5"
       >
         <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out"></div>
         {loading ? (
@@ -100,8 +100,8 @@ export default function InstallButton() {
       {showIOSPrompt && (
         <div className="absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[280px] bg-[#1a1a2e] text-white text-[12px] p-3 rounded-lg shadow-xl border border-white/10 text-center z-50 animate-fade-in">
           iPhone'a yüklemek için Safari menüsünden <br/>
-          <span className="font-bold text-[#1e3a8a]">"Paylaş"</span> ikonuna tıklayıp <br/>
-          <span className="font-bold text-[#1e3a8a]">"Ana Ekrana Ekle"</span> seçeneğini kullanın.
+          <span className="font-bold text-[#ceaa52]">"Paylaş"</span> ikonuna tıklayıp <br/>
+          <span className="font-bold text-[#ceaa52]">"Ana Ekrana Ekle"</span> seçeneğini kullanın.
           <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#1a1a2e] border-t border-l border-white/10 rotate-45"></div>
         </div>
       )}

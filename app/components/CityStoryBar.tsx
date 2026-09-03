@@ -63,7 +63,7 @@ export default function CityStoryBar() {
       {/* Right Arrow */}
       <button
         onClick={() => scroll("right")}
-        className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-[#1e3a8a] rounded-full shadow-md flex items-center justify-center text-white hover:bg-[#9e1b22] transition-colors"
+        className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-[#ceaa52] rounded-full shadow-md flex items-center justify-center text-white hover:bg-[#9e1b22] transition-colors"
         aria-label="Sağa kaydır"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -89,14 +89,14 @@ export default function CityStoryBar() {
               <div
                 className={`w-[135px] h-[105px] md:w-[145px] md:h-[110px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
                   isSelected
-                    ? "border-[#1e3a8a] bg-red-50 shadow-md"
+                    ? "border-[#ceaa52] bg-red-50 shadow-md"
                     : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
                 }`}
               >
                 <div className="w-10 h-10 md:w-11 md:h-11 relative">
                   <Image src="/icons/prime-logo.jpg" alt={city.name} fill className="rounded-full object-contain" />
                 </div>
-                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#1e3a8a]" : "text-gray-700"}`}>
+                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#ceaa52]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
                 <span className="text-[9px] md:text-[10px] tracking-widest text-gray-400 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">

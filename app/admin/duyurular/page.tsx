@@ -148,7 +148,7 @@ export default function AdminGundemPage() {
       
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-[#1e3a8a] rounded-xl flex items-center justify-center text-white">
+        <div className="w-10 h-10 bg-[#ceaa52] rounded-xl flex items-center justify-center text-white">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
         </div>
         <div>
@@ -177,7 +177,7 @@ export default function AdminGundemPage() {
               value={baslik}
               onChange={(e) => setBaslik(e.target.value)}
               placeholder="Büyük Randevu Bursa'da!"
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] font-bold text-gray-900 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]/20"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] font-bold text-gray-900 focus:outline-none focus:border-[#ceaa52] focus:ring-1 focus:ring-[#9e1b22]/20"
             />
           </div>
 
@@ -189,7 +189,7 @@ export default function AdminGundemPage() {
               onChange={(e) => setOzet(e.target.value)}
               rows={2}
               placeholder="Haberin kısa özeti..."
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]/20 resize-none"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#ceaa52] focus:ring-1 focus:ring-[#9e1b22]/20 resize-none"
             />
           </div>
 
@@ -201,7 +201,7 @@ export default function AdminGundemPage() {
               onChange={(e) => setDetay(e.target.value)}
               rows={8}
               placeholder="Haberin tüm detayları..."
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]/20"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#ceaa52] focus:ring-1 focus:ring-[#9e1b22]/20"
             />
           </div>
 
@@ -211,7 +211,7 @@ export default function AdminGundemPage() {
             <select
               value={kategori}
               onChange={(e) => setKategori(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] font-bold text-gray-900 focus:outline-none focus:border-[#1e3a8a]"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-[14px] font-bold text-gray-900 focus:outline-none focus:border-[#ceaa52]"
             >
               {KATEGORILER.map((kat) => (
                 <option key={kat} value={kat}>{kat}</option>
@@ -228,7 +228,7 @@ export default function AdminGundemPage() {
                 value={resimUrl}
                 onChange={(e) => setResimUrl(e.target.value)}
                 placeholder="https://..."
-                className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a]/20"
+                className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-[14px] text-gray-900 focus:outline-none focus:border-[#ceaa52] focus:ring-1 focus:ring-[#9e1b22]/20"
               />
               <input
                 type="file"
@@ -267,7 +267,7 @@ export default function AdminGundemPage() {
             <button
               onClick={kaydet}
               disabled={saving}
-              className="bg-[#1e3a8a] hover:bg-[#9e1b22] text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md disabled:opacity-50 text-[14px]"
+              className="bg-[#ceaa52] hover:bg-[#9e1b22] text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md disabled:opacity-50 text-[14px]"
             >
               {saving ? "Kaydediliyor..." : (editId ? "Değişiklikleri Kaydet" : "Haber Yayınla")}
             </button>
@@ -292,7 +292,7 @@ export default function AdminGundemPage() {
                 )}
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[9px] bg-red-50 text-[#1e3a8a] font-black px-2 py-0.5 rounded uppercase tracking-wider">
+                    <span className="text-[9px] bg-red-50 text-[#ceaa52] font-black px-2 py-0.5 rounded uppercase tracking-wider">
                       {h.kategori}
                     </span>
                     <span className="text-[11px] text-gray-400">{formatDate(h.created_at)}</span>
@@ -319,7 +319,7 @@ export default function AdminGundemPage() {
                 </button>
                 <button
                   onClick={() => sil(h.id)}
-                  className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-red-50 text-[#1e3a8a] hover:bg-red-100 transition-colors"
+                  className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-red-50 text-[#ceaa52] hover:bg-red-100 transition-colors"
                 >
                   Sil
                 </button>

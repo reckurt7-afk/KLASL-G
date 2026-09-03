@@ -56,7 +56,7 @@ export default function OyuncuYonetimiPage() {
                   <td className="p-3"><input type="text" defaultValue={o.ad_soyad} onBlur={(e) => handleUpdate(o.id, 'ad_soyad', e.target.value)} className="w-full bg-[#1a1a1a] p-2 rounded border border-white/20" /></td>
                   <td className="p-3"><input type="text" defaultValue={o.takim} onBlur={(e) => handleUpdate(o.id, 'takim', e.target.value)} className="w-full bg-[#1a1a1a] p-2 rounded border border-white/20" /></td>
                   <td className="p-3"><input type="text" defaultValue={o.mevki} onBlur={(e) => handleUpdate(o.id, 'mevki', e.target.value)} className="w-20 bg-[#1a1a1a] p-2 rounded border border-white/20" /></td>
-                  <td className="p-3 text-right"><button onClick={() => sil(o.id, o.ad_soyad)} className="px-3 py-1 bg-red-600 rounded text-white text-xs">Sil</button></td>
+                  <td className="p-3 text-right"><button onClick={() => sil(o.id, o.ad_soyad)} className="px-3 py-1 bg-[#9e1b22] rounded text-white text-xs">Sil</button></td>
                 </tr>
               ))}
             </tbody>

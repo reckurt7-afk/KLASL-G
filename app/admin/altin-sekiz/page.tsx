@@ -90,7 +90,7 @@ export default function AltinSekizAdmin() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-black mb-2 flex items-center gap-3">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9e1b22" strokeWidth="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               ALTIN 8'İ GÜNCELLE
             </h1>
             <p className="text-gray-400">Haftanın en iyi 8 oyuncusunu buradan düzenleyebilirsin.</p>

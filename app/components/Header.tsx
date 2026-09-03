@@ -51,7 +51,7 @@ export default function Header() {
                 {profil?.avatar_url ? (
                   <img src={profil.avatar_url} alt={profil.ad_soyad} className="w-10 h-10 rounded-full object-cover shadow-md" />
                 ) : (
-                  <div className="w-10 h-10 bg-[#1e3a8a] text-white rounded-full flex items-center justify-center font-bold shadow-md uppercase">
+                  <div className="w-10 h-10 bg-[#ceaa52] text-white rounded-full flex items-center justify-center font-bold shadow-md uppercase">
                     {(profil?.ad_soyad || user.email || "K")[0]}
                   </div>
                 )}
@@ -63,7 +63,7 @@ export default function Header() {
 
               {/* Dropdown Menu */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-56 bg-[#1e3a8a] text-white rounded-xl shadow-xl overflow-hidden py-2 flex flex-col z-50">
+                <div className="absolute right-0 mt-3 w-56 bg-[#ceaa52] text-white rounded-xl shadow-xl overflow-hidden py-2 flex flex-col z-50">
                   <div className="px-4 pb-3 pt-2 mb-2 border-b border-[#eab308]/50 flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-bold uppercase shrink-0">
                       {(profil?.ad_soyad || user.email || "K")[0]}
