@@ -72,9 +72,8 @@ export default function LandingPage() {
       
       {/* HEADER */}
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
-        <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-between relative h-full">
-          {/* Sol Kısım (Boş - Ortalamayı dengelemek için) */}
-          <div className="w-[100px] hidden md:block"></div>
+        <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-end relative h-full">
+          
 
           {/* Orta Kısım - Logo (Tam Merkeze Sabitlendi) */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center shrink-0 z-10 -ml-2 md:-ml-4">

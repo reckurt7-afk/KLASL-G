@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-      <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-between relative">
+      <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-end relative">
         {/* Left: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center z-10 -ml-2 md:-ml-4">
           
