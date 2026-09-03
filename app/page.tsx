@@ -78,7 +78,7 @@ export default function LandingPage() {
           {/* Orta Kısım - Logo (Tam Merkeze Sabitlendi) */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center shrink-0 z-10 -ml-2 md:-ml-4">
             
-            <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
+            <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
           </Link>
 
           {/* Sağ Kısım - Butonlar */}

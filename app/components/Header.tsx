@@ -26,7 +26,7 @@ export default function Header() {
         {/* Left: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center z-10 -ml-2 md:-ml-4">
           
-          <span className="font-black text-xl tracking-tight text-[#cc0000] text-3xl tracking-tighter">PRO <span className="text-black">LİG</span></span>
+          <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
