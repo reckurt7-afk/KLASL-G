@@ -77,10 +77,8 @@ export default function LandingPage() {
           <div className="w-[100px] hidden md:block"></div>
 
           {/* Orta Kısım - Logo (Tam Merkeze Sabitlendi) */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-3 shrink-0 z-10">
-            <div className="w-[44px] h-[44px] md:w-[48px] md:h-[48px] rounded-full overflow-hidden border border-gray-200 shadow-md shrink-0">
-              <Image src="/icons/prolig-logo-final.jpg" width={48} height={48} alt="Pro Lig Logo" className="w-full h-full object-cover scale-[1.05]" />
-            </div>
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center shrink-0 z-10 -ml-2 md:-ml-4">
+            
             <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
           </Link>
 
