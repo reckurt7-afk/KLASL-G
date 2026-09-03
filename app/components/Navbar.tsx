@@ -43,7 +43,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-5 group">
               <div className="relative w-[70px] h-[70px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#d4af37] transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0)] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]">
-                <Image src="/icons/prolig-logo-final.jpg" alt="Logo" fill className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <Image src="/icons/prolig-logo-final.jpg" alt="Logo" fill className="rounded-full object-cover group-hover:scale-110 transition-transform duration-500 aspect-square" />
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-black text-[#cc0000] tracking-widest leading-none group-hover:text-[#d4af37] transition-colors duration-300">PRO <span className="text-black">LİG</span></span>

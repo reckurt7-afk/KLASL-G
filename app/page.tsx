@@ -74,7 +74,7 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
         <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0">
-            <Image src="/icons/prolig-logo-final.jpg" width={44} height={44} alt="Pro Lig Logo" className="object-contain md:w-[48px] md:h-[48px] rounded-full shadow-md" />
+            <Image src="/icons/prolig-logo-final.jpg" width={44} height={44} alt="Pro Lig Logo" className="object-cover md:w-[48px] md:h-[48px] rounded-full shadow-md border border-gray-200" />
             <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
           </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
