@@ -1,28 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import InstallButton from "./components/InstallButton";
+import { useState, useRef } from "react";
 
 export default function LandingPage() {
-
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    const playMusic = () => {
-      if (audioRef.current && audioRef.current.paused) {
-        audioRef.current.play().catch(() => {});
-      }
-    };
-    
-    // Tarayıcı otomatik oynatmaya izin vermezse ilk tıklamada başlat
-    document.addEventListener('click', playMusic, { once: true });
-    
-    return () => {
-      document.removeEventListener('click', playMusic);
-    };
-  }, []);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const subscribeUser = async () => {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
@@ -87,15 +72,13 @@ export default function LandingPage() {
       {/* HEADER */}
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-[70px] md:h-[76px] flex items-center shadow-sm">
         <div className="w-full max-w-[1400px] mx-auto px-5 md:px-8 flex items-center justify-between">
-          <Link href="/" className="flex items-center shrink-0 pl-2 md:pl-4 z-10">
-              <Image src="/icons/prolig-logo-final.jpg" width={64} height={64} alt="Pro Lig Logo" className="rounded-full object-contain md:w-[70px] md:h-[70px]" />
-            </Link>
-            <Link href="/" className="flex-1 flex justify-center pr-10 sm:pr-0 z-0">
-              <span className="font-black text-[#cc0000] text-[24px] md:text-[30px] tracking-tighter">PRO <span className="text-black">LİG</span></span>
-            </Link>
+          <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0">
+            <Image src="/icons/prolig-logo-final.jpg" width={44} height={44} alt="Pro Lig Logo" className="object-contain md:w-[48px] md:h-[48px] rounded-full shadow-md" />
+            <span className="font-black text-[20px] md:text-[22px] tracking-tight text-[#1a1a2e]">PRO <span className="text-[#e60000]">LİG</span></span>
+          </Link>
           <div className="flex items-center gap-2 md:gap-6 pr-4 sm:pr-0">
-            <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#1e3a8a] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
-              <span className="w-2.5 h-2.5 bg-[#1e3a8a] rounded-full animate-pulse"></span>
+            <Link href="/canli-yayin" className="hidden md:flex items-center gap-2 text-[#e60000] font-bold text-[13px] cursor-pointer hover:opacity-80 transition-opacity">
+              <span className="w-2.5 h-2.5 bg-[#e60000] rounded-full animate-pulse"></span>
               Pro Lig TV
             </Link>
             <div className="flex items-center gap-2 md:gap-3">
@@ -103,7 +86,7 @@ export default function LandingPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:-translate-x-1 transition-transform"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                 GİRİŞ YAP
               </Link>
-              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#1e3a8a] to-[#ff3333] hover:from-[#cc0000] hover:to-[#1e3a8a] text-white font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
+              <Link href="/kayit" className="group relative overflow-hidden bg-gradient-to-r from-[#e60000] to-[#ff3333] hover:from-[#cc0000] hover:to-[#e60000] text-white font-black text-[14px] md:text-[15px] px-5 py-3 md:px-6 md:py-3 rounded-lg md:rounded-xl transition-all duration-300 flex items-center gap-1.5 md:gap-2 shadow-[0_4px_12px_rgba(230,0,0,0.3)] hover:shadow-[0_6px_16px_rgba(230,0,0,0.4)] hover:-translate-y-0.5 whitespace-nowrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="hidden sm:block group-hover:scale-110 transition-transform"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 ÜYE OL
               </Link>
@@ -113,61 +96,72 @@ export default function LandingPage() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-screen flex flex-col items-center justify-start bg-black pb-6 overflow-hidden">
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black pt-[90px] pb-16 overflow-hidden">
         {/* Background MP4 Video */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-black">
           <video 
+            ref={videoRef}
             autoPlay 
             loop 
-            muted 
+            muted={isMuted}
             playsInline
             preload="auto"
             onEnded={(e) => {
               e.currentTarget.currentTime = 0;
               e.currentTarget.play().catch(() => {});
             }}
-            className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2"
+            className="absolute top-1/2 left-1/2 w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-80"
           >
             <source src="/hero-bg-classic.mp4" type="video/mp4" />
           </video>
         </div>
+        
+        {/* Mute Toggle Button */}
+        <button 
+          onClick={() => setIsMuted(!isMuted)}
+          className="absolute bottom-10 right-10 z-[100] bg-black/60 hover:bg-black/80 text-white p-3.5 rounded-full backdrop-blur-md transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)] border border-white/20"
+          aria-label="Sesi Aç / Kapat"
+        >
+          {isMuted ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          )}
+        </button>
         
         {/* Hafif Karartma (Sadece yazıların okunabilmesi için çok ince bir siyah katman) */}
         <div className="absolute inset-0 z-10 bg-black/40 pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col items-center text-center w-full max-w-[1000px] mx-auto px-5 gap-6">
           
-          {/* SAFARI SPACER */}
-          <div className="w-full h-[95px] md:h-[110px] shrink-0 relative z-10"></div>
-
           {/* Top Badge */}
-          <div className="border border-[#1e3a8a]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-[#1e3a8a] animate-pulse"></span>
+          <div className="border border-[#e60000]/30 bg-black/50 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center justify-center gap-2 shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-[#e60000] animate-pulse"></span>
             <span className="text-white/90 text-[10px] md:text-[12px] font-bold tracking-widest uppercase">Türkiye&apos;nin #1 Platformu</span>
           </div>
 
           {/* Center Logo - Fixed white background issue by using a soft transparent glow instead */}
-          <div className="relative flex items-center justify-center mb-3 mt-4 md:mt-6">
+          <div className="relative flex items-center justify-center my-2 mt-4">
             <div className="absolute inset-0 bg-white/20 blur-[50px] rounded-full scale-[1.7]"></div>
             <Image 
               src="/icons/prolig-logo-final.jpg" 
               width={180} 
               height={180} 
               alt="Pro Lig" 
-              className="rounded-full relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[170px] md:w-[210px]" 
+              className="relative z-10 object-contain drop-shadow-[0_10px_25px_rgba(255,255,255,0.4)] w-[170px] md:w-[210px]" 
             />
           </div>
 
           {/* Title */}
           <h1 className="text-[32px] md:text-[48px] leading-[1.15] text-white font-black w-full tracking-tight mt-2">
             Halı saha futbolunun <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-[#a30000]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#a30000]">
               en kapsamlı platformu
             </span>
           </h1>
 
           {/* Install PWA */}
-          <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px] mt-4">
+          <div className="flex flex-col items-center w-full max-w-[320px] md:max-w-[400px]">
             <InstallButton />
             <p className="text-white/70 text-[13px] md:text-[15px] font-medium text-center mt-4 leading-relaxed">
               Maç sonuçları, puan durumları, takımlar ve özel haberlere telefonundan anında ulaş.
@@ -177,15 +171,15 @@ export default function LandingPage() {
           {/* Stats Badges */}
           <div className="flex flex-row flex-wrap items-center justify-center gap-2 md:gap-4 w-full mt-2">
             <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               <span className="text-white font-bold text-[13px] md:text-[15px]">40 Şehir</span>
             </div>
             <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               <span className="text-white font-bold text-[13px] md:text-[15px]">16.364+ Oyuncu</span>
             </div>
             <div className="border border-white/10 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-center gap-2 shadow-sm">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff3131" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
               <span className="text-white font-bold text-[13px] md:text-[15px]">1.395+ Takım</span>
             </div>
           </div>
@@ -194,7 +188,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-[360px] md:max-w-[440px] mt-6">
             <Link 
               href="/lig" 
-              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#1e3a8a] to-[#b30000] hover:from-[#d4af37] hover:to-[#cc0000] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
+              className="col-span-1 sm:col-span-2 bg-gradient-to-r from-[#e60000] to-[#b30000] hover:from-[#ff3131] hover:to-[#cc0000] text-white font-bold text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(230,0,0,0.3)] hover:-translate-y-1"
             >
               Platformu Keşfet
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -202,14 +196,14 @@ export default function LandingPage() {
             
             <Link 
               href="/giris" 
-              style={{ color: "#1e3a8a" }}
+              style={{ color: "#e60000" }}
               className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Giriş Yap
             </Link>
             <Link 
               href="/lig" 
-              style={{ color: "#1e3a8a" }}
+              style={{ color: "#e60000" }}
               className="bg-white hover:bg-gray-100 font-black text-[16px] h-[52px] rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
             >
               Misafir Girişi
@@ -217,18 +211,16 @@ export default function LandingPage() {
           </div>
 
           {/* Notifications Button */}
-            <div className="w-full max-w-[360px] md:max-w-[440px] mt-3 flex gap-2">
-               <button 
-                  onClick={subscribeUser}
-                  className="flex-1 group relative overflow-hidden bg-gradient-to-r from-[#0077b5] to-[#1da1f2] text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_5px_15px_rgba(29,161,242,0.3)] hover:-translate-y-1"
-               >
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                  BİLDİRİMLERİ AÇ
-               </button>
-            </div>
-            
-            <audio ref={audioRef} loop autoPlay src="/bg-music.mp3" />
+          <div className="w-full max-w-[360px] md:max-w-[440px] mt-1">
+             <button 
+                onClick={subscribeUser}
+                className="group relative overflow-hidden w-full bg-gradient-to-r from-[#0077b5] to-[#1da1f2] text-white font-bold text-[14px] h-[48px] rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_5px_15px_rgba(29,161,242,0.3)] hover:-translate-y-1"
+             >
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent)] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out cursor-pointer"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                BİLDİRİMLERİ AÇ
+             </button>
+          </div>
         </div>
       </section>
 
@@ -266,7 +258,7 @@ export default function LandingPage() {
             </div>
 
             <div className="bg-[#ffe5e5] border border-[#ffcccc] rounded-xl p-8 text-center flex flex-col items-center">
-              <div className="w-12 h-12 bg-[#1e3a8a] rounded-full flex items-center justify-center text-white mb-5 shadow-sm">
+              <div className="w-12 h-12 bg-[#e60000] rounded-full flex items-center justify-center text-white mb-5 shadow-sm">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
               </div>
               <h4 className="font-bold text-[13px] text-[#1a1a2e] mb-3 uppercase tracking-wide">CANLI MAÇ YAYINI</h4>
@@ -293,7 +285,7 @@ export default function LandingPage() {
                 <div className="w-16 h-16 bg-[#f8f9fa] rounded-2xl flex items-center justify-center mb-6">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
-                <div className="text-[54px] font-black text-[#1e3a8a] leading-none mb-2 tracking-tighter">40</div>
+                <div className="text-[54px] font-black text-[#e60000] leading-none mb-2 tracking-tighter">40</div>
                 <div className="text-[14px] font-bold text-[#1a1a2e]">İl</div>
               </div>
 
@@ -301,7 +293,7 @@ export default function LandingPage() {
                 <div className="w-16 h-16 bg-[#fff0f0] rounded-2xl flex items-center justify-center mb-6">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
-                <div className="text-[54px] font-black text-[#1e3a8a] leading-none mb-2 tracking-tighter">1.395</div>
+                <div className="text-[54px] font-black text-[#e60000] leading-none mb-2 tracking-tighter">1.395</div>
                 <div className="text-[14px] font-bold text-[#1a1a2e]">Takım</div>
               </div>
 
@@ -336,7 +328,7 @@ export default function LandingPage() {
             {/* Box 1 */}
             <div className="bg-[#f0f9f4] rounded-xl p-8 flex flex-col border border-[#e2f2e9]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" strokeWidth="2"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="M7 4h10l1 13H6L7 4z"></path></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Lig Takibi</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">40 şehirde aktif ligleri takip et, puan durumunu incele</p>
@@ -345,7 +337,7 @@ export default function LandingPage() {
             {/* Box 2 */}
             <div className="bg-[#fff9f5] rounded-xl p-8 flex flex-col border border-[#faefe8]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Takım Profilleri</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">Takımları keşfet, istatistiklerini incele, kadroları gör</p>
@@ -354,7 +346,7 @@ export default function LandingPage() {
             {/* Box 3 */}
             <div className="bg-[#fff5f5] rounded-xl p-8 flex flex-col border border-[#fce8e8]">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e60000" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
               </div>
               <h3 className="text-[18px] font-bold text-[#1a1a2e] mb-3">Maç Sonuçları</h3>
               <p className="text-gray-600 text-[13px] leading-relaxed">Canlı skorları takip et, maç detaylarını incele</p>
@@ -433,7 +425,7 @@ export default function LandingPage() {
         </div>
         
         <div className="text-gray-400 text-[10px] mt-6 pt-6 border-t border-gray-100 w-full max-w-sm text-center">
-          Bu site <a href="https://www.agx-labs.com/" className="text-gray-500 font-bold hover:text-[#1e3a8a]">AGX Labs</a> tarafından geliştirilmiştir
+          Bu site <a href="https://www.agx-labs.com/" className="text-gray-500 font-bold hover:text-[#e60000]">AGX Labs</a> tarafından geliştirilmiştir
         </div>
       </footer>
 
