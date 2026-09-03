@@ -32,6 +32,7 @@ export default function CityStoryBar() {
              sorted.splice(1, 0, item8);
           }
 
+          setCities(sorted);
           if (!selectedCityId && sorted.length > 0) {
             setSelectedCityId(sorted[0].id);
           }
