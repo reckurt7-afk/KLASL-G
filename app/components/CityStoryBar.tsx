@@ -15,14 +15,23 @@ export default function CityStoryBar() {
       const { data } = await supabase.from("cities").select("*").order("id", { ascending: true });
       if (data) {
           // Özel Sıralama: ID 8'i (4. Sezon) ikinci sıraya (index 1) al
+          
           const sorted = [...data];
+          
+          // 1. Karacabey'i en başa (1. sıraya) al
+          const indexKaracabey = sorted.findIndex(c => c.name && c.name.toLowerCase().includes("karacabey"));
+          if (indexKaracabey > -1) {
+             const itemKaracabey = sorted.splice(indexKaracabey, 1)[0];
+             sorted.unshift(itemKaracabey);
+          }
+
+          // 2. ID 8'i (4. Sezon vb) 2. sıraya (index 1) al
           const index8 = sorted.findIndex(c => c.id === 8);
           if (index8 > -1) {
              const item8 = sorted.splice(index8, 1)[0];
-             sorted.splice(1, 0, item8); // 1. indexe (yani 2. sıraya) yerleştir
+             sorted.splice(1, 0, item8);
           }
-          
-          setCities(sorted);
+
           if (!selectedCityId && sorted.length > 0) {
             setSelectedCityId(sorted[0].id);
           }
