@@ -43,7 +43,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-5 group">
               <div className="relative w-[70px] h-[70px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#ceaa52] transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0)] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.5)]">
-                <Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover scale-[1.4] group-hover:scale-[1.5] transition-transform duration-500 aspect-square" />
+                <Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover scale-[1.1] bg-white border-2 border-[#ceaa52] group-hover:scale-[1.15] transition-transform duration-500 aspect-square" />
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-black text-[#9e1b22] tracking-widest leading-none group-hover:text-[#ceaa52] transition-colors duration-300">PRİME <span className="text-black">LİG</span></span>
