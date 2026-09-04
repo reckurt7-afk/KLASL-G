@@ -53,7 +53,7 @@ export default function LandingPage() {
       if (response.ok) {
         // Show immediate welcome notification
         await reg.showNotification("PRİME LİG", {
-          body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",,
+          body: "Bildirimler başarıyla açıldı! Maç sonuçları ve haberler anında cebinizde.",
           icon: "/icons/prime-logo.jpg",
           vibrate: [200, 100, 200]
         } as any);
