@@ -65,4 +65,4 @@ self.addEventListener("notificationclick", (event) => {
     })
   );
 });
-// Force cache bust: 1788421555321
+// Force cache bust: 1788507905327
