@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="flex-1 min-w-[200px] max-w-[260px]">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[rgba(212,175,55,0.3)]">
-                <Image src="/icons/prime-logo.jpg" alt="Prime Lig" fill className="object-cover" />
+                <Image src="/icons/prime-logo.jpg" alt="Prime Lig" fill className="rounded-full object-cover scale-[1.4]" />
               </div>
               <div>
                 <div className="text-white font-black text-lg tracking-widest leading-none">PRİME LİG</div>

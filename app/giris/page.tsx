@@ -81,7 +81,7 @@ export default function GirisPage() {
               src="/icons/prime-logo.jpg"
               alt="PRİME LİG"
               fill
-              style={{ objectFit: "contain", filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
+              className="rounded-full object-cover scale-[1.4]" style={{ filter: "drop-shadow(0 0 10px rgba(0,0,0,0.1))" }}
             />
           </div>
           <h1 style={{
