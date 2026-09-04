@@ -166,7 +166,7 @@ export default function LandingPage() {
           {/* Title */}
           <h1 className="text-[32px] md:text-[48px] leading-[1.15] text-white font-black w-full tracking-tight mt-2">
             Halı saha futbolunun <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ceaa52] to-[#9e1b22]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff3131] to-[#cc0000]">
               en kapsamlı platformu
             </span>
           </h1>
