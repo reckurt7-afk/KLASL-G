@@ -97,7 +97,7 @@ export default function GundemCarousel() {
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-xl overflow-hidden shrink-0 snap-start group cursor-pointer block"
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-[18px] overflow-hidden shrink-0 snap-start group cursor-pointer block border-[3px] border-[#ceaa52] shadow-[0_5px_15px_rgba(206,170,82,0.25)] hover:border-[#9e1b22] hover:shadow-[0_8px_25px_rgba(158,27,34,0.3)] transition-all duration-300"
               >
                 {/* Background */}
                 {haber.resim ? (
