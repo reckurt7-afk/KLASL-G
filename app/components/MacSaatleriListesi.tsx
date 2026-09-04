@@ -58,7 +58,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-black text-white">⏱️ MAÇ SAATLERİ</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ceaa52]">PRİME LİG TAKVİMİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#9e1b22]">PRİME LİG TAKVİMİ</p>
       </div>
 
       {loading ? (
@@ -116,7 +116,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                         <div className="bg-[#070707] border border-[rgba(255,255,255,0.07)] rounded-xl px-2 md:px-4 py-1.5 md:py-2">
                           <span className="text-white font-black text-lg md:text-2xl">
                             {mac.durum === "ERTELENDİ" ? (
-                              <span className="text-[#ceaa52] text-sm md:text-base">ERTELENDİ</span>
+                              <span className="text-[#9e1b22] text-sm md:text-base">ERTELENDİ</span>
                             ) : mac.saat ? (
                               mac.saat.substring(0, 5)
                             ) : (

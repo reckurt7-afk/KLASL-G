@@ -130,7 +130,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
                         ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#ceaa52] group-hover:shadow-sm"
+                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
                     }`}>
                       {item.icon}
                     </div>
@@ -173,7 +173,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
                         ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#ceaa52] group-hover:shadow-sm"
+                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
                     }`}>
                       {item.icon}
                     </div>
@@ -185,7 +185,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                       </div>
                     ) : (
-                      <div className="relative z-10 text-gray-300 group-hover:text-[#ceaa52] group-hover:translate-x-1 transition-transform shrink-0">
+                      <div className="relative z-10 text-gray-300 group-hover:text-[#9e1b22] group-hover:translate-x-1 transition-transform shrink-0">
                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                       </div>
                     )}

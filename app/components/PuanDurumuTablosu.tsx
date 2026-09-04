@@ -59,7 +59,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
       {!mini && (
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="section-title">LİG PUAN DURUMU</h2>
-          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#e50914]">PRİME LİG {cityName}</p>
+          <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#9e1b22]">PRİME LİG {cityName}</p>
         </div>
       )}
 
@@ -133,7 +133,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                         <div className="relative w-[24px] h-[24px] sm:w-[40px] sm:h-[40px] shrink-0 rounded-full overflow-hidden bg-gray-100 border border-[rgba(255,255,255,0.1)] group-hover:border-[#ceaa52]/70 transition-colors flex items-center justify-center shadow-lg">
                           <Image src={t.logo} alt={t.name} fill className="object-contain p-[2px] sm:p-1" />
                         </div>
-                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#ceaa52] transition-colors">{t.name}</span>
+                        <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#9e1b22] transition-colors">{t.name}</span>
                       </div>
                       <div className="text-center text-gray-500">{t.played}</div>
                       <div className="text-center font-medium text-green-500 drop-shadow-md">{t.won}</div>

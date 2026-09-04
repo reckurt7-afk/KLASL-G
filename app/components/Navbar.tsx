@@ -46,8 +46,8 @@ export default function Navbar() {
                 <Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover scale-[1.1] bg-white border-2 border-[#ceaa52] group-hover:scale-[1.15] transition-transform duration-500 aspect-square" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-[#9e1b22] tracking-widest leading-none group-hover:text-[#ceaa52] transition-colors duration-300">PRİME <span className="text-black">LİG</span></span>
-                <span className="text-[11px] text-[#ceaa52] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
+                <span className="text-2xl font-black text-[#9e1b22] tracking-widest leading-none group-hover:text-[#9e1b22] transition-colors duration-300">PRİME <span className="text-black">LİG</span></span>
+                <span className="text-[11px] text-[#9e1b22] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
 
@@ -67,7 +67,7 @@ export default function Navbar() {
                           : "text-gray-300 hover:bg-gray-100 hover:text-gray-900"
                       }`}
                     >
-                      <Icon size={16} className={isActive ? "text-gray-900" : "text-[#ceaa52]"} />
+                      <Icon size={16} className={isActive ? "text-gray-900" : "text-[#9e1b22]"} />
                       <span>{link.label}</span>
                     </motion.div>
                   </Link>
@@ -97,7 +97,7 @@ export default function Navbar() {
                   <Icon 
                     size={24} 
                     strokeWidth={isActive ? 2.5 : 2} 
-                    className={`mb-1 transition-colors ${isActive ? "text-[#ceaa52] drop-shadow-[0_2px_5px_rgba(212,175,55,0.8)]" : "text-gray-500"}`} 
+                    className={`mb-1 transition-colors ${isActive ? "text-[#9e1b22] drop-shadow-[0_2px_5px_rgba(212,175,55,0.8)]" : "text-gray-500"}`} 
                   />
                   <span className="truncate w-full text-center px-0.5">
                     {link.label}

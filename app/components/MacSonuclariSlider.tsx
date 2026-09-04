@@ -126,9 +126,9 @@ export default function MacSonuclariSlider() {
 
                   {/* Score */}
                   <div className="flex items-center gap-1.5 px-2 shrink-0">
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#ceaa52]' : 'text-[#ceaa52]'}`}>{match.ev_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#9e1b22]' : 'text-[#9e1b22]'}`}>{match.ev_skor ?? 0}</span>
                     <span className="text-gray-300 font-bold">-</span>
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#ceaa52]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#9e1b22]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
                   </div>
 
                   {/* Away */}

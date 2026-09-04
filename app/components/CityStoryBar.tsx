@@ -96,7 +96,7 @@ export default function CityStoryBar() {
                 <div className="w-10 h-10 md:w-11 md:h-11 relative">
                   <Image src="/icons/prime-logo.jpg" alt={city.name} fill className="rounded-full object-cover scale-[1.1] bg-white border border-[#ceaa52]" />
                 </div>
-                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#ceaa52]" : "text-gray-700"}`}>
+                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#9e1b22]" : "text-gray-700"}`}>
                   {city.name}
                 </span>
                 <span className="text-[9px] md:text-[10px] tracking-widest text-gray-400 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">

@@ -39,7 +39,7 @@ export default function TakimlarListesi() {
     <div className="w-full">
       <div className="text-center mb-12">
         <h2 className="section-title">👥 TAKIMLAR</h2>
-        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#ceaa52]">PRİME LİG MÜCADELECİLERİ</p>
+        <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#9e1b22]">PRİME LİG MÜCADELECİLERİ</p>
       </div>
 
       {loading ? (
@@ -79,7 +79,7 @@ export default function TakimlarListesi() {
                       <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain p-2" />
                     </div>
 
-                    <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#ceaa52] transition-colors mt-2 line-clamp-2">
+                    <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#9e1b22] transition-colors mt-2 line-clamp-2">
                       {takim.name}
                     </div>
                     
