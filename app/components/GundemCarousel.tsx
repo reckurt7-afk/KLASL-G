@@ -97,7 +97,7 @@ export default function GundemCarousel() {
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-[18px] overflow-hidden shrink-0 snap-start group cursor-pointer block border-[3px] border-[#ceaa52] shadow-[0_5px_15px_rgba(206,170,82,0.25)] hover:border-[#9e1b22] hover:shadow-[0_8px_25px_rgba(158,27,34,0.3)] transition-all duration-300"
+                className="relative min-w-[calc(50%-6px)] md:min-w-[calc(33.333%-8px)] lg:min-w-[380px] h-[260px] md:h-[300px] rounded-[18px] overflow-hidden shrink-0 snap-start group cursor-pointer block border border-[#ceaa52]/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] hover:border-[#ceaa52] hover:shadow-[0_12px_30px_rgba(206,170,82,0.25)] transition-all duration-300"
               >
                 {/* Background */}
                 {haber.resim ? (
@@ -108,7 +108,8 @@ export default function GundemCarousel() {
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] to-[#9e1b22]/80" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent backdrop-blur-[2px]" />
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
