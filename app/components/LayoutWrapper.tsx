@@ -78,7 +78,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   if (isDuyuru) {
     return (
-      <div className="flex flex-col bg-[#f4f6f8] min-h-screen font-sans">
+      <div className="flex flex-col bg-[#0f1115] min-h-screen font-sans">
         <Header />
         <main className="flex-1 w-full">
           <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6">
@@ -90,16 +90,16 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   }
 
   return (
-    <div className="flex flex-col bg-[#f4f6f8] min-h-screen font-sans">
+    <div className="flex flex-col bg-[#0f1115] min-h-screen font-sans">
       <Header />
       <CityStoryBar />
       <GundemCarousel />
       <MacSonuclariSlider />
 
       {/* The red separator line like the screenshot */}
-      <div className="w-full bg-[#f4f6f8] pt-2">
+      <div className="w-full bg-[#0f1115] pt-2">
          <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6">
-            <div className="w-full h-[2px] bg-[#ceaa52] rounded-full opacity-20"></div>
+            <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ceaa52]/30 to-transparent"></div>
          </div>
       </div>
       
@@ -119,18 +119,18 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#9e1b22] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(158,27,34,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#ceaa52]/20 hover:shadow-md hover:-translate-y-0.5"
+                        ? "bg-gradient-to-r from-[#9e1b22]/20 to-transparent border-transparent text-[#ceaa52] border-l-[3px] border-l-[#ceaa52] rounded-l-none"
+                        : "bg-transparent border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:translate-x-1"
                     }`}
                   >
                     {!isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     )}
                     
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
-                        ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
+                        ? "text-[#ceaa52]" 
+                        : "text-gray-500 group-hover:text-white"
                     }`}>
                       {item.icon}
                     </div>
@@ -162,18 +162,18 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     href={item.href}
                     className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
                       isActive
-                        ? "bg-gradient-to-r from-[#9e1b22] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(158,27,34,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#ceaa52]/20 hover:shadow-md hover:-translate-y-0.5"
+                        ? "bg-gradient-to-r from-[#9e1b22]/20 to-transparent border-transparent text-[#ceaa52] border-l-[3px] border-l-[#ceaa52] rounded-l-none"
+                        : "bg-transparent border-transparent text-gray-400 hover:bg-white/5 hover:text-white hover:translate-x-1"
                     }`}
                   >
                     {!isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     )}
                     
                     <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
                       isActive 
-                        ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
+                        ? "text-[#ceaa52]" 
+                        : "text-gray-500 group-hover:text-white"
                     }`}>
                       {item.icon}
                     </div>
@@ -197,7 +197,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] bg-white rounded-2xl border border-gray-100 p-4 md:p-6 shadow-sm">
+        <main className="flex-1 w-full min-h-[500px] bg-[#15181e] rounded-2xl border border-white/5 p-4 md:p-6 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
           {children}
         </main>
 

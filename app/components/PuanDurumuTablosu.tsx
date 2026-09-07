@@ -57,7 +57,7 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
   return (
     <div className="w-full">
       {!mini && (
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-[#ceaa52]enter mb-8 sm:mb-12">
           <h2 className="section-title">LİG PUAN DURUMU</h2>
           <p className="section-sub mt-2 tracking-[0.3em] font-bold text-[#9e1b22]">PRİME LİG {cityName}</p>
         </div>
@@ -67,14 +67,14 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
         <div className="w-full overflow-x-auto">
           <div className="min-w-[320px]">
             <div className="sticky top-0 z-20 grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 bg-white/95 border-b border-gray-100 backdrop-blur-md border-b border-gray-200 text-gray-500 font-bold text-[10px] sm:text-xs uppercase tracking-wider p-2 sm:p-4 items-center">
-              <div className="text-center">S</div>
+              <div className="text-[#ceaa52]enter">S</div>
               <div>TAKIM</div>
-              <div className="text-center">O</div>
-              <div className="text-center">G</div>
-              <div className="text-center">B</div>
-              <div className="text-center">M</div>
-              <div className="text-center">AV</div>
-              <div className="text-center text-gray-900">P</div>
+              <div className="text-[#ceaa52]enter">O</div>
+              <div className="text-[#ceaa52]enter">G</div>
+              <div className="text-[#ceaa52]enter">B</div>
+              <div className="text-[#ceaa52]enter">M</div>
+              <div className="text-[#ceaa52]enter">AV</div>
+              <div className="text-[#ceaa52]enter text-white">P</div>
             </div>
 
             <motion.div 
@@ -110,11 +110,11 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                     rowBg = "bg-gradient-to-r from-yellow-500/10 to-transparent border-l-[3px] border-l-yellow-500";
                     medal = "🥇";
                   } else if (i === 1) {
-                    rankColor = "text-gray-600 drop-shadow-[0_0_8px_rgba(209,213,219,0.5)]";
+                    rankColor = "text-gray-400 drop-shadow-[0_0_8px_rgba(209,213,219,0.5)]";
                     rowBg = "bg-gradient-to-r from-gray-400/10 to-transparent border-l-[3px] border-l-gray-300";
                     medal = "🥈";
                   } else if (i === 2) {
-                    rankColor = "text-amber-600 drop-shadow-[0_0_8px_rgba(217,119,6,0.5)]";
+                    rankColor = "text-whitember-600 drop-shadow-[0_0_8px_rgba(217,119,6,0.5)]";
                     rowBg = "bg-gradient-to-r from-amber-600/10 to-transparent border-l-[3px] border-l-amber-600";
                     medal = "🥉";
                   } else if (i >= takimlar.length - 2 && !mini) {
@@ -125,8 +125,8 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                   }
 
                   return (
-                    <motion.div variants={itemVariants} key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-gray-100 last:border-b-0 text-gray-900 p-2 sm:p-4 transition-all duration-300 hover:bg-gray-50 group text-[11px] sm:text-sm`}>
-                      <div className={`font-black text-[13px] sm:text-lg text-center ${rankColor} transition-transform group-hover:scale-110`}>
+                    <motion.div variants={itemVariants} key={t.id} className={`grid grid-cols-[28px_minmax(100px,1fr)_20px_20px_20px_20px_32px_32px] sm:grid-cols-[40px_minmax(200px,1fr)_40px_40px_40px_40px_50px_50px] gap-1 sm:gap-2 items-center ${rowBg} border-b border-gray-100 last:border-b-0 text-white p-2 sm:p-4 transition-all duration-300 hover:bg-gray-50 group text-[11px] sm:text-sm`}>
+                      <div className={`font-black text-[13px] sm:text-lg text-[#ceaa52]enter ${rankColor} transition-transform group-hover:scale-110`}>
                         {medal}
                       </div>
                       <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
@@ -135,12 +135,12 @@ export default function PuanDurumuTablosu({ mini = false }: { mini?: boolean }) 
                         </div>
                         <span className="font-bold text-[11px] sm:text-base leading-tight truncate group-hover:text-[#9e1b22] transition-colors">{t.name}</span>
                       </div>
-                      <div className="text-center text-gray-500">{t.played}</div>
-                      <div className="text-center font-medium text-green-500 drop-shadow-md">{t.won}</div>
-                      <div className="text-center font-medium text-gray-500 drop-shadow-md">{t.drawn}</div>
-                      <div className="text-center font-medium text-[#eab308] drop-shadow-md">{t.lost}</div>
-                      <div className="text-center font-bold text-gray-600">{t.goal_difference > 0 ? `+${t.goal_difference}` : t.goal_difference}</div>
-                      <div className="text-center font-black text-[12px] sm:text-base text-gray-900 bg-gradient-to-br from-[#ceaa52] to-[#8c7324] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(212,175,55,0.3)]">{t.points}</div>
+                      <div className="text-[#ceaa52]enter text-gray-500">{t.played}</div>
+                      <div className="text-[#ceaa52]enter font-medium text-green-500 drop-shadow-md">{t.won}</div>
+                      <div className="text-[#ceaa52]enter font-medium text-gray-500 drop-shadow-md">{t.drawn}</div>
+                      <div className="text-[#ceaa52]enter font-medium text-[#eab308] drop-shadow-md">{t.lost}</div>
+                      <div className="text-[#ceaa52]enter font-bold text-gray-400">{t.goal_difference > 0 ? `+${t.goal_difference}` : t.goal_difference}</div>
+                      <div className="text-[#ceaa52]enter font-black text-[12px] sm:text-base text-white bg-gradient-to-br from-[#ceaa52] to-[#8c7324] rounded-[4px] sm:rounded-md py-1 shadow-[0_0_15px_rgba(212,175,55,0.3)]">{t.points}</div>
                     </motion.div>
                   );
                 })
