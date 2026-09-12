@@ -46,8 +46,8 @@ export default function Navbar() {
                 <Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover scale-[1.1] bg-white border-2 border-[#ceaa52] group-hover:scale-[1.15] transition-transform duration-500 aspect-square" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-[#ceaa52] tracking-widest leading-none group-hover:text-[#ceaa52] transition-colors duration-300">PRİME <span className="text-white">LİG</span></span>
-                <span className="text-[11px] text-[#ceaa52]/70 font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
+                <span className="text-2xl font-black text-[#9e1b22] tracking-widest leading-none group-hover:text-[#9e1b22] transition-colors duration-300">PRİME <span className="text-black">LİG</span></span>
+                <span className="text-[11px] text-[#9e1b22] font-bold tracking-[0.3em] uppercase">{cities.find(c => c.id === selectedCityId)?.name || "LİG"}</span>
               </div>
             </Link>
 

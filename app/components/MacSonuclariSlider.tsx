@@ -63,10 +63,10 @@ export default function MacSonuclariSlider() {
 
   if (loading) {
     return (
-      <div className="w-full bg-[#0f1115] py-4">
+      <div className="w-full bg-white py-4">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 flex gap-3 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="min-w-[240px] h-[110px] border border-white/5 rounded-xl bg-white/5 animate-pulse shrink-0" />
+            <div key={i} className="min-w-[240px] h-[110px] border border-gray-100 rounded-xl bg-gray-50 animate-pulse shrink-0" />
           ))}
         </div>
       </div>
@@ -76,7 +76,7 @@ export default function MacSonuclariSlider() {
   if (maclar.length === 0) return null;
 
   return (
-    <div className="w-full bg-[#0f1115] py-4">
+    <div className="w-full bg-white py-4">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         <div
           ref={scrollRef}
@@ -91,7 +91,7 @@ export default function MacSonuclariSlider() {
             return (
               <div
                 key={match.id}
-                className={`min-w-[240px] bg-white rounded-xl p-3 shrink-0 snap-start shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-white/10 hover:-translate-y-0.5 transition-all cursor-pointer relative overflow-hidden`}
+                className={`min-w-[240px] bg-white rounded-xl p-3 shrink-0 snap-start shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 hover:-translate-y-0.5 transition-all cursor-pointer relative overflow-hidden`}
               >
                 {/* Dynamic Top Border like the screenshot */}
                 <div className={`absolute top-0 left-0 right-0 h-[3px] ${["bg-[#eab308]", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][match.id % 5]}`}></div>
@@ -111,7 +111,7 @@ export default function MacSonuclariSlider() {
                       Bitti
                     </span>
                   )}
-                  <span className="text-[10px] font-medium text-gray-500">{dateStr}</span>
+                  <span className="text-[10px] font-medium text-gray-400">{dateStr}</span>
                 </div>
 
                 {/* Teams */}
@@ -128,7 +128,7 @@ export default function MacSonuclariSlider() {
                   <div className="flex items-center gap-1.5 px-2 shrink-0">
                     <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#9e1b22]' : 'text-[#9e1b22]'}`}>{match.ev_skor ?? 0}</span>
                     <span className="text-gray-300 font-bold">-</span>
-                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#9e1b22]' : 'text-gray-100'}`}>{match.dep_skor ?? 0}</span>
+                    <span className={`text-[22px] font-black leading-none ${match.canli ? 'text-[#9e1b22]' : 'text-gray-800'}`}>{match.dep_skor ?? 0}</span>
                   </div>
 
                   {/* Away */}
@@ -141,9 +141,9 @@ export default function MacSonuclariSlider() {
                 </div>
 
                 {/* Footer */}
-                <div className="text-[9px] font-bold mt-2 text-center border-t border-white/10 pt-1.5 flex justify-center items-center gap-1">
+                <div className="text-[9px] font-bold mt-2 text-center border-t border-gray-100 pt-1.5 flex justify-center items-center gap-1">
                   {match.canli && <div className="w-1.5 h-1.5 bg-[#eab308] rounded-full animate-ping"></div>}
-                  <span className={match.canli ? "text-[#eab308]" : "text-gray-500"}>Prime Lig • {match.hafta}. HAFTA</span>
+                  <span className={match.canli ? "text-[#eab308]" : "text-gray-400"}>Prime Lig • {match.hafta}. HAFTA</span>
                 </div>
               </div>
             );

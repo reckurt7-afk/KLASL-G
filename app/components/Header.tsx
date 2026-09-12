@@ -21,12 +21,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="w-full bg-[#0f1115] border-b border-white/5 sticky top-0 z-50">
+    <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-[1600px] mx-auto px-4 h-[70px] flex items-center justify-end relative">
         {/* Left: Logo */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center z-10 -ml-2 md:-ml-4">
           
-          <div className="flex items-center gap-3"><div className="w-[45px] h-[45px] relative shrink-0"><Image src="/icons/prime-logo.jpg" alt="Logo" fill className="rounded-full object-cover scale-[1.15] bg-white border border-[#ceaa52] shadow-[0_0_15px_rgba(206,170,82,0.3)]" /></div><span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#ceaa52] hidden sm:inline-block">PRIME <span className="text-white">LiG</span></span></div>
+          <span className="font-black text-[28px] md:text-[34px] tracking-tighter text-[#ceaa52]">PRIME <span className="text-[#9e1b22]">LiG</span></span>
         </Link>
 
         {/* Right: TV, Search, Profile */}
@@ -36,7 +36,7 @@ export default function Header() {
             Prime Lig TV
           </Link>
           
-          <button className="text-gray-400 hover:text-gray-900 text-xl">
+          <button className="text-gray-500 hover:text-gray-900 text-xl">
             🔍
           </button>
 
@@ -57,7 +57,7 @@ export default function Header() {
                 )}
                 <div className="hidden md:flex flex-col text-left">
                   <span className="text-sm font-bold text-gray-900 leading-tight line-clamp-1">{profil?.ad_soyad || "Kullanıcı"}</span>
-                  <span className="text-[10px] text-gray-400">Hesabım</span>
+                  <span className="text-[10px] text-gray-500">Hesabım</span>
                 </div>
               </button>
 
@@ -97,7 +97,7 @@ export default function Header() {
               </div>
               <div className="hidden md:flex flex-col text-left">
                 <span className="text-sm font-bold text-gray-900 leading-tight">Misafir</span>
-                <span className="text-[10px] text-gray-400">Giriş Yap</span>
+                <span className="text-[10px] text-gray-500">Giriş Yap</span>
               </div>
             </Link>
           )}
