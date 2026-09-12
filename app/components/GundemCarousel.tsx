@@ -66,11 +66,11 @@ export default function GundemCarousel() {
   const formatDate = (s: string) => new Date(s).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div className="w-full bg-white pt-6 pb-4">
+    <div className="w-full bg-[#0f1115] pt-6 pb-4">
       <div className="max-w-[1440px] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-[20px] font-black text-gray-900">Gündem</h2>
+          <h2 className="text-[20px] font-black text-white">Gündem</h2>
           <div className="flex items-center gap-1.5">
             {haberler.map((_, i) => (
               <button
@@ -79,7 +79,7 @@ export default function GundemCarousel() {
                   setActiveIdx(i);
                   scrollRef.current?.scrollTo({ left: i * (scrollRef.current?.offsetWidth || 0), behavior: "smooth" });
                 }}
-                className={`rounded-full transition-all ${i === activeIdx ? "w-6 h-2 bg-[#ceaa52]" : "w-2 h-2 bg-gray-300"}`}
+                className={`rounded-full transition-all ${i === activeIdx ? "w-6 h-2 bg-[#ceaa52]" : "w-2 h-2 bg-white/20"}`}
               />
             ))}
           </div>

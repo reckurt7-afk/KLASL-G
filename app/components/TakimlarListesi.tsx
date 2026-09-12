@@ -72,21 +72,21 @@ export default function TakimlarListesi() {
             return (
               <motion.div variants={itemVariants} key={takim.id}>
                 <Link href={`/takim/${slug}`} className="group block h-full">
-                  <div className="card h-full p-4 md:p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:border-[#ceaa52]/50 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)] relative overflow-hidden bg-white border border-gray-100">
+                  <div className="card h-full p-4 md:p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:border-[#ceaa52]/50 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)] relative overflow-hidden bg-[#15181e] border border-white/10">
                     <div className="absolute inset-0 bg-gradient-to-b from-[#ceaa52]/0 to-[#ceaa52]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                     <div className="relative w-[70px] h-[70px] md:w-[110px] md:h-[110px] mb-4 rounded-full bg-[#050505] border border-gray-800 shadow-[0_10px_20px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover:scale-110 group-hover:border-[#ceaa52]/50 transition-all duration-500 overflow-hidden">
                       <Image src={takim.logo || '/logos/default.png'} alt={takim.name} fill className="object-contain p-2" />
                     </div>
 
-                    <div className="text-gray-900 text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#9e1b22] transition-colors mt-2 line-clamp-2">
+                    <div className="text-white text-sm md:text-xl font-black uppercase tracking-wide group-hover:text-[#9e1b22] transition-colors mt-2 line-clamp-2">
                       {takim.name}
                     </div>
                     
                     <div className="w-8 h-1 bg-gradient-to-r from-transparent via-[#ceaa52]/50 to-transparent my-3"></div>
                     
                     <div className="mt-auto w-full bg-gray-100 rounded-xl py-2 flex items-center justify-center border border-gray-200 group-hover:border-[#ceaa52]/20">
-                      <span className="text-gray-500 text-[10px] font-bold uppercase tracking-wider group-hover:text-gray-900 transition-colors">Kadroyu Gör ➔</span>
+                      <span className="text-gray-500 text-[10px] font-bold uppercase tracking-wider group-hover:text-white transition-colors">Kadroyu Gör ➔</span>
                     </div>
                   </div>
                 </Link>

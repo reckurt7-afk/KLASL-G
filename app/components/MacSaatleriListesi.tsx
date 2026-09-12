@@ -87,11 +87,11 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                     className="card bg-[#111] border border-[rgba(255,255,255,0.07)] hover:border-[#ceaa52]/50 rounded-2xl p-4 md:p-6 transition-all duration-300 flex flex-col"
                   >
                     <div className="flex justify-between items-center mb-4 pb-3 border-b border-[rgba(255,255,255,0.05)]">
-                      <div className="flex items-center gap-2 text-gray-400 text-[10px] md:text-xs font-medium">
+                      <div className="flex items-center gap-2 text-gray-500 text-[10px] md:text-xs font-medium">
                         <span>🏟️</span>
                         <span>{mac.saha || "Saha Belli Değil"}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-400 text-[10px] md:text-xs font-medium">
+                      <div className="flex items-center gap-2 text-gray-500 text-[10px] md:text-xs font-medium">
                         <span>📅</span>
                         <span>{mac.tarih || "Tarih Yok"}</span>
                       </div>
@@ -103,7 +103,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                           {TEAM_LOGOS[mac.ev_sahibi] ? (
                             <Image src={TEAM_LOGOS[mac.ev_sahibi]} alt={mac.ev_sahibi} fill className="object-contain" />
                           ) : (
-                            <div className="w-full h-full bg-black/30 rounded-full flex items-center justify-center text-gray-600 font-black">?</div>
+                            <div className="w-full h-full bg-black/30 rounded-full flex items-center justify-center text-gray-300 font-black">?</div>
                           )}
                         </div>
                         <span className="text-white font-bold text-[10px] md:text-xs uppercase line-clamp-2 leading-tight">
@@ -131,7 +131,7 @@ export default function MacSaatleriListesi({ mini = false }: { mini?: boolean })
                           {TEAM_LOGOS[mac.deplasman] ? (
                             <Image src={TEAM_LOGOS[mac.deplasman]} alt={mac.deplasman} fill className="object-contain" />
                           ) : (
-                            <div className="w-full h-full bg-black/30 rounded-full flex items-center justify-center text-gray-600 font-black">?</div>
+                            <div className="w-full h-full bg-black/30 rounded-full flex items-center justify-center text-gray-300 font-black">?</div>
                           )}
                         </div>
                         <span className="text-white font-bold text-[10px] md:text-xs uppercase line-clamp-2 leading-tight">
