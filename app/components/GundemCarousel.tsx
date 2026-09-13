@@ -99,13 +99,7 @@ export default function GundemCarousel() {
               <Link
                 key={haber.id}
                 href={`/duyuru/${haber.id}`}
-                className={`relative shrink-0 snap-start group cursor-pointer block rounded-2xl overflow-hidden
-                  transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl
-                  ${idx === 0
-                    ? "w-[85vw] sm:w-[60vw] md:w-[520px] h-[320px] md:h-[380px]"
-                    : "w-[72vw] sm:w-[50vw] md:w-[360px] h-[260px] md:h-[300px]"
-                  }
-                `}
+                className="relative shrink-0 snap-start group cursor-pointer block rounded-2xl overflow-hidden w-[80vw] sm:w-[55vw] md:w-[360px] h-[270px] md:h-[300px] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.10)" }}
               >
                 {/* Background Image */}
@@ -135,18 +129,14 @@ export default function GundemCarousel() {
                     <span className="text-[#ceaa52] text-[10px] font-bold bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm">
                       {formatDate(haber.created_at)}
                     </span>
-                    {idx !== 0 && (
-                      <span className="text-white text-[10px] font-bold bg-white/15 px-2 py-1 rounded-full backdrop-blur-sm">
-                        ★ {haber.kategori}
-                      </span>
-                    )}
+                    <span className="text-white text-[10px] font-bold bg-white/15 px-2 py-1 rounded-full backdrop-blur-sm">
+                      ★ {haber.kategori}
+                    </span>
                   </div>
-                  <h3 className={`text-white font-black leading-snug line-clamp-2 drop-shadow-md ${
-                    idx === 0 ? "text-[18px] md:text-[22px]" : "text-[14px] md:text-[16px]"
-                  }`}>
+                  <h3 className="text-white font-black leading-snug line-clamp-2 drop-shadow-md text-[15px] md:text-[18px]">
                     {haber.baslik}
                   </h3>
-                  {haber.ozet && idx === 0 && (
+                  {haber.ozet && (
                     <p className="text-gray-300 text-[12px] md:text-[13px] line-clamp-1 mt-1 opacity-90">
                       {haber.ozet}
                     </p>
