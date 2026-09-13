@@ -52,7 +52,7 @@ export default function CityStoryBar() {
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors"
+        className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-gray-400 hover:bg-gray-50 transition-colors"
         aria-label="Sola kaydır"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -87,19 +87,15 @@ export default function CityStoryBar() {
             >
               {/* Card */}
               <div
-                className={`w-[135px] h-[105px] md:w-[145px] md:h-[110px] rounded-2xl flex flex-col items-center justify-center gap-1 transition-all border-2 ${
-                  isSelected
-                    ? "border-[#ceaa52] bg-red-50 shadow-md"
-                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
-                }`}
+                className={`relative w-[130px] h-[115px] md:w-[145px] md:h-[120px] rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 ${isSelected ? "bg-gradient-to-br from-[#9e1b22] to-[#b82029] shadow-[0_8px_16px_rgba(158,27,34,0.3)] scale-105 z-10 border-0" : "bg-white border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5"}`}
               >
-                <div className="w-10 h-10 md:w-11 md:h-11 relative">
-                  <Image src="/icons/prime-logo.jpg" alt={city.name} fill className="rounded-full object-cover scale-[1.1] bg-white border border-[#ceaa52]" />
+                <div className={`w-11 h-11 md:w-12 md:h-12 relative rounded-full p-[2px] ${isSelected ? "bg-white shadow-inner" : "bg-gradient-to-br from-gray-100 to-gray-200"}`}>
+                  <div className="w-full h-full relative rounded-full overflow-hidden border-2 border-white"><Image src="/icons/prime-logo.jpg" alt={city.name} fill className="object-cover scale-[1.1]" /></div>
                 </div>
-                <span className={`text-[11px] md:text-[12px] font-black leading-snug text-center break-words w-full px-2 ${isSelected ? "text-[#9e1b22]" : "text-gray-700"}`}>
+                <span className={`text-[11px] md:text-[12px] font-black leading-tight text-center break-words w-full px-2 mt-1 ${isSelected ? "text-white drop-shadow-sm" : "text-gray-700"}`}>
                   {city.name}
                 </span>
-                <span className="text-[9px] md:text-[10px] tracking-widest text-gray-400 font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1">
+                <span className={`text-[9px] md:text-[10px] tracking-widest font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-center px-1 ${isSelected ? "text-[#ceaa52]" : "text-gray-400"}`}>
                   {city.status === 'AKTIF' ? 'AKTİF' : 'BEKLEMEDE'}
                 </span>
               </div>
