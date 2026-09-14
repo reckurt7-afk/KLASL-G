@@ -63,7 +63,7 @@ export default function MacSonuclariSlider() {
 
   if (loading) {
     return (
-      <div className="w-full bg-white py-4">
+      <div className="w-full bg-[#fcfcfc] py-6 border-t border-gray-100">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 flex gap-3 overflow-hidden">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="min-w-[240px] h-[110px] border border-gray-100 rounded-xl bg-gray-50 animate-pulse shrink-0" />

@@ -78,7 +78,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   if (isDuyuru) {
     return (
-      <div className="flex flex-col bg-[#f4f6f8] min-h-screen font-sans">
+      <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
         <Header />
         <main className="flex-1 w-full">
           <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6">
@@ -90,14 +90,14 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   }
 
   return (
-    <div className="flex flex-col bg-[#f4f6f8] min-h-screen font-sans">
+    <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
       <Header />
       <CityStoryBar />
       <GundemCarousel />
       <MacSonuclariSlider />
 
       {/* The red separator line like the screenshot */}
-      <div className="w-full bg-[#f4f6f8] pt-2">
+      <div className="w-full bg-[#fcfcfc] pt-2">
          <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6">
             <div className="w-full h-[2px] bg-[#ceaa52] rounded-full opacity-20"></div>
          </div>
@@ -150,7 +150,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] pb-24 lg:pb-6 bg-white rounded-2xl border border-gray-100 p-4 md:p-6 shadow-sm">
+        <main className="flex-1 w-full min-h-[500px] pb-24 lg:pb-6 bg-white rounded-[24px] border border-gray-100 p-5 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
           {children}
         </main>
 

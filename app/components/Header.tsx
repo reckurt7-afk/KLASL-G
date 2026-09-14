@@ -21,7 +21,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <header className="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
       <div className="max-w-[1600px] mx-auto px-4 h-[64px] flex items-center justify-between">
 
         {/* Left: Empty space for balance on mobile */}
