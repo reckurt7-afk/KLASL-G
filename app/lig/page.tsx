@@ -4,6 +4,7 @@ import { useCityStore } from "../store/cityStore";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
 import Link from "next/link";
+import Image from "next/image";
 
 type Haber = {
   id: number;
@@ -26,9 +27,9 @@ export default function LigMerkezi() {
     async function fetchHaberler() {
       try {
         const data = await publicFetch("duyurular", "select=*&renk=eq.KAP&order=created_at.desc");
-        const parsed = data.map((d: any) => {
+        const parsed = (data || []).map((d: any) => {
           let ozet = d.aciklama || "";
-          let resim = "/images/default-kap.jpg";
+          let resim = "/icons/prime-logo.jpg"; // Default premium logo if no image
           try {
             const j = JSON.parse(d.aciklama || "{}");
             if (j.ozet !== undefined) {
@@ -41,7 +42,7 @@ export default function LigMerkezi() {
             baslik: d.baslik,
             ozet,
             resim,
-            kategori: d.renk || "HABER",
+            kategori: d.renk || "KAP",
             created_at: d.created_at
           };
         });
@@ -63,64 +64,102 @@ export default function LigMerkezi() {
   return (
     <div className="w-full flex flex-col fade-in">
       
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-6 mt-4 bg-gradient-to-r from-red-50 to-white h-[76px] rounded-2xl border border-red-100 shadow-sm px-5">
-         <div className="w-12 h-12 bg-gradient-to-br from-[#9e1b22] to-[#b30000] rounded-xl flex items-center justify-center text-white shadow-[0_4px_10px_rgba(158,27,34,0.3)] shrink-0">
-           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
-         </div>
-         <div className="flex flex-col justify-center">
-           <h1 className="text-[16px] md:text-[18px] font-black text-[#1a1a2e] leading-none mb-1">{cityName} Transfer KAP</h1>
-           <p className="text-[11px] md:text-[13px] text-gray-500 font-medium leading-none">Şehrin son gelişmeleri ve transferler</p>
-         </div>
-         <div className="ml-auto w-8 h-8 bg-white text-[#ceaa52] border border-red-100 rounded-full flex items-center justify-center text-[13px] font-black shrink-0 shadow-sm">
-            {haberler.length}
-         </div>
+      {/* Premium Header Banner */}
+      <div className="relative w-full overflow-hidden rounded-[20px] mb-6 md:mb-8 shadow-[0_8px_24px_rgba(158,27,34,0.15)] group">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f1115] via-[#1a0507] to-[#9e1b22] z-0" />
+        {/* Subtle pattern or texture could go here */}
+        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#ceaa52] via-transparent to-transparent z-0" />
+        
+        <div className="relative z-10 flex items-center p-5 md:p-6 gap-4">
+          <div className="w-14 h-14 md:w-16 md:h-16 relative bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-inner shrink-0">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ceaa52" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+              <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+            </svg>
+          </div>
+          
+          <div className="flex flex-col justify-center flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2 h-2 rounded-full bg-[#ceaa52] animate-pulse" />
+              <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] text-[#ceaa52] uppercase">
+                RESMİ BİLDİRİM EKRANI
+              </span>
+            </div>
+            <h1 className="text-[20px] md:text-[24px] font-black text-white leading-tight tracking-tight">
+              {cityName} Transfer KAP
+            </h1>
+          </div>
+
+          <div className="hidden sm:flex flex-col items-center justify-center px-4 border-l border-white/10 ml-auto">
+            <span className="text-[24px] font-black text-white leading-none">{haberler.length}</span>
+            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider mt-1">Bildirim</span>
+          </div>
+        </div>
       </div>
 
-      {/* Grid */}
+      {/* Content Grid */}
       {loading ? (
-        <div className="w-full py-12 flex justify-center"><div className="w-8 h-8 border-4 border-[#eab308] border-t-transparent rounded-full animate-spin"></div></div>
+        <div className="w-full py-16 flex flex-col items-center justify-center gap-4">
+          <div className="w-10 h-10 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm font-bold text-gray-400 animate-pulse">KAP Bildirimleri Yükleniyor...</span>
+        </div>
       ) : haberler.length === 0 ? (
-        <div className="w-full py-12 text-center text-gray-500 font-bold">Henüz haber bulunmuyor.</div>
+        <div className="w-full py-20 flex flex-col items-center justify-center bg-gray-50 rounded-[20px] border border-gray-100">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ceaa52" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-50"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span className="text-gray-500 font-bold text-center">Henüz güncel bir transfer bildirimi bulunmuyor.</span>
+        </div>
       ) : (
-        <div className="flex flex-wrap gap-5 md:gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
           {haberler.map((haber) => (
             <Link 
               key={haber.id} 
               href={`/duyuru/${haber.id}`}
-              className="relative w-[160px] h-[220px] md:w-[180px] md:h-[260px] rounded-[14px] overflow-hidden group cursor-pointer shadow-sm block shrink-0"
+              className="relative w-full aspect-[4/5] sm:aspect-[3/4] rounded-[16px] overflow-hidden group cursor-pointer block bg-[#0f1115] border border-gray-200 hover:border-[#ceaa52]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.12)]"
             >
+              {/* Image */}
               <div 
-                className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
                 style={{ backgroundImage: `url(${haber.resim})` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+              
+              {/* Premium Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-0" />
               
               {/* Top Badges */}
-              <div className="absolute top-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
-                <span className="bg-[#1a1a2e]/80 backdrop-blur-sm text-white text-[8px] font-bold px-1.5 py-0.5 rounded border border-white/10 uppercase tracking-wider">
+              <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                <span className="bg-black/40 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded-md border border-white/10 uppercase tracking-wider">
                   {formatDate(haber.created_at)}
                 </span>
-                <span className="bg-[#ceaa52] text-white text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider shadow-sm">
-                  {haber.kategori.toUpperCase()}
+                <span className="bg-[#9e1b22] text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest shadow-md">
+                  {haber.kategori}
                 </span>
               </div>
 
               {/* Bottom Content */}
-              <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col z-10">
-                <h3 className="text-white font-black text-[12px] md:text-[13px] leading-tight line-clamp-2 mb-1 group-hover:text-red-400 transition-colors">
+              <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 flex flex-col z-10">
+                <h3 className="text-white font-black text-[15px] md:text-[16px] leading-snug line-clamp-2 mb-2 group-hover:text-[#ceaa52] transition-colors">
                   {haber.baslik}
                 </h3>
-                <p className="text-gray-300 text-[9px] md:text-[10px] font-bold opacity-90 mt-1 flex items-center gap-1 group-hover:text-white transition-colors uppercase">
-                  DEVAMINI OKU
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </p>
+                {haber.ozet && (
+                  <p className="text-gray-300 text-[11px] md:text-[12px] line-clamp-2 mb-3 opacity-90 leading-relaxed">
+                    {haber.ozet}
+                  </p>
+                )}
+                
+                {/* Read More button */}
+                <div className="flex items-center gap-1.5 mt-auto">
+                  <span className="text-[#ceaa52] text-[10px] font-black tracking-widest uppercase group-hover:text-white transition-colors">
+                    DETAYLARI İNCELE
+                  </span>
+                  <div className="w-5 h-5 rounded-full bg-[#ceaa52]/20 flex items-center justify-center group-hover:bg-[#ceaa52] transition-colors">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-[#ceaa52] group-hover:text-white transition-colors" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </div>
+                </div>
               </div>
             </Link>
           ))}
         </div>
-      )}    </div>
+      )}
+    </div>
   );
 }
-
-
