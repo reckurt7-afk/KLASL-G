@@ -92,7 +92,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
       <Header />
-      <CityStoryBar />
+      {/* <CityStoryBar /> removed */}
       <GundemCarousel />
       <MacSonuclariSlider />
 
@@ -107,47 +107,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8">
         
         {/* Left Sidebar - Desktop Only */}
-        <aside className="w-[260px] hidden lg:block shrink-0">
-          <div className="sticky top-[86px] flex flex-col gap-1">
-            <h3 className="text-[11px] font-black text-gray-400 tracking-[0.2em] uppercase mb-2 px-2">Lig Menüsü</h3>
-            <nav className="flex flex-col gap-2.5">
-              {SIDEBAR_ITEMS.map((item) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
-                      isActive
-                        ? "bg-gradient-to-r from-[#9e1b22] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(158,27,34,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#ceaa52]/20 hover:shadow-md hover:-translate-y-0.5"
-                    }`}
-                  >
-                    {!isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    )}
-                    
-                    <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
-                      isActive 
-                        ? "bg-white/20 text-white" 
-                        : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
-                    }`}>
-                      {item.icon}
-                    </div>
-
-                    <span className="relative z-10 text-[13px] md:text-[14px] font-black tracking-tight leading-tight pt-0.5">{item.label}</span>
-                    
-                    {isActive && (
-                      <div className="absolute right-4 z-10 text-white/50">
-                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                      </div>
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-        </aside>
+        {/* Left sidebar removed */}
 
         {/* Main Content */}
         <main className="flex-1 w-full min-h-[500px] pb-24 lg:pb-6 bg-white rounded-[24px] border border-gray-100 p-5 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
