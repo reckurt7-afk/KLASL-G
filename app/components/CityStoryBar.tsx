@@ -16,7 +16,7 @@ export default function CityStoryBar() {
       if (data) {
           // Özel Sıralama: ID 8'i (4. Sezon) ikinci sıraya (index 1) al
           
-          const sorted = [...data];
+          const sorted = [...data].filter(c => c.id !== 1 && c.name !== "PRİME LİG BURSA" && c.name !== "PRIME LIG BURSA");
           
           // 1. Karacabey'i en başa (1. sıraya) al
           const indexKaracabey = sorted.findIndex(c => c.name && c.name.toLowerCase().includes("karacabey"));
