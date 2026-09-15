@@ -92,7 +92,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
       <Header />
-      <CityStoryBar />
+      {/* <CityStoryBar /> removed */}
       <GundemCarousel />
       <MacSonuclariSlider />
 
