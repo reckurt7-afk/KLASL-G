@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Header from "./Header";
+import CanliSkorBandi from "./CanliSkorBandi";
 import CityStoryBar from "./CityStoryBar";
 import GundemCarousel from "./GundemCarousel";
 import MacSonuclariSlider from "./MacSonuclariSlider";
-// No import
 
 // We will redefine SIDEBAR_ITEMS here just in case they aren't exported
 const MOCK_SIDEBAR = [
@@ -36,6 +36,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return (
       <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
         <Header />
+        <CanliSkorBandi />
         <main className="flex-1 w-full">
           <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6">
             {children}
@@ -48,6 +49,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
       <Header />
+      <CanliSkorBandi />
       <CityStoryBar />
 
       <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8 relative z-10">
