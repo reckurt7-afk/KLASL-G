@@ -1,10 +1,11 @@
 "use client";
 
-import { useCityStore } from "../store/cityStore";
 import { useEffect, useState } from "react";
 import { publicFetch } from "@/lib/supabase";
 import Link from "next/link";
-import Image from "next/image";
+import { useCityStore } from "@/app/store/cityStore";
+import { motion, AnimatePresence } from "framer-motion";
+import { BellRing, ArrowRight, Activity } from "lucide-react";
 
 type Haber = {
   id: number;
@@ -20,7 +21,6 @@ export default function LigMerkezi() {
   const [haberler, setHaberler] = useState<Haber[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Selected city name can be derived from ID. For now just mock.
   const cityName = selectedCityId === 1 ? "Bursa" : selectedCityId === 2 ? "İstanbul" : selectedCityId === 3 ? "İzmir" : "Türkiye";
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function LigMerkezi() {
         const data = await publicFetch("duyurular", "select=*&renk=eq.KAP&order=created_at.desc");
         const parsed = (data || []).map((d: any) => {
           let ozet = d.aciklama || "";
-          let resim = "/icons/prime-logo.jpg"; // Default premium logo if no image
+          let resim = "/icons/prime-logo.jpg";
           try {
             const j = JSON.parse(d.aciklama || "{}");
             if (j.ozet !== undefined) {
@@ -61,105 +61,157 @@ export default function LigMerkezi() {
     return `${d.getDate()} ${d.toLocaleString('tr-TR', { month: 'short' }).toUpperCase()} ${d.getFullYear()}`;
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
   return (
-    <div className="w-full flex flex-col fade-in">
-      
+    <div className="w-full flex flex-col fade-in relative min-h-[500px]">
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#ceaa52] opacity-5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#9e1b22] opacity-5 rounded-full blur-3xl pointer-events-none" />
+
       {/* Premium Header Banner */}
-      <div className="relative w-full overflow-hidden rounded-[20px] mb-6 md:mb-8 shadow-[0_8px_24px_rgba(158,27,34,0.15)] group">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0f1115] via-[#1a0507] to-[#9e1b22] z-0" />
-        {/* Subtle pattern or texture could go here */}
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#ceaa52] via-transparent to-transparent z-0" />
-        
-        <div className="relative z-10 flex items-center p-5 md:p-6 gap-4">
-          <div className="w-14 h-14 md:w-16 md:h-16 relative bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-inner shrink-0">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ceaa52" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
-              <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
-            </svg>
-          </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative w-full overflow-hidden rounded-[20px] mb-8 md:mb-10 shadow-[0_8px_30px_rgba(158,27,34,0.15)] group border border-white/10"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0c10] via-[#1a0507] to-[#801319] z-0" />
+        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#ceaa52] via-transparent to-transparent z-0" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-20" />
+
+        <div className="relative z-10 flex items-center p-6 md:p-8 gap-5">
+          <motion.div 
+            whileHover={{ scale: 1.05, rotate: 5 }}
+            className="w-16 h-16 md:w-20 md:h-20 relative bg-black/40 rounded-2xl flex items-center justify-center backdrop-blur-md border border-[#ceaa52]/30 shadow-[0_0_20px_rgba(206,170,82,0.2)] shrink-0 group-hover:border-[#ceaa52]/70 transition-colors"
+          >
+            <Activity className="w-8 h-8 md:w-10 md:h-10 text-[#ceaa52]" />
+          </motion.div>
           
           <div className="flex flex-col justify-center flex-1">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-[#ceaa52] animate-pulse" />
-              <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] text-[#ceaa52] uppercase">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ceaa52] animate-pulse shadow-[0_0_8px_rgba(206,170,82,0.8)]" />
+              <span className="text-[10px] md:text-[12px] font-bold tracking-[0.25em] text-[#ceaa52] uppercase drop-shadow-md">
                 RESMİ BİLDİRİM EKRANI
               </span>
             </div>
-            <h1 className="text-[20px] md:text-[24px] font-black text-white leading-tight tracking-tight">
+            <h1 className="text-[24px] md:text-[32px] font-black text-white leading-tight tracking-tight drop-shadow-lg">
               {cityName} Transfer KAP
             </h1>
           </div>
 
-          <div className="hidden sm:flex flex-col items-center justify-center px-4 border-l border-white/10 ml-auto">
-            <span className="text-[24px] font-black text-white leading-none">{haberler.length}</span>
-            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider mt-1">Bildirim</span>
+          <div className="hidden sm:flex flex-col items-center justify-center px-6 border-l border-white/10 ml-auto bg-black/20 rounded-2xl py-3 backdrop-blur-sm group-hover:bg-black/40 transition-colors">
+            <motion.span 
+              key={haberler.length}
+              initial={{ scale: 1.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="text-[32px] font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 leading-none"
+            >
+              {haberler.length}
+            </motion.span>
+            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1.5">Bildirim</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Content Grid */}
-      {loading ? (
-        <div className="w-full py-16 flex flex-col items-center justify-center gap-4">
-          <div className="w-10 h-10 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm font-bold text-gray-400 animate-pulse">KAP Bildirimleri Yükleniyor...</span>
-        </div>
-      ) : haberler.length === 0 ? (
-        <div className="w-full py-20 flex flex-col items-center justify-center bg-gray-50 rounded-[20px] border border-gray-100">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ceaa52" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4 opacity-50"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span className="text-gray-500 font-bold text-center">Henüz güncel bir transfer bildirimi bulunmuyor.</span>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-          {haberler.map((haber) => (
-            <Link 
-              key={haber.id} 
-              href={`/duyuru/${haber.id}`}
-              className="relative w-full aspect-[4/5] sm:aspect-[3/4] rounded-[16px] overflow-hidden group cursor-pointer block bg-[#0f1115] border border-gray-200 hover:border-[#ceaa52]/50 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.12)]"
-            >
-              {/* Image */}
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-                style={{ backgroundImage: `url(${haber.resim})` }}
-              />
-              
-              {/* Premium Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent z-0" />
-              
-              {/* Top Badges */}
-              <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
-                <span className="bg-black/40 backdrop-blur-md text-white text-[9px] font-bold px-2 py-1 rounded-md border border-white/10 uppercase tracking-wider">
-                  {formatDate(haber.created_at)}
-                </span>
-                <span className="bg-[#9e1b22] text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest shadow-md">
-                  {haber.kategori}
-                </span>
-              </div>
-
-              {/* Bottom Content */}
-              <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 flex flex-col z-10">
-                <h3 className="text-white font-black text-[15px] md:text-[16px] leading-snug line-clamp-2 mb-2 group-hover:text-[#ceaa52] transition-colors">
-                  {haber.baslik}
-                </h3>
-                {haber.ozet && (
-                  <p className="text-gray-300 text-[11px] md:text-[12px] line-clamp-2 mb-3 opacity-90 leading-relaxed">
-                    {haber.ozet}
-                  </p>
-                )}
-                
-                {/* Read More button */}
-                <div className="flex items-center gap-1.5 mt-auto">
-                  <span className="text-[#ceaa52] text-[10px] font-black tracking-widest uppercase group-hover:text-white transition-colors">
-                    DETAYLARI İNCELE
-                  </span>
-                  <div className="w-5 h-5 rounded-full bg-[#ceaa52]/20 flex items-center justify-center group-hover:bg-[#ceaa52] transition-colors">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-[#ceaa52] group-hover:text-white transition-colors" strokeWidth="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      <AnimatePresence mode="wait">
+        {loading ? (
+          <motion.div 
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full py-24 flex flex-col items-center justify-center gap-6"
+          >
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <div className="absolute inset-0 border-4 border-gray-100 rounded-full" />
+              <div className="absolute inset-0 border-4 border-[#ceaa52] border-t-transparent rounded-full animate-spin" />
+              <BellRing className="w-8 h-8 text-gray-300 animate-pulse" />
+            </div>
+            <span className="text-sm font-bold text-gray-400 animate-pulse tracking-widest uppercase">
+              KAP Bildirimleri Yükleniyor...
+            </span>
+          </motion.div>
+        ) : haberler.length === 0 ? (
+          <motion.div 
+            key="empty"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full py-28 flex flex-col items-center justify-center bg-gray-50/50 rounded-[24px] border border-gray-100 backdrop-blur-sm shadow-inner"
+          >
+            <div className="w-24 h-24 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-5 hover:scale-105 transition-transform">
+              <Activity className="w-10 h-10 text-gray-300" />
+            </div>
+            <span className="text-gray-500 font-bold text-lg text-center tracking-tight">Henüz güncel bir transfer bildirimi bulunmuyor.</span>
+            <span className="text-gray-400 text-sm mt-2 text-center max-w-sm">Yeni transferler ve resmi duyurular yapıldığında burada listelenecektir.</span>
+          </motion.div>
+        ) : (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6"
+          >
+            {haberler.map((haber) => (
+              <motion.div key={haber.id} variants={itemVariants}>
+                <Link 
+                  href={`/duyuru/${haber.id}`}
+                  className="relative w-full aspect-[4/5] sm:aspect-[3/4] rounded-[20px] overflow-hidden group cursor-pointer block bg-[#0f1115] border border-gray-200 hover:border-[#ceaa52]/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
+                >
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" 
+                    style={{ backgroundImage: `url(${haber.resim})` }}
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10 opacity-90 group-hover:opacity-80 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent opacity-60" />
+                  
+                  <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
+                    <div className="bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1.5 rounded-lg border border-white/10 tracking-widest flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#ceaa52]" />
+                      {formatDate(haber.created_at)}
+                    </div>
+                    <div className="bg-gradient-to-r from-[#9e1b22] to-[#b82029] text-white text-[10px] font-black px-3 py-1.5 rounded-lg tracking-widest shadow-[0_4px_10px_rgba(158,27,34,0.4)] border border-[#ff4d56]/20">
+                      {haber.kategori}
+                    </div>
                   </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+
+                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col z-10 transform transition-transform duration-500 group-hover:translate-y-[-4px]">
+                    <h3 className="text-white font-black text-[16px] md:text-[18px] leading-snug line-clamp-2 mb-2.5 group-hover:text-[#ceaa52] transition-colors drop-shadow-md">
+                      {haber.baslik}
+                    </h3>
+                    {haber.ozet && (
+                      <p className="text-gray-300 text-[12px] md:text-[13px] line-clamp-2 mb-4 opacity-90 leading-relaxed font-medium">
+                        {haber.ozet}
+                      </p>
+                    )}
+                    
+                    <div className="flex items-center gap-2 mt-auto w-full pt-4 border-t border-white/10">
+                      <span className="text-[#ceaa52] text-[11px] font-black tracking-[0.2em] uppercase group-hover:text-white transition-colors">
+                        DETAYLARI İNCELE
+                      </span>
+                      <div className="w-7 h-7 rounded-full bg-[#ceaa52]/20 flex items-center justify-center group-hover:bg-[#ceaa52] transition-all duration-300 ml-auto group-hover:shadow-[0_0_15px_rgba(206,170,82,0.5)]">
+                        <ArrowRight className="w-3.5 h-3.5 text-[#ceaa52] group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

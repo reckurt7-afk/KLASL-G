@@ -4,6 +4,8 @@ import { useRef, useEffect, useState } from "react";
 import { useCityStore } from "@/app/store/cityStore";
 import { publicFetch } from "../../lib/supabase";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 type Haber = {
   id: number;
@@ -61,16 +63,23 @@ export default function GundemCarousel() {
   if (haberler.length === 0) return null;
 
   return (
-    <div className="w-full bg-[#fcfcfc] pt-6 pb-6">
-      <div className="max-w-[1440px] mx-auto">
+    <div className="w-full bg-[#fcfcfc] pt-8 pb-8 relative overflow-hidden">
+      {/* Background elegant accents */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none hidden md:block" />
+      <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none hidden md:block" />
+
+      <div className="max-w-[1440px] mx-auto relative z-20">
         {/* Section Header */}
-        <div className="flex items-center justify-between mb-5 px-4 md:px-6">
+        <div className="flex items-center justify-between mb-6 px-4 md:px-6">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-7 bg-gradient-to-b from-[#9e1b22] to-[#ceaa52] rounded-full" />
-            <h2 className="text-[22px] font-black text-gray-900 tracking-tight">Gündem</h2>
+            <div className="w-1.5 h-8 bg-gradient-to-b from-[#9e1b22] to-[#ceaa52] rounded-full shadow-[0_0_10px_rgba(158,27,34,0.4)]" />
+            <h2 className="text-[26px] font-black text-gray-900 tracking-tight flex items-center gap-2">
+              Gündem
+              <div className="w-2 h-2 rounded-full bg-[#9e1b22] shadow-[0_0_8px_rgba(158,27,34,0.6)] animate-pulse" />
+            </h2>
           </div>
           {/* Dot indicators */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {haberler.map((_, i) => (
               <button
                 key={i}
@@ -81,90 +90,96 @@ export default function GundemCarousel() {
                   const cardW = el.querySelector("a")?.offsetWidth || 300;
                   el.scrollTo({ left: i * (cardW + 20), behavior: "smooth" });
                 }}
-                className={`rounded-full transition-all duration-300 ${i === activeIdx ? "w-6 h-2 bg-[#9e1b22]" : "w-2 h-2 bg-gray-200 hover:bg-gray-400"}`}
+                className={`rounded-full transition-all duration-500 ease-out ${i === activeIdx ? "w-8 h-2 bg-[#9e1b22] shadow-[0_0_8px_rgba(158,27,34,0.5)]" : "w-2 h-2 bg-gray-200 hover:bg-gray-400"}`}
               />
             ))}
           </div>
         </div>
 
         {/* Carousel */}
-        <div className="relative">
+        <div className="relative group/carousel">
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-4 md:px-6"
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 px-4 md:px-6"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {haberler.map((haber, idx) => (
-              <Link
+              <motion.div
                 key={haber.id}
-                href={`/duyuru/${haber.id}`}
-                className="relative shrink-0 snap-start group cursor-pointer block rounded-2xl overflow-hidden w-[80vw] sm:w-[55vw] md:w-[360px] h-[270px] md:h-[300px] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
-                style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.10)" }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="shrink-0 snap-start relative"
               >
-                {/* Background Image */}
-                {haber.resim ? (
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${haber.resim})` }}
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#2d0a0e] to-[#9e1b22]" />
-                )}
-
-                {/* Gradient Overlay - only bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-
-                {/* Featured Badge for first card */}
-                {idx === 0 && (
-                  <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-[#9e1b22] text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse inline-block" />
-                    MANŞET
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
-                  <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <span className="text-[#ceaa52] text-[10px] font-bold bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm">
-                      {formatDate(haber.created_at)}
-                    </span>
-                    <span className="text-white text-[10px] font-bold bg-white/15 px-2 py-1 rounded-full backdrop-blur-sm">
-                      ★ {haber.kategori}
-                    </span>
-                  </div>
-                  <h3 className="text-white font-black leading-snug line-clamp-2 drop-shadow-md text-[15px] md:text-[18px]">
-                    {haber.baslik}
-                  </h3>
-                  {haber.ozet && (
-                    <p className="text-gray-300 text-[12px] md:text-[13px] line-clamp-1 mt-1 opacity-90">
-                      {haber.ozet}
-                    </p>
+                <Link
+                  href={`/duyuru/${haber.id}`}
+                  className="relative group block rounded-[24px] overflow-hidden w-[85vw] sm:w-[60vw] md:w-[400px] h-[280px] md:h-[340px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] transition-shadow duration-500 border border-gray-100"
+                >
+                  {/* Background Image */}
+                  {haber.resim ? (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${haber.resim})` }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#2d0a0e] to-[#9e1b22]" />
                   )}
-                </div>
 
-                {/* Hover arrow indicator */}
-                <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </Link>
+                  {/* Elegant Gradients */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent opacity-50" />
+
+                  {/* Featured Badge for first card */}
+                  {idx === 0 && (
+                    <div className="absolute top-5 left-5 flex items-center gap-2 bg-[#9e1b22] text-white text-[11px] font-black px-4 py-2 rounded-xl shadow-lg border border-white/20">
+                      <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                      MANŞET
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 transform transition-transform duration-500 group-hover:-translate-y-2">
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
+                      <span className="text-white text-[10px] font-bold bg-white/20 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10 uppercase tracking-widest shadow-sm">
+                        {haber.kategori}
+                      </span>
+                      <span className="text-[#ceaa52] text-[10px] font-bold bg-black/40 px-3 py-1.5 rounded-lg backdrop-blur-md border border-[#ceaa52]/20 uppercase tracking-widest">
+                        {formatDate(haber.created_at)}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-white font-black leading-snug line-clamp-2 drop-shadow-lg text-[18px] md:text-[22px] group-hover:text-[#ceaa52] transition-colors duration-300">
+                      {haber.baslik}
+                    </h3>
+                    
+                    {haber.ozet && (
+                      <p className="text-gray-300 text-[13px] md:text-[14px] line-clamp-2 mt-2.5 opacity-90 leading-relaxed font-medium">
+                        {haber.ozet}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Hover Arrow Indicator */}
+                  <div className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-4 group-hover:translate-x-0 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <ChevronRight className="w-5 h-5 text-white" />
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
 
           {/* Desktop Arrow Buttons */}
           <button
             onClick={() => scroll("left")}
-            className="hidden md:flex absolute -left-1 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-lg items-center justify-center text-gray-600 hover:bg-[#9e1b22] hover:text-white hover:border-[#9e1b22] transition-all duration-200"
+            className="hidden md:flex absolute left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.1)] items-center justify-center text-gray-700 hover:bg-[#9e1b22] hover:text-white hover:border-[#9e1b22] hover:scale-110 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 -translate-x-4 group-hover/carousel:translate-x-0"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="hidden md:flex absolute -right-1 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-[#9e1b22] rounded-full shadow-lg items-center justify-center text-white hover:bg-[#ceaa52] transition-all duration-200"
+            className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 bg-[#9e1b22] border border-[#9e1b22] rounded-full shadow-[0_8px_20px_rgba(158,27,34,0.3)] items-center justify-center text-white hover:bg-[#ceaa52] hover:border-[#ceaa52] hover:scale-110 transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 translate-x-4 group-hover/carousel:translate-x-0"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <ChevronRight className="w-6 h-6" />
           </button>
         </div>
       </div>
