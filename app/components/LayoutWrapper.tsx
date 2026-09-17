@@ -1,61 +1,17 @@
 "use client";
 
+import React, from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import CityStoryBar from "./CityStoryBar";
 import GundemCarousel from "./GundemCarousel";
 import MacSonuclariSlider from "./MacSonuclariSlider";
-import Link from "next/link";
+import { SIDEBAR_ITEMS } from "@/lib/constants"; // Assumed location, let's keep it inline if needed
 
-const NAV_ITEMS = [
-  {
-    href: "/lig",
-    label: "TRANSFERLER KAP",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
-        <path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
-      </svg>
-    ),
-  },
-  {
-    href: "/puan-durumu",
-    label: "PUAN DURUMU",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/>
-      </svg>
-    ),
-  },
-  {
-    href: "/fikstur",
-    label: "Fikstür",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/>
-      </svg>
-    ),
-  },
-  {
-    href: "/takimlar",
-    label: "Takımlar",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-    ),
-  },
-];
-
-const SIDEBAR_ITEMS = [
-  { href: "/lig", label: "TRANSFERLER KAP", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg> },
-  { href: "/genel-bakis", label: "HAFTANIN ALTIN 8'İ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+// We will redefine SIDEBAR_ITEMS here just in case they aren't exported
+const MOCK_SIDEBAR = [
+  { href: "/lig", label: "LİG MERKEZİ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> },
   { href: "/puan-durumu", label: "PUAN DURUMU", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10l1 13H6L7 4z"/></svg> },
   { href: "/fikstur", label: "MAÇ PROGRAMI", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
   { href: "/takimlar", label: "TAKIM İSTATİSTİKLERİ", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
@@ -93,49 +49,41 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <div className="flex flex-col bg-[#fcfcfc] min-h-screen font-sans">
       <Header />
       <CityStoryBar />
-      <GundemCarousel />
-      <MacSonuclariSlider />
 
-      {/* The red separator line like the screenshot */}
-      <div className="w-full bg-[#fcfcfc] pt-2">
-         <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6">
-            <div className="w-full h-[2px] bg-[#ceaa52] rounded-full opacity-20"></div>
-         </div>
-      </div>
-      
-      {/* Two Column Section */}
-      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1440px] mx-auto w-full px-4 md:px-6 py-6 flex flex-col lg:flex-row gap-8 relative z-10">
         
         {/* Left Sidebar - Desktop Only */}
         <aside className="w-[260px] hidden lg:block shrink-0">
           <div className="sticky top-[86px] flex flex-col gap-1">
             <h3 className="text-[11px] font-black text-gray-400 tracking-[0.2em] uppercase mb-2 px-2">Lig Menüsü</h3>
-            <nav className="flex flex-col gap-2.5">
-              {SIDEBAR_ITEMS.map((item) => {
+            <nav className="flex flex-col gap-2">
+              {MOCK_SIDEBAR.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-xl border transition-all duration-300 overflow-hidden ${
+                    className={`group relative flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 overflow-hidden border ${
                       isActive
-                        ? "bg-gradient-to-r from-[#9e1b22] to-[#b82029] border-transparent text-white shadow-[0_8px_16px_rgba(158,27,34,0.2)]"
-                        : "bg-white border-gray-100 text-gray-700 hover:border-[#ceaa52]/20 hover:shadow-md hover:-translate-y-0.5"
+                        ? "bg-gradient-to-r from-[#9e1b22] to-[#b82029] border-[#9e1b22] text-white shadow-[0_8px_16px_rgba(158,27,34,0.25)] scale-[1.02]"
+                        : "bg-white border-gray-100/50 text-gray-700 hover:border-[#ceaa52]/30 hover:shadow-lg hover:-translate-y-0.5"
                     }`}
                   >
                     {!isActive && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-50/50 to-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#9e1b22]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     )}
                     
-                    <div className={`relative z-10 flex items-center justify-center w-9 h-9 rounded-lg transition-colors duration-300 shrink-0 ${
+                    <div className={`relative z-10 flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 shrink-0 ${
                       isActive 
-                        ? "bg-white/20 text-white" 
+                        ? "bg-white/20 text-white shadow-inner" 
                         : "bg-gray-50 text-gray-400 group-hover:bg-white group-hover:text-[#9e1b22] group-hover:shadow-sm"
                     }`}>
                       {item.icon}
                     </div>
 
-                    <span className="relative z-10 text-[13px] md:text-[14px] font-black tracking-tight leading-tight pt-0.5">{item.label}</span>
+                    <span className={`relative z-10 text-[13px] font-black tracking-tight leading-tight ${isActive ? "text-white" : "group-hover:text-gray-900"}`}>
+                      {item.label}
+                    </span>
                     
                     {isActive && (
                       <div className="absolute right-4 z-10 text-white/50">
@@ -149,23 +97,36 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
           </div>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 w-full min-h-[500px] pb-24 lg:pb-6 bg-white rounded-[24px] border border-gray-100 p-5 md:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
-          {children}
-        </main>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col w-full overflow-hidden gap-8">
+          {/* We moved GundemCarousel and MacSonuclariSlider into the main column to match the scratch layout! */}
+          <GundemCarousel />
+          
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#ceaa52]/20 to-transparent"></div>
+          
+          <MacSonuclariSlider />
+          
+          <main className="w-full bg-white rounded-[24px] border border-gray-100/50 shadow-[0_8px_30px_rgba(0,0,0,0.02)] min-h-[500px] overflow-hidden">
+            {children}
+          </main>
+        </div>
 
-      
-      {/* Mobile Bottom Navigation (App-like) */}
+      </div>
+
+      {/* Mobile Bottom Navigation */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-gray-200 pb-safe z-[9999] shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
         <nav className="flex items-center justify-between px-2 h-16">
-          {SIDEBAR_ITEMS.slice(0, 5).map((item) => {
+          {MOCK_SIDEBAR.slice(0, 5).map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex-1 flex flex-col items-center justify-center gap-1 h-full"
+                className="flex-1 flex flex-col items-center justify-center gap-1 h-full relative"
               >
+                {isActive && (
+                   <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-[3px] bg-[#9e1b22] rounded-b-full"></div>
+                )}
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isActive ? "bg-[#9e1b22] text-white shadow-md scale-110" : "text-gray-400 hover:text-gray-900"}`}>
                   {item.icon}
                 </div>
@@ -178,7 +139,6 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         </nav>
       </div>
   
-      </div>
     </div>
   );
 }
