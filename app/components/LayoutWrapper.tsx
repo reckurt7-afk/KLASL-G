@@ -7,7 +7,7 @@ import Header from "./Header";
 import CityStoryBar from "./CityStoryBar";
 import GundemCarousel from "./GundemCarousel";
 import MacSonuclariSlider from "./MacSonuclariSlider";
-import { SIDEBAR_ITEMS } from "@/lib/constants"; // Assumed location, let's keep it inline if needed
+// No import
 
 // We will redefine SIDEBAR_ITEMS here just in case they aren't exported
 const MOCK_SIDEBAR = [
